@@ -1,0 +1,55 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0A0A0A"/>
+
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M 56 0 L 0 0 0 56" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#AAFF45" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0A0A0A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Logo dot -->
+  <circle cx="80" cy="72" r="8" fill="#AAFF45"/>
+
+  <!-- Brand -->
+  <text x="100" y="80" font-family="Inter, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#FFFFFF" letter-spacing="0">FBS Intelligence</text>
+  <text x="270" y="80" font-family="Inter, -apple-system, sans-serif" font-size="18" font-weight="400" fill="#666666">/ Freedom Business Summit</text>
+
+  <!-- Pill badge -->
+  <rect x="80" y="140" width="220" height="32" rx="16" fill="#AAFF45"/>
+  <text x="190" y="161" font-family="Inter, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0A0A0A" text-anchor="middle" letter-spacing="1.5">INVESTMENT MIGRATION</text>
+
+  <!-- Headline -->
+  <text x="80" y="240" font-family="Inter, -apple-system, sans-serif" font-size="64" font-weight="800" fill="#FFFFFF" letter-spacing="-2">Qualified leads.</text>
+  <text x="80" y="318" font-family="Inter, -apple-system, sans-serif" font-size="64" font-weight="800" fill="#AAAAAA" letter-spacing="-2">Audience Intelligence.</text>
+
+  <!-- Subheading -->
+  <text x="80" y="390" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="400" fill="#666666">The lead generation network built exclusively for</text>
+  <text x="80" y="420" font-family="Inter, -apple-system, sans-serif" font-size="22" font-weight="400" fill="#666666">citizenship, residency and global mobility firms.</text>
+
+  <!-- Divider -->
+  <line x1="80" y1="470" x2="1120" y2="470" stroke="#1E1E1E" stroke-width="1"/>
+
+  <!-- Stats -->
+  <text x="80" y="520" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#FFFFFF">5,500+</text>
+  <text x="80" y="548" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#666666">Survey respondents</text>
+
+  <text x="320" y="520" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#FFFFFF">16+</text>
+  <text x="320" y="548" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#666666">Active jurisdictions</text>
+
+  <text x="520" y="520" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#FFFFFF">30+</text>
+  <text x="520" y="548" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#666666">Partner firms</text>
+
+  <text x="720" y="520" font-family="Inter, -apple-system, sans-serif" font-size="36" font-weight="800" fill="#AAFF45">4.9★</text>
+  <text x="720" y="548" font-family="Inter, -apple-system, sans-serif" font-size="13" font-weight="400" fill="#666666">Partner rating</text>
+
+  <!-- URL -->
+  <text x="1120" y="548" font-family="Inter, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#444444" text-anchor="end">intelligence.fsummit.net</text>
+</svg>
