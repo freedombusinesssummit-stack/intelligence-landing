@@ -1143,7 +1143,22 @@ const css = `
   .excl-flow-item.you .excl-flow-status { background: var(--black); color: var(--lime); }
   .excl-flow-item.them .excl-flow-status { background: var(--border); color: var(--muted); }
 
-  /* PHOTO TESTIMONIALS */
+  /* PHOTO TESTIMONIALS — editorial layout */
+  .test-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 40px;
+    align-items: stretch;
+  }
+  .test-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .test-stack .test-card {
+    flex: 1;
+  }
   .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
   .test-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 26px; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
   .test-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--lime); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
@@ -1331,7 +1346,8 @@ const css = `
   .cta-field input:focus, .cta-field select:focus, .cta-field textarea:focus { border-color: var(--black); box-shadow: 0 0 0 3px rgba(170,255,69,0.25); }
   .cta-field textarea { resize: vertical; min-height: 80px; font-family: inherit; }
   .cta-form-submit { width: 100%; margin-top: 12px; background: var(--black); color: var(--white); border: none; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; padding: 16px; border-radius: 8px; transition: all 0.2s; letter-spacing: 0.01em; }
-  .cta-form-submit:hover { background: var(--dark2); transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(0,0,0,0.4); }
+  .cta-form-submit:hover:not(:disabled) { background: var(--dark2); transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(0,0,0,0.4); }
+  .cta-form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
   .cta-form-disclaimer { font-size: 11px; color: var(--text2); text-align: center; margin-top: 12px; line-height: 1.5; }
 
   .cta-form .success { text-align: center; padding: 32px 0; }
@@ -1359,8 +1375,7 @@ const css = `
     .stage-arrow { display: none; }
     .lead-showcase { grid-template-columns: 1fr; gap: 40px; }
     .promise-grid { grid-template-columns: 1fr; gap: 60px; }
-    .test-grid { grid-template-columns: 1fr 1fr; }
-    .test-card.featured { grid-column: span 2; }
+    .test-layout { grid-template-columns: 1fr; }
     .who-grid { grid-template-columns: 1fr; gap: 48px; }
     .inside-grid { grid-template-columns: 1fr; }
     .lime-cta-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -1383,8 +1398,7 @@ const css = `
     .score-row { grid-template-columns:1fr; gap:8px; }
     .score-range { text-align:left; }
     .inline-cta-inner { flex-direction:column; align-items:flex-start; }
-    .test-grid { grid-template-columns: 1fr; }
-    .test-card.featured { grid-column: span 1; }
+    .test-layout { grid-template-columns: 1fr; }
     .test-card.featured .test-quote { font-size: 14px; }
     .lead-card-grid { grid-template-columns: 1fr; }
     .dash-kpi-row { grid-template-columns: repeat(2, 1fr); }
@@ -1473,6 +1487,8 @@ const JURISDICTIONS = [
   { flag: "🇸🇬", name: "Singapore", prog: "GIP · EntrePass" },
   { flag: "🇲🇾", name: "Malaysia", prog: "MM2H · Premium Visa" },
   { flag: "🇦🇺", name: "Australia / NZ", prog: "Investor & Skilled Visas" },
+  { flag: "🇺🇸", name: "USA", prog: "EB-5 Investor Visa" },
+  { flag: "🇵🇾", name: "Paraguay", prog: "Permanent Residency" },
   { flag: "🇰🇳", name: "St. Kitts & Nevis", prog: "CBI · Donation / RE" },
   { flag: "🇩🇲", name: "Dominica", prog: "CBI · EDF / RE" },
   { flag: "🇬🇩", name: "Grenada", prog: "CBI · USA E-2 Treaty" },
@@ -1536,7 +1552,72 @@ export default function App() {
   const [done, setDone] = useState(false);
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", role: "", jurisdiction: "", capacity: "", message: "" });
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
-  const submit = (e) => { if (e) e.preventDefault(); if (form.name && form.email && form.company) setDone(true); };
+  const [submitting, setSubmitting] = useState(false);
+
+  const submit = async (e) => {
+    if (e) e.preventDefault();
+    if (!form.name || !form.email || !form.company) return;
+    setSubmitting(true);
+    try {
+      const MAILERLITE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMjkwMjI2ODdkNTJlNjk4ZjYwMzVkODk4YTI0MmFhMzgxNTlmMWQwMmRhN2ZlMDI2MGYxMTMzZGE0NWUyNDViZmQ1OTJiMjI5YjEzZjdjOTMiLCJpYXQiOjE3Nzc4MDQxNDEuMDU2ODcsIm5iZiI6MTc3NzgwNDE0MS4wNTY4NzMsImV4cCI6NDkzMzQ3Nzc0MS4wNTI3NTUsInN1YiI6IjkzMDA0MyIsInNjb3BlcyI6W119.Apd5ihW7N-KluBSDf-dovqu0O_Ia30wPUVjClBzRyOej5nne5be0poXt21OvB2PluTK4EyJO7ZBcOsitkoMG2Q6DSkjThmx0cjn-1APSFbWRAkp0VqXAljYyag-6LebecLKFjiSHNn5uAx441wje7CtSi4-qvb2UAIAYUX3El-upwv1TPges-H5dXbfvU0dOPOpStwNwg_neJOM1B7FyhZ8GOC2aVvaRkmsMJ_Q668dWd_1mhg21Bw35mXe6uzdQA90XENbpEjkn7ezw9Uv0jXDj-qHYs1EE6A08ulWRd-w2LERgr4MA_hJoz2IgjSn5cJWUfM-KtpGd9DxApaCZ_xbkx-zJRIQQXCQKC8WmDNLfDfjpsDGCMxdhcJ2j94fPX66aBNZTWq1DbEH4Z8SWGvgbwYdFEmBeUld552x8x_iGXRFLmicL6EOeng0bXmFlMwD2twukjkWsoVIQW8Vbdyza8XaNi-dtnDVLuMOqNhb2DDa0UbaHwW0DsEPPvHznrd2ut0zVtq-qr9MwiI1kAVwFcKgvJ5NXvjjXH0dgD0Z4iTn6KhHQuGoTav6vQazCsmtG0iicIvbVNcz_eXbi7G2sr_uUQZxRP_G2E-hya_NsnZmspqsTr4JRTckWgrTBYYH1QK8Zbd-cTPNx9y3vDlmsQx_N_5UG1JHIvQGBb2U";
+
+      // Split name into first / last
+      const nameParts = form.name.trim().split(" ");
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
+
+      // 1. Create or update subscriber
+      const subRes = await fetch("https://connect.mailerlite.com/api/subscribers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${MAILERLITE_TOKEN}`,
+        },
+        body: JSON.stringify({
+          email: form.email,
+          fields: {
+            name: firstName,
+            last_name: lastName,
+            company: form.company,
+            phone: form.phone || "",
+            city: form.jurisdiction || "",
+            country: form.role || "",
+          },
+        }),
+      });
+
+      const subData = await subRes.json();
+      const subscriberId = subData?.data?.id;
+
+      // 2. Find group "FBS Intelligence Landing" and assign subscriber
+      if (subscriberId) {
+        // Get groups list to find the right group ID
+        const groupsRes = await fetch("https://connect.mailerlite.com/api/groups?limit=50", {
+          headers: { "Authorization": `Bearer ${MAILERLITE_TOKEN}` },
+        });
+        const groupsData = await groupsRes.json();
+        const group = groupsData?.data?.find((g) => g.name === "FBS Intelligence Landing");
+
+        if (group) {
+          await fetch(`https://connect.mailerlite.com/api/subscribers/${subscriberId}/groups/${group.id}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${MAILERLITE_TOKEN}`,
+            },
+          });
+        }
+      }
+
+      setDone(true);
+    } catch (err) {
+      console.error("MailerLite error:", err);
+      // Still show success to user — don't block on API errors
+      setDone(true);
+    } finally {
+      setSubmitting(false);
+    }
+  };
   const scrollToForm = () => document.getElementById("apply").scrollIntoView({ behavior: "smooth" });
 
   const [statsRef, statsInView] = useInView(0.3);
@@ -1602,7 +1683,7 @@ export default function App() {
                 <span className="hero-social-stars-icon">★★★★★</span>
                 <span className="hero-social-rating">4.9</span>
               </div>
-              <div className="hero-social-label">Loved by <strong>30+ firms</strong> across 14 jurisdictions</div>
+              <div className="hero-social-label">Loved by <strong>30+ firms</strong> across 16 jurisdictions</div>
             </div>
           </div>
 
@@ -1618,7 +1699,7 @@ export default function App() {
             <Stat num={5500} suffix="+" label="Survey respondents from 60+ countries" inView={statsInView} delay={0} />
             <Stat num={30} suffix="" label="Partner firms onboarded" inView={statsInView} delay={120} />
             <Stat num={92} suffix="%" label="Verification completion within 24h" inView={statsInView} delay={240} />
-            <Stat num={14} suffix="+" label="Active jurisdictions" inView={statsInView} delay={360} />
+            <Stat num={16} suffix="+" label="Active jurisdictions" inView={statsInView} delay={360} />
           </div>
 
           {/* PRESS LOGOS */}
@@ -1822,7 +1903,7 @@ export default function App() {
         <div className="wrap">
           <Reveal>
             <div className="eyebrow"><span className="eyebrow-line" />Jurisdictions</div>
-            <h2>14+ active jurisdictions. <span className="hl-sm">Continuous flow</span>.</h2>
+            <h2>16+ active jurisdictions. <span className="hl-sm">Continuous flow</span>.</h2>
           </Reveal>
 
           <div className="jur-grid">
@@ -1842,6 +1923,21 @@ export default function App() {
         </div>
       </section>
 
+      {/* INLINE CTA #2 — after Jurisdictions */}
+      <div className="inline-cta">
+        <div className="wrap inline-cta-inner">
+          <div className="inline-cta-text">
+            <div className="inline-cta-tag">
+              <span className="inline-cta-tag-dot" />
+              Selective Onboarding
+            </div>
+            <h3>Apply now to secure your spot in your jurisdiction.</h3>
+            <p>Up to 5 service providers per market. Exclusive lead feeds available.</p>
+          </div>
+          <button className="inline-cta-btn" onClick={scrollToForm}>Apply for Access →</button>
+        </div>
+      </div>
+
       {/* TESTIMONIALS */}
       <section className="section section-off">
         <div className="wrap">
@@ -1850,20 +1946,34 @@ export default function App() {
             <h2>What partners say after <span className="hl-sm">90+ days</span></h2>
           </Reveal>
 
-          <div className="test-grid">
-            {PHOTO_TESTIMONIALS.map((t, i) => (
-              <Reveal key={i} delay={i * 100} className={`test-card ${t.featured ? "featured" : ""}`}>
-                <div className="test-stars">{"★".repeat(5)}</div>
-                <p className="test-quote">"{t.quote}"</p>
-                <div className="test-meta">
-                  <div className="test-photo" style={{ background: t.bgGradient }}>{t.initials}</div>
-                  <div>
-                    <div className="test-name">{t.name}</div>
-                    <div className="test-role"><span className="test-flag">{t.flag}</span>{t.role} · {t.firm}</div>
-                  </div>
+          {/* Desktop: featured left + 2 cards right stacked */}
+          <div className="test-layout">
+            <Reveal delay={0} className={`test-card featured`}>
+              <div className="test-stars">{"★".repeat(5)}</div>
+              <p className="test-quote">"{PHOTO_TESTIMONIALS[0].quote}"</p>
+              <div className="test-meta">
+                <div className="test-photo" style={{ background: PHOTO_TESTIMONIALS[0].bgGradient }}>{PHOTO_TESTIMONIALS[0].initials}</div>
+                <div>
+                  <div className="test-name">{PHOTO_TESTIMONIALS[0].name}</div>
+                  <div className="test-role"><span className="test-flag">{PHOTO_TESTIMONIALS[0].flag}</span>{PHOTO_TESTIMONIALS[0].role} · {PHOTO_TESTIMONIALS[0].firm}</div>
                 </div>
-              </Reveal>
-            ))}
+              </div>
+            </Reveal>
+            <div className="test-stack">
+              {PHOTO_TESTIMONIALS.slice(1).map((t, i) => (
+                <Reveal key={i} delay={100 + i * 80} className="test-card">
+                  <div className="test-stars">{"★".repeat(5)}</div>
+                  <p className="test-quote">"{t.quote}"</p>
+                  <div className="test-meta">
+                    <div className="test-photo" style={{ background: t.bgGradient }}>{t.initials}</div>
+                    <div>
+                      <div className="test-name">{t.name}</div>
+                      <div className="test-role"><span className="test-flag">{t.flag}</span>{t.role} · {t.firm}</div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -2164,7 +2274,9 @@ export default function App() {
                           <textarea value={form.message} onChange={set("message")} placeholder="Tell us about your practice, ICP, or specific programme focus…" />
                         </div>
                       </div>
-                      <button type="button" className="cta-form-submit" onClick={submit}>Submit Application →</button>
+                      <button type="button" className="cta-form-submit" onClick={submit} disabled={submitting}>
+                        {submitting ? "Submitting…" : "Submit Application →"}
+                      </button>
                       <div className="cta-form-disclaimer">
                         By submitting, you agree to be contacted by FBS Intelligence. We don't share your data.
                       </div>
