@@ -1156,9 +1156,124 @@ const css = `
     flex-direction: column;
     gap: 16px;
   }
-  .test-stack .test-card {
-    flex: 1;
+  .test-stack .test-card { flex: 1; }
+
+  /* ════════ SOCIAL PROOF SECTION — dark bg ════════ */
+  .social-proof-section {
+    background: var(--dark);
+    border-top: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
   }
+  .social-proof-section::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(ellipse at center, rgba(170,255,69,0.08) 0%, transparent 60%);
+    filter: blur(60px);
+    pointer-events: none;
+  }
+  .social-proof-section > .wrap { position: relative; z-index: 2; }
+  .social-proof-section h2 { color: var(--white); }
+  .social-proof-section .section-body { color: #AAA; }
+
+  /* ── PARTNER LOGOS ROW ── */
+  .partner-logos-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 28px 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .partner-logo-item {
+    flex: 1;
+    min-width: 130px;
+    max-width: 190px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+  .partner-logo-item:hover { opacity: 1; }
+  .partner-logo-svg {
+    width: 100%;
+    height: 44px;
+    color: #FFFFFF;
+  }
+
+  /* ── DARK TESTIMONIALS GRID ── */
+  .test-dark-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .test-dark-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .test-dark-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--lime);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+  .test-dark-card:hover { border-color: rgba(170,255,69,0.3); transform: translateY(-3px); }
+  .test-dark-card:hover::before { transform: scaleX(1); }
+  .test-dark-card.featured-dark {
+    background: rgba(170,255,69,0.06);
+    border-color: rgba(170,255,69,0.2);
+  }
+  .test-dark-stars { color: var(--lime); font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+  .test-dark-quote {
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.85);
+    flex: 1;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+  .test-dark-card.featured-dark .test-dark-quote { font-size: 17px; color: var(--white); }
+  .test-dark-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .test-dark-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: var(--white);
+    flex-shrink: 0;
+  }
+  .test-dark-name { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+  .test-dark-role { font-size: 11px; color: #888; line-height: 1.4; }
   .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
   .test-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 26px; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; }
   .test-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--lime); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
@@ -1376,11 +1491,14 @@ const css = `
     .lead-showcase { grid-template-columns: 1fr; gap: 40px; }
     .promise-grid { grid-template-columns: 1fr; gap: 60px; }
     .test-layout { grid-template-columns: 1fr; }
+    .test-dark-grid { grid-template-columns: 1fr 1fr; }
     .who-grid { grid-template-columns: 1fr; gap: 48px; }
     .inside-grid { grid-template-columns: 1fr; }
     .lime-cta-grid { grid-template-columns: 1fr; gap: 40px; }
     .excl-grid { grid-template-columns: 1fr; gap: 40px; }
     .intel-grid { grid-template-columns: 1fr; gap: 40px; }
+    .partner-logos-row { justify-content: center; gap: 16px; }
+    .partner-logo-item { min-width: 110px; max-width: 150px; }
   }
   @media (max-width:768px) {
     .ai-kpi-row { grid-template-columns: 1fr 1fr; }
@@ -1399,7 +1517,8 @@ const css = `
     .score-range { text-align:left; }
     .inline-cta-inner { flex-direction:column; align-items:flex-start; }
     .test-layout { grid-template-columns: 1fr; }
-    .test-card.featured .test-quote { font-size: 14px; }
+    .test-dark-grid { grid-template-columns: 1fr; }
+    .partner-logos-row { flex-direction: column; align-items: flex-start; gap: 20px; }
     .lead-card-grid { grid-template-columns: 1fr; }
     .dash-kpi-row { grid-template-columns: repeat(2, 1fr); }
     .stage-timing { flex-direction: column; gap: 12px; }
@@ -1923,60 +2042,212 @@ export default function App() {
         </div>
       </section>
 
-      {/* INLINE CTA #2 — after Jurisdictions */}
-      <div className="inline-cta">
-        <div className="wrap inline-cta-inner">
-          <div className="inline-cta-text">
-            <div className="inline-cta-tag">
-              <span className="inline-cta-tag-dot" />
-              Selective Onboarding
-            </div>
-            <h3>Apply now to secure your spot in your jurisdiction.</h3>
-            <p>Up to 5 service providers per market. Exclusive lead feeds available.</p>
-          </div>
-          <button className="inline-cta-btn" onClick={scrollToForm}>Apply for Access →</button>
-        </div>
-      </div>
-
-      {/* TESTIMONIALS */}
-      <section className="section section-off">
+      {/* ════════ SECOND CTA FORM — after Jurisdictions ════════ */}
+      <section className="final-cta" id="apply-early">
         <div className="wrap">
           <Reveal>
-            <div className="eyebrow"><span className="eyebrow-line" />Partner Voices</div>
-            <h2>What partners say after <span className="hl-sm">90+ days</span></h2>
-          </Reveal>
-
-          {/* Desktop: featured left + 2 cards right stacked */}
-          <div className="test-layout">
-            <Reveal delay={0} className={`test-card featured`}>
-              <div className="test-stars">{"★".repeat(5)}</div>
-              <p className="test-quote">"{PHOTO_TESTIMONIALS[0].quote}"</p>
-              <div className="test-meta">
-                <div className="test-photo" style={{ background: PHOTO_TESTIMONIALS[0].bgGradient }}>{PHOTO_TESTIMONIALS[0].initials}</div>
-                <div>
-                  <div className="test-name">{PHOTO_TESTIMONIALS[0].name}</div>
-                  <div className="test-role"><span className="test-flag">{PHOTO_TESTIMONIALS[0].flag}</span>{PHOTO_TESTIMONIALS[0].role} · {PHOTO_TESTIMONIALS[0].firm}</div>
+            <div className="lime-cta-box">
+              <div className="lime-cta-grid">
+                <div className="lime-cta-text">
+                  <div className="lime-cta-eyebrow">
+                    <span style={{ width: 6, height: 6, background: "var(--black)", borderRadius: "50%" }} />
+                    Selective Onboarding
+                  </div>
+                  <h2>Apply to join the FBS Intelligence network.</h2>
+                  <p>
+                    We onboard a limited number of service providers per jurisdiction in most regions. Submit your firm profile — we respond within 24 hours.
+                  </p>
+                  <div className="lime-cta-meta">
+                    <span><span className="check">✓</span> 24-hour review of your application</span>
+                    <span><span className="check">✓</span> Discovery call within the same week</span>
+                    <span><span className="check">✓</span> First matched leads in 7 days</span>
+                    <span><span className="check">✓</span> Pricing shared after discovery call</span>
+                  </div>
+                </div>
+                <div className="cta-form">
+                  {!done ? (
+                    <>
+                      <div className="cta-form-head">
+                        <h3>Apply for Partner Access</h3>
+                        <p>Tell us about your firm. We'll be in touch within 24 hours.</p>
+                      </div>
+                      <div className="cta-form-grid">
+                        <div className="cta-field">
+                          <label>Full name</label>
+                          <input value={form.name} onChange={set("name")} placeholder="Your full name" />
+                        </div>
+                        <div className="cta-field">
+                          <label>Business email</label>
+                          <input type="email" value={form.email} onChange={set("email")} placeholder="you@firm.com" />
+                        </div>
+                        <div className="cta-field">
+                          <label>Firm name</label>
+                          <input value={form.company} onChange={set("company")} placeholder="Company / firm" />
+                        </div>
+                        <div className="cta-field">
+                          <label>Phone (optional)</label>
+                          <input type="tel" value={form.phone} onChange={set("phone")} placeholder="+1 555 000 0000" />
+                        </div>
+                        <div className="cta-field">
+                          <label>Type of firm</label>
+                          <select value={form.role} onChange={set("role")}>
+                            <option value="">Select…</option>
+                            <option>Immigration Law Firm</option>
+                            <option>CBI / Golden Visa Agent</option>
+                            <option>Tax & Structuring Advisor</option>
+                            <option>Real Estate Developer</option>
+                            <option>Family Office</option>
+                            <option>Other</option>
+                          </select>
+                        </div>
+                        <div className="cta-field">
+                          <label>Primary jurisdiction</label>
+                          <select value={form.jurisdiction} onChange={set("jurisdiction")}>
+                            <option value="">Select…</option>
+                            <option>Portugal</option><option>Malta</option><option>Cyprus</option>
+                            <option>Greece</option><option>UAE</option><option>Singapore</option>
+                            <option>Malaysia</option><option>Australia / NZ</option><option>USA (EB-5)</option>
+                            <option>Paraguay</option><option>St. Kitts & Nevis</option><option>Dominica</option>
+                            <option>Grenada</option><option>Antigua & Barbuda</option><option>Türkiye</option>
+                            <option>Mexico</option><option>Other</option>
+                          </select>
+                        </div>
+                        <div className="cta-field full">
+                          <label>Monthly capacity</label>
+                          <select value={form.capacity} onChange={set("capacity")}>
+                            <option value="">Select…</option>
+                            <option>Under 10</option><option>10 – 25</option>
+                            <option>25 – 50</option><option>50 – 100</option><option>100+</option>
+                          </select>
+                        </div>
+                        <div className="cta-field full">
+                          <label>Anything else? (optional)</label>
+                          <textarea value={form.message} onChange={set("message")} placeholder="Tell us about your practice…" />
+                        </div>
+                      </div>
+                      <button type="button" className="cta-form-submit" onClick={submit} disabled={submitting}>
+                        {submitting ? "Submitting…" : "Submit Application →"}
+                      </button>
+                      <div className="cta-form-disclaimer">
+                        By submitting, you agree to be contacted by FBS Intelligence. We don't share your data.
+                      </div>
+                    </>
+                  ) : (
+                    <div className="success">
+                      <div className="check-big">✓</div>
+                      <h3>Application received</h3>
+                      <p>We'll review your firm profile within 24 hours and reach out with next steps.</p>
+                    </div>
+                  )}
                 </div>
               </div>
-            </Reveal>
-            <div className="test-stack">
-              {PHOTO_TESTIMONIALS.slice(1).map((t, i) => (
-                <Reveal key={i} delay={100 + i * 80} className="test-card">
-                  <div className="test-stars">{"★".repeat(5)}</div>
-                  <p className="test-quote">"{t.quote}"</p>
-                  <div className="test-meta">
-                    <div className="test-photo" style={{ background: t.bgGradient }}>{t.initials}</div>
-                    <div>
-                      <div className="test-name">{t.name}</div>
-                      <div className="test-role"><span className="test-flag">{t.flag}</span>{t.role} · {t.firm}</div>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ════════ SOCIAL PROOF — PARTNER LOGOS + TESTIMONIALS ════════ */}
+      <section className="section social-proof-section">
+        <div className="wrap">
+          <Reveal>
+            <div className="eyebrow eyebrow-lime"><span className="eyebrow-line" />Trusted By</div>
+            <h2>Used by leading firms in <span className="hl-sm">16+ markets</span></h2>
+            <p className="section-body" style={{ color: "#AAA" }}>
+              From boutique CBI agencies to global immigration practices — firms that live or die by lead quality.
+            </p>
+          </Reveal>
+
+          {/* ── SVG COMPANY LOGOS ROW ── */}
+          <Reveal delay={100}>
+            <div className="partner-logos-row">
+              {/* Malta Residency Agency */}
+              <div className="partner-logo-item">
+                <svg viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
+                  <rect x="0" y="8" width="32" height="32" rx="6" fill="#CF1B2B"/>
+                  <rect x="0" y="8" width="16" height="32" fill="#FFFFFF"/>
+                  <rect x="16" y="8" width="16" height="16" fill="#FFFFFF"/>
+                  <text x="40" y="22" fontFamily="Inter,sans-serif" fontSize="11" fontWeight="700" fill="currentColor" letterSpacing="0.05em">MALTA</text>
+                  <text x="40" y="36" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">RESIDENCY AGENCY</text>
+                </svg>
+              </div>
+
+              {/* e-Residency Estonia */}
+              <div className="partner-logo-item">
+                <svg viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
+                  <rect x="0" y="4" width="28" height="40" rx="4" fill="#0072CE"/>
+                  <text x="6" y="30" fontFamily="Georgia,serif" fontSize="22" fontWeight="700" fill="white">e</text>
+                  <text x="36" y="20" fontFamily="Inter,sans-serif" fontSize="11" fontWeight="700" fill="currentColor" letterSpacing="0.04em">e-Residency</text>
+                  <text x="36" y="34" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">ESTONIA</text>
+                </svg>
+              </div>
+
+              {/* Portugal Golden Visa */}
+              <div className="partner-logo-item">
+                <svg viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
+                  <rect x="0" y="8" width="14" height="32" fill="#006600"/>
+                  <rect x="14" y="8" width="20" height="32" fill="#FF0000"/>
+                  <circle cx="24" cy="24" r="8" fill="none" stroke="#FFD700" strokeWidth="2"/>
+                  <text x="42" y="22" fontFamily="Inter,sans-serif" fontSize="11" fontWeight="700" fill="currentColor" letterSpacing="0.04em">PORTUGAL</text>
+                  <text x="42" y="36" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">GOLDEN VISA</text>
+                </svg>
+              </div>
+
+              {/* St. Kitts CBI */}
+              <div className="partner-logo-item">
+                <svg viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
+                  <rect x="0" y="4" width="40" height="40" rx="6" fill="#009E60"/>
+                  <polygon points="0,44 40,4 40,44" fill="#009E60"/>
+                  <line x1="0" y1="4" x2="40" y2="44" stroke="#FFD700" strokeWidth="4"/>
+                  <line x1="40" y1="4" x2="0" y2="44" stroke="#FFD700" strokeWidth="4"/>
+                  <text x="48" y="21" fontFamily="Inter,sans-serif" fontSize="10" fontWeight="700" fill="currentColor" letterSpacing="0.04em">ST. KITTS &amp; NEVIS</text>
+                  <text x="48" y="34" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">CBI PROGRAMME</text>
+                </svg>
+              </div>
+
+              {/* UAE GDRFA */}
+              <div className="partner-logo-item">
+                <svg viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
+                  <rect x="0" y="4" width="8" height="40" fill="#00732F"/>
+                  <rect x="8" y="4" width="32" height="13" fill="#FFFFFF"/>
+                  <rect x="8" y="17" width="32" height="14" fill="#000000"/>
+                  <rect x="8" y="31" width="32" height="13" fill="#FF0000"/>
+                  <text x="48" y="22" fontFamily="Inter,sans-serif" fontSize="11" fontWeight="700" fill="currentColor" letterSpacing="0.04em">UAE</text>
+                  <text x="48" y="35" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">GOLDEN VISA</text>
+                </svg>
+              </div>
+
+              {/* Grenada CBI */}
+              <div className="partner-logo-item">
+                <svg viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
+                  <rect x="0" y="4" width="40" height="40" rx="6" fill="#CE1126"/>
+                  <rect x="4" y="8" width="32" height="32" rx="4" fill="#009E60"/>
+                  <circle cx="20" cy="24" r="8" fill="#FCD116"/>
+                  <text x="48" y="21" fontFamily="Inter,sans-serif" fontSize="10" fontWeight="700" fill="currentColor" letterSpacing="0.04em">GRENADA</text>
+                  <text x="48" y="34" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">CBI · E-2 TREATY</text>
+                </svg>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* ── TESTIMONIALS GRID — 3 col on dark ── */}
+          <div className="test-dark-grid">
+            {PHOTO_TESTIMONIALS.map((t, i) => (
+              <Reveal key={i} delay={i * 80} className={`test-dark-card ${i === 0 ? "featured-dark" : ""}`}>
+                <div className="test-dark-stars">{"★".repeat(5)}</div>
+                <p className="test-dark-quote">"{t.quote}"</p>
+                <div className="test-dark-meta">
+                  <div className="test-dark-avatar" style={{ background: t.bgGradient }}>{t.initials}</div>
+                  <div>
+                    <div className="test-dark-name">{t.name}</div>
+                    <div className="test-dark-role"><span style={{ marginRight: 4 }}>{t.flag}</span>{t.role} · {t.firm}</div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
 
+        {/* Moving cards row */}
         <div style={{ marginTop: 40 }}>
           <MovingCards items={TESTIMONIALS_MARQUEE} direction="left" />
         </div>
