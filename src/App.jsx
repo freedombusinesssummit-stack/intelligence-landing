@@ -2591,7 +2591,7 @@ export default function App() {
           </div>
           <div className="footer-bottom">
             <p>© 2026 Freedom Business Summit · FBS Intelligence</p>
-            <p>fsummit.net</p>
+            <p>fbsintelligence.com</p>
           </div>
         </div>
       </footer>
