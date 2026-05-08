@@ -1358,13 +1358,14 @@ const css = `
   .intel-layer::before { content:''; position:absolute; top:-200px; right:-100px; width:500px; height:500px; background: radial-gradient(circle, rgba(170,255,69,0.18), transparent 70%); filter: blur(60px); }
   .intel-layer > .wrap { position: relative; z-index: 2; }
 
-  .intel-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: start; }
+  .intel-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: stretch; }
+  .intel-text { display: flex; flex-direction: column; }
   .intel-text h2 { font-size: clamp(28px, 3.5vw, 42px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; color: var(--black); margin-bottom: 20px; }
   .intel-text h2 .hl-sm { background: linear-gradient(120deg, var(--lime) 0%, var(--lime) 100%); background-repeat: no-repeat; background-size: 100% 0.32em; background-position: 0 88%; padding: 0 4px; }
   .intel-text > p { font-size: 16px; line-height: 1.7; color: var(--text2); margin-bottom: 16px; }
   .intel-text strong { color: var(--black); font-weight: 600; }
 
-  .intel-milestones { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .intel-milestones { display: flex; flex-direction: column; gap: 12px; margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border); }
   .intel-milestone { display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: var(--white); border: 1px solid var(--border); border-radius: 10px; transition: all 0.2s; }
   .intel-milestone:hover { border-color: var(--lime); transform: translateX(4px); }
   .intel-milestone-num { width: 36px; height: 36px; border-radius: 8px; background: var(--lime); color: var(--black); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; flex-shrink: 0; letter-spacing: -0.02em; }
@@ -1377,7 +1378,7 @@ const css = `
   .intel-milestone-tag.locked { background: var(--off); color: var(--muted); }
 
   /* ICP CARD */
-  .icp-card { background: var(--white); border-radius: 18px; box-shadow: 0 16px 48px -8px rgba(0,0,0,0.1), 0 0 0 1px var(--border); padding: 32px; position: relative; overflow: hidden; }
+  .icp-card { background: var(--white); border-radius: 18px; box-shadow: 0 16px 48px -8px rgba(0,0,0,0.1), 0 0 0 1px var(--border); padding: 32px; position: relative; overflow: hidden; height: 100%; display: flex; flex-direction: column; }
   .icp-card::before { content:''; position:absolute; top:0; left:0; right:0; height: 4px; background: linear-gradient(90deg, var(--lime), var(--lime2)); }
   .icp-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
   .icp-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; color: var(--lime-dark); text-transform: uppercase; }
@@ -1391,7 +1392,7 @@ const css = `
   .icp-persona-text h4 { font-size: 18px; font-weight: 800; color: var(--black); margin-bottom: 4px; letter-spacing: -0.01em; }
   .icp-persona-text p { font-size: 12px; color: var(--text2); }
 
-  .icp-grid { display: flex; flex-direction: column; gap: 0; margin-bottom: 24px; }
+  .icp-grid { display: flex; flex-direction: column; gap: 0; margin-bottom: 24px; flex: 1; }
   .icp-row { display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); }
   .icp-row:last-child { border-bottom: none; }
   .icp-row-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
@@ -1802,7 +1803,7 @@ export default function App() {
                 <span className="hero-social-stars-icon">★★★★★</span>
                 <span className="hero-social-rating">4.9</span>
               </div>
-              <div className="hero-social-label">Loved by <strong>30+ firms</strong> across 16 jurisdictions</div>
+              <div className="hero-social-label">Trusted by <strong>30+ firms</strong> across 16 jurisdictions</div>
             </div>
           </div>
 
@@ -1815,10 +1816,10 @@ export default function App() {
           </div>
 
           <div className="stats-bar" ref={statsRef}>
-            <Stat num={5500} suffix="+" label="Survey respondents from 60+ countries" inView={statsInView} delay={0} />
-            <Stat num={30} suffix="" label="Partner firms onboarded" inView={statsInView} delay={120} />
+            <Stat num={800} suffix="+" label="Survey respondents from 60+ countries" inView={statsInView} delay={0} />
+            <Stat num={16} suffix="+" label="Active jurisdictions covered" inView={statsInView} delay={120} />
             <Stat num={92} suffix="%" label="Verification completion within 24h" inView={statsInView} delay={240} />
-            <Stat num={16} suffix="+" label="Active jurisdictions" inView={statsInView} delay={360} />
+            <Stat num={30} suffix="+" label="Partner firms onboarded" inView={statsInView} delay={360} />
           </div>
 
           {/* PRESS LOGOS */}
