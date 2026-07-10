@@ -144,6 +144,61 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .fhv-score{font-size:13px;font-weight:800;color:var(--hot-color);}
 .fhv-new{font-size:10px;font-weight:700;color:var(--lime-dark);background:var(--lime-soft);padding:2px 8px;border-radius:100px;}
 
+/* ═══ HORIZONTAL STEPS ═══ */
+.hsteps-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:48px;position:relative;}
+.hstep{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px 12px 24px;position:relative;background:var(--white);border:1px solid var(--border);border-right:none;transition:all 0.2s;}
+.hstep:first-child{border-radius:14px 0 0 14px;}
+.hstep:last-child{border-right:1px solid var(--border);border-radius:0 14px 14px 0;}
+.hstep:hover{background:var(--lime-soft);border-color:rgba(170,255,69,0.4);z-index:1;}
+.hstep:hover .hstep-num{color:var(--lime-dark);}
+.hstep-emoji{font-size:24px;margin-bottom:10px;}
+.hstep-num{font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.hstep-title{font-size:13px;font-weight:700;color:var(--black);margin-bottom:6px;line-height:1.3;}
+.hstep-desc{font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:8px;}
+.hstep-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime-dark);background:var(--lime-soft);padding:2px 8px;border-radius:100px;}
+.hstep-arrow{position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--border);z-index:2;background:var(--white);padding:2px;}
+
+/* ═══ ADVISOR BRIEF ANATOMY ═══ */
+.advisor-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;margin-top:72px;padding-top:72px;border-top:1px solid var(--border);}
+
+.advisor-card{background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 16px 48px -8px rgba(0,0,0,0.1);margin-top:28px;}
+.ac-header{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 14px;}
+.ac-header-left{display:flex;align-items:center;gap:10px;}
+.ac-hot-badge{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800;color:var(--hot-color);letter-spacing:0.04em;}
+.ac-hot-dot{width:8px;height:8px;border-radius:50%;background:var(--hot-color);flex-shrink:0;}
+.ac-score-tag{background:#FFF0ED;color:var(--hot-color);font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;}
+.ac-time{font-size:12px;color:var(--muted);}
+.ac-divider{height:1px;background:var(--border);margin:0 20px;}
+.ac-profile{display:flex;align-items:center;gap:14px;padding:18px 20px;}
+.ac-avatar{width:44px;height:44px;border-radius:50%;background:#D94F3A;color:var(--white);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;}
+.ac-name{font-size:16px;font-weight:700;color:var(--black);margin-bottom:2px;}
+.ac-role{font-size:13px;color:var(--text2);}
+.ac-fields{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:0 20px 16px;background:var(--off);border-radius:10px;overflow:hidden;}
+.ac-field{padding:14px 16px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
+.ac-field:nth-child(2){border-right:none;}
+.ac-field:nth-child(3){border-bottom:none;}
+.ac-field:nth-child(4){border-right:none;border-bottom:none;}
+.ac-field-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:5px;}
+.ac-field-val{font-size:14px;font-weight:700;color:var(--black);}
+.ac-quote{margin:0 20px 16px;background:var(--dark);border-radius:10px;padding:16px;}
+.ac-quote-label{font-size:9px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--lime);margin-bottom:8px;}
+.ac-quote-text{font-size:13px;color:rgba(255,255,255,0.82);line-height:1.65;font-style:italic;}
+.ac-actions{display:flex;gap:10px;padding:0 20px 20px;}
+.ac-unlock{flex:1;background:var(--black);color:var(--white);border:none;padding:13px 20px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.ac-unlock:hover{background:var(--lime);color:var(--black);}
+.ac-save{background:none;border:1.5px solid var(--border);color:var(--text2);padding:13px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.ac-save:hover{border-color:var(--black);color:var(--black);}
+
+.advisor-text{padding-top:40px;}
+.advisor-text-h{font-size:clamp(20px,2.4vw,28px);font-weight:800;color:var(--black);letter-spacing:-0.02em;line-height:1.2;margin-bottom:16px;}
+.advisor-text-p{font-size:16px;color:var(--text2);line-height:1.7;margin-bottom:24px;}
+.advisor-callout{background:var(--off);border-left:3px solid var(--lime);padding:16px 20px;border-radius:0 10px 10px 0;font-size:14px;color:var(--text);line-height:1.65;margin-bottom:32px;}
+.advisor-fields-explained{display:flex;flex-direction:column;gap:16px;}
+.aff-row{display:flex;align-items:flex-start;gap:14px;}
+.aff-icon{width:36px;height:36px;border-radius:10px;background:var(--off);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.aff-h{font-size:14px;font-weight:700;color:var(--black);margin-bottom:3px;}
+.aff-p{font-size:13px;color:var(--text2);line-height:1.55;}
+
 /* ═══ 5-STEP FORMULA ═══ */
 .formula-section{padding:96px 0;background:var(--white);border-bottom:1px solid var(--border);}
 .formula-pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:56px;position:relative;}
@@ -326,6 +381,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .sp{font-size:16px;color:var(--text2);max-width:580px;line-height:1.7;margin-bottom:0;}
 
 @media(max-width:1024px){
+  .hsteps-grid{grid-template-columns:repeat(4,1fr);}
+  .hstep:nth-child(4){border-right:1px solid var(--border);border-radius:0 14px 0 0;}
+  .hstep:nth-child(5){border-radius:0 0 0 14px;}
+  .hstep:nth-child(7){border-radius:0 0 14px 0;}
+  .hstep-arrow{display:none;}
+  .advisor-grid{grid-template-columns:1fr;gap:40px;}
+  .advisor-text{padding-top:0;}
   .funnel-hero-grid{grid-template-columns:1fr;}
   .gms-top-grid{grid-template-columns:1fr;}
   .formula-pipeline{grid-template-columns:1fr 1fr;gap:24px;}
@@ -334,6 +396,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
   .db-stats{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
+  .hsteps-grid{grid-template-columns:1fr 1fr;}
+  .hstep{border-right:1px solid var(--border) !important;border-radius:0 !important;}
+  .hstep:first-child{border-radius:14px 0 0 0 !important;}
+  .hstep:last-child{border-radius:0 0 14px 14px !important;}
+  .ac-fields{grid-template-columns:1fr;}
+  .ac-field{border-right:none !important;border-bottom:1px solid var(--border) !important;}
+  .ac-field:last-child{border-bottom:none !important;}
   .formula-pipeline{grid-template-columns:1fr;}
   .tiers-row{grid-template-columns:1fr;}
   .stats-strip{flex-wrap:wrap;}
@@ -435,56 +504,107 @@ export default function Overview() {
           <p className="sp">Before the first lead reaches your dashboard, FBS Intelligence completes seven steps on your behalf — from understanding your offer to delivering verified prospects matched to your jurisdiction.</p>
         </Reveal>
 
-        <div className="funnel-hero-grid">
+        {/* HORIZONTAL STEPS */}
+        <div className="hsteps-grid">
+          {[
+            {n:"01",e:"🎯",t:"We learn your offer",d:"Discovery call: your jurisdiction, programme, client profile, what a qualified lead looks like.",tag:"Onboarding"},
+            {n:"02",e:"👤",t:"We define your ICP",d:"We build an Ideal Client Profile — capital range, geography, motivation, timeline.",tag:"Strategy"},
+            {n:"03",e:"🎬",t:"We run video ads",d:"Sponsored video on Meta, Instagram, LinkedIn and YouTube targeting your exact ICP.",tag:"Acquisition"},
+            {n:"04",e:"📅",t:"We host a webinar",d:"Prospects register for a mini-webinar on global mobility. Full UTM attribution captured.",tag:"Registration"},
+            {n:"05",e:"📋",t:"We run the survey",d:"Every registrant completes the 14-question Global Mobility Survey before joining.",tag:"Qualification"},
+            {n:"06",e:"📊",t:"We score & verify",d:"Each response is scored 0–100. Score 40+ leads go through intent verification.",tag:"Scoring"},
+            {n:"07",e:"📥",t:"Leads in your dashboard",d:"Matched, scored, verified leads with full Advisor Brief — ready for contact.",tag:"Delivery"},
+          ].map((s,i)=>(
+            <Reveal key={i} delay={i*50} className="hstep">
+              <div className="hstep-emoji">{s.e}</div>
+              <div className="hstep-num">{s.n}</div>
+              <div className="hstep-title">{s.t}</div>
+              <div className="hstep-desc">{s.d}</div>
+              <div className="hstep-tag">{s.tag}</div>
+              {i < 6 && <div className="hstep-arrow">→</div>}
+            </Reveal>
+          ))}
+        </div>
+
+        {/* ADVISOR BRIEF ANATOMY */}
+        <div className="advisor-grid">
           <Reveal delay={80}>
-            <div className="funnel-steps-list">
-              {[
-                {n:"01",t:"We learn your offer",d:"Discovery call: your jurisdiction, programme, target client profile, and what a qualified lead looks like for your firm.",tag:"Onboarding"},
-                {n:"02",t:"We define your ICP",d:"Based on your input, we build an Ideal Client Profile — capital range, geography, motivation, decision timeline.",tag:"Strategy"},
-                {n:"03",t:"We run video ads",d:"Sponsored video content on Meta, Instagram, LinkedIn and YouTube targeting your exact ICP in relevant markets.",tag:"Acquisition"},
-                {n:"04",t:"We host a webinar",d:"Interested prospects register for a mini-webinar series on global mobility. Registration captures full UTM attribution.",tag:"Registration"},
-                {n:"05",t:"We qualify via survey",d:"Every registrant completes the 14-question Global Mobility Survey. Budget, timeline, family, jurisdiction, motivation.",tag:"Qualification"},
-                {n:"06",t:"We score and verify",d:"Each response is scored 0–100 on 6 dimensions. Score 40+ leads go through intent verification before entering your feed.",tag:"Scoring"},
-                {n:"07",t:"Leads appear in your dashboard",d:"Matched, scored, verified leads with a full Advisor Brief — ready for you to contact.",tag:"Delivery"},
-              ].map((s,i)=>(
-                <div key={i} className="fstep">
-                  <div className="fstep-num">{s.n}</div>
-                  <div className="fstep-body">
-                    <div className="fstep-title">{s.t}</div>
-                    <div className="fstep-desc">{s.d}</div>
-                    <div className="fstep-tag">{s.tag}</div>
+            <div className="eyebrow" style={{marginBottom:12}}><span className="eyebrow-line"/>What you receive</div>
+            <h2 className="sh2" style={{fontSize:"clamp(28px,3.6vw,48px)"}}>Anatomy of a HOT-tier<br/><span className="hl">Advisor Brief</span></h2>
+
+            <div className="advisor-card">
+              {/* Header */}
+              <div className="ac-header">
+                <div className="ac-header-left">
+                  <div className="ac-hot-badge">
+                    <span className="ac-hot-dot"/>HOT
                   </div>
+                  <div className="ac-score-tag">Score 87/100</div>
                 </div>
-              ))}
+                <div className="ac-time">12 min ago</div>
+              </div>
+              <div className="ac-divider"/>
+
+              {/* Profile */}
+              <div className="ac-profile">
+                <div className="ac-avatar">JM</div>
+                <div>
+                  <div className="ac-name">J. Marchetti</div>
+                  <div className="ac-role">Founder · 🇮🇹 Milan, Italy</div>
+                </div>
+              </div>
+
+              {/* Fields grid */}
+              <div className="ac-fields">
+                {[
+                  {l:"INCOME",v:"$2M – $5M / yr"},
+                  {l:"TIMELINE",v:"Within 60 days"},
+                  {l:"FAMILY",v:"Spouse + 2 kids"},
+                  {l:"PROGRAMME",v:"St. Kitts CBI"},
+                ].map((f,i)=>(
+                  <div key={i} className="ac-field">
+                    <div className="ac-field-label">{f.l}</div>
+                    <div className="ac-field-val">{f.v}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Quote */}
+              <div className="ac-quote">
+                <div className="ac-quote-label">PROSPECT'S OWN WORDS</div>
+                <div className="ac-quote-text">"We've been planning this for two years. The Italian tax situation is becoming impossible. We have $400k ready to deploy and we want our second passport before the kids start international school in September."</div>
+              </div>
+
+              {/* Actions */}
+              <div className="ac-actions">
+                <button className="ac-unlock">☎ Unlock contact (1 credit)</button>
+                <button className="ac-save">🔖 Save</button>
+              </div>
             </div>
           </Reveal>
 
-          <Reveal delay={160}>
-            <div className="funnel-hero-visual">
-              <div className="fhv-card">
-                <div className="fhv-top">
-                  <div className="fhv-label">Your Partner Setup</div>
-                  <div className="fhv-live"><div className="fhv-live-dot"/>Live feed active</div>
-                </div>
-                <div className="fhv-jurisdiction">
-                  <div className="fhv-jur-label">Primary jurisdiction</div>
-                  <div className="fhv-jur-val">Malta MEIN · St. Kitts CBI</div>
-                </div>
-                <div className="fhv-metrics">
-                  <div className="fhv-metric"><div className="fhv-metric-val">24</div><div className="fhv-metric-lbl">Leads this month</div></div>
-                  <div className="fhv-metric"><div className="fhv-metric-val" style={{color:"var(--hot-color)"}}>9</div><div className="fhv-metric-lbl">HOT tier</div></div>
-                  <div className="fhv-metric"><div className="fhv-metric-val">18</div><div className="fhv-metric-lbl">Credits left</div></div>
-                </div>
-                <div className="fhv-mini-leads">
-                  {[{av:"JM",bg:"#D94F3A",n:"J. Marchetti",s:87},{av:"DH",bg:"#059669",n:"D. Harrison",s:73},{av:"ED",bg:"#C07D10",n:"E. Dubois",s:52}].map((l,i)=>(
-                    <div key={i} className="fhv-lead">
-                      <div className="fhv-av" style={{background:l.bg}}>{l.av}</div>
-                      <div className="fhv-ln">{l.n}</div>
-                      <div className="fhv-score">{l.s}</div>
-                      {i===0&&<div className="fhv-new">New</div>}
+          <Reveal delay={180}>
+            <div className="advisor-text">
+              <h3 className="advisor-text-h">Every field captured before the lead touches your dashboard.</h3>
+              <p className="advisor-text-p"><strong>Score &amp; tier</strong> tells you priority. <strong>Prospect's own words</strong> tells you what to lead with. <strong>Profile context</strong> gives you the rest.</p>
+              <div className="advisor-callout">
+                The shift: instead of qualifying 100 leads to find 5 worth pursuing, you receive 15 — and 12 are worth pursuing on day one.
+              </div>
+              <div className="advisor-fields-explained">
+                {[
+                  {icon:"📊",h:"Score & tier",p:"Instant priority signal — HOT means budget confirmed, timeline under 90 days, decision-maker identified."},
+                  {icon:"💰",h:"Income & capital",p:"Self-reported annual income and deployable capital range. No guessing what they can afford."},
+                  {icon:"📅",h:"Timeline",p:"Exact window: 60 days, 6 months, or 12 months. You know how urgently to follow up."},
+                  {icon:"💬",h:"Prospect's own words",p:"Their verbatim survey response — motivation, context, urgency. Better than any CRM note."},
+                ].map((f,i)=>(
+                  <div key={i} className="aff-row">
+                    <div className="aff-icon">{f.icon}</div>
+                    <div>
+                      <div className="aff-h">{f.h}</div>
+                      <div className="aff-p">{f.p}</div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </Reveal>
