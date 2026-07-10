@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-function useInView(threshold = 0.12, once = true) {
+function useInView(threshold = 0.1, once = true) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
   useEffect(() => {
@@ -15,7 +15,7 @@ function useInView(threshold = 0.12, once = true) {
 }
 
 function Reveal({ children, delay = 0, className = "" }) {
-  const [ref, inView] = useInView(0.1);
+  const [ref, inView] = useInView(0.08);
   return (
     <div ref={ref} className={`reveal ${inView ? "is-in" : ""} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}>
@@ -34,7 +34,7 @@ function useScrollY() {
   return y;
 }
 
-function AnimNum({ target, inView, suffix = "", prefix = "" }) {
+function AnimNum({ target, inView, suffix = "" }) {
   const [v, setV] = useState(0);
   const done = useRef(false);
   useEffect(() => {
@@ -50,7 +50,7 @@ function AnimNum({ target, inView, suffix = "", prefix = "" }) {
     };
     requestAnimationFrame(step);
   }, [inView, target]);
-  return <>{prefix}{v}{suffix}</>;
+  return <>{v}{suffix}</>;
 }
 
 const css = `
@@ -60,725 +60,741 @@ const css = `
   --black:#0A0A0A;--off:#F4F4F2;--white:#FFFFFF;
   --lime:#AAFF45;--lime2:#8EE032;--lime-soft:#E8F5DF;--lime-dark:#5A8A20;
   --muted:#6B6B6B;--border:#E5E5E5;--dark:#0F0F0F;--text:#0A0A0A;--text2:#5A5A56;
+  --warm-bg:#FFF9F0;--warm-border:#F5D9B0;--hot-color:#E05A3A;--warm-color:#C07D10;--cold-color:#4A7FC1;
 }
 html{scroll-behavior:smooth;}
 body{background:var(--white);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 .wrap{max-width:1200px;margin:0 auto;padding:0 32px;}
-
 @keyframes pulseLime{0%,100%{box-shadow:0 0 0 0 rgba(170,255,69,0.5)}50%{box-shadow:0 0 0 10px rgba(170,255,69,0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 @keyframes marquee-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes pingDot{0%{transform:scale(0.8);opacity:1}100%{transform:scale(2.4);opacity:0}}
-@keyframes pulseDot{0%,100%{box-shadow:0 0 0 0 rgba(255,107,85,0.4)}50%{box-shadow:0 0 0 6px rgba(255,107,85,0)}}
-@keyframes shimmer{0%{background-position:-400% 0}100%{background-position:400% 0}}
-
 .fade-up{animation:fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) both;}
-.d1{animation-delay:0.05s}.d2{animation-delay:0.12s}.d3{animation-delay:0.2s}.d4{animation-delay:0.28s}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1);}
+.d1{animation-delay:0.05s}.d2{animation-delay:0.12s}.d3{animation-delay:0.2s}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.75s cubic-bezier(0.16,1,0.3,1),transform 0.75s cubic-bezier(0.16,1,0.3,1);}
 .reveal.is-in{opacity:1;transform:translateY(0);}
 
-/* ── NAV ── */
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .nav-progress{position:absolute;bottom:0;left:0;height:2px;background:var(--lime);transition:width 0.05s linear;}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px;}
 .nav-logo{font-size:14px;font-weight:800;color:var(--black);display:flex;align-items:center;gap:10px;letter-spacing:-0.02em;text-decoration:none;}
 .nav-logo-dot{width:8px;height:8px;background:var(--lime);border-radius:50%;animation:pulseLime 2.5s ease-in-out infinite;}
 .nav-right{display:flex;align-items:center;gap:24px;}
-.nav-link{font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text2);cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;transition:color 0.15s;text-decoration:none;}
+.nav-link{font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color 0.15s;}
 .nav-link:hover{color:var(--black);}
 .nav-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--black);color:var(--white);border:none;cursor:pointer;padding:9px 20px;border-radius:7px;font-family:'Inter',sans-serif;transition:all 0.15s;text-decoration:none;}
 .nav-btn:hover{background:var(--lime);color:var(--black);}
 
-/* ── HERO ── */
+/* HERO */
 .hero{padding:130px 0 80px;background:var(--white);border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
 .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(to right,rgba(0,0,0,0.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(0,0,0,0.04) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 70% 50% at 50% 30%,black 40%,transparent 100%);pointer-events:none;}
 .hero>.wrap{position:relative;z-index:2;}
 .hero-pill{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:100px;padding:5px 14px 5px 6px;margin-bottom:28px;font-size:12px;font-weight:500;color:var(--text);}
 .hero-pill-dot{background:var(--lime);color:var(--black);font-size:10px;font-weight:800;padding:3px 10px;border-radius:100px;letter-spacing:0.08em;text-transform:uppercase;}
-.hero h1{font-size:clamp(38px,5.2vw,68px);font-weight:800;line-height:1.02;letter-spacing:-0.035em;color:var(--black);max-width:900px;margin-bottom:8px;}
+.hero h1{font-size:clamp(38px,5vw,68px);font-weight:800;line-height:1.02;letter-spacing:-0.035em;color:var(--black);max-width:900px;margin-bottom:8px;}
 .accent{position:relative;display:inline-block;}.accent::after{content:'';position:absolute;bottom:0;left:0;right:0;height:0.32em;background:var(--lime);z-index:-1;border-radius:2px;}
-.hero-sub{font-size:clamp(24px,3.2vw,44px);font-weight:800;line-height:1.05;letter-spacing:-0.03em;color:#BBBBB7;margin-bottom:28px;max-width:900px;}
-.hero-desc{font-size:18px;font-weight:400;line-height:1.65;color:var(--text2);max-width:580px;}
-
+.hero-sub{font-size:clamp(22px,3vw,40px);font-weight:800;line-height:1.08;letter-spacing:-0.03em;color:#C0C0BC;margin-bottom:28px;max-width:900px;}
+.hero-desc{font-size:18px;line-height:1.65;color:var(--text2);max-width:580px;}
 .stats-strip{display:flex;gap:0;padding-top:48px;margin-top:48px;border-top:1px solid var(--border);}
 .stat-item{flex:1;padding-right:28px;border-right:1px solid var(--border);margin-right:28px;}
 .stat-item:last-child{border-right:none;margin-right:0;padding-right:0;}
 .stat-num{font-size:36px;font-weight:800;letter-spacing:-0.03em;color:var(--black);line-height:1;margin-bottom:6px;}
 .stat-label{font-size:13px;color:var(--text2);line-height:1.45;}
 
-/* ── MARQUEE ── */
+/* MARQUEE */
 .marquee-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--off);padding:13px 0;}
 .marquee-track{display:flex;white-space:nowrap;animation:marquee-left 50s linear infinite;}
 .marquee-item{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text2);padding:0 24px;}
 .marquee-dot{color:var(--lime);}
 
-/* ── BEFORE/AFTER ── */
-.ba-section{padding:80px 0;background:var(--white);border-bottom:1px solid var(--border);}
-.ba-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin-top:48px;}
-.ba-col{border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:14px;}
-.ba-before{background:#FFF5F5;border:1px solid #FFD6D6;}
-.ba-after{background:var(--lime-soft);border:1px solid rgba(170,255,69,0.4);}
-.ba-col-label{font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:4px;}
-.ba-before .ba-col-label{color:#CC3333;}
-.ba-after .ba-col-label{color:var(--lime-dark);}
-.ba-col-title{font-size:20px;font-weight:800;color:var(--black);letter-spacing:-0.02em;margin-bottom:8px;line-height:1.2;}
-.ba-item{display:flex;align-items:center;gap:10px;font-size:14px;line-height:1.45;}
-.ba-before .ba-item{color:#8A3333;}
-.ba-after .ba-item{color:#2A5A10;}
-.ba-icon{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
-.ba-before .ba-icon{background:rgba(204,51,51,0.12);color:#CC3333;}
-.ba-after .ba-icon{background:rgba(90,138,32,0.15);color:var(--lime-dark);}
-.ba-arrow{font-size:28px;color:var(--muted);text-align:center;flex-shrink:0;}
+/* ═══ DEDICATED FUNNEL SECTION ═══ */
+.funnel-hero-section{padding:96px 0;background:var(--off);border-bottom:1px solid var(--border);}
+.funnel-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:48px;}
 
-/* ── 5-STEP FORMULA ── */
-.formula-section{padding:96px 0;background:var(--off);border-bottom:1px solid var(--border);}
-.formula-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
-.formula-eyebrow-line{width:24px;height:1px;background:var(--lime-dark);opacity:0.5;}
+.funnel-steps-list{display:flex;flex-direction:column;gap:0;position:relative;}
+.funnel-steps-list::before{content:'';position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:linear-gradient(to bottom,var(--lime),rgba(170,255,69,0.4),rgba(170,255,69,0.1));z-index:0;}
+.fstep{display:flex;align-items:flex-start;gap:20px;padding:16px 0;position:relative;z-index:1;}
+.fstep-num{width:40px;height:40px;border-radius:12px;background:var(--white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--black);flex-shrink:0;position:relative;z-index:2;transition:all 0.25s;}
+.fstep:hover .fstep-num{background:var(--lime);border-color:var(--lime);}
+.fstep-body{}
+.fstep-title{font-size:15px;font-weight:700;color:var(--black);margin-bottom:3px;padding-top:9px;}
+.fstep-desc{font-size:13px;color:var(--text2);line-height:1.6;}
+.fstep-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--lime-dark);margin-top:4px;}
 
+.funnel-hero-visual{position:relative;}
+.fhv-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:28px;box-shadow:0 16px 48px -8px rgba(0,0,0,0.1);animation:float 7s ease-in-out infinite;}
+.fhv-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.fhv-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+.fhv-live{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--hot-color);}
+.fhv-live-dot{width:7px;height:7px;border-radius:50%;background:var(--hot-color);animation:pulseLime2 1.5s infinite;}
+@keyframes pulseLime2{0%,100%{opacity:1}50%{opacity:0.4}}
+.fhv-jurisdiction{background:var(--lime-soft);border:1px solid rgba(170,255,69,0.3);border-radius:10px;padding:14px 16px;margin-bottom:16px;}
+.fhv-jur-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:4px;}
+.fhv-jur-val{font-size:18px;font-weight:800;color:var(--black);}
+.fhv-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.fhv-metric{background:var(--off);border-radius:8px;padding:12px;}
+.fhv-metric-val{font-size:20px;font-weight:800;color:var(--black);letter-spacing:-0.02em;}
+.fhv-metric-lbl{font-size:11px;color:var(--muted);margin-top:2px;}
+.fhv-mini-leads{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
+.fhv-lead{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--off);border-radius:8px;}
+.fhv-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--white);flex-shrink:0;}
+.fhv-ln{font-size:13px;font-weight:600;color:var(--black);flex:1;}
+.fhv-score{font-size:13px;font-weight:800;color:var(--hot-color);}
+.fhv-new{font-size:10px;font-weight:700;color:var(--lime-dark);background:var(--lime-soft);padding:2px 8px;border-radius:100px;}
+
+/* ═══ 5-STEP FORMULA ═══ */
+.formula-section{padding:96px 0;background:var(--white);border-bottom:1px solid var(--border);}
 .formula-pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:56px;position:relative;}
-.formula-connector{position:absolute;top:52px;left:10%;right:10%;height:2px;background:linear-gradient(to right,var(--lime),var(--lime2),rgba(170,255,69,0.3),rgba(170,255,69,0.15),rgba(170,255,69,0.05));z-index:0;}
-
-.formula-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 8px;position:relative;z-index:1;cursor:default;}
-.formula-step:hover .formula-icon{border-color:var(--lime);box-shadow:0 0 0 8px rgba(170,255,69,0.15);transform:scale(1.05);}
-
-.formula-icon{width:104px;height:104px;border-radius:24px;background:var(--white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:20px;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);position:relative;z-index:2;box-shadow:0 4px 16px rgba(0,0,0,0.06);}
-.formula-step.active .formula-icon{background:var(--black);border-color:var(--black);box-shadow:0 8px 32px rgba(0,0,0,0.2);}
-
+.formula-connector{position:absolute;top:50px;left:10%;right:10%;height:2px;background:linear-gradient(to right,var(--lime),var(--lime2),rgba(170,255,69,0.4),rgba(170,255,69,0.15),rgba(170,255,69,0.05));z-index:0;}
+.formula-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 10px;position:relative;z-index:1;}
+.formula-step:hover .formula-icon{border-color:var(--lime);box-shadow:0 0 0 8px rgba(170,255,69,0.12);transform:scale(1.06);}
+.formula-icon{width:100px;height:100px;border-radius:24px;background:var(--white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:20px;transition:all 0.3s;position:relative;z-index:2;box-shadow:0 4px 14px rgba(0,0,0,0.06);}
+.formula-step.last-step .formula-icon{background:var(--black);border-color:var(--black);}
 .formula-num{font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:8px;}
-.formula-step-name{font-size:18px;font-weight:800;color:var(--black);letter-spacing:-0.02em;margin-bottom:6px;}
-.formula-step-desc{font-size:12px;color:var(--text2);line-height:1.55;max-width:160px;margin:0 auto 12px;}
-.formula-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;border:1px solid var(--border);background:var(--white);color:var(--black);}
-.formula-step.active .formula-badge{background:var(--lime);border-color:var(--lime);color:var(--black);}
+.formula-name{font-size:17px;font-weight:800;color:var(--black);letter-spacing:-0.02em;margin-bottom:6px;}
+.formula-desc{font-size:12px;color:var(--text2);line-height:1.55;max-width:155px;margin:0 auto 12px;}
+.formula-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;border:1px solid var(--border);background:var(--off);color:var(--black);}
+.formula-step.last-step .formula-badge{background:var(--lime);border-color:var(--lime);}
 
-/* formula result visual cards */
-.formula-visuals{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:32px;}
-.fv-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:12px;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:all 0.2s;}
-.fv-card:hover{border-color:var(--black);}
-.fv-card.active{background:var(--black);border-color:var(--black);}
-.fv-img{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;}
-.fv-thumb{width:24px;height:16px;border-radius:3px;background:#1a1a1a;}
-.fv-stat{font-size:11px;font-weight:700;color:var(--text2);}
-.fv-card.active .fv-stat{color:rgba(255,255,255,0.6);}
+/* ═══ GMS / LEAD QUALITY ═══ */
+.gms-section{padding:96px 0;background:var(--off);border-bottom:1px solid var(--border);}
+.gms-top-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;margin-top:48px;}
 
-/* formula CTA */
-.formula-cta-bar{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px 32px;margin-top:48px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.formula-cta-text h4{font-size:17px;font-weight:700;color:var(--black);margin-bottom:4px;}
-.formula-cta-text p{font-size:13px;color:var(--text2);}
-.formula-cta-btns{display:flex;gap:12px;flex-shrink:0;}
-.btn-outline{background:none;border:1.5px solid var(--border);color:var(--black);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;padding:11px 22px;border-radius:8px;cursor:pointer;transition:all 0.15s;}
-.btn-outline:hover{border-color:var(--black);}
-.btn-dark{background:var(--black);color:var(--white);border:none;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;padding:11px 22px;border-radius:8px;cursor:pointer;transition:all 0.15s;text-decoration:none;display:inline-block;}
-.btn-dark:hover{background:var(--lime);color:var(--black);}
+/* survey mockup */
+.gms-survey-card{background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 16px 48px -8px rgba(0,0,0,0.1);}
+.gms-survey-chrome{background:#F5F4F0;padding:11px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);}
+.gms-dots{display:flex;gap:5px;}
+.gms-dot{width:10px;height:10px;border-radius:50%;}
+.gms-url{flex:1;text-align:center;font-size:11px;color:#999;background:var(--white);padding:4px 14px;border-radius:6px;max-width:260px;margin:0 auto;border:1px solid var(--border);}
+.gms-body{padding:24px 28px;}
+.gms-progress-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
+.gms-prog-track{flex:1;height:4px;background:var(--off);border-radius:2px;overflow:hidden;}
+.gms-prog-fill{height:100%;background:var(--lime);border-radius:2px;}
+.gms-prog-lbl{font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap;}
+.gms-q{font-size:17px;font-weight:700;color:var(--black);margin-bottom:16px;line-height:1.35;letter-spacing:-0.01em;}
+.gms-options{display:flex;flex-direction:column;gap:8px;}
+.gms-option{border:1.5px solid var(--border);border-radius:9px;padding:12px 16px;font-size:13px;color:var(--text);cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;background:none;}
+.gms-option:hover{border-color:var(--black);}
+.gms-option.sel{border-color:var(--lime);background:var(--lime-soft);}
+.gms-option-check{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;}
+.gms-option.sel .gms-option-check{background:var(--lime);border-color:var(--lime);color:var(--black);}
+.gms-footer{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:16px;border-top:1px solid var(--border);}
+.gms-back{font-size:13px;color:var(--muted);background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;}
+.gms-next{background:var(--black);color:var(--white);border:none;padding:10px 24px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.gms-next:hover{background:var(--lime);color:var(--black);}
 
-/* ── QUALIFIED LEAD CHECKLIST ── */
-.qualified-section{padding:96px 0;background:var(--white);border-bottom:1px solid var(--border);}
-.qualified-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-top:48px;}
-.qualified-checks{display:flex;flex-direction:column;gap:14px;}
-.qcheck{display:flex;align-items:flex-start;gap:16px;padding:18px 20px;background:var(--off);border-radius:12px;border:1px solid transparent;transition:all 0.2s;}
-.qcheck:hover{border-color:var(--lime);background:var(--lime-soft);}
-.qcheck-icon{width:36px;height:36px;border-radius:10px;background:var(--lime);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.qcheck-body{}
-.qcheck-h{font-size:14px;font-weight:700;color:var(--black);margin-bottom:3px;}
-.qcheck-p{font-size:12px;color:var(--text2);line-height:1.5;}
-.qcheck-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--lime-dark);margin-top:4px;}
+/* scoring result */
+.gms-score-card{background:var(--dark);border-radius:14px;padding:24px;margin-top:14px;text-align:center;}
+.gms-score-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#666;margin-bottom:12px;}
+.gms-score-num{font-size:68px;font-weight:900;letter-spacing:-0.04em;color:var(--lime);line-height:1;}
+.gms-score-sub{font-size:13px;color:rgba(255,255,255,0.4);margin-top:6px;}
+.gms-score-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(224,90,58,0.15);color:#FF6B55;font-size:12px;font-weight:700;padding:7px 16px;border-radius:100px;margin-top:12px;border:1px solid rgba(224,90,58,0.3);}
 
-/* ── AUDIENCE SOURCES ── */
-.sources-section{padding:96px 0;background:var(--off);border-bottom:1px solid var(--border);}
-.sources-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
-.source-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px;transition:all 0.2s;}
-.source-card:hover{border-color:var(--black);transform:translateY(-3px);}
-.source-icon{font-size:28px;margin-bottom:12px;}
-.source-channel{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:6px;}
-.source-name{font-size:16px;font-weight:700;color:var(--black);margin-bottom:8px;}
-.source-desc{font-size:13px;color:var(--text2);line-height:1.55;}
-.source-metric{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:12px;font-weight:700;color:var(--black);background:var(--off);padding:4px 10px;border-radius:100px;}
+/* 6 dimensions */
+.gms-dims-col{display:flex;flex-direction:column;gap:0;}
+.gms-dim-intro{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:28px;}
+.gms-dim{display:flex;align-items:flex-start;gap:14px;padding:16px 0;border-bottom:1px solid var(--border);}
+.gms-dim:last-child{border-bottom:none;}
+.gms-dim-num{font-size:11px;font-weight:700;color:var(--lime-dark);min-width:28px;padding-top:2px;}
+.gms-dim-body{flex:1;}
+.gms-dim-h{font-size:14px;font-weight:700;color:var(--black);margin-bottom:2px;}
+.gms-dim-p{font-size:12px;color:var(--text2);line-height:1.5;}
+.gms-dim-bar{display:flex;align-items:center;gap:8px;margin-top:6px;}
+.gms-dim-track{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.gms-dim-fill{height:100%;border-radius:2px;background:var(--lime);}
+.gms-dim-pct{font-size:10px;font-weight:700;color:var(--lime-dark);}
 
-/* ── DASHBOARD MOCKUP ── */
-.dashboard-section{padding:96px 0;background:var(--dark);position:relative;overflow:hidden;border-bottom:1px solid #1a1a1a;}
-.dashboard-section::before{content:'';position:absolute;top:-20%;left:-5%;width:50%;height:70%;background:radial-gradient(ellipse at center,rgba(170,255,69,0.1),transparent 60%);filter:blur(60px);pointer-events:none;}
-.dashboard-section>.wrap{position:relative;z-index:2;}
+/* tiers */
+.tiers-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.tier-card{border-radius:14px;padding:24px;transition:all 0.2s;}
+.tier-card:hover{transform:translateY(-3px);}
+.tier-card.hot{background:var(--black);border:1px solid #1a1a1a;}
+.tier-card.warm{background:var(--warm-bg);border:1px solid var(--warm-border);}
+.tier-card.cold{background:var(--off);border:1px solid var(--border);}
+.tier-badge-row{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:0.1em;margin-bottom:14px;}
+.tier-badge-dot{width:8px;height:8px;border-radius:50%;}
+.tier-range{font-size:34px;font-weight:900;letter-spacing:-0.03em;line-height:1;margin-bottom:4px;}
+.tier-card.hot .tier-range{color:var(--lime);}
+.tier-card.warm .tier-range{color:var(--warm-color);}
+.tier-card.cold .tier-range{color:var(--cold-color);}
+.tier-sublabel{font-size:12px;color:var(--muted);margin-bottom:12px;}
+.tier-card.hot .tier-sublabel{color:#888;}
+.tier-desc{font-size:13px;line-height:1.6;color:var(--muted);}
+.tier-card.hot .tier-desc{color:rgba(255,255,255,0.55);}
 
-.dashboard-mockup{background:#111;border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;box-shadow:0 32px 80px -16px rgba(0,0,0,0.6);margin-top:48px;}
-.dashboard-chrome{background:#0A0A0A;padding:14px 20px;display:flex;align-items:center;gap:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
-.db-dots{display:flex;gap:6px;}
-.db-dot{width:11px;height:11px;border-radius:50%;}
-.db-title{font-size:12px;color:#555;font-weight:500;}
-.db-actions{margin-left:auto;display:flex;gap:8px;}
-.db-action{font-size:11px;font-weight:600;color:#555;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);padding:4px 12px;border-radius:6px;cursor:pointer;}
-.db-action.active{color:var(--lime);border-color:rgba(170,255,69,0.3);}
+/* ═══ DASHBOARD MOCKUP ═══ */
+.dashboard-section{padding:96px 0;background:var(--white);border-bottom:1px solid var(--border);}
+.db-wrapper{margin-top:48px;border-radius:20px;overflow:hidden;box-shadow:0 24px 72px -16px rgba(0,0,0,0.18),0 0 0 1px rgba(0,0,0,0.06);background:var(--white);}
 
-.dashboard-body{display:grid;grid-template-columns:220px 1fr;min-height:560px;}
+/* mac chrome */
+.db-chrome{background:#EBEBEB;padding:13px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #D5D5D5;}
+.db-chrome-dots{display:flex;gap:6px;}
+.db-chrome-dot{width:12px;height:12px;border-radius:50%;}
+.db-chrome-url{flex:1;text-align:center;}
+.db-chrome-url-inner{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid #D5D5D5;border-radius:8px;padding:5px 16px;font-size:12px;color:#888;min-width:280px;}
+.db-chrome-lock{font-size:11px;}
 
-/* sidebar */
-.db-sidebar{background:#0D0D0D;border-right:1px solid rgba(255,255,255,0.06);padding:20px 0;}
-.db-nav-item{display:flex;align-items:center;gap:10px;padding:10px 20px;font-size:13px;color:#555;cursor:pointer;transition:all 0.15s;}
-.db-nav-item:hover{color:#AAA;background:rgba(255,255,255,0.03);}
-.db-nav-item.active{color:var(--lime);background:rgba(170,255,69,0.06);border-right:2px solid var(--lime);}
-.db-nav-icon{font-size:15px;width:20px;text-align:center;}
-.db-nav-section{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#333;padding:16px 20px 6px;}
+/* dashboard inner */
+.db-inner{background:#FAFAF9;min-height:600px;}
+.db-header{padding:28px 32px 20px;border-bottom:1px solid var(--border);background:var(--white);display:flex;align-items:flex-start;justify-content:space-between;}
+.db-greeting{font-size:22px;font-weight:800;color:var(--black);margin-bottom:4px;letter-spacing:-0.02em;}
+.db-greeting span{color:var(--lime-dark);}
+.db-sub{font-size:14px;color:var(--text2);}
+.db-sub strong{color:var(--hot-color);}
+.db-review-btn{background:var(--black);color:var(--white);border:none;padding:12px 24px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:8px;flex-shrink:0;}
 
-/* main content */
-.db-main{padding:24px;}
-.db-header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
-.db-page-title{font-size:18px;font-weight:800;color:var(--white);letter-spacing:-0.02em;}
-.db-filter-row{display:flex;gap:8px;}
-.db-filter{font-size:11px;font-weight:600;color:#555;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:5px 12px;border-radius:6px;cursor:pointer;}
-.db-filter.active{color:var(--lime);border-color:rgba(170,255,69,0.3);background:rgba(170,255,69,0.06);}
+/* stat cards */
+.db-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-bottom:1px solid var(--border);}
+.db-stat-card{padding:20px 24px;border-right:1px solid var(--border);background:var(--white);}
+.db-stat-card:last-child{border-right:none;}
+.db-stat-cat{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.db-stat-val{font-size:28px;font-weight:900;letter-spacing:-0.03em;color:var(--black);margin-bottom:4px;}
+.db-stat-desc{font-size:12px;color:var(--muted);}
+.db-stat-change{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:#2A8A3A;margin-top:6px;}
 
-/* stats row */
-.db-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
-.db-stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 16px;}
-.db-stat-val{font-size:22px;font-weight:800;color:var(--white);letter-spacing:-0.02em;margin-bottom:3px;}
-.db-stat-val.lime{color:var(--lime);}
-.db-stat-label{font-size:11px;color:#555;}
+/* leads table */
+.db-table-section{padding:24px 32px;}
+.db-table-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.db-table-title{font-size:16px;font-weight:700;color:var(--black);}
+.db-filter-group{display:flex;gap:0;background:var(--off);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.db-filter-btn{padding:7px 14px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;transition:all 0.15s;}
+.db-filter-btn.active{background:var(--black);color:var(--white);}
+.db-filter-btn .dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:5px;}
 
-/* lead rows */
-.db-leads{display:flex;flex-direction:column;gap:8px;}
-.db-lead-row{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px 18px;display:grid;grid-template-columns:32px 1fr 80px 90px 90px 100px 100px;gap:12px;align-items:center;cursor:pointer;transition:all 0.15s;}
-.db-lead-row:hover{background:rgba(255,255,255,0.06);border-color:rgba(170,255,69,0.2);}
-.db-lead-row.hot{border-left:3px solid #FF6B55;}
-.db-lead-row.warm{border-left:3px solid #C07D10;}
-.db-lead-row.cold{border-left:3px solid #4A7FC1;}
+.db-table{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.db-th{padding:10px 14px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:#FAFAF9;border-bottom:1px solid var(--border);}
+.db-tr{border-bottom:1px solid var(--border);transition:background 0.15s;cursor:pointer;}
+.db-tr:last-child{border-bottom:none;}
+.db-tr:hover{background:#FAFAF9;}
+.db-td{padding:14px 14px;font-size:13px;color:var(--text);}
 
-.db-lead-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--white);flex-shrink:0;}
-.db-lead-name{font-size:13px;font-weight:600;color:rgba(255,255,255,0.88);margin-bottom:2px;}
-.db-lead-country{font-size:11px;color:#555;}
+.db-lead-cell{display:flex;align-items:center;gap:12px;}
+.db-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--white);flex-shrink:0;}
+.db-lname{font-size:14px;font-weight:600;color:var(--black);}
+.db-ltime{font-size:11px;color:var(--muted);}
 
-.db-score{text-align:center;}
-.db-score-num{font-size:16px;font-weight:800;letter-spacing:-0.02em;}
-.db-score-bar{height:3px;border-radius:2px;margin-top:4px;background:rgba(255,255,255,0.1);}
-.db-score-fill{height:100%;border-radius:2px;}
+.db-tier-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:4px 10px;border-radius:6px;letter-spacing:0.04em;}
+.tt-hot{background:#FFF0ED;color:var(--hot-color);}
+.tt-warm{background:var(--warm-bg);color:var(--warm-color);}
+.tt-cold{background:#EEF4FF;color:var(--cold-color);}
 
-.db-tier-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;padding:4px 10px;border-radius:100px;letter-spacing:0.06em;}
-.tier-hot{background:rgba(255,107,85,0.15);color:#FF6B55;}
-.tier-warm{background:rgba(192,125,16,0.15);color:#C07D10;}
-.tier-cold{background:rgba(74,127,193,0.15);color:#4A7FC1;}
+.db-score-cell{display:flex;align-items:baseline;gap:4px;}
+.db-score-big{font-size:16px;font-weight:800;color:var(--black);}
+.db-score-denom{font-size:11px;color:var(--muted);}
 
-.db-jur{font-size:12px;color:rgba(255,255,255,0.5);}
-.db-capital{font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);}
-.db-time{font-size:12px;color:rgba(255,255,255,0.5);}
-.db-status{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;}
-.status-new{background:rgba(170,255,69,0.1);color:var(--lime);}
-.status-viewed{background:rgba(255,255,255,0.07);color:#888;}
-.status-contacted{background:rgba(192,125,16,0.12);color:#C07D10;}
+.db-status-tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;}
+.st-new{color:#2A8A3A;}.st-new::before{content:'•';margin-right:2px;}
+.st-contacted{color:var(--muted);}.st-contacted::before{content:'✓';margin-right:2px;}
+.st-reached{background:#E8F5E0;color:#2A6A1A;border:1px solid #B8DFA8;}
 
-/* lead detail drawer hint */
-.db-lead-unlock{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--lime);background:rgba(170,255,69,0.1);border:1px solid rgba(170,255,69,0.2);padding:5px 12px;border-radius:6px;white-space:nowrap;cursor:pointer;margin-left:auto;}
+/* ═══ FUNNEL DEEP DIVE ═══ */
+.deepdive-section{padding:96px 0;background:var(--off);border-bottom:1px solid var(--border);}
+.deepdive-steps{display:flex;flex-direction:column;gap:0;margin-top:56px;position:relative;}
+.deepdive-steps::before{content:'';position:absolute;left:39px;top:40px;bottom:40px;width:2px;background:linear-gradient(to bottom,var(--lime),var(--lime2),rgba(170,255,69,0.2));z-index:0;}
+.deepdive-step{display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:flex-start;position:relative;z-index:1;padding-bottom:40px;}
+.deepdive-step:last-child{padding-bottom:0;}
+.deepdive-icon{width:80px;height:80px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;border:2px solid var(--border);background:var(--white);transition:all 0.3s;position:relative;z-index:2;}
+.deepdive-step:hover .deepdive-icon{border-color:var(--lime);box-shadow:0 0 0 6px rgba(170,255,69,0.12);}
+.deepdive-icon.final{background:var(--black);border-color:var(--black);}
+.deepdive-body{padding-top:16px;}
+.deepdive-num{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:8px;}
+.deepdive-step h3{font-size:22px;font-weight:800;letter-spacing:-0.02em;color:var(--black);margin-bottom:10px;line-height:1.2;}
+.deepdive-step p{font-size:15px;color:var(--text2);line-height:1.7;max-width:560px;margin-bottom:16px;}
+.step-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.stag{display:inline-flex;align-items:center;font-size:12px;font-weight:600;padding:5px 12px;border-radius:100px;background:var(--white);color:var(--text2);border:1px solid var(--border);}
+.stag.lime{background:var(--lime-soft);color:var(--lime-dark);border-color:rgba(170,255,69,0.3);}
+.stag.dark{background:var(--black);color:var(--white);border-color:var(--black);}
 
-/* ── FULL FUNNEL ── */
-.funnel-section{padding:96px 0;background:var(--white);border-bottom:1px solid var(--border);}
-.funnel-steps{display:flex;flex-direction:column;gap:0;margin-top:56px;position:relative;}
-.funnel-steps::before{content:'';position:absolute;left:39px;top:40px;bottom:40px;width:2px;background:linear-gradient(to bottom,var(--lime),var(--lime2),rgba(170,255,69,0.2));z-index:0;}
-.funnel-step{display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:flex-start;position:relative;z-index:1;padding-bottom:40px;}
-.funnel-step:last-child{padding-bottom:0;}
-.funnel-step-icon{width:80px;height:80px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;border:2px solid var(--border);background:var(--white);transition:all 0.3s;position:relative;z-index:2;}
-.funnel-step:hover .funnel-step-icon{border-color:var(--lime);box-shadow:0 0 0 6px rgba(170,255,69,0.12);}
-.funnel-step-icon.final{background:var(--black);border-color:var(--black);}
-.funnel-step-body{padding-top:16px;}
-.funnel-step-num{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:8px;}
-.funnel-step h3{font-size:22px;font-weight:800;letter-spacing:-0.02em;color:var(--black);margin-bottom:10px;line-height:1.2;}
-.funnel-step p{font-size:15px;color:var(--text2);line-height:1.7;max-width:560px;margin-bottom:16px;}
-.funnel-step-tags{display:flex;flex-wrap:wrap;gap:8px;}
-.ftag{display:inline-flex;align-items:center;font-size:12px;font-weight:600;padding:5px 12px;border-radius:100px;background:var(--off);color:var(--text2);border:1px solid var(--border);}
-.ftag.lime{background:var(--lime-soft);color:var(--lime-dark);border-color:rgba(170,255,69,0.3);}
-.ftag.dark{background:var(--black);color:var(--white);border-color:var(--black);}
-
-/* ── BOTTOM CTA ── */
+/* BOTTOM CTA */
 .bottom-cta{padding:96px 0;background:var(--dark);position:relative;overflow:hidden;text-align:center;}
-.bottom-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse at center,rgba(170,255,69,0.2),transparent 60%);filter:blur(60px);pointer-events:none;}
+.bottom-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse at center,rgba(170,255,69,0.18),transparent 60%);filter:blur(60px);pointer-events:none;}
 .bottom-cta>.wrap{position:relative;z-index:2;}
 .bottom-cta h2{font-size:clamp(30px,4vw,48px);font-weight:800;letter-spacing:-0.03em;color:var(--white);margin-bottom:14px;line-height:1.08;}
 .bottom-cta p{font-size:17px;color:#888;max-width:460px;margin:0 auto 32px;line-height:1.65;}
 .btn-lime{background:var(--lime);color:var(--black);border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:15px;font-weight:800;padding:18px 40px;border-radius:10px;transition:all 0.2s;display:inline-block;text-decoration:none;}
 .btn-lime:hover{transform:translateY(-2px);box-shadow:0 16px 40px -8px rgba(170,255,69,0.5);}
 
-@media(max-width:1024px){.dashboard-body{grid-template-columns:1fr;}.db-sidebar{display:none;}.db-lead-row{grid-template-columns:32px 1fr 70px 80px;}.db-lead-row>*:nth-child(n+6){display:none;}.formula-pipeline{grid-template-columns:1fr 1fr;gap:24px;}.formula-connector{display:none;}.formula-visuals{display:none;}.ba-grid{grid-template-columns:1fr;gap:16px;}.ba-arrow{display:none;}.qualified-grid{grid-template-columns:1fr;}.sources-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:768px){.formula-pipeline{grid-template-columns:1fr;}.stats-strip{flex-wrap:wrap;}.stat-item{flex:1 1 calc(50% - 12px);border-right:none;}.funnel-step{grid-template-columns:60px 1fr;gap:16px;}.funnel-step-icon{width:60px;height:60px;font-size:22px;}.funnel-steps::before{left:29px;}.sources-grid{grid-template-columns:1fr;}.db-stats{grid-template-columns:1fr 1fr;}}
+/* section eyebrow */
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.eyebrow-line{width:24px;height:1px;background:currentColor;opacity:0.4;}
+.eyebrow.lime{color:var(--lime-dark);}
+.sh2{font-size:clamp(26px,3.6vw,44px);font-weight:800;letter-spacing:-0.03em;line-height:1.08;color:var(--black);margin-bottom:14px;max-width:800px;}
+.sh2 .hl{position:relative;display:inline-block;}
+.sh2 .hl::after{content:'';position:absolute;bottom:0;left:0;right:0;height:0.32em;background:var(--lime);z-index:-1;border-radius:2px;}
+.sp{font-size:16px;color:var(--text2);max-width:580px;line-height:1.7;margin-bottom:0;}
+
+@media(max-width:1024px){
+  .funnel-hero-grid{grid-template-columns:1fr;}
+  .gms-top-grid{grid-template-columns:1fr;}
+  .formula-pipeline{grid-template-columns:1fr 1fr;gap:24px;}
+  .formula-connector{display:none;}
+  .tiers-row{grid-template-columns:1fr 1fr;}
+  .db-stats{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .formula-pipeline{grid-template-columns:1fr;}
+  .tiers-row{grid-template-columns:1fr;}
+  .stats-strip{flex-wrap:wrap;}
+  .stat-item{flex:1 1 calc(50% - 12px);border-right:none;}
+  .deepdive-step{grid-template-columns:60px 1fr;gap:16px;}
+  .deepdive-icon{width:60px;height:60px;font-size:22px;}
+  .deepdive-steps::before{left:29px;}
+  .db-stats{grid-template-columns:1fr 1fr;}
+  .wrap{padding:0 20px;}
+}
 `;
 
-const FUNNEL_STEPS = [
-  {n:"01",emoji:"🎬",title:"Video Series",body:"Short expert videos on global mobility, second passports, and tax optimization — distributed on LinkedIn, YouTube, and through paid Meta/Google campaigns.",tags:[{t:"LinkedIn Video"},{t:"YouTube",cls:"lime"},{t:"Meta Ads",cls:"lime"},{t:"Google Ads"}]},
-  {n:"02",emoji:"📅",title:"Mini-Webinar Invitation",body:"Each video ends with an invitation to a free mini-webinar series. A dedicated landing page captures registrations with full analytics from day one: Meta Pixel, GTM, UTM tracking.",tags:[{t:"Landing page",cls:"lime"},{t:"Meta Pixel"},{t:"Google Analytics"},{t:"UTM tracking",cls:"dark"}]},
-  {n:"03",emoji:"📋",title:"Global Mobility Survey",body:"Every registrant completes the 14-question Global Mobility Survey before joining the webinar. Budget, timeline, family, motivation, jurisdiction. Without it, no lead enters the system.",tags:[{t:"14 questions",cls:"lime"},{t:"Jurisdiction intent"},{t:"Capital range"},{t:"Timeline"}]},
-  {n:"04",emoji:"📊",title:"Scoring & Segmentation",body:"Each response is scored 0–100 across 6 dimensions using the Global Mobility Score Index. HOT (70+), WARM (40–69), COLD (0–39). Leads are tagged by jurisdiction, source, and UTM.",tags:[{t:"GMS 0–100",cls:"dark"},{t:"6 dimensions"},{t:"HOT / WARM / COLD",cls:"lime"},{t:"UTM tagged"}]},
-  {n:"05",emoji:"✅",title:"Intent Verification",body:"Qualified leads (score 40+) go through an additional intent verification step — confirming readiness, decision authority, and depth of interest. This filters out noise.",tags:[{t:"Score 40+ only",cls:"lime"},{t:"Readiness confirmed"},{t:"Decision authority"}]},
-  {n:"06",emoji:"📥",title:"Dashboard Delivery",body:"Qualified, verified leads appear in the partner dashboard matched to their jurisdiction. Each lead includes a full Advisor Brief. Partners unlock contact details with one credit.",tags:[{t:"Jurisdiction matched",cls:"dark"},{t:"Advisor Brief",cls:"lime"},{t:"1 credit = contact unlock"}]},
+const GMS_DIMS = [
+  {n:"01",h:"Budget confirmation",p:"Deployable capital, not aspiration.",w:20},
+  {n:"02",h:"Decision timeline",p:"3 months, 12 months, or 'someday'.",w:20},
+  {n:"03",h:"Jurisdiction specificity",p:"Specific programme vs. still comparing.",w:15},
+  {n:"04",h:"Primary motivation",p:"Tax, political risk, passport, lifestyle.",w:15},
+  {n:"05",h:"Family complexity",p:"Solo, couple, or multi-generational.",w:15},
+  {n:"06",h:"Decision authority",p:"Sole decision-maker or consensus.",w:15},
 ];
 
-const SOURCES = [
-  {icon:"🎬",channel:"Paid",name:"Meta & Instagram Ads",desc:"Targeted campaigns reaching founders and HNW individuals actively searching for residency and citizenship solutions.",metric:"60+ countries"},
-  {icon:"🔍",channel:"Paid",name:"Google Search & YouTube",desc:"Intent-based targeting — people who are actively searching for 'second passport', 'golden visa', 'Portugal residency'.",metric:"Purchase intent"},
-  {icon:"💼",channel:"Organic",name:"LinkedIn Content",desc:"Thought leadership content targeting C-suite executives, fund managers, and internationally mobile professionals.",metric:"B2B audience"},
-  {icon:"🎤",channel:"Events",name:"FBS Summit Events",desc:"Registrants from the US Edition, Caribbean Edition, and Europe Edition events — already in the investment migration mindset.",metric:"800+ past registrants"},
-  {icon:"📧",channel:"Database",name:"FBS Email Database",desc:"Existing FBS audience built over multiple event cycles — segmented by jurisdiction interest and engagement level.",metric:"Warm audience"},
-  {icon:"📹",channel:"Content",name:"Webinar Series",desc:"Mini-webinar registrants who self-selected into a 3-session educational series on jurisdiction strategy — highest intent signal.",metric:"Highest intent"},
+const GMS_OPTIONS = ["Within 3 months — we're ready","Within 6 months","Within 12 months","Still researching"];
+
+const DEEPDIVE_STEPS = [
+  {n:"01",e:"🎬",t:"Video Series",b:"Short expert videos on global mobility, second passports, and tax optimisation — distributed on LinkedIn, YouTube, and through paid Meta/Google campaigns targeting your exact ICP and jurisdiction.",tags:[{t:"LinkedIn"},{t:"YouTube",c:"lime"},{t:"Meta Ads",c:"lime"},{t:"Google Ads"}]},
+  {n:"02",e:"📅",t:"Webinar Invitation",b:"Each video ends with an invitation to a free mini-webinar. A dedicated landing page captures registrations with full analytics from day one: Meta Pixel, GTM, UTM tracking.",tags:[{t:"Landing page",c:"lime"},{t:"Meta Pixel"},{t:"Google Analytics"},{t:"UTM tracking",c:"dark"}]},
+  {n:"03",e:"📋",t:"Global Mobility Survey",b:"Every registrant completes the 14-question Global Mobility Survey before joining the webinar. Budget, timeline, family situation, motivation, jurisdiction. Without completing the survey, no lead enters the system.",tags:[{t:"14 questions",c:"lime"},{t:"Budget"},{t:"Timeline"},{t:"Jurisdiction"}]},
+  {n:"04",e:"📊",t:"Scoring & Verification",b:"Each response is scored 0–100 across 6 dimensions. HOT (70+), WARM (40–69), COLD (0–39). Score 40+ leads go through intent verification — confirming decision authority and readiness before they reach your dashboard.",tags:[{t:"GMS 0–100",c:"dark"},{t:"6 dimensions"},{t:"HOT / WARM / COLD",c:"lime"},{t:"Verification"}]},
+  {n:"05",e:"📥",t:"Dashboard Delivery",b:"Qualified, verified leads appear in your dashboard matched to your jurisdiction. Each includes a full Advisor Brief. Profile is always visible. Contact details — email and phone — unlock with one credit.",tags:[{t:"Jurisdiction matched",c:"dark"},{t:"Advisor Brief",c:"lime"},{t:"1 credit = contact"}]},
 ];
 
 const DB_LEADS = [
-  {avatar:"JH",color:"#D94F3A",name:"J. Harrison",country:"🇺🇸 USA",score:87,scoreColor:"#AAFF45",tier:"HOT",tierCls:"tier-hot",jur:"Malta MEIN",capital:"$400k–$2M",time:"60 days",status:"new",statusCls:"status-new",statusTxt:"New"},
-  {avatar:"SM",color:"#3A6DD9",name:"S. Marchetti",country:"🇮🇹 Italy",score:74,scoreColor:"#FF6B55",tier:"HOT",tierCls:"tier-hot",jur:"Portugal GV",capital:"$300k–$1M",time:"90 days",status:"viewed",statusCls:"status-viewed",statusTxt:"Viewed"},
-  {avatar:"RK",color:"#8B5CF6",name:"R. Kapoor",country:"🇮🇳 India",score:61,scoreColor:"#C07D10",tier:"WARM",tierCls:"tier-warm",jur:"UAE Residence",capital:"$150k–$500k",time:"6 months",status:"contacted",statusCls:"status-contacted",statusTxt:"Contacted"},
-  {avatar:"EV",color:"#059669",name:"E. Volkov",country:"🇦🇪 UAE",score:91,scoreColor:"#AAFF45",tier:"HOT",tierCls:"tier-hot",jur:"St. Kitts CBI",capital:"$400k+",time:"30 days",status:"new",statusCls:"status-new",statusTxt:"New"},
-  {avatar:"LC",color:"#C07D10",name:"L. Chen",country:"🇸🇬 Singapore",score:55,scoreColor:"#4A7FC1",tier:"WARM",tierCls:"tier-warm",jur:"Greece GV",capital:"$250k–$800k",time:"12 months",status:"new",statusCls:"status-new",statusTxt:"New"},
-];
-
-const QUALIFIED_CHECKS = [
-  {icon:"💰",h:"Budget confirmed",p:"Prospect stated specific deployable capital — not 'we're interested' but '$400k–$2M ready to move'.",tag:"Question 3 of 14"},
-  {icon:"📅",h:"Timeline known",p:"Exact window captured: within 3 months, 6 months, or 12 months. Not 'someday'.",tag:"Question 5 of 14"},
-  {icon:"🗺️",h:"Jurisdiction selected",p:"Prospect indicated specific programme interest — Portugal GV, Malta MEIN, UAE residence, or Caribbean CBI.",tag:"Question 2 of 14"},
-  {icon:"👤",h:"Decision-maker identified",p:"Self-reported as sole decision-maker or primary decision-maker in a couple/family context.",tag:"Question 9 of 14"},
-  {icon:"🧠",h:"Motivation captured",p:"Tax pressure, political risk, passport freedom, business expansion, family security — in their own words.",tag:"Question 7 of 14"},
-  {icon:"✅",h:"Intent verified",p:"Post-survey verification step confirms readiness. Only score 40+ leads pass. Score 70+ are flagged HOT.",tag:"Verification step"},
+  {av:"JM",bg:"#D94F3A",name:"J. Marchetti",time:"12 min ago",country:"🇮🇹 Italy",tier:"HOT",tc:"tt-hot",score:87,prog:"St. Kitts CBI",status:"New",sc:"st-new"},
+  {av:"RK",bg:"#3A6DD9",name:"R. Kapoor",time:"34 min ago",country:"🇮🇳 India",tier:"HOT",tc:"tt-hot",score:79,prog:"Portugal Golden Visa",status:"New",sc:"st-new"},
+  {av:"SO",bg:"#8B5CF6",name:"S. Olusegun",time:"1 hr ago",country:"🇳🇬 Nigeria",tier:"WARM",tc:"tt-warm",score:58,prog:"Grenada CBI",status:"Contacted",sc:"st-contacted"},
+  {av:"DH",bg:"#059669",name:"D. Harrison",time:"2 hr ago",country:"🇺🇸 USA",tier:"HOT",tc:"tt-hot",score:73,prog:"Malta MEIN",status:"Reached",sc:"st-reached"},
+  {av:"ED",bg:"#C07D10",name:"E. Dubois",time:"3 hr ago",country:"🇫🇷 France",tier:"WARM",tc:"tt-warm",score:52,prog:"Malta MEIN",status:"New",sc:"st-new"},
 ];
 
 export default function Overview() {
-  const [activeFilter, setActiveFilter] = useState("ALL");
+  const [selOpt, setSelOpt] = useState(0);
+  const [activeFilter, setActiveFilter] = useState("All");
   const scrollY = useScrollY();
   const [statsRef, statsInView] = useInView(0.3);
-  const docH = typeof document !== "undefined"
-    ? Math.max(document.documentElement.scrollHeight - window.innerHeight, 1) : 1;
+  const docH = typeof document !== "undefined" ? Math.max(document.documentElement.scrollHeight - window.innerHeight, 1) : 1;
   const progress = Math.min((scrollY / docH) * 100, 100);
+  const filtered = activeFilter === "All" ? DB_LEADS : DB_LEADS.filter(l => l.tier === activeFilter.toUpperCase());
 
-  const filteredLeads = activeFilter === "ALL" ? DB_LEADS : DB_LEADS.filter(l => l.tier === activeFilter);
+  return (<><style>{css}</style>
 
-  return (
-    <>
-      <style>{css}</style>
-
-      {/* NAV */}
-      <nav>
-        <div className="wrap nav-inner">
-          <a href="/" className="nav-logo"><div className="nav-logo-dot" />FBS Intelligence</a>
-          <div className="nav-right">
-            <a href="/" className="nav-link">Home</a>
-            <a href="/pricing" className="nav-link">Pricing</a>
-            <a href="/overview" className="nav-link" style={{ color: "var(--black)", fontWeight: 700 }}>How it works</a>
-            <a href="/#apply" className="nav-btn">Apply</a>
-          </div>
-        </div>
-        <div className="nav-progress" style={{ width: `${progress}%` }} />
-      </nav>
-
-      {/* HERO */}
-      <section className="hero">
-        <div className="hero-grid-bg" />
-        <div className="wrap">
-          <div className="hero-pill fade-up"><span className="hero-pill-dot">How it works</span>Platform Overview</div>
-          <h1 className="fade-up d1">From first video view to<br /><span className="accent">qualified lead in dashboard.</span></h1>
-          <div className="hero-sub fade-up d2">The 5-step formula, explained.</div>
-          <p className="hero-desc fade-up d3">
-            Every lead in the FBS Intelligence dashboard has been through a five-step qualification process — starting from a video and ending with a scored, verified, jurisdiction-matched Advisor Brief ready for contact.
-          </p>
-
-          <div className="stats-strip" ref={statsRef}>
-            {[
-              {n:5,s:"",label:"Steps from first\nview to dashboard"},
-              {n:14,s:" Q",label:"Global Mobility Survey\nquestions per lead"},
-              {n:92,s:"%",label:"Intent verification\ncompletion rate"},
-              {n:72,s:"h",label:"From survey\nto partner dashboard"},
-            ].map((s,i) => (
-              <div key={i} className="stat-item">
-                <div className="stat-num"><AnimNum target={s.n} inView={statsInView} suffix={s.s} /></div>
-                <div className="stat-label" style={{ whiteSpace: "pre-line" }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* MARQUEE */}
-      <div className="marquee-wrap">
-        <div className="marquee-track">
-          {[...Array(2)].flatMap((_, k) =>
-            ["Video Series", "Webinar Registration", "Global Mobility Survey", "GMS Score 0–100", "HOT · WARM · COLD", "UTM Attribution", "Intent Verification", "Jurisdiction Matching", "Advisor Brief", "Partner Dashboard", "Exclusive Leads"].map((t, i) => (
-              <span key={`${k}-${i}`} className="marquee-item">{t} <span className="marquee-dot">·</span></span>
-            ))
-          )}
+    {/* NAV */}
+    <nav>
+      <div className="wrap nav-inner">
+        <a href="/" className="nav-logo"><div className="nav-logo-dot"/>FBS Intelligence</a>
+        <div className="nav-right">
+          <a href="/" className="nav-link">Home</a>
+          <a href="/pricing" className="nav-link">Pricing</a>
+          <a href="/overview" className="nav-link" style={{color:"var(--black)",fontWeight:700}}>How it works</a>
+          <a href="/#apply" className="nav-btn">Apply</a>
         </div>
       </div>
+      <div className="nav-progress" style={{width:progress+"%"}}/>
+    </nav>
 
-      {/* BEFORE / AFTER */}
-      <section className="ba-section">
-        <div className="wrap">
-          <Reveal>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 16, display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 24, height: 1, background: "var(--muted)", opacity: 0.4 }} />
-              The problem we solve
+    {/* HERO */}
+    <section className="hero">
+      <div className="hero-grid-bg"/>
+      <div className="wrap">
+        <div className="hero-pill fade-up"><span className="hero-pill-dot">How it works</span>Platform Overview</div>
+        <h1 className="fade-up d1">A dedicated funnel.<br/><span className="accent">Qualified leads only.</span></h1>
+        <div className="hero-sub fade-up d2">Built for your firm. Your jurisdiction. Your ICP.</div>
+        <p className="hero-desc fade-up d3">FBS Intelligence builds and runs a complete lead acquisition funnel for each partner — from video ads to survey to scoring to verified intent. You receive leads who are ready to talk.</p>
+        <div className="stats-strip" ref={statsRef}>
+          {[{n:5,s:"",l:"Steps from ad\nto dashboard"},{n:14,s:" Q",l:"Survey questions\nper lead"},{n:92,s:"%",l:"Verification\ncompletion rate"},{n:72,s:"h",l:"Survey to\ndashboard"}].map((s,i)=>(
+            <div key={i} className="stat-item">
+              <div className="stat-num"><AnimNum target={s.n} inView={statsInView} suffix={s.s}/></div>
+              <div className="stat-label" style={{whiteSpace:"pre-line"}}>{s.l}</div>
             </div>
-            <h2 style={{ fontSize: "clamp(26px,3.6vw,44px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--black)", marginBottom: 0, maxWidth: 700 }}>
-              Most firms waste time on the wrong leads.
-            </h2>
-          </Reveal>
-
-          <div className="ba-grid">
-            <Reveal delay={100} className="ba-col ba-before">
-              <div className="ba-col-label">Before FBS Intelligence</div>
-              <div className="ba-col-title">Cold lists and wasted calls</div>
-              {[
-                ["✕","Cold purchased lists with no intent signal"],
-                ["✕","Unqualified Facebook leads who don't know what a Golden Visa is"],
-                ["✕","Hours spent on discovery calls that go nowhere"],
-                ["✕","No idea of budget, timeline, or decision authority"],
-                ["✕","10 conversations to find 1 qualified prospect"],
-              ].map(([i, t], k) => (
-                <div key={k} className="ba-item"><div className="ba-icon">{i}</div>{t}</div>
-              ))}
-            </Reveal>
-
-            <div className="ba-arrow">→</div>
-
-            <Reveal delay={200} className="ba-col ba-after">
-              <div className="ba-col-label">With FBS Intelligence</div>
-              <div className="ba-col-title">Verified intent, ready to talk</div>
-              {[
-                ["✓","Exclusive leads who completed a 14-question intent survey"],
-                ["✓","Budget confirmed, timeline stated, jurisdiction selected"],
-                ["✓","Global Mobility Score 0–100 before first contact"],
-                ["✓","Decision-maker identified and motivation captured"],
-                ["✓","Full Advisor Brief — you know exactly who you're calling"],
-              ].map(([i, t], k) => (
-                <div key={k} className="ba-item"><div className="ba-icon">{i}</div>{t}</div>
-              ))}
-            </Reveal>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* 5-STEP FORMULA */}
-      <section className="formula-section" id="formula">
-        <div className="wrap">
-          <Reveal>
-            <div className="formula-eyebrow"><span className="formula-eyebrow-line" />The 5-Step Formula</div>
-            <h2 style={{ fontSize: "clamp(28px,3.8vw,48px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--black)", marginBottom: 14, maxWidth: 780 }}>
-              The formula behind every<br /><span style={{ position: "relative", display: "inline-block" }}>qualified lead.<span style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "0.32em", background: "var(--lime)", zIndex: -1, borderRadius: 2 }}></span></span>
-            </h2>
-            <p style={{ fontSize: 17, color: "var(--text2)", maxWidth: 580, lineHeight: 1.65, marginBottom: 0 }}>
-              Five steps from first impression to dashboard delivery. Each step filters, qualifies, and enriches — so only serious prospects reach your firm.
-            </p>
-          </Reveal>
+    {/* MARQUEE */}
+    <div className="marquee-wrap">
+      <div className="marquee-track">
+        {[...Array(2)].flatMap((_,k)=>["Dedicated Funnel","Your Jurisdiction","Video Ads","Webinar","GMS Survey","Intent Scoring","Verification","Dashboard Delivery","Advisor Brief","Exclusive Leads","HOT · WARM · COLD"].map((t,i)=>(
+          <span key={`${k}-${i}`} className="marquee-item">{t} <span className="marquee-dot">·</span></span>
+        )))}
+      </div>
+    </div>
 
-          {/* Pipeline */}
-          <div className="formula-pipeline">
-            <div className="formula-connector" />
-            {[
-              {n:"01",emoji:"🎬",name:"Attract",desc:"Short expert videos and paid campaigns reach investors and founders in 60+ countries.",badge:"60+ countries",active:false},
-              {n:"02",emoji:"📥",name:"Capture",desc:"Webinar landing page captures intent and source data with full UTM attribution.",badge:"UTM tracked",active:false},
-              {n:"03",emoji:"📋",name:"Qualify",desc:"14-question Global Mobility Survey collects budget, timeline, family, motivation, and jurisdiction.",badge:"14 questions",active:false},
-              {n:"04",emoji:"📊",name:"Score",desc:"Global Mobility Score 0–100, HOT/WARM/COLD tier, plus intent verification for 40+ scores.",badge:"GMS 0–100",active:false},
-              {n:"05",emoji:"📥",name:"Deliver",desc:"Matched lead appears in partner dashboard with Advisor Brief and contact unlock.",badge:"72h delivery",active:true},
-            ].map((s, i) => (
-              <Reveal key={i} delay={i * 80} className={`formula-step ${s.active ? "active" : ""}`}>
-                <div className="formula-icon">{s.emoji}</div>
-                <div className="formula-num">{s.n}</div>
-                <div className="formula-step-name">{s.name}</div>
-                <div className="formula-step-desc">{s.desc}</div>
-                <div className="formula-badge">{s.badge}</div>
-              </Reveal>
-            ))}
-          </div>
+    {/* DEDICATED FUNNEL SECTION */}
+    <section className="funnel-hero-section" id="funnel">
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>What we build for you</div>
+          <h2 className="sh2">We build the funnel.<br/>You <span className="hl">receive the leads.</span></h2>
+          <p className="sp">Before the first lead reaches your dashboard, FBS Intelligence completes seven steps on your behalf — from understanding your offer to delivering verified prospects matched to your jurisdiction.</p>
+        </Reveal>
 
-          {/* Visual result row */}
-          <div className="formula-visuals">
-            {[
-              {label:"LinkedIn · Meta · Google · YouTube · Events",bg:"#1a1a1a",content:<div style={{display:"flex",gap:4}}>{["🎬","📱","💼","📹"].map((e,i)=><div key={i} style={{width:28,height:18,borderRadius:4,background:"#333",display:"flex",alignItems:"center",justifyContent:"center",fontSize:12}}>{e}</div>)}</div>},
-              {label:"Landing page + pixel",bg:"var(--white)",content:<div style={{width:"80%",height:36,borderRadius:6,border:"1px solid var(--border)",background:"var(--off)",display:"flex",alignItems:"center",padding:"0 8px"}}><div style={{height:6,width:"60%",borderRadius:3,background:"var(--border)"}}></div></div>},
-              {label:"14 Q survey",bg:"var(--white)",content:<div style={{display:"flex",flexDirection:"column",gap:3,width:"80%"}}>{[80,60,45].map((w,i)=><div key={i} style={{height:5,width:w+"%",borderRadius:3,background:"var(--border)"}}/>)}</div>},
-              {label:"Score meter",bg:"#0A0A0A",content:<div style={{textAlign:"center"}}><div style={{fontSize:22,fontWeight:900,color:"var(--lime)",letterSpacing:"-0.03em"}}>87</div><div style={{fontSize:9,color:"#555",marginTop:2}}>HOT</div></div>},
-              {label:"Advisor Brief in dashboard",bg:"#0A0A0A",content:<div style={{display:"flex",flexDirection:"column",gap:3,width:"90%"}}>{[70,50,60,40].map((w,i)=><div key={i} style={{height:4,width:w+"%",borderRadius:2,background:i===0?"var(--lime)":"rgba(255,255,255,0.1)"}}/>)}</div>},
-            ].map((v, i) => (
-              <div key={i} className={`fv-card ${i === 4 ? "active" : ""}`} style={{ background: v.bg }}>
-                {v.content}
-                <div className="fv-stat" style={{ fontSize: 10, textAlign: "center", color: i === 4 ? "rgba(255,255,255,0.4)" : "var(--muted)" }}>{v.label}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Formula CTA bar */}
-          <Reveal delay={200}>
-            <div className="formula-cta-bar">
-              <div className="formula-cta-text">
-                <h4>Want to see what a real lead looks like?</h4>
-                <p>Scroll down to see the live dashboard mockup — or apply for partner access.</p>
-              </div>
-              <div className="formula-cta-btns">
-                <a href="#dashboard" className="btn-outline">See sample dashboard</a>
-                <a href="/#apply" className="btn-dark">Apply for access →</a>
-              </div>
+        <div className="funnel-hero-grid">
+          <Reveal delay={80}>
+            <div className="funnel-steps-list">
+              {[
+                {n:"01",t:"We learn your offer",d:"Discovery call: your jurisdiction, programme, target client profile, and what a qualified lead looks like for your firm.",tag:"Onboarding"},
+                {n:"02",t:"We define your ICP",d:"Based on your input, we build an Ideal Client Profile — capital range, geography, motivation, decision timeline.",tag:"Strategy"},
+                {n:"03",t:"We run video ads",d:"Sponsored video content on Meta, Instagram, LinkedIn and YouTube targeting your exact ICP in relevant markets.",tag:"Acquisition"},
+                {n:"04",t:"We host a webinar",d:"Interested prospects register for a mini-webinar series on global mobility. Registration captures full UTM attribution.",tag:"Registration"},
+                {n:"05",t:"We qualify via survey",d:"Every registrant completes the 14-question Global Mobility Survey. Budget, timeline, family, jurisdiction, motivation.",tag:"Qualification"},
+                {n:"06",t:"We score and verify",d:"Each response is scored 0–100 on 6 dimensions. Score 40+ leads go through intent verification before entering your feed.",tag:"Scoring"},
+                {n:"07",t:"Leads appear in your dashboard",d:"Matched, scored, verified leads with a full Advisor Brief — ready for you to contact.",tag:"Delivery"},
+              ].map((s,i)=>(
+                <div key={i} className="fstep">
+                  <div className="fstep-num">{s.n}</div>
+                  <div className="fstep-body">
+                    <div className="fstep-title">{s.t}</div>
+                    <div className="fstep-desc">{s.d}</div>
+                    <div className="fstep-tag">{s.tag}</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </Reveal>
-        </div>
-      </section>
 
-      {/* WHAT MAKES A LEAD QUALIFIED */}
-      <section className="qualified-section">
-        <div className="wrap">
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-            <div style={{ width: 24, height: 1, background: "#888", opacity: 0.4 }} />
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#888" }}>
-              Lead Quality
-            </div>
-          </div>
-          <div className="qualified-grid">
-            <Reveal>
-              <h2 style={{ fontSize: "clamp(26px,3.4vw,42px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--black)", marginBottom: 16, lineHeight: 1.1 }}>
-                What makes a lead<br />qualified?
-              </h2>
-              <p style={{ fontSize: 16, color: "var(--text2)", lineHeight: 1.7, marginBottom: 28 }}>
-                Every lead in your dashboard has cleared six criteria before you see their name. Not "interested". Not "clicked an ad". Genuinely ready.
-              </p>
-              <div style={{ background: "var(--off)", border: "1px solid var(--border)", borderRadius: 12, padding: "16px 20px", display: "flex", alignItems: "flex-start", gap: 14 }}>
-                <div style={{ fontSize: 22, flexShrink: 0 }}>📊</div>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 700, color: "var(--black)", marginBottom: 4 }}>Global Mobility Score</div>
-                  <div style={{ fontSize: 13, color: "var(--text2)", lineHeight: 1.55 }}>Each criterion contributes to a 0–100 score. Only leads scoring 40+ reach the shared dashboard. Score 70+ are flagged HOT and prioritised.</div>
+          <Reveal delay={160}>
+            <div className="funnel-hero-visual">
+              <div className="fhv-card">
+                <div className="fhv-top">
+                  <div className="fhv-label">Your Partner Setup</div>
+                  <div className="fhv-live"><div className="fhv-live-dot"/>Live feed active</div>
+                </div>
+                <div className="fhv-jurisdiction">
+                  <div className="fhv-jur-label">Primary jurisdiction</div>
+                  <div className="fhv-jur-val">Malta MEIN · St. Kitts CBI</div>
+                </div>
+                <div className="fhv-metrics">
+                  <div className="fhv-metric"><div className="fhv-metric-val">24</div><div className="fhv-metric-lbl">Leads this month</div></div>
+                  <div className="fhv-metric"><div className="fhv-metric-val" style={{color:"var(--hot-color)"}}>9</div><div className="fhv-metric-lbl">HOT tier</div></div>
+                  <div className="fhv-metric"><div className="fhv-metric-val">18</div><div className="fhv-metric-lbl">Credits left</div></div>
+                </div>
+                <div className="fhv-mini-leads">
+                  {[{av:"JM",bg:"#D94F3A",n:"J. Marchetti",s:87},{av:"DH",bg:"#059669",n:"D. Harrison",s:73},{av:"ED",bg:"#C07D10",n:"E. Dubois",s:52}].map((l,i)=>(
+                    <div key={i} className="fhv-lead">
+                      <div className="fhv-av" style={{background:l.bg}}>{l.av}</div>
+                      <div className="fhv-ln">{l.n}</div>
+                      <div className="fhv-score">{l.s}</div>
+                      {i===0&&<div className="fhv-new">New</div>}
+                    </div>
+                  ))}
                 </div>
               </div>
-            </Reveal>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
 
-            <Reveal delay={120}>
-              <div className="qualified-checks">
-                {QUALIFIED_CHECKS.map((q, i) => (
-                  <div key={i} className="qcheck">
-                    <div className="qcheck-icon">{q.icon}</div>
-                    <div className="qcheck-body">
-                      <div className="qcheck-h">{q.h}</div>
-                      <div className="qcheck-p">{q.p}</div>
-                      <div className="qcheck-tag">{q.tag}</div>
+    {/* 5-STEP FORMULA */}
+    <section className="formula-section">
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>The 5-Step Formula</div>
+          <h2 className="sh2">From ad impression to<br/><span className="hl">qualified lead in dashboard.</span></h2>
+          <p className="sp">Five steps, all managed by FBS Intelligence. Each step filters, qualifies, and enriches — so only serious prospects matched to your jurisdiction reach your firm.</p>
+        </Reveal>
+
+        <div className="formula-pipeline">
+          <div className="formula-connector"/>
+          {[
+            {n:"01",e:"🎬",name:"Attract",desc:"Sponsored video targeting your exact ICP and jurisdiction across Meta, LinkedIn and YouTube.",badge:"Your ICP targeted",last:false},
+            {n:"02",e:"📥",name:"Capture",desc:"Webinar registration page with UTM attribution and pixel tracking from day one.",badge:"UTM tracked",last:false},
+            {n:"03",e:"📋",name:"Qualify",desc:"14-question Global Mobility Survey: budget, timeline, family, motivation and jurisdiction interest.",badge:"14 questions",last:false},
+            {n:"04",e:"📊",name:"Score",desc:"Global Mobility Score 0–100 across 6 dimensions. Intent verification for all 40+ scores.",badge:"GMS 0–100",last:false},
+            {n:"05",e:"📥",name:"Deliver",desc:"Matched lead in your dashboard with a full Advisor Brief. Profile visible, contact unlocks with 1 credit.",badge:"72h delivery",last:true},
+          ].map((s,i)=>(
+            <Reveal key={i} delay={i*70} className={`formula-step ${s.last?"last-step":""}`}>
+              <div className="formula-icon">{s.e}</div>
+              <div className="formula-num">{s.n}</div>
+              <div className="formula-name">{s.name}</div>
+              <div className="formula-desc">{s.desc}</div>
+              <div className="formula-badge">{s.badge}</div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* GMS / LEAD QUALITY */}
+    <section className="gms-section" id="scoring">
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>Lead Scoring & Verification</div>
+          <h2 className="sh2">How we score leads before<br/><span className="hl">they reach you.</span></h2>
+          <p className="sp">Every registrant completes a 14-question survey. Their answers are scored across 6 dimensions to produce a Global Mobility Score (0–100). Only leads scoring 40+ pass to verification — and only verified leads reach your dashboard.</p>
+        </Reveal>
+
+        <div className="gms-top-grid">
+          <Reveal delay={80}>
+            <div>
+              <div className="gms-survey-card">
+                <div className="gms-survey-chrome">
+                  <div className="gms-dots">
+                    <div className="gms-dot" style={{background:"#FF5F57"}}/>
+                    <div className="gms-dot" style={{background:"#FEBC2E"}}/>
+                    <div className="gms-dot" style={{background:"#28C840"}}/>
+                  </div>
+                  <div className="gms-url">survey.fbsintelligence.com</div>
+                </div>
+                <div className="gms-body">
+                  <div className="gms-progress-row">
+                    <div className="gms-prog-track"><div className="gms-prog-fill" style={{width:"57%"}}/></div>
+                    <div className="gms-prog-lbl">Question 8 of 14</div>
+                  </div>
+                  <div className="gms-q">What is your target timeline for obtaining residency or citizenship?</div>
+                  <div className="gms-options">
+                    {GMS_OPTIONS.map((opt,i)=>(
+                      <button key={i} className={`gms-option ${selOpt===i?"sel":""}`} onClick={()=>setSelOpt(i)}>
+                        <div className="gms-option-check">{selOpt===i?"✓":""}</div>{opt}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="gms-footer">
+                    <button className="gms-back">← Back</button>
+                    <button className="gms-next">Next →</button>
+                  </div>
+                </div>
+              </div>
+              <div className="gms-score-card">
+                <div className="gms-score-label">Global Mobility Score</div>
+                <div className="gms-score-num">87</div>
+                <div className="gms-score-sub">Out of 100 · 6 dimensions scored</div>
+                <div className="gms-score-badge">
+                  <span style={{width:7,height:7,borderRadius:"50%",background:"#FF6B55",display:"inline-block",flexShrink:0}}/>
+                  HOT — Verified & ready
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={160}>
+            <div className="gms-dims-col">
+              <div style={{marginBottom:4}}>
+                <div style={{fontSize:13,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:16}}>6 Scoring Dimensions</div>
+              </div>
+              <p className="gms-dim-intro">Each survey question maps to one of six dimensions. The weighted score determines tier: HOT, WARM, or COLD. Budget and timeline carry the most weight — they separate real prospects from browsers.</p>
+              {GMS_DIMS.map((d,i)=>(
+                <div key={i} className="gms-dim">
+                  <div className="gms-dim-num">{d.n}</div>
+                  <div className="gms-dim-body">
+                    <div className="gms-dim-h">{d.h}</div>
+                    <div className="gms-dim-p">{d.p}</div>
+                    <div className="gms-dim-bar">
+                      <div className="gms-dim-track"><div className="gms-dim-fill" style={{width:d.w+"%"}}/></div>
+                      <div className="gms-dim-pct">{d.w}%</div>
                     </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Tiers */}
+        <Reveal delay={80}>
+          <div style={{marginTop:56,marginBottom:20}}>
+            <div style={{fontSize:13,fontWeight:700,color:"var(--muted)",textTransform:"uppercase",letterSpacing:"0.1em",marginBottom:8}}>Score Tiers</div>
+            <p style={{fontSize:15,color:"var(--text2)",maxWidth:560}}>Scores determine the tier — which controls how leads are prioritised in your dashboard and how urgently you should reach out.</p>
+          </div>
+        </Reveal>
+        <div className="tiers-row">
+          {[
+            {cls:"hot",badge:"HOT",badgeColor:"#E05A3A",range:"70–100",sub:"Verified — ready to engage",desc:"Budget confirmed, timeline within 90 days, specific programme identified, decision-maker verified. Reach out within 24 hours."},
+            {cls:"warm",badge:"WARM",badgeColor:"#C07D10",range:"40–69",sub:"Active research phase",desc:"Real intent with a 3–12 month horizon. Budget and programme interest present but not fully locked. Nurture and qualify further."},
+            {cls:"cold",badge:"COLD",badgeColor:"#4A7FC1",range:"0–39",sub:"Early exploration",desc:"Genuine interest but timeline and budget unclear. Useful for audience intelligence and long-cycle nurture. Not delivered to your dashboard."},
+          ].map((t,i)=>(
+            <Reveal key={i} delay={i*80} className={`tier-card ${t.cls}`}>
+              <div className="tier-badge-row" style={{color:t.badgeColor}}>
+                <div className="tier-badge-dot" style={{background:t.badgeColor}}/>{t.badge}
+              </div>
+              <div className="tier-range">{t.range}</div>
+              <div className="tier-sublabel">{t.sub}</div>
+              <div className="tier-desc">{t.desc}</div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* DASHBOARD MOCKUP */}
+    <section className="dashboard-section" id="dashboard">
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>Partner Dashboard</div>
+          <h2 className="sh2">This is what you see<br/><span className="hl">on day one.</span></h2>
+          <p className="sp">Scored, verified leads matched to your jurisdiction — with their Advisor Brief attached. Profile always visible. Contact details unlock with one credit.</p>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <div className="db-wrapper">
+            {/* Mac chrome */}
+            <div className="db-chrome">
+              <div className="db-chrome-dots">
+                <div className="db-chrome-dot" style={{background:"#FF5F57"}}/>
+                <div className="db-chrome-dot" style={{background:"#FEBC2E"}}/>
+                <div className="db-chrome-dot" style={{background:"#28C840"}}/>
+              </div>
+              <div className="db-chrome-url">
+                <div className="db-chrome-url-inner">
+                  <span className="db-chrome-lock">🔒</span>
+                  app.fbsintelligence.com/dashboard
+                </div>
+              </div>
+            </div>
+
+            <div className="db-inner">
+              {/* Header */}
+              <div className="db-header">
+                <div>
+                  <div className="db-greeting">Good morning, <span>Andreas</span> 👋</div>
+                  <div className="db-sub"><strong>4 new HOT leads</strong> matched overnight.</div>
+                </div>
+                <button className="db-review-btn">Review →</button>
+              </div>
+
+              {/* Stats */}
+              <div className="db-stats">
+                {[
+                  {cat:"TODAY",val:"12",desc:"New leads",change:"↑ 23%"},
+                  {cat:"PIPELINE",val:"$1.4M",desc:"Estimated",change:"↑ 18%"},
+                  {cat:"CONTACT",val:"68%",desc:"Within 24h",change:"↑ 4%"},
+                  {cat:"CLOSE",val:"22%",desc:"HOT tier",change:"↑ 7%"},
+                ].map((s,i)=>(
+                  <div key={i} className="db-stat-card">
+                    <div className="db-stat-cat">{s.cat}</div>
+                    <div className="db-stat-val">{s.val}</div>
+                    <div className="db-stat-desc">{s.desc}</div>
+                    <div className="db-stat-change">{s.change}</div>
                   </div>
                 ))}
               </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
-      {/* AUDIENCE SOURCES */}
-      <section className="sources-section">
-        <div className="wrap">
-          <Reveal>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <div style={{ width: 24, height: 1, background: "#888", opacity: 0.4 }} />
-              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#888" }}>Where leads come from</div>
-            </div>
-            <h2 style={{ fontSize: "clamp(26px,3.4vw,42px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--black)", marginBottom: 14 }}>
-              Six acquisition channels.<br />One qualified dashboard.
-            </h2>
-            <p style={{ fontSize: 16, color: "var(--text2)", maxWidth: 580, lineHeight: 1.7, marginBottom: 0 }}>
-              Leads enter the FBS funnel from multiple sources — all go through the same Global Mobility Survey before reaching your dashboard.
-            </p>
-          </Reveal>
-
-          <div className="sources-grid">
-            {SOURCES.map((s, i) => (
-              <Reveal key={i} delay={i * 60} className="source-card">
-                <div className="source-icon">{s.icon}</div>
-                <div className="source-channel">{s.channel}</div>
-                <div className="source-name">{s.name}</div>
-                <div className="source-desc">{s.desc}</div>
-                <div className="source-metric">📍 {s.metric}</div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* DASHBOARD MOCKUP */}
-      <section className="dashboard-section" id="dashboard">
-        <div className="wrap">
-          <Reveal>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#888", marginBottom: 16, display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 24, height: 1, background: "#555" }} />Partner Dashboard
-            </div>
-            <h2 style={{ fontSize: "clamp(26px,3.6vw,44px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--white)", marginBottom: 14, lineHeight: 1.05 }}>
-              This is what you see<br />on day one.
-            </h2>
-            <p style={{ fontSize: 16, color: "#888", maxWidth: 560, lineHeight: 1.7 }}>
-              Scored leads, matched to your jurisdiction, with Advisor Brief attached. Profile always visible. Contact details unlock with one credit.
-            </p>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <div className="dashboard-mockup">
-              {/* Chrome bar */}
-              <div className="dashboard-chrome">
-                <div className="db-dots">
-                  <div className="db-dot" style={{ background: "#FF5F57" }} />
-                  <div className="db-dot" style={{ background: "#FEBC2E" }} />
-                  <div className="db-dot" style={{ background: "#28C840" }} />
-                </div>
-                <div className="db-title">FBS Intelligence — Partner Dashboard</div>
-                <div className="db-actions">
-                  <div className="db-action active">Lead Feed</div>
-                  <div className="db-action">Analytics</div>
-                  <div className="db-action">Settings</div>
-                </div>
-              </div>
-
-              <div className="dashboard-body">
-                {/* Sidebar */}
-                <div className="db-sidebar">
-                  <div className="db-nav-section">Navigation</div>
-                  <div className="db-nav-item active"><span className="db-nav-icon">📥</span>Lead Feed</div>
-                  <div className="db-nav-item"><span className="db-nav-icon">📊</span>Analytics</div>
-                  <div className="db-nav-item"><span className="db-nav-icon">👤</span>ICP Profile</div>
-                  <div className="db-nav-item"><span className="db-nav-icon">📋</span>Advisor Briefs</div>
-                  <div className="db-nav-section">Account</div>
-                  <div className="db-nav-item"><span className="db-nav-icon">⚙️</span>Settings</div>
-                  <div className="db-nav-item"><span className="db-nav-icon">💳</span>Credits</div>
-                  <div style={{ position: "absolute", bottom: 20, left: 16, right: 16 }}>
-                    <div style={{ background: "rgba(170,255,69,0.08)", border: "1px solid rgba(170,255,69,0.2)", borderRadius: 10, padding: "12px 14px" }}>
-                      <div style={{ fontSize: 11, color: "var(--lime)", fontWeight: 700, marginBottom: 4 }}>Credits remaining</div>
-                      <div style={{ fontSize: 22, fontWeight: 800, color: "var(--white)" }}>18</div>
-                      <div style={{ fontSize: 11, color: "#555", marginTop: 2 }}>of 30 this month</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Main */}
-                <div className="db-main">
-                  <div className="db-header-row">
-                    <div className="db-page-title">Lead Feed</div>
-                    <div className="db-filter-row">
-                      {["ALL","HOT","WARM","COLD"].map(f => (
-                        <div key={f} className={`db-filter ${activeFilter === f ? "active" : ""}`}
-                          onClick={() => setActiveFilter(f)}>{f}</div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Stats */}
-                  <div className="db-stats">
-                    {[
-                      {val:"24",label:"Leads this month",lime:false},
-                      {val:"9",label:"HOT (score 70+)",lime:true},
-                      {val:"11",label:"WARM (40–69)",lime:false},
-                      {val:"18",label:"Credits remaining",lime:false},
-                    ].map((s,i) => (
-                      <div key={i} className="db-stat">
-                        <div className={`db-stat-val ${s.lime ? "lime" : ""}`}>{s.val}</div>
-                        <div className="db-stat-label">{s.label}</div>
-                      </div>
+              {/* Leads table */}
+              <div className="db-table-section">
+                <div className="db-table-header">
+                  <div className="db-table-title">Live Leads Feed</div>
+                  <div className="db-filter-group">
+                    {["All","HOT","WARM","COLD"].map(f=>(
+                      <button key={f} className={`db-filter-btn ${activeFilter===f?"active":""}`} onClick={()=>setActiveFilter(f)}>
+                        {f!=="All"&&<span className="dot" style={{background:f==="HOT"?"#E05A3A":f==="WARM"?"#C07D10":"#4A7FC1"}}/>}
+                        {f}
+                      </button>
                     ))}
                   </div>
+                </div>
 
-                  {/* Lead rows */}
-                  <div className="db-leads">
-                    {/* Header row */}
-                    <div style={{ display: "grid", gridTemplateColumns: "32px 1fr 80px 90px 90px 100px 100px", gap: 12, padding: "0 18px", marginBottom: 4 }}>
-                      {["","Lead","Score","Tier","Jurisdiction","Capital","Status"].map((h,i) => (
-                        <div key={i} style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#444" }}>{h}</div>
-                      ))}
-                    </div>
-
-                    {filteredLeads.map((lead, i) => (
-                      <div key={i} className={`db-lead-row ${lead.tier.toLowerCase()}`}>
-                        <div className="db-lead-avatar" style={{ background: lead.color }}>{lead.avatar}</div>
-                        <div>
-                          <div className="db-lead-name">{lead.name}</div>
-                          <div className="db-lead-country">{lead.country}</div>
-                        </div>
-                        <div className="db-score">
-                          <div className="db-score-num" style={{ color: lead.scoreColor }}>{lead.score}</div>
-                          <div className="db-score-bar">
-                            <div className="db-score-fill" style={{ width: lead.score + "%", background: lead.scoreColor }} />
+                <table className="db-table">
+                  <thead>
+                    <tr>
+                      <th className="db-th">Lead</th>
+                      <th className="db-th">Country</th>
+                      <th className="db-th">Tier</th>
+                      <th className="db-th">Score</th>
+                      <th className="db-th">Programme</th>
+                      <th className="db-th">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filtered.map((l,i)=>(
+                      <tr key={i} className="db-tr">
+                        <td className="db-td">
+                          <div className="db-lead-cell">
+                            <div className="db-av" style={{background:l.bg}}>{l.av}</div>
+                            <div>
+                              <div className="db-lname">{l.name}</div>
+                              <div className="db-ltime">{l.time}</div>
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <span className={`db-tier-badge ${lead.tierCls}`}>
-                            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "currentColor", display: "inline-block" }} />
-                            {lead.tier}
-                          </span>
-                        </div>
-                        <div className="db-jur">{lead.jur}</div>
-                        <div className="db-capital">{lead.capital}</div>
-                        <div>
-                          <span className={`db-status ${lead.statusCls}`}>{lead.statusTxt}</span>
-                        </div>
-                      </div>
+                        </td>
+                        <td className="db-td">{l.country}</td>
+                        <td className="db-td"><span className={`db-tier-tag ${l.tc}`}>{l.tier}</span></td>
+                        <td className="db-td">
+                          <div className="db-score-cell">
+                            <div className="db-score-big">{l.score}</div>
+                            <div className="db-score-denom">/100</div>
+                          </div>
+                        </td>
+                        <td className="db-td" style={{color:"var(--text2)"}}>{l.prog}</td>
+                        <td className="db-td">
+                          <span className={`db-status-tag ${l.sc}`}>{l.status}</span>
+                        </td>
+                      </tr>
                     ))}
-
-                    {/* Unlock hint on first HOT lead */}
-                    <div style={{ background: "rgba(170,255,69,0.04)", border: "1px dashed rgba(170,255,69,0.25)", borderRadius: 12, padding: "14px 18px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                      <div style={{ fontSize: 13, color: "#555" }}>🔒 Profile visible · Contact details locked</div>
-                      <div className="db-lead-unlock">🔓 Unlock contact — 1 credit</div>
-                    </div>
-                  </div>
-                </div>
+                  </tbody>
+                </table>
               </div>
             </div>
-          </Reveal>
-        </div>
-      </section>
+          </div>
+        </Reveal>
+      </div>
+    </section>
 
-      {/* FULL FUNNEL DEEP DIVE */}
-      <section className="funnel-section" id="funnel">
-        <div className="wrap">
-          <Reveal>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--lime-dark)", marginBottom: 16, display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 24, height: 1, background: "var(--lime-dark)", opacity: 0.5 }} />Deep dive — All 6 stages
-            </div>
-            <h2 style={{ fontSize: "clamp(26px,3.4vw,42px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--black)", marginBottom: 14 }}>
-              Six stages. Fully managed.<br /><span style={{ position: "relative", display: "inline-block" }}>You see results.<span style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "0.32em", background: "var(--lime)", zIndex: -1, borderRadius: 2 }}></span></span>
-            </h2>
-            <p style={{ fontSize: 16, color: "var(--text2)", maxWidth: 580, lineHeight: 1.7, marginBottom: 0 }}>
-              Every stage is handled by FBS Intelligence. Partners only see prospects who are ready to talk.
-            </p>
-          </Reveal>
-
-          <div className="funnel-steps">
-            {FUNNEL_STEPS.map((s, i) => (
-              <Reveal key={i} delay={i * 60} className="funnel-step">
-                <div className={`funnel-step-icon ${i === 5 ? "final" : ""}`}>{s.emoji}</div>
-                <div className="funnel-step-body">
-                  <div className="funnel-step-num">STAGE {s.n}</div>
-                  <h3>{s.title}</h3>
-                  <p>{s.body}</p>
-                  <div className="funnel-step-tags">
-                    {s.tags.map((t, j) => <span key={j} className={`ftag ${t.cls || ""}`}>{t.t}</span>)}
-                  </div>
+    {/* DEEP DIVE FUNNEL */}
+    <section className="deepdive-section" id="deepdive">
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>Deep Dive</div>
+          <h2 className="sh2">Every step in detail.</h2>
+          <p className="sp">The full five-stage funnel from first ad impression to partner dashboard delivery — with what happens at each stage.</p>
+        </Reveal>
+        <div className="deepdive-steps">
+          {DEEPDIVE_STEPS.map((s,i)=>(
+            <Reveal key={i} delay={i*60} className="deepdive-step">
+              <div className={`deepdive-icon ${i===4?"final":""}`}>{s.e}</div>
+              <div className="deepdive-body">
+                <div className="deepdive-num">STEP {s.n}</div>
+                <h3>{s.t}</h3>
+                <p>{s.b}</p>
+                <div className="step-tags">
+                  {s.tags.map((t,j)=><span key={j} className={`stag ${t.c||""}`}>{t.t}</span>)}
                 </div>
-              </Reveal>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* BOTTOM CTA */}
+    <section className="bottom-cta">
+      <div className="wrap">
+        <Reveal>
+          <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"var(--lime)",color:"var(--black)",fontSize:11,fontWeight:800,padding:"4px 12px",borderRadius:100,letterSpacing:"0.08em",textTransform:"uppercase",marginBottom:24}}>
+            <span style={{width:6,height:6,borderRadius:"50%",background:"var(--black)",display:"inline-block"}}/>Selective Onboarding
+          </div>
+          <h2>Ready to receive leads<br/>from this funnel?</h2>
+          <p>One partner per jurisdiction. Apply and we'll review your profile within 24 hours.</p>
+          <a href="/pricing" className="btn-lime">See pricing & apply →</a>
+          <div style={{marginTop:16,display:"flex",gap:20,justifyContent:"center",flexWrap:"wrap"}}>
+            {["Discovery call within 48h","First leads in 7–14 days","Exclusive per jurisdiction"].map(t=>(
+              <span key={t} style={{fontSize:12,color:"#555",display:"inline-flex",alignItems:"center",gap:6}}>
+                <span style={{color:"var(--lime)",fontWeight:900}}>✓</span>{t}
+              </span>
             ))}
           </div>
-        </div>
-      </section>
+        </Reveal>
+      </div>
+    </section>
 
-      {/* BOTTOM CTA */}
-      <section className="bottom-cta">
-        <div className="wrap">
-          <Reveal>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--lime)", color: "var(--black)", fontSize: 11, fontWeight: 800, padding: "4px 12px", borderRadius: 100, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 24 }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--black)", display: "inline-block" }} />Selective Onboarding
-            </div>
-            <h2>Ready to receive leads<br />from this funnel?</h2>
-            <p>One firm per jurisdiction. Apply and we'll review your profile within 24 hours.</p>
-            <a href="/pricing" className="btn-lime">See pricing & apply →</a>
-            <div style={{ marginTop: 16, display: "flex", gap: 20, justifyContent: "center", flexWrap: "wrap" }}>
-              {["24h review","First leads in 7 days","Exclusive per jurisdiction"].map(t => (
-                <span key={t} style={{ fontSize: 12, color: "#555", display: "inline-flex", alignItems: "center", gap: 6 }}>
-                  <span style={{ color: "var(--lime)", fontWeight: 900 }}>✓</span> {t}
-                </span>
-              ))}
-            </div>
-          </Reveal>
+    <footer style={{background:"var(--black)",padding:"48px 0 32px",borderTop:"1px solid #1a1a1a"}}>
+      <div className="wrap" style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:16}}>
+        <div style={{display:"flex",alignItems:"center",gap:8,fontSize:14,fontWeight:800,color:"var(--white)"}}>
+          <div style={{width:8,height:8,background:"var(--lime)",borderRadius:"50%"}}/>FBS Intelligence
         </div>
-      </section>
-
-      <footer style={{ background: "var(--black)", padding: "48px 0 32px", borderTop: "1px solid #1a1a1a" }}>
-        <div className="wrap" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, fontWeight: 800, color: "var(--white)" }}>
-            <div style={{ width: 8, height: 8, background: "var(--lime)", borderRadius: "50%" }} />FBS Intelligence
-          </div>
-          <div style={{ display: "flex", gap: 24 }}>
-            <a href="/" style={{ fontSize: 13, color: "#666", textDecoration: "none" }}>Home</a>
-            <a href="/pricing" style={{ fontSize: 13, color: "#666", textDecoration: "none" }}>Pricing</a>
-            <a href="/overview" style={{ fontSize: 13, color: "#AAA", textDecoration: "none" }}>How it works</a>
-          </div>
-          <div style={{ fontSize: 12, color: "#444" }}>© 2026 Freedom Business Summit</div>
+        <div style={{display:"flex",gap:24}}>
+          <a href="/" style={{fontSize:13,color:"#666",textDecoration:"none"}}>Home</a>
+          <a href="/pricing" style={{fontSize:13,color:"#666",textDecoration:"none"}}>Pricing</a>
+          <a href="/overview" style={{fontSize:13,color:"#AAA",textDecoration:"none"}}>How it works</a>
         </div>
-      </footer>
-    </>
-  );
+        <div style={{fontSize:12,color:"#444"}}>© 2026 Freedom Business Summit</div>
+      </div>
+    </footer>
+  </>);
 }
