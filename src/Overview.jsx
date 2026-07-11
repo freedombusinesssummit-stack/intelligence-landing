@@ -201,17 +201,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 
 /* ═══ 5-STEP FORMULA ═══ */
 .formula-section{padding:96px 0;background:var(--white);border-bottom:1px solid var(--border);}
-.formula-pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:56px;position:relative;}
-.formula-connector{position:absolute;top:50px;left:10%;right:10%;height:2px;background:linear-gradient(to right,var(--lime),var(--lime2),rgba(170,255,69,0.4),rgba(170,255,69,0.15),rgba(170,255,69,0.05));z-index:0;}
-.formula-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 10px;position:relative;z-index:1;}
-.formula-step:hover .formula-icon{border-color:var(--lime);box-shadow:0 0 0 8px rgba(170,255,69,0.12);transform:scale(1.06);}
-.formula-icon{width:100px;height:100px;border-radius:24px;background:var(--white);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:20px;transition:all 0.3s;position:relative;z-index:2;box-shadow:0 4px 14px rgba(0,0,0,0.06);}
-.formula-step.last-step .formula-icon{background:var(--black);border-color:var(--black);}
-.formula-num{font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:8px;}
-.formula-name{font-size:17px;font-weight:800;color:var(--black);letter-spacing:-0.02em;margin-bottom:6px;}
-.formula-desc{font-size:12px;color:var(--text2);line-height:1.55;max-width:155px;margin:0 auto 12px;}
-.formula-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;border:1px solid var(--border);background:var(--off);color:var(--black);}
-.formula-step.last-step .formula-badge{background:var(--lime);border-color:var(--lime);}
+.formula-pipeline{display:flex;flex-direction:column;gap:10px;margin-top:48px;}
+.formula-step{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:20px;padding:20px 24px;background:var(--off);border:1px solid var(--border);border-radius:14px;cursor:default;transition:all 0.2s;}
+.formula-step:hover{background:var(--white);border-color:var(--black);transform:translateX(4px);}
+.formula-step.last-step{background:var(--black);border-color:var(--black);}
+.formula-step.last-step:hover{transform:translateX(4px);box-shadow:0 8px 24px rgba(0,0,0,0.15);}
+.formula-icon{width:48px;height:48px;border-radius:12px;background:var(--white);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;transition:all 0.2s;}
+.formula-step:hover .formula-icon{border-color:var(--lime);}
+.formula-step.last-step .formula-icon{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.15);}
+.formula-step-body{display:flex;flex-direction:column;gap:2px;}
+.formula-num{font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--lime-dark);}
+.formula-step.last-step .formula-num{color:rgba(170,255,69,0.7);}
+.formula-name{font-size:16px;font-weight:800;color:var(--black);letter-spacing:-0.02em;}
+.formula-step.last-step .formula-name{color:var(--white);}
+.formula-desc{font-size:13px;color:var(--text2);line-height:1.5;}
+.formula-step.last-step .formula-desc{color:rgba(255,255,255,0.55);}
+.formula-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:5px 12px;border-radius:100px;border:1px solid var(--border);background:var(--white);color:var(--black);white-space:nowrap;flex-shrink:0;}
+.formula-step.last-step .formula-badge{background:var(--lime);border-color:var(--lime);color:var(--black);}
+.formula-step:hover .formula-badge{border-color:var(--black);}
+.formula-connector{display:none;}
 
 /* ═══ GMS / LEAD QUALITY ═══ */
 .gms-section{padding:96px 0;background:var(--off);border-bottom:1px solid var(--border);}
@@ -451,29 +459,39 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
   .advisor-text{padding-top:0;}
   .funnel-hero-grid{grid-template-columns:1fr;}
   .gms-top-grid{grid-template-columns:1fr;}
-  .formula-pipeline{grid-template-columns:1fr 1fr;gap:24px;}
-  .formula-connector{display:none;}
   .tiers-row{grid-template-columns:1fr 1fr;}
   .db-stats{grid-template-columns:1fr 1fr;}
+  .formula-badge{font-size:10px;padding:4px 8px;}
 }
 @media(max-width:768px){
+  /* Hero stats: 2x2 grid */
+  .stats-strip{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+  .stat-item{padding:20px 16px 20px 0;border-right:none;margin-right:0;border-bottom:1px solid var(--border);}
+  .stat-item:nth-child(odd){border-right:1px solid var(--border);}
+  .stat-item:nth-child(3),.stat-item:nth-child(4){border-bottom:none;}
+  /* Formula rectangular: hide badge on small screens */
+  .formula-badge{display:none;}
+  .formula-step{grid-template-columns:44px 1fr;gap:12px;padding:14px 16px;}
+  /* Hsteps */
   .hsteps-grid{grid-template-columns:1fr 1fr;}
   .hstep{border-right:1px solid var(--border) !important;border-radius:0 !important;}
   .hstep:first-child{border-radius:14px 0 0 0 !important;}
   .hstep:last-child{border-radius:0 0 14px 14px !important;}
+  /* Advisor card fields */
   .ac-fields{grid-template-columns:1fr;}
   .ac-field{border-right:none !important;border-bottom:1px solid var(--border) !important;}
   .ac-field:last-child{border-bottom:none !important;}
+  /* Timeline */
   .tl-phases{grid-template-columns:1fr;}
-  .formula-pipeline{grid-template-columns:1fr;}
+  /* Tiers */
   .tiers-row{grid-template-columns:1fr;}
-  .stats-strip{flex-wrap:wrap;}
-  .stat-item{flex:1 1 calc(50% - 12px);border-right:none;}
-  .deepdive-step{grid-template-columns:60px 1fr;gap:16px;}
-  .deepdive-icon{width:60px;height:60px;font-size:22px;}
-  .deepdive-steps::before{left:29px;}
+  /* Deep dive */
+  .deepdive-step{grid-template-columns:56px 1fr;gap:14px;}
+  .deepdive-icon{width:56px;height:56px;font-size:22px;}
+  .deepdive-steps::before{left:27px;}
+  /* Dashboard stats */
   .db-stats{grid-template-columns:1fr 1fr;}
-  .wrap{padding:0 20px;}
+  .wrap{padding:0 16px;}
 }
 `;
 
@@ -684,7 +702,6 @@ export default function Overview() {
         </Reveal>
 
         <div className="formula-pipeline">
-          <div className="formula-connector"/>
           {[
             {n:"01",e:"🎬",name:"Attract",desc:"Sponsored video targeting your exact ICP and jurisdiction across Meta, LinkedIn and YouTube.",badge:"Your ICP targeted",last:false},
             {n:"02",e:"📥",name:"Capture",desc:"Webinar registration page with UTM attribution and pixel tracking from day one.",badge:"UTM tracked",last:false},
@@ -692,14 +709,17 @@ export default function Overview() {
             {n:"04",e:"📊",name:"Score",desc:"Global Mobility Score 0–100 across 6 dimensions. Intent verification for all 40+ scores.",badge:"GMS 0–100",last:false},
             {n:"05",e:"📥",name:"Deliver",desc:"Matched lead in your dashboard with a full Advisor Brief. Profile visible, contact unlocks with 1 credit.",badge:"72h delivery",last:true},
           ].map((s,i)=>(
-            <Reveal key={i} delay={i*70} className={`formula-step ${s.last?"last-step":""}`}>
+            <Reveal key={i} delay={i*60} className={`formula-step ${s.last?"last-step":""}`}>
               <div className="formula-icon">{s.e}</div>
-              <div className="formula-num">{s.n}</div>
-              <div className="formula-name">{s.name}</div>
-              <div className="formula-desc">{s.desc}</div>
+              <div className="formula-step-body">
+                <div className="formula-num">{s.n}</div>
+                <div className="formula-name">{s.name}</div>
+                <div className="formula-desc">{s.desc}</div>
+              </div>
               <div className="formula-badge">{s.badge}</div>
             </Reveal>
           ))}
+
         </div>
       </div>
     </section>
