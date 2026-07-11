@@ -344,6 +344,62 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .st-contacted{color:var(--muted);}.st-contacted::before{content:'✓';margin-right:2px;}
 .st-reached{background:#E8F5E0;color:#2A6A1A;border:1px solid #B8DFA8;}
 
+/* ═══ INBOUND / OUTBOUND ═══ */
+.io-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;}
+.io-card{border-radius:20px;padding:40px 36px;display:flex;flex-direction:column;gap:0;}
+.io-inbound{background:var(--lime-soft);border:1px solid rgba(170,255,69,0.4);}
+.io-outbound{background:var(--black);border:1px solid #1a1a1a;}
+.io-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:20px;width:fit-content;}
+.io-badge-in{background:var(--lime);color:var(--black);}
+.io-badge-out{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);}
+.io-title{font-size:24px;font-weight:800;color:var(--black);letter-spacing:-0.02em;margin-bottom:12px;line-height:1.15;}
+.io-outbound .io-title{color:var(--white);}
+.io-desc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:28px;}
+.io-outbound .io-desc{color:rgba(255,255,255,0.55);}
+.io-when{margin-bottom:24px;}
+.io-when-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:12px;}
+.io-outbound .io-when-label{color:rgba(170,255,69,0.7);}
+.io-when-items{display:flex;flex-direction:column;gap:10px;}
+.io-when-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text);}
+.io-outbound .io-when-item{color:rgba(255,255,255,0.75);}
+.io-check{width:18px;height:18px;border-radius:5px;background:var(--lime);color:var(--black);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;margin-top:1px;}
+.io-check-dark{background:rgba(170,255,69,0.15);color:var(--lime);}
+.io-examples{display:flex;flex-wrap:wrap;gap:8px;padding-top:20px;border-top:1px solid rgba(90,138,32,0.2);}
+.io-examples span{font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;background:var(--white);color:var(--black);border:1px solid rgba(90,138,32,0.2);}
+.io-examples-dark{border-top-color:rgba(255,255,255,0.08);}
+.io-examples-dark span{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.7);border-color:rgba(255,255,255,0.1);}
+.io-note{background:var(--off);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-top:24px;display:flex;align-items:flex-start;gap:18px;}
+.io-note-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+.io-note-h{font-size:15px;font-weight:700;color:var(--black);margin-bottom:6px;}
+.io-note-p{font-size:13px;color:var(--text2);line-height:1.65;}
+
+/* ═══ TIMELINE ═══ */
+.tl-wrapper{margin-top:56px;}
+.tl-phases{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+.tl-phase{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.2s;}
+.tl-phase:hover{transform:translateY(-3px);box-shadow:0 12px 32px -8px rgba(0,0,0,0.1);}
+.tl-phase-head{padding:20px 20px 16px;border-left:3px solid;}
+.tl-phase-tag{font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;}
+.tl-phase-label{font-size:16px;font-weight:800;color:var(--black);margin-bottom:4px;letter-spacing:-0.01em;}
+.tl-phase-weeks{font-size:12px;color:var(--muted);font-weight:600;}
+.tl-phase-body{padding:0 20px 20px;}
+.tl-items{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.tl-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text2);line-height:1.45;}
+.tl-item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+.tl-outcome{border-left:2px solid;padding:8px 12px;font-size:12px;font-weight:700;color:var(--black);background:var(--off);border-radius:0 6px 6px 0;}
+.tl-summary{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px 32px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.tl-track-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.tl-track-bar{display:flex;height:36px;border-radius:8px;overflow:hidden;margin-bottom:8px;}
+.tl-bar-seg{display:flex;align-items:center;justify-content:center;}
+.tl-bar-lbl{font-size:11px;font-weight:800;letter-spacing:0.06em;}
+.tl-track-marks{display:flex;justify-content:space-between;padding:0 2px;}
+.tl-mark{font-size:10px;color:var(--muted);font-weight:500;}
+.tl-summary-stats{display:flex;flex-direction:column;gap:16px;flex-shrink:0;}
+.tl-stat{text-align:right;}
+.tl-stat-val{font-size:26px;font-weight:900;color:var(--black);letter-spacing:-0.03em;line-height:1;}
+.tl-stat-unit{font-size:14px;font-weight:500;color:var(--muted);}
+.tl-stat-label{font-size:11px;color:var(--muted);margin-top:2px;}
+
 /* ═══ FUNNEL DEEP DIVE ═══ */
 .deepdive-section{padding:96px 0;background:var(--off);border-bottom:1px solid var(--border);}
 .deepdive-steps{display:flex;flex-direction:column;gap:0;margin-top:56px;position:relative;}
@@ -381,6 +437,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .sp{font-size:16px;color:var(--text2);max-width:580px;line-height:1.7;margin-bottom:0;}
 
 @media(max-width:1024px){
+  .io-grid{grid-template-columns:1fr;}
+  .tl-phases{grid-template-columns:1fr 1fr;}
+  .tl-summary{grid-template-columns:1fr;}
+  .tl-summary-stats{flex-direction:row;justify-content:flex-start;}
+  .tl-stat{text-align:left;}
   .hsteps-grid{grid-template-columns:repeat(4,1fr);}
   .hstep:nth-child(4){border-right:1px solid var(--border);border-radius:0 14px 0 0;}
   .hstep:nth-child(5){border-radius:0 0 0 14px;}
@@ -403,6 +464,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
   .ac-fields{grid-template-columns:1fr;}
   .ac-field{border-right:none !important;border-bottom:1px solid var(--border) !important;}
   .ac-field:last-child{border-bottom:none !important;}
+  .tl-phases{grid-template-columns:1fr;}
   .formula-pipeline{grid-template-columns:1fr;}
   .tiers-row{grid-template-columns:1fr;}
   .stats-strip{flex-wrap:wrap;}
@@ -857,6 +919,161 @@ export default function Overview() {
     </section>
 
     {/* DEEP DIVE FUNNEL */}
+    {/* ── INBOUND VS OUTBOUND ── */}
+    <section style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>Jurisdiction Analysis</div>
+          <h2 className="sh2">We study your market first.<br/><span className="hl">Inbound or outbound?</span></h2>
+          <p className="sp">Before running a single ad, we analyse your jurisdiction and firm positioning to determine the right acquisition strategy. Not every market works the same way.</p>
+        </Reveal>
+
+        <div className="io-grid">
+          <Reveal delay={80} className="io-card io-inbound">
+            <div className="io-badge io-badge-in">Inbound</div>
+            <h3 className="io-title">Leads come to you.</h3>
+            <p className="io-desc">We create educational content and paid campaigns that attract investors actively searching for your programme. They register, complete the survey, and arrive in your dashboard already interested.</p>
+            <div className="io-when">
+              <div className="io-when-label">Works best when</div>
+              <div className="io-when-items">
+                {["Your jurisdiction has strong organic search demand (Portugal GV, UAE, Malta MEIN)","Prospects are actively researching online before making decisions","Your firm can follow up within 24–48 hours of lead delivery"].map((t,i)=>(
+                  <div key={i} className="io-when-item"><span className="io-check">✓</span>{t}</div>
+                ))}
+              </div>
+            </div>
+            <div className="io-examples">
+              <span>Portugal</span><span>Malta</span><span>UAE</span><span>Singapore</span><span>Greece</span>
+            </div>
+          </Reveal>
+
+          <Reveal delay={160} className="io-card io-outbound">
+            <div className="io-badge io-badge-out">Outbound</div>
+            <h3 className="io-title">You reach out to leads.</h3>
+            <p className="io-desc">We identify and warm prospects in specific target markets — founders, HNW individuals, and internationally mobile professionals — before your team initiates contact. Higher touch, higher conversion.</p>
+            <div className="io-when">
+              <div className="io-when-label">Works best when</div>
+              <div className="io-when-items">
+                {["Your programme has lower search demand but strong appeal (Caribbean CBI, Paraguay)","You want to target a specific country, industry, or wealth demographic","Your firm has capacity for proactive outreach and follow-up sequences"].map((t,i)=>(
+                  <div key={i} className="io-when-item"><span className="io-check io-check-dark">✓</span>{t}</div>
+                ))}
+              </div>
+            </div>
+            <div className="io-examples io-examples-dark">
+              <span>St. Kitts</span><span>Dominica</span><span>Grenada</span><span>Paraguay</span><span>Antigua</span>
+            </div>
+          </Reveal>
+        </div>
+
+        <Reveal delay={100}>
+          <div className="io-note">
+            <div className="io-note-icon">🔍</div>
+            <div>
+              <div className="io-note-h">We determine this on the discovery call.</div>
+              <div className="io-note-p">During onboarding, we review your jurisdiction, your firm's current lead sources, and your team's capacity. Some partners run both inbound and outbound simultaneously — we build the funnel accordingly.</div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+
+    {/* ── TIMELINE ── */}
+    <section style={{padding:"96px 0",background:"var(--off)",borderBottom:"1px solid var(--border)"}}>
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>Timeline to First Lead</div>
+          <h2 className="sh2">From signed agreement<br/>to <span className="hl">leads in your dashboard.</span></h2>
+          <p className="sp">Setup takes 4–8 weeks in total. The first weeks are foundation — funnel, copy, pixels, ICP. Then we test traffic, optimise, and scale. Most partners receive their first verified leads within 6–8 weeks of signing.</p>
+        </Reveal>
+
+        {/* Timeline visual */}
+        <div className="tl-wrapper">
+          <div className="tl-phases">
+            {[
+              {
+                phase:"Phase 1",label:"Discovery & Setup",weeks:"Weeks 1–2",color:"var(--lime)",
+                items:["Discovery call — offer, ICP, jurisdiction","Global Mobility Score framework built","Landing page + survey configured","Pixel, UTM, analytics stack connected","Onboarding documentation delivered"],
+                outcome:"Funnel ready to receive traffic"
+              },
+              {
+                phase:"Phase 2",label:"Funnel Creation",weeks:"Weeks 2–4",color:"#0A0A0A",
+                items:["Video ad scripts and creatives produced","Webinar script + slides prepared","MailerLite sequences configured","CRM integration set up","ICP targeting brief finalised"],
+                outcome:"All assets live and tested"
+              },
+              {
+                phase:"Phase 3",label:"Traffic Testing",weeks:"Weeks 4–8",color:"#4A7FC1",
+                items:["First ad campaigns launched (test budget)","A/B testing: creatives, audiences, copy","Conversion rate optimisation on survey","First webinar run — registrations collected","Initial leads scored and verified"],
+                outcome:"First qualified leads delivered"
+              },
+              {
+                phase:"Phase 4",label:"Scale",weeks:"Week 8+",color:"var(--hot-color)",
+                items:["Winning campaigns scaled","ICP persona updated from real data","Lead volume increases with budget","Monthly reporting begins","Quarterly ICP review scheduled (Premium)"],
+                outcome:"Consistent lead flow at scale"
+              },
+            ].map((ph,i)=>(
+              <Reveal key={i} delay={i*80} className="tl-phase">
+                <div className="tl-phase-head" style={{borderLeftColor:ph.color}}>
+                  <div className="tl-phase-tag" style={{color:ph.color}}>{ph.phase}</div>
+                  <div className="tl-phase-label">{ph.label}</div>
+                  <div className="tl-phase-weeks">{ph.weeks}</div>
+                </div>
+                <div className="tl-phase-body">
+                  <ul className="tl-items">
+                    {ph.items.map((item,j)=>(
+                      <li key={j} className="tl-item">
+                        <span className="tl-item-dot" style={{background:ph.color}}/>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="tl-outcome" style={{borderLeftColor:ph.color}}>
+                    <span className="tl-outcome-label">→</span> {ph.outcome}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Summary bar */}
+          <Reveal delay={200}>
+            <div className="tl-summary">
+              <div className="tl-summary-track">
+                <div className="tl-track-label">Timeline to first leads</div>
+                <div className="tl-track-bar">
+                  {[
+                    {label:"Setup",w:"25%",color:"var(--lime)"},
+                    {label:"Build",w:"25%",color:"#0A0A0A"},
+                    {label:"Test",w:"25%",color:"#4A7FC1"},
+                    {label:"Scale",w:"25%",color:"var(--hot-color)"},
+                  ].map((s,i)=>(
+                    <div key={i} className="tl-bar-seg" style={{width:s.w,background:s.color}}>
+                      <span className="tl-bar-lbl" style={{color:s.color==="var(--lime)"||s.color==="var(--hot-color)"?"var(--black)":"var(--white)"}}>{s.label}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="tl-track-marks">
+                  {["Week 0","Week 2","Week 4","Week 6–8","Week 8+"].map((m,i)=>(
+                    <span key={i} className="tl-mark">{m}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="tl-summary-stats">
+                {[
+                  {val:"2–3",unit:"weeks",label:"Funnel creation"},
+                  {val:"4",unit:"weeks",label:"Traffic testing"},
+                  {val:"4–8",unit:"weeks",label:"Total to first lead"},
+                ].map((s,i)=>(
+                  <div key={i} className="tl-stat">
+                    <div className="tl-stat-val">{s.val}<span className="tl-stat-unit"> {s.unit}</span></div>
+                    <div className="tl-stat-label">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+
     <section className="deepdive-section" id="deepdive">
       <div className="wrap">
         <Reveal>
