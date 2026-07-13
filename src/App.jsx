@@ -2159,99 +2159,74 @@ export default function App() {
             </p>
           </Reveal>
 
-          {/* ── SVG COMPANY LOGOS ROW ── */}
+          {/* ── REAL PARTNER LOGOS FROM FSUMMIT.NET ── */}
           <Reveal delay={100}>
             <div className="partner-logos-row">
-              {/* Malta Residency Agency */}
-              <div className="partner-logo-item">
-                <svg viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
-                  <rect x="0" y="8" width="32" height="32" rx="6" fill="#CF1B2B"/>
-                  <rect x="0" y="8" width="16" height="32" fill="#FFFFFF"/>
-                  <rect x="16" y="8" width="16" height="16" fill="#FFFFFF"/>
-                  <text x="40" y="22" fontFamily="Inter,sans-serif" fontSize="11" fontWeight="700" fill="currentColor" letterSpacing="0.05em">MALTA</text>
-                  <text x="40" y="36" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">RESIDENCY AGENCY</text>
-                </svg>
-              </div>
-
-              {/* e-Residency Estonia */}
-              <div className="partner-logo-item">
-                <svg viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
-                  <rect x="0" y="4" width="28" height="40" rx="4" fill="#0072CE"/>
-                  <text x="6" y="30" fontFamily="Georgia,serif" fontSize="22" fontWeight="700" fill="white">e</text>
-                  <text x="36" y="20" fontFamily="Inter,sans-serif" fontSize="11" fontWeight="700" fill="currentColor" letterSpacing="0.04em">e-Residency</text>
-                  <text x="36" y="34" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">ESTONIA</text>
-                </svg>
-              </div>
-
-              {/* Portugal Golden Visa */}
-              <div className="partner-logo-item">
-                <svg viewBox="0 0 200 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
-                  <rect x="0" y="8" width="14" height="32" fill="#006600"/>
-                  <rect x="14" y="8" width="20" height="32" fill="#FF0000"/>
-                  <circle cx="24" cy="24" r="8" fill="none" stroke="#FFD700" strokeWidth="2"/>
-                  <text x="42" y="22" fontFamily="Inter,sans-serif" fontSize="11" fontWeight="700" fill="currentColor" letterSpacing="0.04em">PORTUGAL</text>
-                  <text x="42" y="36" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">GOLDEN VISA</text>
-                </svg>
-              </div>
-
-              {/* St. Kitts CBI */}
-              <div className="partner-logo-item">
-                <svg viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
-                  <rect x="0" y="4" width="40" height="40" rx="6" fill="#009E60"/>
-                  <polygon points="0,44 40,4 40,44" fill="#009E60"/>
-                  <line x1="0" y1="4" x2="40" y2="44" stroke="#FFD700" strokeWidth="4"/>
-                  <line x1="40" y1="4" x2="0" y2="44" stroke="#FFD700" strokeWidth="4"/>
-                  <text x="48" y="21" fontFamily="Inter,sans-serif" fontSize="10" fontWeight="700" fill="currentColor" letterSpacing="0.04em">ST. KITTS &amp; NEVIS</text>
-                  <text x="48" y="34" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">CBI PROGRAMME</text>
-                </svg>
-              </div>
-
-              {/* UAE GDRFA */}
-              <div className="partner-logo-item">
-                <svg viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
-                  <rect x="0" y="4" width="8" height="40" fill="#00732F"/>
-                  <rect x="8" y="4" width="32" height="13" fill="#FFFFFF"/>
-                  <rect x="8" y="17" width="32" height="14" fill="#000000"/>
-                  <rect x="8" y="31" width="32" height="13" fill="#FF0000"/>
-                  <text x="48" y="22" fontFamily="Inter,sans-serif" fontSize="11" fontWeight="700" fill="currentColor" letterSpacing="0.04em">UAE</text>
-                  <text x="48" y="35" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">GOLDEN VISA</text>
-                </svg>
-              </div>
-
-              {/* Grenada CBI */}
-              <div className="partner-logo-item">
-                <svg viewBox="0 0 180 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="partner-logo-svg">
-                  <rect x="0" y="4" width="40" height="40" rx="6" fill="#CE1126"/>
-                  <rect x="4" y="8" width="32" height="32" rx="4" fill="#009E60"/>
-                  <circle cx="20" cy="24" r="8" fill="#FCD116"/>
-                  <text x="48" y="21" fontFamily="Inter,sans-serif" fontSize="10" fontWeight="700" fill="currentColor" letterSpacing="0.04em">GRENADA</text>
-                  <text x="48" y="34" fontFamily="Inter,sans-serif" fontSize="9" fontWeight="500" fill="currentColor" opacity="0.7" letterSpacing="0.08em">CBI · E-2 TREATY</text>
-                </svg>
-              </div>
+              {[
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/ocorian-logo-vector.png-3d9db7bf.webp", alt: "Ocorian" },
+                { src: "https://fsummit.net/images/Virtuzone-logo-01.svg", alt: "Virtuzone" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/10/Intermark-Global_idrYOGloae_0.png", alt: "Intermark Global" },
+                { src: "https://fsummit.net/images/InCorpLogo White2.svg", alt: "InCorp" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/09/osome_logo_blue.png", alt: "Osome" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2026/03/Msgi-V-teal.webp", alt: "MSGI" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/12/CRS_Logo__1_-removebg-preview-1.png", alt: "CRS" },
+                { src: "https://fsummit.net/images/WorldTalents_logo all-01.svg", alt: "WorldTalents" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/e-residency-white.png", alt: "e-Residency Estonia" },
+                { src: "https://fsummit.net/images/ntl-logo.svg", alt: "NTL" },
+              ].map((logo, i) => (
+                <div key={i} className="partner-logo-item">
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    style={{
+                      height: 36,
+                      maxWidth: 140,
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                      opacity: 0.65,
+                      transition: "opacity 0.2s",
+                    }}
+                    onMouseOver={e => e.currentTarget.style.opacity = "1"}
+                    onMouseOut={e => e.currentTarget.style.opacity = "0.65"}
+                  />
+                </div>
+              ))}
             </div>
           </Reveal>
 
-          {/* ── TESTIMONIALS GRID — 3 col on dark ── */}
-          <div className="test-dark-grid">
-            {PHOTO_TESTIMONIALS.map((t, i) => (
-              <Reveal key={i} delay={i * 80} className={`test-dark-card ${i === 0 ? "featured-dark" : ""}`}>
-                <div className="test-dark-stars">{"★".repeat(5)}</div>
-                <p className="test-dark-quote">"{t.quote}"</p>
-                <div className="test-dark-meta">
-                  <div className="test-dark-avatar" style={{ background: t.bgGradient }}>{t.initials}</div>
-                  <div>
-                    <div className="test-dark-name">{t.name}</div>
-                    <div className="test-dark-role"><span style={{ marginRight: 4 }}>{t.flag}</span>{t.role} · {t.firm}</div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-        {/* Moving cards row */}
-        <div style={{ marginTop: 40 }}>
-          <MovingCards items={TESTIMONIALS_MARQUEE} direction="left" />
+          {/* ── MEDIA LOGOS ── */}
+          <Reveal delay={160}>
+            <div style={{ marginTop: 32, paddingTop: 28, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#555", marginBottom: 20, textAlign: "center" }}>
+                As seen in
+              </div>
+              <div className="partner-logos-row" style={{ justifyContent: "center", gap: 40 }}>
+                {[
+                  { src: "https://fsummit.net/assets/img/associated-press.png", alt: "Associated Press" },
+                  { src: "https://fsummit.net/assets/img/khaleej-times.png", alt: "Khaleej Times" },
+                  { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/gulf-news-logo-vector-removebg-preview.png", alt: "Gulf News" },
+                  { src: "https://fsummit.net/assets/img/CoinMarketCap.png", alt: "CoinMarketCap" },
+                  { src: "https://fsummit.net/assets/img/founder-institute-2.png", alt: "Founder Institute" },
+                ].map((logo, i) => (
+                  <img
+                    key={i}
+                    src={logo.src}
+                    alt={logo.alt}
+                    style={{
+                      height: 28,
+                      maxWidth: 120,
+                      objectFit: "contain",
+                      filter: "brightness(0) invert(1)",
+                      opacity: 0.45,
+                      transition: "opacity 0.2s",
+                    }}
+                    onMouseOver={e => e.currentTarget.style.opacity = "0.75"}
+                    onMouseOut={e => e.currentTarget.style.opacity = "0.45"}
+                  />
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
