@@ -1742,12 +1742,14 @@ export default function App() {
         body: JSON.stringify({
           email: form.email,
           fields: {
-            name: firstName,
-            last_name: lastName,
-            company: form.company,
-            phone: form.phone || "",
-            city: form.jurisdiction || "",
-            country: form.role || "",
+            name:             firstName,
+            last_name:        lastName,
+            company:          form.company,
+            phone:            form.phone        || "",
+            jurisdiction:     form.jurisdiction || "",   // custom field
+            firm_type:        form.role         || "",   // custom field
+            monthly_capacity: form.capacity     || "",   // custom field
+            message:          form.message      || "",   // custom field
           },
         }),
       });
