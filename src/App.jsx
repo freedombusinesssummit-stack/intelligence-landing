@@ -1176,8 +1176,8 @@ const css = `
   .partner-logos-row {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
-    margin-bottom: 12px;
+    gap: 10px;
+    margin-bottom: 10px;
   }
   .partner-logos-row.row2 {
     grid-template-columns: repeat(5, 1fr);
@@ -1185,38 +1185,55 @@ const css = `
   .partner-logo-item {
     background: var(--white);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    height: 72px;
+    border-radius: 10px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 20px;
+    padding: 16px 20px;
     transition: all 0.2s;
+    overflow: hidden;
+  }
+  .partner-logo-item.dark-bg {
+    background: #1A1A1A;
+    border-color: #1A1A1A;
   }
   .partner-logo-item:hover {
     border-color: var(--black);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     transform: translateY(-2px);
   }
   .partner-logo-item img {
-    max-height: 36px;
+    max-height: 32px;
     max-width: 100%;
     width: auto;
+    height: auto;
     object-fit: contain;
-    filter: none;
-    opacity: 0.75;
-    transition: opacity 0.2s;
+    filter: grayscale(1);
+    opacity: 0.6;
+    transition: all 0.25s;
   }
-  .partner-logo-item:hover img { opacity: 1; }
+  .partner-logo-item.dark-bg img {
+    filter: grayscale(1) brightness(2);
+    opacity: 0.7;
+  }
+  .partner-logo-item:hover img {
+    filter: none;
+    opacity: 1;
+  }
+  .partner-logo-item.dark-bg:hover img {
+    filter: brightness(2);
+    opacity: 1;
+  }
 
   /* Media logos strip */
   .media-logos-strip {
-    margin-top: 36px;
-    padding-top: 28px;
+    margin-top: 32px;
+    padding-top: 24px;
     border-top: 1px solid var(--border);
     display: flex;
     align-items: center;
-    gap: 36px;
+    gap: 32px;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -1229,15 +1246,15 @@ const css = `
     white-space: nowrap;
   }
   .media-logo-img {
-    height: 22px;
+    height: 20px;
     width: auto;
     max-width: 110px;
     object-fit: contain;
-    opacity: 0.4;
+    opacity: 0.35;
     filter: grayscale(1);
     transition: all 0.2s;
   }
-  .media-logo-img:hover { opacity: 0.75; filter: grayscale(0); }
+  .media-logo-img:hover { opacity: 0.7; filter: grayscale(0); }
 
   /* ── DARK TESTIMONIALS GRID ── */
   .test-dark-grid {
@@ -2195,13 +2212,13 @@ export default function App() {
           <Reveal delay={80}>
             <div className="partner-logos-row">
               {[
-                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/ocorian-logo-vector.png-3d9db7bf.webp", alt: "Ocorian" },
-                { src: "https://fsummit.net/images/Virtuzone-logo-01.svg", alt: "Virtuzone" },
-                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/10/Intermark-Global_idrYOGloae_0.png", alt: "Intermark Global" },
-                { src: "https://fsummit.net/images/InCorpLogo White2.svg", alt: "InCorp" },
-                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/09/osome_logo_blue.png", alt: "Osome" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/ocorian-logo-vector.png-3d9db7bf.webp", alt: "Ocorian", dark: false },
+                { src: "https://fsummit.net/images/Virtuzone-logo-01.svg", alt: "Virtuzone", dark: false },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/10/Intermark-Global_idrYOGloae_0.png", alt: "Intermark Global", dark: false },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/09/osome_logo_blue.png", alt: "Osome", dark: false },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/12/CRS_Logo__1_-removebg-preview-1.png", alt: "CRS Advogados", dark: false },
               ].map((logo, i) => (
-                <div key={i} className="partner-logo-item">
+                <div key={i} className={`partner-logo-item${logo.dark ? " dark-bg" : ""}`}>
                   <img src={logo.src} alt={logo.alt} />
                 </div>
               ))}
@@ -2212,13 +2229,13 @@ export default function App() {
           <Reveal delay={140}>
             <div className="partner-logos-row row2">
               {[
-                { src: "https://fsummit.net/checkout/wp-content/uploads/2026/03/Msgi-V-teal.webp", alt: "MSGI" },
-                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/12/CRS_Logo__1_-removebg-preview-1.png", alt: "CRS" },
-                { src: "https://fsummit.net/images/WorldTalents_logo all-01.svg", alt: "WorldTalents" },
-                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/e-residency-white.png", alt: "e-Residency Estonia" },
-                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/10/Logo-LACA-White.png", alt: "LACA" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2026/03/Msgi-V-teal.webp", alt: "MSGI", dark: false },
+                { src: "https://fsummit.net/images/WorldTalents_logo all-01.svg", alt: "WorldTalents", dark: false },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/e-residency-white.png", alt: "e-Residency Estonia", dark: true },
+                { src: "https://fsummit.net/images/InCorpLogo White2.svg", alt: "InCorp", dark: true },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/10/Logo-LACA-White.png", alt: "LACA", dark: true },
               ].map((logo, i) => (
-                <div key={i} className="partner-logo-item">
+                <div key={i} className={`partner-logo-item${logo.dark ? " dark-bg" : ""}`}>
                   <img src={logo.src} alt={logo.alt} />
                 </div>
               ))}
