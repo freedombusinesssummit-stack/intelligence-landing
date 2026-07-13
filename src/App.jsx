@@ -954,6 +954,38 @@ const css = `
   .jur-strip { margin-top:16px; padding:12px 0; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text2); }
   .jur-strip strong { color: var(--lime-dark); font-weight:700; }
 
+  /* Jurisdiction inline CTA */
+  .jur-cta-inline { margin-top:28px; background:var(--off); border:1px solid var(--border); border-radius:12px; padding:18px 24px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .jur-cta-text { font-size:14px; color:var(--text); line-height:1.5; flex:1; }
+  .jur-cta-text strong { color:var(--black); font-weight:700; }
+  .jur-cta-btn { background:var(--black); color:var(--white); border:none; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; font-weight:700; padding:11px 22px; border-radius:8px; white-space:nowrap; transition:all 0.15s; }
+  .jur-cta-btn:hover { background:var(--lime); color:var(--black); }
+
+  /* Mid-page CTA bar */
+  .mid-cta-bar { display:flex; align-items:center; justify-content:space-between; gap:32px; padding:28px 0; }
+  .mid-cta-eyebrow { font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--lime-dark); margin-bottom:6px; }
+  .mid-cta-title { font-size:18px; font-weight:700; color:var(--black); letter-spacing:-0.01em; }
+  .mid-cta-actions { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+  .mid-cta-btn-primary { background:var(--black); color:var(--white); border:none; cursor:pointer; font-family:'Inter',sans-serif; font-size:13px; font-weight:700; padding:12px 24px; border-radius:8px; transition:all 0.15s; white-space:nowrap; }
+  .mid-cta-btn-primary:hover { background:var(--lime); color:var(--black); }
+  .mid-cta-btn-ghost { font-size:13px; font-weight:600; color:var(--text2); text-decoration:none; padding:12px 20px; border:1.5px solid var(--border); border-radius:8px; transition:all 0.15s; white-space:nowrap; }
+  .mid-cta-btn-ghost:hover { border-color:var(--black); color:var(--black); }
+
+  /* Lime proof CTA */
+  .proof-cta-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+  .proof-cta-stats { display:flex; gap:0; }
+  .proof-cta-stat { flex:1; padding-right:28px; margin-right:28px; border-right:1px solid rgba(0,0,0,0.15); }
+  .proof-cta-stat:last-child { border-right:none; margin-right:0; padding-right:0; }
+  .proof-cta-stat-num { font-size:38px; font-weight:900; letter-spacing:-0.03em; color:var(--black); line-height:1; margin-bottom:6px; }
+  .proof-cta-stat-lbl { font-size:12px; color:rgba(0,0,0,0.6); line-height:1.45; }
+  .proof-cta-h { font-size:clamp(20px,2.4vw,28px); font-weight:800; color:var(--black); letter-spacing:-0.025em; line-height:1.2; margin-bottom:10px; }
+  .proof-cta-p { font-size:14px; color:rgba(0,0,0,0.6); margin-bottom:24px; }
+  .proof-cta-btns { display:flex; gap:12px; flex-wrap:wrap; }
+  .proof-cta-btn-dark { background:var(--black); color:var(--lime); border:none; cursor:pointer; font-family:'Inter',sans-serif; font-size:14px; font-weight:800; padding:14px 28px; border-radius:9px; transition:all 0.15s; }
+  .proof-cta-btn-dark:hover { background:rgba(0,0,0,0.85); transform:translateY(-1px); }
+  .proof-cta-btn-ghost { font-size:14px; font-weight:700; color:var(--black); text-decoration:none; padding:14px 24px; border:2px solid rgba(0,0,0,0.25); border-radius:9px; transition:all 0.15s; }
+  .proof-cta-btn-ghost:hover { border-color:var(--black); background:rgba(0,0,0,0.06); }
+
   /* ORBIT */
   .orbit { position: relative; width: 100%; max-width: 420px; aspect-ratio: 1; margin: 0 auto; }
   .orbit-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 110px; height: 110px; background: var(--lime); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 5; box-shadow: 0 0 0 8px rgba(170,255,69,0.2), 0 0 0 16px rgba(170,255,69,0.1); animation: pulseLime 2.5s ease-in-out infinite; }
@@ -1528,6 +1560,15 @@ const css = `
     .lime-cta-box { padding: 36px 24px; }
     .logos-list { gap: 24px; }
     .icp-row { grid-template-columns: 1fr; gap: 4px; }
+    .mid-cta-bar { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .mid-cta-actions { width: 100%; }
+    .mid-cta-btn-primary, .mid-cta-btn-ghost { flex: 1; text-align: center; }
+    .proof-cta-grid { grid-template-columns: 1fr; gap: 32px; }
+    .proof-cta-stats { gap: 0; }
+    .proof-cta-stat { padding-right: 16px; margin-right: 16px; }
+    .proof-cta-stat-num { font-size: 28px; }
+    .jur-cta-inline { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .jur-cta-btn { width: 100%; }
   }
 `;
 
@@ -1986,6 +2027,22 @@ export default function App() {
         </div>
       </section>
 
+      {/* ── INLINE CTA: after Advisor Brief ── */}
+      <section style={{padding:"0 0 0",background:"var(--off)",borderBottom:"1px solid var(--border)"}}>
+        <div className="wrap">
+          <div className="mid-cta-bar">
+            <div className="mid-cta-left">
+              <div className="mid-cta-eyebrow">Ready to see this in your dashboard?</div>
+              <div className="mid-cta-title">Your first leads arrive within 7–14 days of onboarding.</div>
+            </div>
+            <div className="mid-cta-actions">
+              <button className="mid-cta-btn-primary" onClick={scrollToForm}>Apply for Access →</button>
+              <a href="/pricing" className="mid-cta-btn-ghost">See pricing</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* WHO THIS IS FOR */}
       <section className="who-section" id="who">
         <div className="wrap">
@@ -2040,6 +2097,14 @@ export default function App() {
           <div className="jur-strip">
             <span>+ Custom jurisdictions on Partner-tier</span>
             <span>Updated <strong>April 2026</strong></span>
+          </div>
+
+          {/* Jurisdiction CTA inline */}
+          <div className="jur-cta-inline">
+            <div className="jur-cta-text">
+              <strong>Don't see your jurisdiction?</strong> We add new markets quarterly — apply and we'll scope your programme during the discovery call.
+            </div>
+            <button className="jur-cta-btn" onClick={scrollToForm}>Apply now →</button>
           </div>
         </div>
       </section>
@@ -2436,6 +2501,36 @@ export default function App() {
                 </div>
               </div>
             </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SOCIAL PROOF CTA ── */}
+      <section style={{padding:"72px 0",background:"var(--lime)",borderBottom:"1px solid rgba(0,0,0,0.1)"}}>
+        <div className="wrap">
+          <div className="proof-cta-grid">
+            <div className="proof-cta-left">
+              <div className="proof-cta-stats">
+                {[
+                  {n:"800+",l:"Survey respondents\nin our network"},
+                  {n:"92%",l:"Verification\ncompletion rate"},
+                  {n:"72h",l:"From survey\nto your dashboard"},
+                ].map((s,i)=>(
+                  <div key={i} className="proof-cta-stat">
+                    <div className="proof-cta-stat-num">{s.n}</div>
+                    <div className="proof-cta-stat-lbl" style={{whiteSpace:"pre-line"}}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="proof-cta-right">
+              <h3 className="proof-cta-h">Stop chasing unqualified leads.<br/>Start receiving verified ones.</h3>
+              <p className="proof-cta-p">One firm per jurisdiction. Reviewed in 24 hours.</p>
+              <div className="proof-cta-btns">
+                <button className="proof-cta-btn-dark" onClick={scrollToForm}>Apply for Access →</button>
+                <a href="/overview" className="proof-cta-btn-ghost">See how it works</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
