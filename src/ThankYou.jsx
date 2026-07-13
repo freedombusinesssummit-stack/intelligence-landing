@@ -28,14 +28,14 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px
 .nav-back:hover{color:var(--black);}
 
 /* STICKY REMINDER BAR */
-.sticky-bar{position:fixed;top:62px;left:0;right:0;z-index:90;background:var(--warn);color:var(--white);padding:10px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;animation:slideDown 0.4s cubic-bezier(0.16,1,0.3,1);box-shadow:0 4px 16px rgba(255,107,53,0.3);}
+.sticky-bar{position:fixed;top:62px;left:0;right:0;z-index:90;background:#1A1A1A;color:var(--white);padding:10px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;animation:slideDown 0.4s cubic-bezier(0.16,1,0.3,1);border-bottom:1px solid rgba(255,255,255,0.08);}
 .sticky-bar.hidden{display:none;}
-.sticky-bar-left{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;}
-.sticky-dot{width:8px;height:8px;border-radius:50%;background:var(--white);animation:pulse 1.5s ease-in-out infinite;flex-shrink:0;}
-.sticky-bar-btn{background:var(--white);color:var(--warn);font-family:'Inter',sans-serif;font-size:12px;font-weight:800;padding:7px 16px;border-radius:7px;border:none;cursor:pointer;white-space:nowrap;transition:all 0.15s;}
-.sticky-bar-btn:hover{background:rgba(255,255,255,0.9);}
-.sticky-bar-close{background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:18px;padding:0 4px;line-height:1;flex-shrink:0;}
-.sticky-bar-close:hover{color:var(--white);}
+.sticky-bar-left{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.75);font-weight:500;}
+.sticky-dot{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 1.5s ease-in-out infinite;flex-shrink:0;}
+.sticky-bar-btn{background:var(--lime);color:var(--black);font-family:'Inter',sans-serif;font-size:12px;font-weight:800;padding:7px 18px;border-radius:7px;border:none;cursor:pointer;white-space:nowrap;transition:all 0.15s;}
+.sticky-bar-btn:hover{background:var(--lime2);}
+.sticky-bar-close{background:none;border:none;color:rgba(255,255,255,0.35);cursor:pointer;font-size:16px;padding:0 4px;line-height:1;flex-shrink:0;transition:color 0.15s;}
+.sticky-bar-close:hover{color:rgba(255,255,255,0.7);}
 
 /* HERO */
 .ty-hero{padding:56px 32px 40px;text-align:center;animation:fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) both;}
@@ -64,7 +64,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px
 
 /* WHAT HAPPENS NEXT */
 .next-section{max-width:900px;margin:0 auto;padding:48px 24px 0;}
-.next-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+.next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px;}
 .next-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px;display:flex;align-items:flex-start;gap:16px;transition:all 0.2s;}
 .next-card:hover{border-color:var(--black);transform:translateY(-2px);}
 .next-icon{width:40px;height:40px;border-radius:10px;background:var(--off);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
@@ -132,42 +132,13 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px
   .ty-step{border-right:none;border-bottom:1px solid var(--border);text-align:left;display:flex;align-items:center;gap:14px;padding:12px 16px;}
   .ty-step:last-child{border-bottom:none;}
   .ty-step-icon{margin-bottom:0;}
-  .next-section,.proof-section,.overview-cta,.cal-section{padding-left:16px;padding-right:16px;}
   .next-grid{grid-template-columns:1fr;}
-  .proof-strip{grid-template-columns:1fr 1fr;gap:20px;padding:24px;}
-  .proof-stat{border-right:none;margin-right:0;padding-right:0;}
-  .proof-stat:nth-child(odd){border-right:1px solid rgba(255,255,255,0.1);padding-right:16px;margin-right:16px;}
-  .test-row{grid-template-columns:1fr;}
   .overview-card{grid-template-columns:1fr;gap:24px;padding:28px 24px;}
   .overview-card-visual{display:none;}
   .sticky-bar{flex-wrap:wrap;gap:10px;}
   .calendly-inline-widget{height:580px;}
 }
 `;
-
-const TESTIMONIALS = [
-  {
-    quote: "We tried three different lead sources before FBS. Nothing came close — these are people who actually know what they want and have the budget ready.",
-    name: "Andreas K.",
-    role: "Partner · Malta CBI Advisory",
-    av: "AK", bg: "#2C5F8D",
-    stars: 5,
-  },
-  {
-    quote: "The Advisor Brief alone is worth it. I know exactly who I'm calling before I pick up the phone. Conversion rate doubled within the first quarter.",
-    name: "Sofia R.",
-    role: "Director · Lisbon Mobility Partners",
-    av: "SR", bg: "#8B5CF6",
-    stars: 5,
-  },
-  {
-    quote: "The GMS score is accurate. Every HOT lead I've contacted has been exactly what the brief said — budget ready, decision made, just needed the right firm.",
-    name: "James T.",
-    role: "MD · Caribbean Passport Services",
-    av: "JT", bg: "#059669",
-    stars: 5,
-  },
-];
 
 export default function ThankYou() {
   const [stickyVisible, setStickyVisible] = useState(false);
@@ -259,6 +230,24 @@ export default function ThankYou() {
         </div>
       </div>
 
+      {/* CALENDLY — right after steps */}
+      <div className="cal-section" ref={calSectionRef}>
+        <div className="cal-header">
+          <div className="cal-label"><span className="cal-label-dot" />Step 02 — Book your call</div>
+          <h2>Pick a time for your<br />30-minute discovery call.</h2>
+          <p>No pitch deck. No obligation. We'll scope your jurisdiction, confirm fit, and walk you through pricing.</p>
+        </div>
+        <div className="cal-wrap" ref={calRef}>
+          <div
+            className="calendly-inline-widget"
+            data-url="https://calendly.com/freedomsummit/30min?hide_event_type_details=1&hide_gdpr_banner=1"
+          />
+        </div>
+        <div className="cal-disclaimer">
+          Can't find a time? Email us at <a href="mailto:hello@fbsintelligence.com">hello@fbsintelligence.com</a>
+        </div>
+      </div>
+
       {/* WHAT HAPPENS NEXT */}
       <div className="next-section">
         <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"var(--muted)",marginBottom:6}}>What happens next</div>
@@ -268,7 +257,6 @@ export default function ThankYou() {
             {icon:"🔍",h:"We review your firm profile",p:"Within 24 hours, we check jurisdiction fit, current lead sources, and team capacity. If there's a match, we confirm your spot.",time:"Within 24h"},
             {icon:"📧",h:"You receive a confirmation email",p:"Check your inbox — we send a summary of your application and what to expect on the discovery call.",time:"Within 2h"},
             {icon:"📞",h:"We prepare your ICP brief",p:"Before the call, we research your jurisdiction demand, typical buyer profiles, and campaign approach — so the call is specific, not generic.",time:"Before the call"},
-            {icon:"📥",h:"First leads within 7–14 days",p:"If we're a fit, onboarding takes 5–7 days. First qualified leads appear in your dashboard within two weeks of signing.",time:"Post-onboarding"},
           ].map((n,i)=>(
             <div key={i} className="next-card">
               <div className="next-icon">{n.icon}</div>
@@ -276,39 +264,6 @@ export default function ThankYou() {
                 <div className="next-h">{n.h}</div>
                 <div className="next-p">{n.p}</div>
                 <div className="next-time">{n.time}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* PROOF STRIP */}
-      <div className="proof-section">
-        <div className="proof-strip">
-          {[
-            {n:"800+",l:"Survey respondents\nin our network"},
-            {n:"30+",l:"Partner firms\nonboarded"},
-            {n:"92%",l:"Intent verification\ncompletion rate"},
-            {n:"72h",l:"Survey to\npartner dashboard"},
-          ].map((s,i)=>(
-            <div key={i} className="proof-stat">
-              <div className="proof-num">{s.n}</div>
-              <div className="proof-label" style={{whiteSpace:"pre-line"}}>{s.l}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="test-row">
-          {TESTIMONIALS.map((t,i)=>(
-            <div key={i} className="test-card">
-              <div className="test-stars">{"★".repeat(t.stars)}</div>
-              <div className="test-quote">"{t.quote}"</div>
-              <div className="test-meta">
-                <div className="test-av" style={{background:t.bg}}>{t.av}</div>
-                <div>
-                  <div className="test-name">{t.name}</div>
-                  <div className="test-role">{t.role}</div>
-                </div>
               </div>
             </div>
           ))}
@@ -342,24 +297,6 @@ export default function ThankYou() {
               ))}
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* CALENDLY */}
-      <div className="cal-section" ref={calSectionRef}>
-        <div className="cal-header">
-          <div className="cal-label"><span className="cal-label-dot" />Step 02 — Book your call</div>
-          <h2>Pick a time for your<br />30-minute discovery call.</h2>
-          <p>No pitch deck. No obligation. We'll scope your jurisdiction, confirm fit, and walk you through pricing.</p>
-        </div>
-        <div className="cal-wrap" ref={calRef}>
-          <div
-            className="calendly-inline-widget"
-            data-url="https://calendly.com/freedomsummit/30min?hide_event_type_details=1&hide_gdpr_banner=1"
-          />
-        </div>
-        <div className="cal-disclaimer">
-          Can't find a time? Email us at <a href="mailto:hello@fbsintelligence.com">hello@fbsintelligence.com</a>
         </div>
       </div>
 
