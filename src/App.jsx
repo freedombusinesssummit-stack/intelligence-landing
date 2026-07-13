@@ -1160,58 +1160,84 @@ const css = `
 
   /* ════════ SOCIAL PROOF SECTION — dark bg ════════ */
   .social-proof-section {
-    background: var(--dark);
-    border-top: 1px solid #1a1a1a;
-    border-bottom: 1px solid #1a1a1a;
-    padding: 100px 0;
+    background: var(--off);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 0;
     position: relative;
     overflow: hidden;
   }
-  .social-proof-section::before {
-    content: '';
-    position: absolute;
-    top: -30%;
-    right: -10%;
-    width: 60%;
-    height: 80%;
-    background: radial-gradient(ellipse at center, rgba(170,255,69,0.08) 0%, transparent 60%);
-    filter: blur(60px);
-    pointer-events: none;
-  }
   .social-proof-section > .wrap { position: relative; z-index: 2; }
-  .social-proof-section h2 { color: var(--white); }
-  .social-proof-section .section-body { color: #AAA; }
+  .social-proof-section h2 { color: var(--black); }
+  .social-proof-section .section-body { color: var(--text2); }
+  .eyebrow-lime-on-light { color: var(--lime-dark) !important; }
 
-  /* ── PARTNER LOGOS ROW ── */
+  /* ── PARTNER LOGOS GRID ── */
   .partner-logos-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 28px 32px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    margin-bottom: 48px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .partner-logos-row.row2 {
+    grid-template-columns: repeat(5, 1fr);
   }
   .partner-logo-item {
-    flex: 1;
-    min-width: 130px;
-    max-width: 190px;
-    opacity: 0.5;
-    transition: opacity 0.2s;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    height: 72px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    padding: 14px 20px;
+    transition: all 0.2s;
   }
-  .partner-logo-item:hover { opacity: 1; }
-  .partner-logo-svg {
-    width: 100%;
-    height: 44px;
-    color: #FFFFFF;
+  .partner-logo-item:hover {
+    border-color: var(--black);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
   }
+  .partner-logo-item img {
+    max-height: 36px;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: none;
+    opacity: 0.75;
+    transition: opacity 0.2s;
+  }
+  .partner-logo-item:hover img { opacity: 1; }
+
+  /* Media logos strip */
+  .media-logos-strip {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .media-logos-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .media-logo-img {
+    height: 22px;
+    width: auto;
+    max-width: 110px;
+    object-fit: contain;
+    opacity: 0.4;
+    filter: grayscale(1);
+    transition: all 0.2s;
+  }
+  .media-logo-img:hover { opacity: 0.75; filter: grayscale(0); }
 
   /* ── DARK TESTIMONIALS GRID ── */
   .test-dark-grid {
@@ -1498,8 +1524,8 @@ const css = `
     .lime-cta-grid { grid-template-columns: 1fr; gap: 40px; }
     .excl-grid { grid-template-columns: 1fr; gap: 40px; }
     .intel-grid { grid-template-columns: 1fr; gap: 40px; }
-    .partner-logos-row { justify-content: center; gap: 16px; }
-    .partner-logo-item { min-width: 110px; max-width: 150px; }
+    .partner-logos-row { gap: 10px; }
+    .partner-logo-item { height: 64px; padding: 10px 14px; }
   }
   @media (max-width:768px) {
     .ai-kpi-row { grid-template-columns: 1fr 1fr; }
@@ -1519,7 +1545,10 @@ const css = `
     .inline-cta-inner { flex-direction:column; align-items:flex-start; }
     .test-layout { grid-template-columns: 1fr; }
     .test-dark-grid { grid-template-columns: 1fr; }
-    .partner-logos-row { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .partner-logos-row { grid-template-columns: repeat(3, 1fr); }
+    .partner-logos-row.row2 { grid-template-columns: repeat(3, 1fr); }
+    .media-logos-strip { gap: 20px; }
+    .media-logo-img { height: 18px; }
     .lead-card-grid { grid-template-columns: 1fr; }
     .dash-kpi-row { grid-template-columns: repeat(2, 1fr); }
     .stage-timing { flex-direction: column; gap: 12px; }
@@ -2152,15 +2181,18 @@ export default function App() {
       <section className="section social-proof-section">
         <div className="wrap">
           <Reveal>
-            <div className="eyebrow eyebrow-lime"><span className="eyebrow-line" />Trusted By</div>
-            <h2>Used by leading firms in <span className="hl-sm">16+ markets</span></h2>
-            <p className="section-body" style={{ color: "#AAA" }}>
-              From boutique CBI agencies to global immigration practices — firms that live or die by lead quality.
+            <div className="eyebrow eyebrow-lime-on-light" style={{display:"inline-flex",alignItems:"center",gap:10,fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:18}}>
+              <span style={{width:24,height:1,background:"var(--lime-dark)",opacity:0.5,display:"inline-block"}}/>
+              Partner Ecosystem
+            </div>
+            <h2>Trusted by firms across <span className="hl-sm">16+ jurisdictions</span></h2>
+            <p className="section-body">
+              From boutique CBI agencies to global immigration practices — these firms work with our audience every day.
             </p>
           </Reveal>
 
-          {/* ── REAL PARTNER LOGOS FROM FSUMMIT.NET ── */}
-          <Reveal delay={100}>
+          {/* Row 1 — 5 logos */}
+          <Reveal delay={80}>
             <div className="partner-logos-row">
               {[
                 { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/ocorian-logo-vector.png-3d9db7bf.webp", alt: "Ocorian" },
@@ -2168,63 +2200,44 @@ export default function App() {
                 { src: "https://fsummit.net/checkout/wp-content/uploads/2025/10/Intermark-Global_idrYOGloae_0.png", alt: "Intermark Global" },
                 { src: "https://fsummit.net/images/InCorpLogo White2.svg", alt: "InCorp" },
                 { src: "https://fsummit.net/checkout/wp-content/uploads/2025/09/osome_logo_blue.png", alt: "Osome" },
-                { src: "https://fsummit.net/checkout/wp-content/uploads/2026/03/Msgi-V-teal.webp", alt: "MSGI" },
-                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/12/CRS_Logo__1_-removebg-preview-1.png", alt: "CRS" },
-                { src: "https://fsummit.net/images/WorldTalents_logo all-01.svg", alt: "WorldTalents" },
-                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/e-residency-white.png", alt: "e-Residency Estonia" },
-                { src: "https://fsummit.net/images/ntl-logo.svg", alt: "NTL" },
               ].map((logo, i) => (
                 <div key={i} className="partner-logo-item">
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    style={{
-                      height: 36,
-                      maxWidth: 140,
-                      objectFit: "contain",
-                      filter: "brightness(0) invert(1)",
-                      opacity: 0.65,
-                      transition: "opacity 0.2s",
-                    }}
-                    onMouseOver={e => e.currentTarget.style.opacity = "1"}
-                    onMouseOut={e => e.currentTarget.style.opacity = "0.65"}
-                  />
+                  <img src={logo.src} alt={logo.alt} />
                 </div>
               ))}
             </div>
           </Reveal>
 
-          {/* ── MEDIA LOGOS ── */}
-          <Reveal delay={160}>
-            <div style={{ marginTop: 32, paddingTop: 28, borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-              <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "#555", marginBottom: 20, textAlign: "center" }}>
-                As seen in
-              </div>
-              <div className="partner-logos-row" style={{ justifyContent: "center", gap: 40 }}>
-                {[
-                  { src: "https://fsummit.net/assets/img/associated-press.png", alt: "Associated Press" },
-                  { src: "https://fsummit.net/assets/img/khaleej-times.png", alt: "Khaleej Times" },
-                  { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/gulf-news-logo-vector-removebg-preview.png", alt: "Gulf News" },
-                  { src: "https://fsummit.net/assets/img/CoinMarketCap.png", alt: "CoinMarketCap" },
-                  { src: "https://fsummit.net/assets/img/founder-institute-2.png", alt: "Founder Institute" },
-                ].map((logo, i) => (
-                  <img
-                    key={i}
-                    src={logo.src}
-                    alt={logo.alt}
-                    style={{
-                      height: 28,
-                      maxWidth: 120,
-                      objectFit: "contain",
-                      filter: "brightness(0) invert(1)",
-                      opacity: 0.45,
-                      transition: "opacity 0.2s",
-                    }}
-                    onMouseOver={e => e.currentTarget.style.opacity = "0.75"}
-                    onMouseOut={e => e.currentTarget.style.opacity = "0.45"}
-                  />
-                ))}
-              </div>
+          {/* Row 2 — 5 logos */}
+          <Reveal delay={140}>
+            <div className="partner-logos-row row2">
+              {[
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2026/03/Msgi-V-teal.webp", alt: "MSGI" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/12/CRS_Logo__1_-removebg-preview-1.png", alt: "CRS" },
+                { src: "https://fsummit.net/images/WorldTalents_logo all-01.svg", alt: "WorldTalents" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/e-residency-white.png", alt: "e-Residency Estonia" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/10/Logo-LACA-White.png", alt: "LACA" },
+              ].map((logo, i) => (
+                <div key={i} className="partner-logo-item">
+                  <img src={logo.src} alt={logo.alt} />
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* Media strip */}
+          <Reveal delay={200}>
+            <div className="media-logos-strip">
+              <span className="media-logos-label">As seen in</span>
+              {[
+                { src: "https://fsummit.net/assets/img/associated-press.png", alt: "Associated Press" },
+                { src: "https://fsummit.net/assets/img/khaleej-times.png", alt: "Khaleej Times" },
+                { src: "https://fsummit.net/checkout/wp-content/uploads/2025/11/gulf-news-logo-vector-removebg-preview.png", alt: "Gulf News" },
+                { src: "https://fsummit.net/assets/img/CoinMarketCap.png", alt: "CoinMarketCap" },
+                { src: "https://fsummit.net/assets/img/founder-institute-2.png", alt: "Founder Institute" },
+              ].map((logo, i) => (
+                <img key={i} src={logo.src} alt={logo.alt} className="media-logo-img" />
+              ))}
             </div>
           </Reveal>
         </div>
