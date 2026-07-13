@@ -322,7 +322,8 @@ function Modal({plan, onClose}) {
       const d=await r.json();const sid=d?.data?.id;
       if(sid){const gr=await fetch("https://connect.mailerlite.com/api/groups?limit=50",{headers:{"Authorization":"Bearer "+ML}});const gd=await gr.json();const g=gd?.data?.find(x=>x.name==="FBS Intelligence Landing");if(g)await fetch("https://connect.mailerlite.com/api/subscribers/"+sid+"/groups/"+g.id,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+ML}});}
     }catch(e){console.error(e);}
-    setBusy(false);setDone(true);
+    setBusy(false);
+    window.location.href = "/thank-you";
   };
   const isPrem=plan?.isPremium;
   return(

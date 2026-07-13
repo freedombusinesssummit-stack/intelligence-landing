@@ -1729,11 +1729,12 @@ export default function App() {
         }
       }
 
-      setDone(true);
+      // Redirect to thank-you page with Calendly
+      window.location.href = "/thank-you";
     } catch (err) {
       console.error("MailerLite error:", err);
-      // Still show success to user — don't block on API errors
-      setDone(true);
+      // Still redirect even on API errors — don't block the user
+      window.location.href = "/thank-you";
     } finally {
       setSubmitting(false);
     }
