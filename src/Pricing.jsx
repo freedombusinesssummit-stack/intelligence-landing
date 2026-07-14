@@ -318,7 +318,7 @@ function Modal({plan, onClose}) {
     setBusy(true);
     try{
       const parts=form.name.trim().split(" ");
-      const r=await fetch("https://connect.mailerlite.com/api/subscribers",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+ML},body:JSON.stringify({email:form.email,fields:{name:parts[0]||"",last_name:parts.slice(1).join(" ")||"",company:form.company,phone:form.phone||"",jurisdiction:form.jurisdiction||"",firm_type:plan?.name||"",monthly_capacity:form.budget||"",message:form.message||""}}})});
+      const r=await fetch("https://connect.mailerlite.com/api/subscribers",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+ML},body:JSON.stringify({email:form.email,fields:{name:parts[0]||"",last_name:parts.slice(1).join(" ")||"",company:form.company,phone:form.phone||"",jurisdiction:form.jurisdiction||"",firm_type:plan?.name||"",monthly_capacity:form.budget||"",message:form.message||""}})});
       const d=await r.json();const sid=d?.data?.id;
       if(sid){const gr=await fetch("https://connect.mailerlite.com/api/groups?limit=50",{headers:{"Authorization":"Bearer "+ML}});const gd=await gr.json();const g=gd?.data?.find(x=>x.name==="FBS Intelligence Landing");if(g)await fetch("https://connect.mailerlite.com/api/subscribers/"+sid+"/groups/"+g.id,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+ML}});}
     }catch(e){console.error(e);}

@@ -1493,6 +1493,10 @@ const css = `
 
   /* CTA FORM (white card on lime bg) */
   .cta-form { background: var(--white); border-radius: 16px; padding: 32px; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.15); }
+  .field-error { color: #D94F3A; font-size: 12px; font-weight: 600; margin-top: 5px; display: flex; align-items: center; gap: 4px; }
+  .field-error::before { content: '↑'; font-size: 10px; }
+  .input-invalid { border-color: #D94F3A !important; background: #FFF8F7 !important; }
+  .input-invalid:focus { box-shadow: 0 0 0 3px rgba(217,79,58,0.12) !important; outline: none; }
   .cta-form-head { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
   .cta-form-head h3 { font-size: 22px; font-weight: 800; color: var(--black); margin-bottom: 6px; letter-spacing: -0.02em; }
   .cta-form-head p { font-size: 13px; color: var(--text2); }
@@ -1717,12 +1721,38 @@ const FAQ = [
 export default function App() {
   const [done, setDone] = useState(false);
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", role: "", jurisdiction: "", capacity: "", message: "" });
-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set = (k) => (e) => {
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+    if (errors[k]) setErrors((er) => ({ ...er, [k]: "" }));
+  };
   const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const validate = () => {
+    const e = {};
+    if (!form.name.trim()) e.name = "Full name is required";
+    if (!form.email.trim()) e.email = "Email is required";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email address";
+    if (!form.company.trim()) e.company = "Company name is required";
+    if (!form.phone.trim()) e.phone = "Phone number is required";
+    if (!form.role) e.role = "Please select your firm type";
+    if (!form.jurisdiction) e.jurisdiction = "Please select a jurisdiction";
+    return e;
+  };
 
   const submit = async (e) => {
     if (e) e.preventDefault();
-    if (!form.name || !form.email || !form.company) return;
+    setSubmitted(true);
+    const errs = validate();
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      // Scroll to first error
+      const firstErrField = document.querySelector(".field-error");
+      if (firstErrField) firstErrField.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    setErrors({});
     setSubmitting(true);
     try {
       const MAILERLITE_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMjkwMjI2ODdkNTJlNjk4ZjYwMzVkODk4YTI0MmFhMzgxNTlmMWQwMmRhN2ZlMDI2MGYxMTMzZGE0NWUyNDViZmQ1OTJiMjI5YjEzZjdjOTMiLCJpYXQiOjE3Nzc4MDQxNDEuMDU2ODcsIm5iZiI6MTc3NzgwNDE0MS4wNTY4NzMsImV4cCI6NDkzMzQ3Nzc0MS4wNTI3NTUsInN1YiI6IjkzMDA0MyIsInNjb3BlcyI6W119.Apd5ihW7N-KluBSDf-dovqu0O_Ia30wPUVjClBzRyOej5nne5be0poXt21OvB2PluTK4EyJO7ZBcOsitkoMG2Q6DSkjThmx0cjn-1APSFbWRAkp0VqXAljYyag-6LebecLKFjiSHNn5uAx441wje7CtSi4-qvb2UAIAYUX3El-upwv1TPges-H5dXbfvU0dOPOpStwNwg_neJOM1B7FyhZ8GOC2aVvaRkmsMJ_Q668dWd_1mhg21Bw35mXe6uzdQA90XENbpEjkn7ezw9Uv0jXDj-qHYs1EE6A08ulWRd-w2LERgr4MA_hJoz2IgjSn5cJWUfM-KtpGd9DxApaCZ_xbkx-zJRIQQXCQKC8WmDNLfDfjpsDGCMxdhcJ2j94fPX66aBNZTWq1DbEH4Z8SWGvgbwYdFEmBeUld552x8x_iGXRFLmicL6EOeng0bXmFlMwD2twukjkWsoVIQW8Vbdyza8XaNi-dtnDVLuMOqNhb2DDa0UbaHwW0DsEPPvHznrd2ut0zVtq-qr9MwiI1kAVwFcKgvJ5NXvjjXH0dgD0Z4iTn6KhHQuGoTav6vQazCsmtG0iicIvbVNcz_eXbi7G2sr_uUQZxRP_G2E-hya_NsnZmspqsTr4JRTckWgrTBYYH1QK8Zbd-cTPNx9y3vDlmsQx_N_5UG1JHIvQGBb2U";
@@ -2123,24 +2153,28 @@ export default function App() {
                       </div>
                       <div className="cta-form-grid">
                         <div className="cta-field">
-                          <label>Full name</label>
-                          <input value={form.name} onChange={set("name")} placeholder="Your full name" />
+                          <label>Full name *</label>
+                          <input value={form.name} onChange={set("name")} placeholder="Your full name" className={errors.name ? "input-invalid" : ""} />
+                          {errors.name && <span className="field-error">{errors.name}</span>}
                         </div>
                         <div className="cta-field">
-                          <label>Business email</label>
-                          <input type="email" value={form.email} onChange={set("email")} placeholder="you@firm.com" />
+                          <label>Business email *</label>
+                          <input type="email" value={form.email} onChange={set("email")} placeholder="you@firm.com" className={errors.email ? "input-invalid" : ""} />
+                          {errors.email && <span className="field-error">{errors.email}</span>}
                         </div>
                         <div className="cta-field">
-                          <label>Firm name</label>
-                          <input value={form.company} onChange={set("company")} placeholder="Company / firm" />
+                          <label>Firm name *</label>
+                          <input value={form.company} onChange={set("company")} placeholder="Company / firm" className={errors.company ? "input-invalid" : ""} />
+                          {errors.company && <span className="field-error">{errors.company}</span>}
                         </div>
                         <div className="cta-field">
-                          <label>Phone (optional)</label>
-                          <input type="tel" value={form.phone} onChange={set("phone")} placeholder="+1 555 000 0000" />
+                          <label>Phone *</label>
+                          <input type="tel" value={form.phone} onChange={set("phone")} placeholder="+1 555 000 0000" className={errors.phone ? "input-invalid" : ""} />
+                          {errors.phone && <span className="field-error">{errors.phone}</span>}
                         </div>
                         <div className="cta-field">
-                          <label>Type of firm</label>
-                          <select value={form.role} onChange={set("role")}>
+                          <label>Type of firm *</label>
+                          <select value={form.role} onChange={set("role")} className={errors.role ? "input-invalid" : ""}>
                             <option value="">Select…</option>
                             <option>Immigration Law Firm</option>
                             <option>CBI / Golden Visa Agent</option>
@@ -2149,10 +2183,11 @@ export default function App() {
                             <option>Family Office</option>
                             <option>Other</option>
                           </select>
+                          {errors.role && <span className="field-error">{errors.role}</span>}
                         </div>
                         <div className="cta-field">
-                          <label>Primary jurisdiction</label>
-                          <select value={form.jurisdiction} onChange={set("jurisdiction")}>
+                          <label>Primary jurisdiction *</label>
+                          <select value={form.jurisdiction} onChange={set("jurisdiction")} className={errors.jurisdiction ? "input-invalid" : ""}>
                             <option value="">Select…</option>
                             <option>Portugal</option><option>Malta</option><option>Cyprus</option>
                             <option>Greece</option><option>UAE</option><option>Singapore</option>
@@ -2161,13 +2196,11 @@ export default function App() {
                             <option>Grenada</option><option>Antigua & Barbuda</option><option>Türkiye</option>
                             <option>Mexico</option><option>Other</option>
                           </select>
+                          {errors.jurisdiction && <span className="field-error">{errors.jurisdiction}</span>}
                         </div>
                         <div className="cta-field full">
                           <label>Monthly capacity</label>
-                          <select value={form.capacity} onChange={set("capacity")}>
-                            <option value="">Select…</option>
-                            <option>Under 10</option><option>10 – 25</option>
-                            <option>25 – 50</option><option>50 – 100</option><option>100+</option>
+                          <select value={form.capacity} onChange={set("capacity")}>\n                            <option value="">Select…</option>\n                            <option>Under 10</option><option>10 – 25</option>\n                            <option>25 – 50</option><option>50 – 100</option><option>100+</option>
                           </select>
                         </div>
                         <div className="cta-field full">
@@ -2427,24 +2460,28 @@ export default function App() {
                       </div>
                       <div className="cta-form-grid">
                         <div className="cta-field">
-                          <label>Full name</label>
-                          <input value={form.name} onChange={set("name")} placeholder="Your full name" />
+                          <label>Full name *</label>
+                          <input value={form.name} onChange={set("name")} placeholder="Your full name" className={errors.name ? "input-invalid" : ""} />
+                          {errors.name && <span className="field-error">{errors.name}</span>}
                         </div>
                         <div className="cta-field">
-                          <label>Business email</label>
-                          <input type="email" value={form.email} onChange={set("email")} placeholder="you@firm.com" />
+                          <label>Business email *</label>
+                          <input type="email" value={form.email} onChange={set("email")} placeholder="you@firm.com" className={errors.email ? "input-invalid" : ""} />
+                          {errors.email && <span className="field-error">{errors.email}</span>}
                         </div>
                         <div className="cta-field">
-                          <label>Firm name</label>
-                          <input value={form.company} onChange={set("company")} placeholder="Company / firm" />
+                          <label>Firm name *</label>
+                          <input value={form.company} onChange={set("company")} placeholder="Company / firm" className={errors.company ? "input-invalid" : ""} />
+                          {errors.company && <span className="field-error">{errors.company}</span>}
                         </div>
                         <div className="cta-field">
-                          <label>Phone (optional)</label>
-                          <input type="tel" value={form.phone} onChange={set("phone")} placeholder="+1 555 000 0000" />
+                          <label>Phone *</label>
+                          <input type="tel" value={form.phone} onChange={set("phone")} placeholder="+1 555 000 0000" className={errors.phone ? "input-invalid" : ""} />
+                          {errors.phone && <span className="field-error">{errors.phone}</span>}
                         </div>
                         <div className="cta-field">
-                          <label>Type of firm</label>
-                          <select value={form.role} onChange={set("role")}>
+                          <label>Type of firm *</label>
+                          <select value={form.role} onChange={set("role")} className={errors.role ? "input-invalid" : ""}>
                             <option value="">Select…</option>
                             <option>Immigration Law Firm</option>
                             <option>CBI / Golden Visa Agent</option>
@@ -2453,10 +2490,11 @@ export default function App() {
                             <option>Family Office</option>
                             <option>Other</option>
                           </select>
+                          {errors.role && <span className="field-error">{errors.role}</span>}
                         </div>
                         <div className="cta-field">
-                          <label>Primary jurisdiction</label>
-                          <select value={form.jurisdiction} onChange={set("jurisdiction")}>
+                          <label>Primary jurisdiction *</label>
+                          <select value={form.jurisdiction} onChange={set("jurisdiction")} className={errors.jurisdiction ? "input-invalid" : ""}>
                             <option value="">Select…</option>
                             <option>Portugal</option>
                             <option>Malta</option>
@@ -2472,6 +2510,7 @@ export default function App() {
                             <option>Mexico</option>
                             <option>Other</option>
                           </select>
+                          {errors.jurisdiction && <span className="field-error">{errors.jurisdiction}</span>}
                         </div>
                         <div className="cta-field full">
                           <label>Monthly capacity (leads you can handle)</label>
