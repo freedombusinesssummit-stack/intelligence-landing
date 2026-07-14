@@ -91,7 +91,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px
 .test-role{font-size:11px;color:var(--muted);}
 
 /* OVERVIEW CTA */
-.overview-cta{max-width:900px;margin:0 auto;padding:48px 24px 0;}
+.overview-cta{max-width:900px;margin:0 auto;padding:48px 24px 80px;}
 .overview-card{background:linear-gradient(135deg,#0F1A0A,#0A1205);border:1px solid rgba(170,255,69,0.2);border-radius:20px;padding:40px 48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;overflow:hidden;}
 .overview-card::before{content:'';position:absolute;top:-40%;right:-10%;width:50%;height:180%;background:radial-gradient(ellipse at center,rgba(170,255,69,0.12),transparent 60%);filter:blur(40px);pointer-events:none;}
 .overview-card-content{position:relative;z-index:2;}
@@ -316,7 +316,6 @@ export default function ThankYou() {
               <h5 style={{fontSize:11,fontWeight:700,color:"#AAA",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:16,marginTop:0}}>Platform</h5>
               <a href="/" style={{display:"block",fontSize:13,color:"#888",textDecoration:"none",padding:"6px 0"}}>Home</a>
               <a href="/overview" style={{display:"block",fontSize:13,color:"#888",textDecoration:"none",padding:"6px 0"}}>How it works</a>
-              <a href="/pricing" style={{display:"block",fontSize:13,color:"#888",textDecoration:"none",padding:"6px 0"}}>Pricing</a>
             </div>
             <div>
               <h5 style={{fontSize:11,fontWeight:700,color:"#AAA",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:16,marginTop:0}}>Company</h5>
