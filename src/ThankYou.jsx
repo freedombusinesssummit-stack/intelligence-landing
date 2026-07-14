@@ -243,8 +243,8 @@ export default function ThankYou() {
             data-url="https://calendly.com/freedomsummit/30min?hide_event_type_details=1&hide_gdpr_banner=1"
           />
         </div>
-        <div style={{textAlign:"center",marginTop:24}}>
-          <a href="/overview" style={{display:"inline-flex",alignItems:"center",gap:8,background:"var(--off)",border:"1.5px solid var(--border)",color:"var(--black)",textDecoration:"none",fontFamily:"'Inter',sans-serif",fontSize:14,fontWeight:700,padding:"13px 28px",borderRadius:10,transition:"all 0.2s",letterSpacing:"-0.01em"}}>
+        <div style={{textAlign:"center",marginTop:24,paddingBottom:80}}>
+          <a href="/overview" style={{display:"inline-flex",alignItems:"center",gap:8,background:"#AAFF45",border:"none",color:"#0A0A0A",textDecoration:"none",fontFamily:"'Inter',sans-serif",fontSize:14,fontWeight:800,padding:"14px 32px",borderRadius:10,letterSpacing:"-0.01em"}}>
             Explore how it works →
           </a>
         </div>
