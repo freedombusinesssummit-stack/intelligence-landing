@@ -28,7 +28,7 @@ nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 32px
 .nav-back:hover{color:var(--black);}
 
 /* STICKY REMINDER BAR */
-.sticky-bar{position:fixed;top:62px;left:0;right:0;z-index:90;background:#1A1A1A;color:var(--white);padding:10px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;animation:slideDown 0.4s cubic-bezier(0.16,1,0.3,1);border-bottom:1px solid rgba(255,255,255,0.08);}
+.sticky-bar{position:fixed;top:62px;left:0;right:0;z-index:90;background:#1A1A1A;color:var(--white);padding:10px 32px;display:flex;align-items:center;justify-content:flex-end;gap:16px;animation:slideDown 0.4s cubic-bezier(0.16,1,0.3,1);border-bottom:1px solid rgba(255,255,255,0.08);}
 .sticky-bar.hidden{display:none;}
 .sticky-bar-left{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.75);font-weight:500;}
 .sticky-dot{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 1.5s ease-in-out infinite;flex-shrink:0;}
