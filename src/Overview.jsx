@@ -539,7 +539,6 @@ export default function Overview() {
         <a href="/" className="nav-logo"><div className="nav-logo-dot"/>FBS Intelligence</a>
         <div className="nav-right">
           <a href="/" className="nav-link">Home</a>
-          <a href="/pricing" className="nav-link">Pricing</a>
           <a href="/overview" className="nav-link" style={{color:"var(--black)",fontWeight:700}}>How it works</a>
           <a href="/#apply" className="nav-btn">Apply</a>
         </div>
@@ -1128,7 +1127,7 @@ export default function Overview() {
           </div>
           <h2>Ready to receive leads<br/>from this funnel?</h2>
           <p>One partner per jurisdiction. Apply and we'll review your profile within 24 hours.</p>
-          <a href="/pricing" className="btn-lime">See pricing & apply →</a>
+          <a href="https://calendly.com/freedomsummit/30min" className="btn-lime">Schedule a Discovery Call →</a>
           <div style={{marginTop:16,display:"flex",gap:20,justifyContent:"center",flexWrap:"wrap"}}>
             {["Discovery call within 48h","First leads in 7–14 days","Exclusive per jurisdiction"].map(t=>(
               <span key={t} style={{fontSize:12,color:"#555",display:"inline-flex",alignItems:"center",gap:6}}>
@@ -1147,7 +1146,6 @@ export default function Overview() {
         </div>
         <div style={{display:"flex",gap:24}}>
           <a href="/" style={{fontSize:13,color:"#666",textDecoration:"none"}}>Home</a>
-          <a href="/pricing" style={{fontSize:13,color:"#666",textDecoration:"none"}}>Pricing</a>
           <a href="/overview" style={{fontSize:13,color:"#AAA",textDecoration:"none"}}>How it works</a>
         </div>
         <div style={{fontSize:12,color:"#444"}}>© 2026 Freedom Business Summit</div>
