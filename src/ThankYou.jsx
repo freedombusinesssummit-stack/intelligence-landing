@@ -243,9 +243,6 @@ export default function ThankYou() {
             data-url="https://calendly.com/freedomsummit/30min?hide_event_type_details=1&hide_gdpr_banner=1"
           />
         </div>
-        <div className="cal-disclaimer">
-          Can't find a time? Email us at <a href="mailto:hello@fbsintelligence.com">hello@fbsintelligence.com</a>
-        </div>
       </div>
 
       {/* WHAT HAPPENS NEXT */}
@@ -300,15 +297,35 @@ export default function ThankYou() {
         </div>
       </div>
 
-      <div className="ty-footer">
-        <p>
-          FBS Intelligence · <a href="/">fbsintelligence.com</a>
-          {" · "}
-          <a href="/overview">How it works</a>
-          {" · "}
-          <a href="/pricing">Pricing</a>
-        </p>
-      </div>
+      <footer style={{background:"#0A0A0A",borderTop:"1px solid #1a1a1a",padding:"64px 0 40px"}}>
+        <div style={{maxWidth:1200,margin:"0 auto",padding:"0 32px"}}>
+          <div style={{display:"grid",gridTemplateColumns:"2fr 1fr 1fr",gap:48,marginBottom:48}}>
+            <div>
+              <h4 style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:12,display:"flex",alignItems:"center",gap:8,letterSpacing:"-0.02em"}}>
+                <span style={{width:8,height:8,background:"#AAFF45",borderRadius:"50%",display:"inline-block"}}/>
+                FBS Intelligence
+              </h4>
+              <p style={{fontSize:13,color:"#888",maxWidth:360,lineHeight:1.7,margin:0}}>The B2B lead intelligence platform built on Freedom Business Summit's 7-year event ecosystem.</p>
+            </div>
+            <div>
+              <h5 style={{fontSize:11,fontWeight:700,color:"#AAA",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:16,marginTop:0}}>Platform</h5>
+              <a href="/" style={{display:"block",fontSize:13,color:"#888",textDecoration:"none",padding:"6px 0"}}>Home</a>
+              <a href="/overview" style={{display:"block",fontSize:13,color:"#888",textDecoration:"none",padding:"6px 0"}}>How it works</a>
+              <a href="/pricing" style={{display:"block",fontSize:13,color:"#888",textDecoration:"none",padding:"6px 0"}}>Pricing</a>
+            </div>
+            <div>
+              <h5 style={{fontSize:11,fontWeight:700,color:"#AAA",textTransform:"uppercase",letterSpacing:"0.12em",marginBottom:16,marginTop:0}}>Company</h5>
+              <a href="/" style={{display:"block",fontSize:13,color:"#888",textDecoration:"none",padding:"6px 0"}}>Apply</a>
+              <a href="https://fsummit.net" style={{display:"block",fontSize:13,color:"#888",textDecoration:"none",padding:"6px 0"}}>Freedom Business Summit</a>
+              <a href="mailto:denis@fsummit.net" style={{display:"block",fontSize:13,color:"#888",textDecoration:"none",padding:"6px 0"}}>Contact</a>
+            </div>
+          </div>
+          <div style={{paddingTop:32,borderTop:"1px solid #1a1a1a",display:"flex",justifyContent:"space-between",alignItems:"center",gap:16,flexWrap:"wrap"}}>
+            <p style={{fontSize:12,color:"#666",margin:0}}>© 2026 Freedom Business Summit · FBS Intelligence</p>
+            <p style={{fontSize:12,color:"#666",margin:0}}>fbsintelligence.com</p>
+          </div>
+        </div>
+      </footer>
     </>
   );
 }
