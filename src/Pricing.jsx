@@ -315,7 +315,7 @@ const EMAIL_SEQUENCE = [
 ];
 
 const FAQ = [
-  {q:"What does the $1,950 setup fee (founding rate) cover?",a:"Full funnel setup: landing page, Global Mobility Survey, Meta Pixel, Google Analytics, UTM attribution, first test campaign, and the first 100 leads acquired. One-time. Charged after discovery call."},
+  {q:"What does the $1,950 setup fee (founding rate) cover?",a:"Everything needed to launch your dedicated lead funnel: webinar landing page (copy, design, build), thank-you page, GMS survey with your jurisdiction module, lead magnet, 7–9 email series, MailerLite setup, ad creatives (2–3 variants), UTM tracking, CRM/webhook integration, GMS scoring configuration, webinar platform setup, and a kick-off call with full end-to-end QA before launch. One-time fee. Charged after the discovery call."},
   {q:"What's the difference between Business and Premium?",a:"Business delivers leads to your dashboard — your team handles all outreach and nurture. Premium adds a <strong>5-email warming sequence</strong> that FBS runs on every lead before it reaches you. By the time you call, the prospect has read four educational emails and clicked 'ready to speak with a specialist.'"},
   {q:"How does the email nurture work in Premium?",a:"When a lead completes the Global Mobility Survey, FBS automatically enrolls them in a 5-email sequence over 11 days. The sequence educates, builds trust, and filters intent. Only leads who engage meaningfully get flagged as HOT in your dashboard."},
   {q:"Are leads exclusive to my firm?",a:"Yes — both plans deliver exclusive leads. No other firm in your jurisdiction sees the same leads from your allocation. This is not a shared pool."},
@@ -408,7 +408,7 @@ export default function PricingPage() {
             </div>
             <div className="setup-right">
               <div className="setup-right-label">What's included</div>
-              {["Funnel + landing page setup","Survey, pixel, UTM framework","Test campaign run","First 100 leads acquired","ICP build + onboarding call"].map(t=>(
+              {["Webinar landing page (copy + design + build)","GMS survey + jurisdiction module","Email series: confirmation, warm-up, reminders","Ad creatives (2–3 variants) + campaign launch","UTM tracking + CRM/webhook integration","Kick-off call + end-to-end QA before launch"].map(t=>(
                 <div key={t} className="setup-item"><div className="setup-check">✓</div>{t}</div>
               ))}
             </div>
@@ -587,6 +587,79 @@ export default function PricingPage() {
             })}
           </tbody>
         </table>
+      </div>
+    </section>
+
+    {/* FAQ */}
+    {/* SETUP FEE BREAKDOWN */}
+    <section style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
+      <div className="wrap">
+        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16}}>
+          <div style={{width:24,height:1,background:"var(--lime-dark)",opacity:0.5}}/>
+          <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"var(--lime-dark)"}}>Setup Fee Breakdown</div>
+        </div>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,alignItems:"start",marginBottom:40}}>
+          <h2 style={{fontSize:"clamp(24px,3vw,38px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",margin:0,lineHeight:1.15}}>Everything included in the<br/><span style={{color:"var(--lime-dark)"}}>$1,950 setup fee.</span></h2>
+          <p style={{fontSize:15,color:"var(--text2)",lineHeight:1.7,margin:0,paddingTop:6}}>One-time fee. Charged after your discovery call. Covers the full build — funnel, content, traffic, and onboarding — before a single lead enters your dashboard.</p>
+        </div>
+
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:16}}>
+          {[
+            {icon:"🖥",title:"Funnel & Pages",items:[
+              "Webinar landing page for your jurisdiction (copy + design + build)",
+              "Thank-you page with lead warm-up logic",
+              "GMS survey: core module + jurisdiction-specific questions",
+              "Lead magnet (jurisdiction playbook) delivered on survey completion",
+            ]},
+            {icon:"📧",title:"Email & Communications",items:[
+              "Email series: confirmation + pre-webinar warm-up + reminders (7–9 emails)",
+              "MailerLite setup: group, automations, sender domain",
+              "Add-to-calendar integration + day-of reminder sequence",
+              "Deliverability test (inbox placement, not spam)",
+            ]},
+            {icon:"🎬",title:"Webinar Content",items:[
+              "Partner video invite — edit and production",
+              "Webinar presentation structure and design",
+              "Script + speaker prep session with your team",
+              "Webinar platform configuration and test run",
+            ]},
+            {icon:"📊",title:"Traffic & Data",items:[
+              "Ad creatives (2–3 variants) + campaign setup and launch",
+              "UTM tracking and end-to-end attribution to lead",
+              "CRM/webhook integration for lead delivery",
+              "GMS scoring setup: HOT / WARM / COLD tiers configured for your ICP",
+            ]},
+            {icon:"🚀",title:"Onboarding",items:[
+              "Kick-off call + full ICP brief",
+              "End-to-end QA of the entire funnel before launch",
+            ]},
+            {icon:"📌",title:"What's not included",items:[
+              "Ongoing ad spend (included in monthly management)",
+              "CRM licence or third-party platform subscriptions",
+              "Paid webinar platform fees (if applicable)",
+            ],muted:true},
+          ].map((s,i)=>(
+            <div key={i} style={{background:s.muted?"#FAFAF8":"var(--off)",border:"1px solid var(--border)",borderRadius:14,padding:"24px 24px 20px"}}>
+              <div style={{fontSize:22,marginBottom:10}}>{s.icon}</div>
+              <div style={{fontSize:13,fontWeight:800,color:s.muted?"var(--muted)":"var(--black)",marginBottom:14,letterSpacing:"-0.01em"}}>{s.title}</div>
+              <div style={{display:"flex",flexDirection:"column",gap:9}}>
+                {s.items.map((item,j)=>(
+                  <div key={j} style={{display:"flex",alignItems:"flex-start",gap:8}}>
+                    <span style={{width:16,height:16,borderRadius:4,background:s.muted?"#E5E5E5":"var(--lime)",color:s.muted?"#999":"var(--black)",display:"inline-flex",alignItems:"center",justifyContent:"center",fontSize:8,fontWeight:800,flexShrink:0,marginTop:1}}>{s.muted?"–":"✓"}</span>
+                    <span style={{fontSize:12,color:s.muted?"var(--muted)":"var(--text2)",lineHeight:1.55}}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{marginTop:24,background:"var(--black)",borderRadius:12,padding:"20px 28px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:24,flexWrap:"wrap"}}>
+          <div style={{fontSize:14,color:"rgba(255,255,255,0.7)",lineHeight:1.6}}>
+            <strong style={{color:"var(--lime)"}}>Founding rate: $1,950</strong> &nbsp;·&nbsp; Regular price after first 10 partners: $5,000 &nbsp;·&nbsp; Charged once, after discovery call
+          </div>
+          <button className="btn-lime" onClick={()=>setModal&&setModal(PLANS[1])} style={{whiteSpace:"nowrap"}}>Apply for access →</button>
+        </div>
       </div>
     </section>
 
