@@ -52,6 +52,23 @@ const css = `
   .setup-item{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);}
   .setup-check{width:18px;height:18px;border-radius:5px;background:var(--lime);color:var(--black);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;}
 
+  /* FOUNDING MEMBERS BANNER */
+  .founding-banner{background:linear-gradient(135deg,#0A0A0A,#1a1a0a);border:1.5px solid rgba(170,255,69,0.35);border-radius:16px;padding:20px 28px;margin-bottom:40px;display:flex;align-items:center;justify-content:space-between;gap:24px;position:relative;overflow:hidden;}
+  .founding-banner::before{content:'';position:absolute;top:-50%;right:-5%;width:40%;height:200%;background:radial-gradient(ellipse,rgba(170,255,69,0.1),transparent 60%);pointer-events:none;}
+  .founding-banner-left{display:flex;align-items:center;gap:16px;}
+  .founding-badge{background:var(--lime);color:var(--black);font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:5px 12px;border-radius:100px;white-space:nowrap;flex-shrink:0;}
+  .founding-text{font-size:14px;color:rgba(255,255,255,0.8);line-height:1.5;}
+  .founding-text strong{color:var(--lime);font-weight:700;}
+  .founding-spots{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:rgba(255,255,255,0.5);white-space:nowrap;flex-shrink:0;}
+  .founding-spots-num{font-size:22px;font-weight:900;color:var(--lime);letter-spacing:-0.03em;}
+
+  /* PRICE STRIKE */
+  .price-old{font-size:22px;font-weight:700;color:var(--muted);text-decoration:line-through;letter-spacing:-0.02em;opacity:0.6;}
+  .plan-card.premium .price-old{color:rgba(255,255,255,0.3);}
+  .price-new-row{display:flex;align-items:flex-end;gap:8px;margin-bottom:4px;}
+  .setup-price-old{font-size:28px;font-weight:700;text-decoration:line-through;color:var(--muted);opacity:0.6;letter-spacing:-0.02em;}
+  .setup-price-new{font-size:52px;font-weight:900;letter-spacing:-0.04em;color:var(--black);line-height:1;}
+
   /* PLANS GRID */
   .plans-section{padding:72px 0 0;background:var(--off);}
   .plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px;margin:0 auto;}
@@ -225,7 +242,7 @@ const PLANS = [
     badge:"Business", bc:"pb-b",
     name:"Business",
     tagline:"Qualified leads delivered to your dashboard. Your team handles outreach, nurture, and conversion.",
-    price:899,
+    price:899, foundingPrice:499,
     priceNote:"Monthly · your team works the leads",
     ctaCls:"cta-b", ctaText:"Apply for Business",
     features:[
@@ -247,7 +264,7 @@ const PLANS = [
     badge:"Most Popular", bc:"pb-p",
     name:"Premium",
     tagline:"Everything in Business, plus FBS warms your leads with email sequences before you ever make contact.",
-    price:1299,
+    price:1299, foundingPrice:899,
     priceNote:"Monthly · FBS actively works the audience for you",
     ctaCls:"cta-p", ctaText:"Apply for Premium",
     features:[
@@ -298,7 +315,7 @@ const EMAIL_SEQUENCE = [
 ];
 
 const FAQ = [
-  {q:"What does the $5,000 setup fee cover?",a:"Full funnel setup: landing page, Global Mobility Survey, Meta Pixel, Google Analytics, UTM attribution, first test campaign, and the first 100 leads acquired. One-time. Charged after discovery call."},
+  {q:"What does the $1,950 setup fee (founding rate) cover?",a:"Full funnel setup: landing page, Global Mobility Survey, Meta Pixel, Google Analytics, UTM attribution, first test campaign, and the first 100 leads acquired. One-time. Charged after discovery call."},
   {q:"What's the difference between Business and Premium?",a:"Business delivers leads to your dashboard — your team handles all outreach and nurture. Premium adds a <strong>5-email warming sequence</strong> that FBS runs on every lead before it reaches you. By the time you call, the prospect has read four educational emails and clicked 'ready to speak with a specialist.'"},
   {q:"How does the email nurture work in Premium?",a:"When a lead completes the Global Mobility Survey, FBS automatically enrolls them in a 5-email sequence over 11 days. The sequence educates, builds trust, and filters intent. Only leads who engage meaningfully get flagged as HOT in your dashboard."},
   {q:"Are leads exclusive to my firm?",a:"Yes — both plans deliver exclusive leads. No other firm in your jurisdiction sees the same leads from your allocation. This is not a shared pool."},
@@ -333,7 +350,7 @@ function Modal({plan, onClose}) {
         {!done?(<>
           <div className="modal-plan-tag" style={{background:isPrem?"#AAFF45":"#F4F4F2",color:isPrem?"#0A0A0A":"#6B6B6B"}}>{plan?.name}</div>
           <h2>Apply for {plan?.name}</h2>
-          <p className="modal-sub"><strong>${plan?.price}/mo</strong> + <strong>$5,000</strong> one-time setup fee. We review your application within 24 hours and book a discovery call.</p>
+          <p className="modal-sub"><strong>${plan?.price}/mo</strong> + <strong>$1,950</strong> one-time setup fee (founding rate). We review your application within 24 hours and book a discovery call.</p>
           <div className="fields">
             <div className="field-row">
               <div className="cf"><label>Full name</label><input value={form.name} onChange={set("name")} placeholder="Your name"/></div>
@@ -383,7 +400,8 @@ export default function PricingPage() {
             <div className="setup-left">
               <div className="setup-tag">One-time setup fee — both plans</div>
               <div className="setup-price-row">
-                <div className="setup-price">$5,000</div>
+                <div className="setup-price-old">$5,000</div>
+                <div className="setup-price-new">$1,950</div>
                 <div className="setup-price-lbl">once</div>
               </div>
               <div className="setup-desc">Charged after discovery call · before go-live</div>
@@ -402,6 +420,22 @@ export default function PricingPage() {
     {/* PLANS */}
     <section className="plans-section">
       <div className="wrap">
+
+        {/* FOUNDING MEMBERS BANNER */}
+        <div className="founding-banner">
+          <div className="founding-banner-left">
+            <div className="founding-badge">Founding Members</div>
+            <div className="founding-text">
+              Special pricing locked for <strong>1 year</strong> — available for the first 10 partners only.
+              Setup fee and monthly rate reduced at founding rates.
+            </div>
+          </div>
+          <div className="founding-spots">
+            <span className="founding-spots-num">7</span>
+            <span>spots<br/>left</span>
+          </div>
+        </div>
+
         <div className="plans-grid">
           {PLANS.map(plan=>(
             <div key={plan.id} className={"plan-card"+(plan.isPremium?" premium":"")}>
@@ -411,8 +445,9 @@ export default function PricingPage() {
               </div>
               <div className="plan-name">{plan.name}</div>
               <div className="plan-tagline">{plan.tagline}</div>
-              <div className="plan-price-row">
-                <div className="plan-price">${plan.price}</div>
+              <div className="price-old">${plan.price}/mo</div>
+              <div className="price-new-row">
+                <div className="plan-price">${plan.foundingPrice}</div>
                 <div className="plan-price-mo">/mo</div>
               </div>
               <div className="plan-price-note">{plan.priceNote}</div>
