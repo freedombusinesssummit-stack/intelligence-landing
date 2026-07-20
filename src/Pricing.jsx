@@ -320,7 +320,7 @@ const FAQ = [
   {q:"How does the email nurture work in Premium?",a:"When a lead completes the Global Mobility Survey, FBS automatically enrolls them in a 5-email sequence over 11 days. The sequence educates, builds trust, and filters intent. Only leads who engage meaningfully get flagged as HOT in your dashboard."},
   {q:"Are leads exclusive to my firm?",a:"Yes — both plans deliver exclusive leads. No other firm in your jurisdiction sees the same leads from your allocation. This is not a shared pool."},
   {q:"How many leads do I receive per month?",a:"Business: 15–20 leads/month. Premium: 25–40 leads/month (higher because the nurture sequence surfaces more engaged prospects). Both are minimums — if we fall short, we credit the following month."},
-  {q:"Can I upgrade from Business to Premium?",a:"Yes, at any time. We configure the nurture sequences and switch your feed. Price difference is charged pro-rata."},
+  {q:"Can I upgrade from Business to Premium?",a:"Yes, at any time. We configure the nurture sequences and switch your feed. Price difference is charged pro-rata. Founding rates apply to both plans."},
   {q:"Do I need to provide ad budget?",a:"No. Both plans include lead acquisition as part of the management fee. Your only cost is the setup fee + monthly fee. No separate media budget required."},
   {q:"How fast do I receive first leads?",a:"Within 7–10 days of onboarding on both plans. Premium leads go through the nurture sequence first, so the first HOT-flagged leads typically arrive 10–14 days after onboarding."},
 ];
@@ -350,7 +350,7 @@ function Modal({plan, onClose}) {
         {!done?(<>
           <div className="modal-plan-tag" style={{background:isPrem?"#AAFF45":"#F4F4F2",color:isPrem?"#0A0A0A":"#6B6B6B"}}>{plan?.name}</div>
           <h2>Apply for {plan?.name}</h2>
-          <p className="modal-sub"><strong>${plan?.price}/mo</strong> + <strong>$1,950</strong> one-time setup fee (founding rate). We review your application within 24 hours and book a discovery call.</p>
+          <p className="modal-sub"><span style={{textDecoration:"line-through",opacity:0.5,fontWeight:500}}>${plan?.price}/mo</span> <strong style={{color:"var(--lime-dark)"}}>${plan?.foundingPrice}/mo</strong> + <span style={{textDecoration:"line-through",opacity:0.5,fontWeight:500}}>$5,000</span> <strong>$1,950</strong> setup (founding rate). We review your application within 24 hours and book a discovery call.</p>
           <div className="fields">
             <div className="field-row">
               <div className="cf"><label>Full name</label><input value={form.name} onChange={set("name")} placeholder="Your name"/></div>
@@ -486,7 +486,7 @@ export default function PricingPage() {
           {/* Business flow */}
           <div className="flow-card">
             <div className="flow-header">
-              <div className="flow-plan-tag">Business · $899/mo</div>
+              <div className="flow-plan-tag">Business · <span style={{textDecoration:"line-through",opacity:0.5}}>$899</span> $499/mo</div>
               <h3>Lead delivered. You take it from here.</h3>
               <p>Lead completes GMS survey → scored → arrives in your dashboard. Your team does the outreach.</p>
             </div>
@@ -512,7 +512,7 @@ export default function PricingPage() {
           {/* Premium flow */}
           <div className="flow-card dark">
             <div className="flow-header">
-              <div className="flow-plan-tag">Premium · $1,299/mo</div>
+              <div className="flow-plan-tag">Premium · <span style={{textDecoration:"line-through",opacity:0.5}}>$1,299</span> $899/mo</div>
               <h3>FBS warms the lead. You close it.</h3>
               <p>FBS runs a 5-email sequence on every lead before it reaches your dashboard. You call someone who's ready.</p>
             </div>
@@ -611,7 +611,7 @@ export default function PricingPage() {
         <p>Tell us about your firm — we review within 24 hours and book a discovery call.</p>
         <button className="btn-lime" onClick={()=>setModal(PLANS[1])}>Apply for Premium →</button>
         <div style={{marginTop:16,display:"flex",gap:20,justifyContent:"center",flexWrap:"wrap"}}>
-          {["$5,000 setup · one-time","Discovery call within 48h","First leads in 7–14 days"].map(t=>(
+          {["$1,950 setup · one-time (founding rate)","Discovery call within 48h","First leads in 7–14 days"].map(t=>(
             <span key={t} style={{fontSize:12,color:"#555",display:"inline-flex",alignItems:"center",gap:6}}>
               <span style={{color:"#AAFF45",fontWeight:900}}>✓</span> {t}
             </span>
