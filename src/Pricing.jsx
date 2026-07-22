@@ -295,7 +295,6 @@ const COMPARE_ROWS = [
   {label:"Exclusive leads — your firm only",b:true,p:true},
   {label:"Global Mobility Score (0–100)",b:true,p:true},
   {label:"Advisor Brief per lead",b:true,p:true},
-  {label:"Leads/month (approximate)",b:"15–20",p:"25–40"},
   {section:"Audience Nurture"},
   {label:"FBS email nurture sequence (5 emails)",b:false,p:true},
   {label:"Lead warming before partner contact",b:false,p:true},
@@ -429,11 +428,11 @@ export default function PricingPage() {
       <div className="wrap">
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16}}>
           <div style={{width:24,height:1,background:"var(--lime-dark)",opacity:0.5}}/>
-          <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"var(--lime-dark)"}}>What the $1,950 setup fee covers</div>
+          <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"var(--lime-dark)"}}>Setup Fee</div>
         </div>
         <div className="split-head" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,alignItems:"start",marginBottom:32}}>
-          <h2 style={{fontSize:"clamp(22px,2.8vw,34px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",margin:0,lineHeight:1.2}}>Everything needed to launch your funnel — built once, runs continuously.</h2>
-          <p style={{fontSize:14,color:"var(--text2)",lineHeight:1.75,margin:0,paddingTop:4}}>The setup fee covers the full build: funnel pages, survey, email sequences, ad creatives, tracking, CRM integration, and onboarding. Charged once after your discovery call, before go-live. Monthly management starts after launch.</p>
+          <h2 style={{fontSize:"clamp(24px,3vw,38px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",margin:0,lineHeight:1.15}}>What your <span style={{background:"var(--lime)",padding:"0 6px",borderRadius:4}}>$1,950</span> setup fee covers.</h2>
+          <p style={{fontSize:14,color:"var(--text2)",lineHeight:1.75,margin:0,paddingTop:6}}>Everything needed to launch your funnel — built once, runs continuously. Funnel pages, survey, email sequences, ad creatives, tracking, CRM integration, and onboarding. Charged once after your discovery call, before go-live. Monthly management starts after launch.</p>
         </div>
 
         <div className="breakdown-grid" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12}}>
