@@ -41,7 +41,7 @@ const css = `
 
   /* SETUP FEE BANNER */
   .setup-banner{display:inline-flex;align-items:stretch;background:var(--off);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:0;}
-  .setup-left{padding:28px 36px;text-align:left;}
+  .setup-left{padding:28px 36px;text-align:left;display:flex;flex-direction:column;justify-content:center;min-width:420px;}
   .setup-tag{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:10px;}
   .setup-price-row{display:flex;align-items:flex-end;gap:8px;margin-bottom:6px;}
   .setup-price{font-size:52px;font-weight:900;letter-spacing:-0.04em;color:var(--black);line-height:1;}
@@ -228,9 +228,16 @@ const css = `
     .compare-table{font-size:13px;}
     .compare-table th.col,.compare-table td.col{width:110px;}
     .setup-banner{flex-direction:column;}
+    .setup-left{min-width:0;}
     .setup-right{border-left:none;border-top:1px solid var(--border);}
+    .breakdown-grid{grid-template-columns:1fr 1fr !important;}
+    .timeline-grid{grid-template-columns:1fr !important;}
+    .split-head{grid-template-columns:1fr !important;}
   }
-  @media(max-width:600px){.field-row{grid-template-columns:1fr;}}
+  @media(max-width:600px){
+    .field-row{grid-template-columns:1fr;}
+    .breakdown-grid{grid-template-columns:1fr !important;}
+  }
 `;
 
 const ML = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiMjkwMjI2ODdkNTJlNjk4ZjYwMzVkODk4YTI0MmFhMzgxNTlmMWQwMmRhN2ZlMDI2MGYxMTMzZGE0NWUyNDViZmQ1OTJiMjI5YjEzZjdjOTMiLCJpYXQiOjE3Nzc4MDQxNDEuMDU2ODcsIm5iZiI6MTc3NzgwNDE0MS4wNTY4NzMsImV4cCI6NDkzMzQ3Nzc0MS4wNTI3NTUsInN1YiI6IjkzMDA0MyIsInNjb3BlcyI6W119.Apd5ihW7N-KluBSDf-dovqu0O_Ia30wPUVjClBzRyOej5nne5be0poXt21OvB2PluTK4EyJO7ZBcOsitkoMG2Q6DSkjThmx0cjn-1APSFbWRAkp0VqXAljYyag-6LebecLKFjiSHNn5uAx441wje7CtSi4-qvb2UAIAYUX3El-upwv1TPges-H5dXbfvU0dOPOpStwNwg_neJOM1B7FyhZ8GOC2aVvaRkmsMJ_Q668dWd_1mhg21Bw35mXe6uzdQA90XENbpEjkn7ezw9Uv0jXDj-qHYs1EE6A08ulWRd-w2LERgr4MA_hJoz2IgjSn5cJWUfM-KtpGd9DxApaCZ_xbkx-zJRIQQXCQKC8WmDNLfDfjpsDGCMxdhcJ2j94fPX66aBNZTWq1DbEH4Z8SWGvgbwYdFEmBeUld552x8x_iGXRFLmicL6EOeng0bXmFlMwD2twukjkWsoVIQW8Vbdyza8XaNi-dtnDVLuMOqNhb2DDa0UbaHwW0DsEPPvHznrd2ut0zVtq-qr9MwiI1kAVwFcKgvJ5NXvjjXH0dgD0Z4iTn6KhHQuGoTav6vQazCsmtG0iicIvbVNcz_eXbi7G2sr_uUQZxRP_G2E-hya_NsnZmspqsTr4JRTckWgrTBYYH1QK8Zbd-cTPNx9y3vDlmsQx_N_5UG1JHIvQGBb2U";
@@ -244,7 +251,7 @@ const PLANS = [
     tagline:"Monthly lead delivery to your dashboard. FBS runs the funnel — your team handles all outreach, nurture, and conversion. Pay per month, cancel anytime after the minimum term.",
     price:899, foundingPrice:499,
     priceNote:"/ month · monthly management fee",
-    ctaCls:"cta-b", ctaText:"Apply for Business",
+    ctaCls:"cta-b", ctaText:"Get Started",
     features:[
       {t:"Exclusive leads matched to your jurisdiction",y:true},
       {t:"Global Mobility Score + full breakdown per lead",y:true},
@@ -266,7 +273,7 @@ const PLANS = [
     tagline:"Everything in Business, plus FBS actively warms your leads with email sequences before you make first contact. By the time you call — they already know who you are.",
     price:1299, foundingPrice:899,
     priceNote:"/ month · monthly management fee",
-    ctaCls:"cta-p", ctaText:"Apply for Premium",
+    ctaCls:"cta-p", ctaText:"Get Started",
     features:[
       {t:"Exclusive leads matched to your jurisdiction",y:true},
       {t:"Global Mobility Score + full breakdown per lead",y:true},
@@ -349,7 +356,7 @@ function Modal({plan, onClose}) {
         <button className="modal-close" onClick={onClose}>✕</button>
         {!done?(<>
           <div className="modal-plan-tag" style={{background:isPrem?"#AAFF45":"#F4F4F2",color:isPrem?"#0A0A0A":"#6B6B6B"}}>{plan?.name}</div>
-          <h2>Apply for {plan?.name}</h2>
+          <h2>Get started with {plan?.name}</h2>
           <p className="modal-sub"><span style={{textDecoration:"line-through",opacity:0.5,fontWeight:500}}>${plan?.price}/mo</span> <strong style={{color:"var(--lime-dark)"}}>${plan?.foundingPrice}/mo</strong> + <span style={{textDecoration:"line-through",opacity:0.5,fontWeight:500}}>$5,000</span> <strong>$1,950</strong> setup (founding rate). We review your application within 24 hours and book a discovery call.</p>
           <div className="fields">
             <div className="field-row">
@@ -363,7 +370,7 @@ function Modal({plan, onClose}) {
             </div>
             <div className="cf"><label>Tell us about your practice (optional)</label><textarea value={form.message} onChange={set("message")} placeholder="Jurisdiction focus, programme specialisation, current lead sources…"/></div>
             <button className="sub-btn" style={{background:isPrem?"#AAFF45":"#0A0A0A",color:isPrem?"#0A0A0A":"#AAFF45"}} onClick={submit} disabled={busy}>
-              {busy?"Submitting…":"Apply for "+plan?.name+" →"}
+              {busy?"Submitting…":"Get Started →"}
             </button>
             <div className="modal-disc">By submitting you agree to be contacted by FBS Intelligence. We don't share your data.</div>
           </div>
@@ -424,12 +431,12 @@ export default function PricingPage() {
           <div style={{width:24,height:1,background:"var(--lime-dark)",opacity:0.5}}/>
           <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"var(--lime-dark)"}}>What the $1,950 setup fee covers</div>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,alignItems:"start",marginBottom:32}}>
+        <div className="split-head" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,alignItems:"start",marginBottom:32}}>
           <h2 style={{fontSize:"clamp(22px,2.8vw,34px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",margin:0,lineHeight:1.2}}>Everything needed to launch your funnel — built once, runs continuously.</h2>
           <p style={{fontSize:14,color:"var(--text2)",lineHeight:1.75,margin:0,paddingTop:4}}>The setup fee covers the full build: funnel pages, survey, email sequences, ad creatives, tracking, CRM integration, and onboarding. Charged once after your discovery call, before go-live. Monthly management starts after launch.</p>
         </div>
 
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12}}>
+        <div className="breakdown-grid" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12}}>
           {[
             {icon:"🖥",title:"Funnel & Pages",items:[
               "Webinar landing page for your jurisdiction (copy + design + build)",
@@ -478,6 +485,48 @@ export default function PricingPage() {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ROLLOUT TIMELINE */}
+    <section style={{padding:"80px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
+      <div className="wrap">
+        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16}}>
+          <div style={{width:24,height:1,background:"var(--lime-dark)",opacity:0.5}}/>
+          <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"var(--lime-dark)"}}>Rollout Timeline</div>
+        </div>
+        <h2 style={{fontSize:"clamp(22px,2.8vw,34px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",margin:"0 0 40px",lineHeight:1.2}}>From kick-off to scaling — the first 8 weeks.</h2>
+
+        <div className="timeline-grid" style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:14,marginBottom:20}}>
+          {[
+            {weeks:"Weeks 1–3",title:"Setup & preparation",desc:"Partner onboarding, ICP definition, funnel setup, tracking configuration, and campaign preparation.",color:"var(--lime)"},
+            {weeks:"Weeks 3–6",title:"Launch",desc:"Campaigns go live, qualified prospects begin entering the platform, and your first live webinar takes place — all covered under the setup fee.",color:"#0A0A0A"},
+            {weeks:"Weeks 6–8",title:"Optimize & scale",desc:"Optimization, scaling, and continuous reporting based on real campaign data, including your second and third educational webinars.",color:"#4A7FC1"},
+          ].map((p,i)=>(
+            <div key={i} style={{background:"var(--off)",border:"1px solid var(--border)",borderRadius:14,overflow:"hidden"}}>
+              <div style={{borderLeft:`3px solid ${p.color}`,padding:"18px 20px 16px"}}>
+                <div style={{fontSize:11,fontWeight:800,letterSpacing:"0.1em",textTransform:"uppercase",color:"var(--muted)",marginBottom:6}}>{p.weeks}</div>
+                <div style={{fontSize:16,fontWeight:800,color:"var(--black)",letterSpacing:"-0.02em",marginBottom:8}}>{p.title}</div>
+                <div style={{fontSize:13,color:"var(--text2)",lineHeight:1.6}}>{p.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{background:"var(--black)",borderRadius:14,padding:"24px 28px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:24,flexWrap:"wrap"}}>
+          <div>
+            <div style={{fontSize:10,fontWeight:800,letterSpacing:"0.14em",textTransform:"uppercase",color:"rgba(170,255,69,0.7)",marginBottom:8}}>Initial validation phase</div>
+            <div style={{fontSize:15,color:"rgba(255,255,255,0.8)",lineHeight:1.65,maxWidth:560}}>During the first 8 weeks we run <strong style={{color:"var(--lime)"}}>3 educational webinars</strong>, generating approximately <strong style={{color:"var(--lime)"}}>100 registrations per webinar</strong>.</div>
+          </div>
+          <div style={{display:"flex",gap:0,flexShrink:0}}>
+            {[{n:"3",l:"webinars"},{n:"~300",l:"registrations"},{n:"8",l:"weeks"}].map((s,i)=>(
+              <div key={i} style={{paddingRight:24,marginRight:24,borderRight:i<2?"1px solid rgba(255,255,255,0.12)":"none"}}>
+                <div style={{fontSize:26,fontWeight:900,color:"var(--lime)",letterSpacing:"-0.03em",lineHeight:1}}>{s.n}</div>
+                <div style={{fontSize:11,color:"rgba(255,255,255,0.45)",marginTop:4}}>{s.l}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -681,7 +730,7 @@ export default function PricingPage() {
       <div className="wrap">
         <h2>Ready to get started?</h2>
         <p>Tell us about your firm — we review within 24 hours and book a discovery call.</p>
-        <button className="btn-lime" onClick={()=>setModal(PLANS[1])}>Apply for Premium →</button>
+        <button className="btn-lime" onClick={()=>setModal(PLANS[1])}>Get Started →</button>
         <div style={{marginTop:16,display:"flex",gap:20,justifyContent:"center",flexWrap:"wrap"}}>
           {["$1,950 setup · one-time (founding rate)","Discovery call within 48h","First leads in 7–14 days"].map(t=>(
             <span key={t} style={{fontSize:12,color:"#555",display:"inline-flex",alignItems:"center",gap:6}}>
