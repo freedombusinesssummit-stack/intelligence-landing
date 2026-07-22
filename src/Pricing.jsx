@@ -501,7 +501,7 @@ export default function PricingPage() {
           {[
             {weeks:"Weeks 1–3",title:"Setup & preparation",desc:"Partner onboarding, ICP definition, funnel setup, tracking configuration, and campaign preparation.",color:"var(--lime)"},
             {weeks:"Weeks 3–6",title:"Launch",desc:"Campaigns go live, qualified prospects begin entering the platform, and your first live webinar takes place — all covered under the setup fee.",color:"#0A0A0A"},
-            {weeks:"Weeks 6–8",title:"Optimize & scale",desc:"Optimization, scaling, and continuous reporting based on real campaign data, including your second and third educational webinars.",color:"#4A7FC1"},
+            {weeks:"Weeks 6–8",title:"Optimize & scale",desc:"Optimization, scaling, and continuous reporting based on real campaign data. Additional webinars run under your monthly plan.",color:"#4A7FC1"},
           ].map((p,i)=>(
             <div key={i} style={{background:"var(--off)",border:"1px solid var(--border)",borderRadius:14,overflow:"hidden"}}>
               <div style={{borderLeft:`3px solid ${p.color}`,padding:"18px 20px 16px"}}>
@@ -516,10 +516,10 @@ export default function PricingPage() {
         <div style={{background:"var(--black)",borderRadius:14,padding:"24px 28px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:24,flexWrap:"wrap"}}>
           <div>
             <div style={{fontSize:10,fontWeight:800,letterSpacing:"0.14em",textTransform:"uppercase",color:"rgba(170,255,69,0.7)",marginBottom:8}}>Initial validation phase</div>
-            <div style={{fontSize:15,color:"rgba(255,255,255,0.8)",lineHeight:1.65,maxWidth:560}}>During the first 8 weeks we run <strong style={{color:"var(--lime)"}}>3 educational webinars</strong>, generating approximately <strong style={{color:"var(--lime)"}}>100 registrations per webinar</strong>.</div>
+            <div style={{fontSize:15,color:"rgba(255,255,255,0.8)",lineHeight:1.65,maxWidth:560}}>The setup fee covers your <strong style={{color:"var(--lime)"}}>first educational webinar</strong>, generating approximately <strong style={{color:"var(--lime)"}}>100 registrations</strong>. Subsequent webinars are run continuously under your monthly plan.</div>
           </div>
           <div style={{display:"flex",gap:0,flexShrink:0}}>
-            {[{n:"3",l:"webinars"},{n:"~300",l:"registrations"},{n:"8",l:"weeks"}].map((s,i)=>(
+            {[{n:"1",l:"webinar included"},{n:"~100",l:"registrations"},{n:"8",l:"weeks to scale"}].map((s,i)=>(
               <div key={i} style={{paddingRight:24,marginRight:24,borderRight:i<2?"1px solid rgba(255,255,255,0.12)":"none"}}>
                 <div style={{fontSize:26,fontWeight:900,color:"var(--lime)",letterSpacing:"-0.03em",lineHeight:1}}>{s.n}</div>
                 <div style={{fontSize:11,color:"rgba(255,255,255,0.45)",marginTop:4}}>{s.l}</div>
