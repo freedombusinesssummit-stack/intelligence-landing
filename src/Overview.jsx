@@ -270,8 +270,7 @@ section[id]{scroll-margin-top:78px;}
 .video-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.2s;}
 .video-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px -10px rgba(0,0,0,0.15);}
 .video-thumb{position:relative;aspect-ratio:9/16;background:#111;overflow:hidden;}
-.video-thumb img,.video-thumb video{width:100%;height:100%;object-fit:cover;}
-.video-sound{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.65);color:#fff;font-size:11px;font-weight:600;padding:6px 14px;border-radius:100px;backdrop-filter:blur(8px);pointer-events:none;white-space:nowrap;}
+.video-thumb img,.video-thumb video,.video-thumb iframe{width:100%;height:100%;object-fit:cover;border:none;}
 .video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(255,255,255,0.95);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--black);box-shadow:0 4px 16px rgba(0,0,0,0.3);transition:all 0.2s;}
 .video-card:hover .video-play{transform:translate(-50%,-50%) scale(1.1);background:var(--lime);}
 .video-badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.6);color:#fff;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:100px;backdrop-filter:blur(8px);}
@@ -921,21 +920,20 @@ export default function Overview() {
 
         <div className="video-grid">
           {[
-            {id:"b01C02DcwOHKl7dcvxdKtbV7sXnw8iYi00t2qlgXdLw2Pg",stage:"Stage 1",title:"Roberta — grab attention",desc:"Scroll-stopping hook in the first 3 seconds — a bold claim or question that speaks to mobility intent.",badge:"Attention"},
-            {id:"IpjmtckTnJzwVNEIv3YT01WbTsPAqtPzlR02DMy4gD6JA",stage:"Stage 2",title:"Sandra — build awareness",desc:"Educate on the opportunity — why now, which programmes, what's changed. Positions the summit as the answer.",badge:"Awareness"},
-            {id:"bjA29v9I8dDjJoYQHsLzRK9yiNCpUGmX3As6GOmjjF4",stage:"Stage 3",title:"Vasilis — deliver the message",desc:"Clear call to action — register, take the survey, get your mobility score. Drives the qualified opt-in.",badge:"Conversion"},
+            {id:"b01C02DcwOHKl7dcvxdKtbV7sXnw8iYi00t2qlgXdLw2Pg",stage:"Stage 1",title:"Grab attention",desc:"Scroll-stopping hook in the first 3 seconds — a bold claim or question that speaks to mobility intent.",badge:"Attention"},
+            {id:"IpjmtckTnJzwVNEIv3YT01WbTsPAqtPzlR02DMy4gD6JA",stage:"Stage 2",title:"Build awareness",desc:"Educate on the opportunity — why now, which programmes, what's changed. Positions the summit as the answer.",badge:"Awareness"},
+            {id:"bjA29v9I8dDjJoYQHsLzRK9yiNCpUGmX3As6GOmjjF4",stage:"Stage 3",title:"Deliver the message",desc:"Clear call to action — register, take the survey, get your mobility score. Drives the qualified opt-in.",badge:"Conversion"},
           ].map((v,i)=>(
             <Reveal key={i} delay={i*80} className="video-card">
               <div className="video-thumb">
-                <video
-                  src={`https://stream.mux.com/${v.id}/low.mp4`}
-                  poster={`https://image.mux.com/${v.id}/thumbnail.jpg?time=1&width=400&height=710&fit_mode=smartcrop`}
-                  autoPlay muted loop playsInline preload="metadata"
-                  onClick={e=>{e.currentTarget.muted=!e.currentTarget.muted;}}
-                  style={{width:"100%",height:"100%",objectFit:"cover",cursor:"pointer",display:"block"}}
+                <iframe
+                  src={`https://player.mux.com/${v.id}?autoplay=muted&loop=true&muted=true&controls=false&primary-color=%23AAFF45`}
+                  title={v.title}
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  style={{width:"100%",height:"100%",border:"none",display:"block"}}
                 />
                 <div className="video-badge">{v.badge}</div>
-                <div className="video-sound">🔊 tap for sound</div>
               </div>
               <div className="video-info">
                 <div className="video-stage">{v.stage}</div>
