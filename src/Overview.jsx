@@ -291,28 +291,55 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .nurture-connector{position:absolute;right:-14px;top:50%;transform:translateY(-50%);z-index:5;font-size:22px;color:var(--lime-dark);background:var(--off);width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;}
 .nurture-node-wrap:not(:last-child){padding-right:28px;}
 
-.nurture-seq{background:var(--black);border-radius:18px;padding:32px 36px;margin-top:32px;}
-.nurture-seq-label{font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(170,255,69,0.7);margin-bottom:24px;}
-.nurture-seq-track{display:grid;grid-template-columns:repeat(5,1fr);gap:0;}
-.nurture-seq-item{position:relative;padding-right:16px;}
-.nurture-seq-day{font-size:13px;font-weight:800;color:var(--lime);margin-bottom:8px;}
-.nurture-seq-subj{font-size:12px;color:rgba(255,255,255,0.65);line-height:1.5;}
-.nurture-seq-line{position:absolute;top:7px;right:8px;width:16px;height:2px;background:rgba(170,255,69,0.3);}
+.list-asset{background:var(--black);border-radius:18px;padding:36px 40px;margin-top:32px;display:grid;grid-template-columns:1.6fr auto;gap:40px;align-items:center;}
+.list-asset-left{display:flex;align-items:flex-start;gap:20px;}
+.list-asset-icon{font-size:36px;flex-shrink:0;}
+.list-asset-h{font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:10px;}
+.list-asset-p{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;}
+.list-asset-badges{display:flex;flex-direction:column;gap:12px;flex-shrink:0;}
+.list-asset-badge{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:rgba(255,255,255,0.85);white-space:nowrap;}
+.list-asset-check{width:20px;height:20px;border-radius:6px;background:var(--lime);color:var(--black);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;}
 
 /* ═══ EMAIL NURTURE (old) ═══ */
-/* ═══ VERIFY / DEMO CTA — white, button right ═══ */
-.demo-card{background:var(--off);border:1px solid var(--border);border-radius:20px;padding:44px 48px;display:grid;grid-template-columns:1.5fr auto;gap:48px;align-items:center;}
+/* ═══ VERIFY / DEMO CTA — white, animated call ═══ */
+.demo-card{background:var(--off);border:1px solid var(--border);border-radius:24px;padding:48px;display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:center;}
 .demo-card-left{}
 .demo-live-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(217,79,58,0.1);border:1px solid rgba(217,79,58,0.25);border-radius:100px;padding:6px 16px;margin-bottom:20px;}
 .demo-live-dot{width:8px;height:8px;border-radius:50%;background:#FF4444;animation:pulse 1.2s ease-in-out infinite;}
 .demo-live-text{font-size:12px;font-weight:700;color:#D94F3A;letter-spacing:0.06em;}
 .demo-h{font-size:clamp(26px,3.4vw,38px);font-weight:800;color:var(--black);letter-spacing:-0.03em;line-height:1.15;margin-bottom:12px;}
 .demo-h-accent{color:var(--lime-dark);}
-.demo-sub{font-size:16px;color:var(--text2);line-height:1.65;max-width:520px;}
-.demo-card-right{display:flex;flex-direction:column;align-items:center;gap:12px;flex-shrink:0;}
-.demo-btn{display:inline-flex;align-items:center;gap:10px;background:var(--black);color:var(--lime);text-decoration:none;font-size:16px;font-weight:800;padding:18px 36px;border-radius:12px;white-space:nowrap;transition:all 0.2s;}
+.demo-sub{font-size:16px;color:var(--text2);line-height:1.65;max-width:480px;margin-bottom:28px;}
+.demo-btn{display:inline-flex;align-items:center;gap:10px;background:var(--black);color:var(--lime);text-decoration:none;font-size:16px;font-weight:800;padding:16px 34px;border-radius:12px;white-space:nowrap;transition:all 0.2s;}
 .demo-btn:hover{background:var(--dark2);transform:translateY(-2px);box-shadow:0 12px 32px -8px rgba(0,0,0,0.3);}
-.demo-note{font-size:13px;color:var(--muted);}
+.demo-note{font-size:13px;color:var(--muted);margin-top:14px;}
+
+/* Animated call window */
+.demo-call{display:flex;justify-content:center;}
+.demo-call-window{width:100%;max-width:320px;background:linear-gradient(160deg,#0F1A08,#0A0A0A);border-radius:24px;padding:24px 22px;box-shadow:0 24px 60px -12px rgba(0,0,0,0.4);border:1px solid rgba(170,255,69,0.15);}
+.demo-call-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;}
+.demo-call-status{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);}
+.demo-call-ring{width:8px;height:8px;border-radius:50%;background:var(--lime);animation:pulse 1s ease-in-out infinite;}
+.demo-call-time{font-size:12px;color:rgba(255,255,255,0.5);font-variant-numeric:tabular-nums;}
+.demo-call-sec{animation:demoSecBlink 1s steps(1) infinite;}
+@keyframes demoSecBlink{50%{opacity:0.3;}}
+.demo-call-body{text-align:center;margin-bottom:32px;}
+.demo-call-avatar{position:relative;width:96px;height:96px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;}
+.demo-call-avatar-ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--lime);opacity:0;}
+.demo-ring-1{animation:demoRing 2s ease-out infinite;}
+.demo-ring-2{animation:demoRing 2s ease-out infinite 1s;}
+@keyframes demoRing{0%{transform:scale(0.7);opacity:0.7;}100%{transform:scale(1.4);opacity:0;}}
+.demo-call-avatar-inner{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--lime),var(--lime2));color:var(--black);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;position:relative;z-index:2;}
+.demo-call-name{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;}
+.demo-call-role{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:20px;}
+.demo-call-wave{display:flex;align-items:center;justify-content:center;gap:4px;height:32px;}
+.demo-wave-bar{width:4px;height:8px;background:var(--lime);border-radius:2px;animation:demoWave 0.9s ease-in-out infinite;}
+@keyframes demoWave{0%,100%{height:8px;}50%{height:28px;}}
+.demo-call-actions{display:flex;align-items:center;justify-content:center;gap:16px;}
+.demo-call-btn{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:transform 0.15s;}
+.demo-call-btn:hover{transform:scale(1.08);}
+.demo-call-mute,.demo-call-video{background:rgba(255,255,255,0.1);}
+.demo-call-end{background:#FF4444;transform:rotate(0deg);}
 
 /* ═══ 5-STEP FORMULA ═══ */
 .formula-section{padding:96px 0;background:var(--white);border-bottom:1px solid var(--border);}
@@ -583,9 +610,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
   .nurture-diagram{grid-template-columns:1fr;gap:32px;}
   .nurture-node-wrap:not(:last-child){padding-right:0;}
   .nurture-connector{display:none;}
-  .nurture-seq-track{grid-template-columns:1fr 1fr;gap:16px;}
-  .nurture-seq-line{display:none;}
-  .demo-card{grid-template-columns:1fr;gap:28px;}
+  .list-asset{grid-template-columns:1fr;gap:24px;}
+  .demo-card{grid-template-columns:1fr;gap:36px;}
+  .demo-call-window{max-width:280px;}
   .ovdash-kpi-row{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
@@ -620,7 +647,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
   .video-grid{grid-template-columns:1fr;}
   .persona-attrs{grid-template-columns:1fr;}
   .nurture-diagram{grid-template-columns:1fr;}
-  .nurture-seq-track{grid-template-columns:1fr;}
+  .list-asset{padding:28px 24px;}
+  .demo-card{padding:28px 24px;}
+  .demo-btn{width:100%;justify-content:center;}
   .ovdash-main{padding:16px;}
   .ovdash-kpi-row{grid-template-columns:1fr 1fr;}
   .ovdash-table-head{display:none;}
@@ -742,8 +771,9 @@ export default function Overview() {
         </div>
 
         {/* DASHBOARD TEMPLATE — from main page */}
+        <div style={{marginTop:80,paddingTop:80,borderTop:"1px solid var(--border)"}}>
         <Reveal delay={80}>
-          <div className="eyebrow" style={{marginBottom:12}}><span className="eyebrow-line"/>What you receive</div>
+          <div className="eyebrow"><span className="eyebrow-line"/>What you receive</div>
           <h2 className="sh2" style={{fontSize:"clamp(28px,3.6vw,48px)",marginBottom:16}}>Your live<br/><span className="hl">lead dashboard.</span></h2>
           <p className="sp" style={{marginBottom:8}}>Every lead lands scored, matched, and ready to contact. Score &amp; tier tells you priority. The prospect's own words tell you what to lead with. Profile context gives you the rest.</p>
         </Reveal>
@@ -821,6 +851,7 @@ export default function Overview() {
             </div>
           </div>
         </Reveal>
+        </div>
       </div>
     </section>
 
@@ -911,8 +942,8 @@ export default function Overview() {
       <div className="wrap">
         <Reveal>
           <div className="eyebrow lime"><span className="eyebrow-line"/>Nurture</div>
-          <h2 className="sh2">We warm them up<br/><span className="hl">before you ever call.</span></h2>
-          <p className="sp">Leads don't go straight to your dashboard. First we build a segmented list, run it through email marketing software, and send an educational sequence that filters for real intent — so only warm, engaged prospects reach you.</p>
+          <h2 className="sh2">We warm them up<br/><span className="hl">before the webinar.</span></h2>
+          <p className="sp">Registrants don't just wait for the webinar. We build a segmented list, run it through email marketing software, and send an educational sequence that warms every prospect and filters for real intent — so the room is full of qualified, engaged attendees.</p>
         </Reveal>
 
         {/* Horizontal 3-step diagram */}
@@ -920,7 +951,7 @@ export default function Overview() {
           {[
             {n:"01",icon:"🗂",title:"Build segmented list",desc:"Every survey response is tagged by jurisdiction, budget, timeline, and intent — creating clean, segmented audiences.",tag:"Segmentation"},
             {n:"02",icon:"⚙️",title:"Email marketing software",desc:"Segments sync into MailerLite. Automated sender domain, deliverability, and tracking configured per partner.",tag:"Automation"},
-            {n:"03",icon:"✉️",title:"Send email sequence",desc:"A 5-email educational sequence over 11 days. Opens, clicks, and engagement flag the hottest leads automatically.",tag:"Sequence"},
+            {n:"03",icon:"✉️",title:"Warm-up sequence",desc:"An educational email sequence before the webinar builds trust and anticipation. Opens and clicks flag the hottest leads.",tag:"Warm-up"},
           ].map((s,i)=>(
             <Reveal key={i} delay={i*80} className="nurture-node-wrap">
               <div className="nurture-node">
@@ -935,23 +966,19 @@ export default function Overview() {
           ))}
         </div>
 
-        {/* Sequence strip */}
+        {/* THE LIST IS AN ASSET */}
         <Reveal delay={200}>
-          <div className="nurture-seq">
-            <div className="nurture-seq-label">The 5-email sequence</div>
-            <div className="nurture-seq-track">
-              {[
-                {d:"Day 0",s:"Your Global Mobility Score is ready"},
-                {d:"Day 2",s:"The 3 most common mistakes"},
-                {d:"Day 5",s:"Portugal vs Malta vs Caribbean"},
-                {d:"Day 8",s:"Questions to ask your advisor"},
-                {d:"Day 11",s:"Ready to speak with a specialist?"},
-              ].map((e,i)=>(
-                <div key={i} className="nurture-seq-item">
-                  <div className="nurture-seq-day">{e.d}</div>
-                  <div className="nurture-seq-subj">{e.s}</div>
-                  {i<4&&<div className="nurture-seq-line"/>}
-                </div>
+          <div className="list-asset">
+            <div className="list-asset-left">
+              <div className="list-asset-icon">💎</div>
+              <div>
+                <div className="list-asset-h">The list is an asset — and it's yours.</div>
+                <div className="list-asset-p">Every prospect we warm up becomes part of a segmented, opt-in email list built around your jurisdiction. As a partner, you keep the list. It compounds in value with every campaign — a durable audience you own, not a one-time batch of leads.</div>
+              </div>
+            </div>
+            <div className="list-asset-badges">
+              {["Partner keeps the list","GDPR opt-in consent","Grows every campaign"].map((b,i)=>(
+                <div key={i} className="list-asset-badge"><span className="list-asset-check">✓</span>{b}</div>
               ))}
             </div>
           </div>
@@ -971,12 +998,37 @@ export default function Overview() {
               </div>
               <h2 className="demo-h">See the Intelligence Platform <span className="demo-h-accent">in action.</span></h2>
               <p className="demo-sub">Leave your details. Our platform demo connects within 30 seconds and walks you through exactly how we qualify and deliver leads to partner firms.</p>
-            </div>
-            <div className="demo-card-right">
               <a href="https://platform.fsummit.net/demo" className="demo-btn" target="_blank" rel="noopener noreferrer">
                 Try the Live Demo →
               </a>
-              <div className="demo-note">Connects in ~30 seconds</div>
+              <div className="demo-note">Real demo call · connects in ~30 seconds</div>
+            </div>
+
+            {/* Animated call visual */}
+            <div className="demo-call">
+              <div className="demo-call-window">
+                <div className="demo-call-header">
+                  <div className="demo-call-status"><span className="demo-call-ring"/>Connecting…</div>
+                  <div className="demo-call-time">00:0<span className="demo-call-sec">3</span></div>
+                </div>
+                <div className="demo-call-body">
+                  <div className="demo-call-avatar">
+                    <div className="demo-call-avatar-ring demo-ring-1"/>
+                    <div className="demo-call-avatar-ring demo-ring-2"/>
+                    <div className="demo-call-avatar-inner">FS</div>
+                  </div>
+                  <div className="demo-call-name">FBS Intelligence</div>
+                  <div className="demo-call-role">Platform Demo · Live Agent</div>
+                  <div className="demo-call-wave">
+                    {[...Array(9)].map((_,i)=><span key={i} className="demo-wave-bar" style={{animationDelay:`${i*0.08}s`}}/>)}
+                  </div>
+                </div>
+                <div className="demo-call-actions">
+                  <div className="demo-call-btn demo-call-mute">🎤</div>
+                  <div className="demo-call-btn demo-call-end">✕</div>
+                  <div className="demo-call-btn demo-call-video">📹</div>
+                </div>
+              </div>
             </div>
           </div>
         </Reveal>
