@@ -529,38 +529,27 @@ section[id]{scroll-margin-top:78px;}
 .st-contacted{color:var(--muted);}.st-contacted::before{content:'✓';margin-right:2px;}
 .st-reached{background:#E8F5E0;color:#2A6A1A;border:1px solid #B8DFA8;}
 
-/* ═══ AI QUALIFICATION LAYER ═══ */
-.ai-section{padding:110px 0;background:linear-gradient(160deg,#0A0A0A,#0F1A08);position:relative;overflow:hidden;border-bottom:1px solid #1a1a1a;}
-.ai-glow{position:absolute;top:-20%;right:-5%;width:50%;height:140%;background:radial-gradient(ellipse,rgba(170,255,69,0.12),transparent 60%);filter:blur(60px);pointer-events:none;}
-.ai-inner{position:relative;z-index:2;}
-.ai-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(170,255,69,0.7);margin-bottom:18px;}
-.ai-eyebrow-line{width:24px;height:1px;background:rgba(170,255,69,0.5);}
-.ai-formula{font-size:clamp(32px,5vw,58px);font-weight:900;letter-spacing:-0.04em;line-height:1.05;color:#fff;margin-bottom:20px;}
-.ai-formula .ai-sorts{color:var(--lime);}
-.ai-formula .ai-closes{color:rgba(255,255,255,0.55);}
-.ai-lead{font-size:18px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:640px;margin-bottom:12px;}
-.ai-lead strong{color:#fff;font-weight:700;}
-.ai-clarify{font-size:15px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:640px;margin-bottom:48px;}
-.ai-clarify strong{color:var(--lime);font-weight:600;}
-.ai-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;}
-.ai-col{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:32px 30px;}
-.ai-col-ai{border-color:rgba(170,255,69,0.25);}
-.ai-col-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-.ai-col-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.ai-col-ai .ai-col-icon{background:var(--lime);color:var(--black);}
-.ai-col-human .ai-col-icon{background:rgba(255,255,255,0.1);}
-.ai-col-label{font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:2px;}
-.ai-col-title{font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.02em;}
-.ai-col-list{display:flex;flex-direction:column;gap:12px;}
-.ai-col-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,0.7);line-height:1.5;}
-.ai-col-check{width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;margin-top:1px;}
-.ai-col-ai .ai-col-check{background:rgba(170,255,69,0.15);color:var(--lime);}
-.ai-col-human .ai-col-check{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);}
-.ai-proof-bar{display:flex;align-items:center;gap:0;margin-top:24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:24px 32px;}
-.ai-proof-stat{flex:1;padding-right:28px;margin-right:28px;border-right:1px solid rgba(255,255,255,0.08);}
-.ai-proof-stat:last-child{border-right:none;padding-right:0;margin-right:0;}
-.ai-proof-num{font-size:28px;font-weight:900;color:var(--lime);letter-spacing:-0.03em;line-height:1;margin-bottom:4px;}
-.ai-proof-lbl{font-size:12px;color:rgba(255,255,255,0.45);}
+/* ═══ AI QUALIFICATION LAYER (compact, white) ═══ */
+.ai-compact{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;}
+.ai-compact-h{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:var(--black);margin:14px 0 16px;}
+.ai-compact-p{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:28px;}
+.ai-compact-p strong{color:var(--black);font-weight:700;}
+.ai-compact-stats{display:flex;gap:0;}
+.ai-compact-stat{padding-right:24px;margin-right:24px;border-right:1px solid var(--border);display:flex;flex-direction:column;}
+.ai-compact-stat:last-child{border-right:none;padding-right:0;margin-right:0;}
+.ai-compact-num{font-size:28px;font-weight:900;color:var(--black);letter-spacing:-0.03em;line-height:1;}
+.ai-compact-lbl{font-size:12px;color:var(--muted);margin-top:3px;}
+.ai-compact-right{display:flex;flex-direction:column;gap:12px;}
+.ai-mini{background:var(--off);border:1px solid var(--border);border-radius:14px;padding:20px 22px;}
+.ai-mini-ai{border-color:rgba(170,255,69,0.4);background:var(--lime-soft);}
+.ai-mini-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.ai-mini-icon{width:32px;height:32px;border-radius:8px;background:var(--white);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.ai-mini-icon-lime{background:var(--lime);}
+.ai-mini-title{font-size:15px;font-weight:800;color:var(--black);letter-spacing:-0.01em;}
+.ai-mini-list{display:flex;flex-direction:column;gap:8px;}
+.ai-mini-item{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--text2);line-height:1.45;}
+.ai-mini-check{width:16px;height:16px;border-radius:4px;background:var(--white);color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0;margin-top:1px;}
+.ai-check-lime{background:var(--lime);color:var(--black);}
 
 /* ═══ INBOUND / OUTBOUND ═══ */
 .io-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;}
@@ -683,9 +672,7 @@ section[id]{scroll-margin-top:78px;}
   .ovdash-kpi-row{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
-  .ai-split{grid-template-columns:1fr;}
-  .ai-proof-bar{flex-direction:column;align-items:flex-start;gap:16px;}
-  .ai-proof-stat{border-right:none;padding-right:0;margin-right:0;}
+  .ai-compact{grid-template-columns:1fr;gap:32px;}
   .nav-right .nav-link{display:none;}
   /* Hero stats: 2x2 grid */
   .stats-strip{display:grid;grid-template-columns:1fr 1fr;gap:0;}
@@ -926,6 +913,46 @@ export default function Overview() {
             </div>
           </div>
         </Reveal>
+        </div>
+      </div>
+    </section>
+
+    {/* ── AI QUALIFICATION LAYER (compact, white) ── */}
+    <section id="ai" style={{padding:"80px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
+      <div className="wrap">
+        <div className="ai-compact">
+          <Reveal className="ai-compact-left">
+            <div className="eyebrow lime"><span className="eyebrow-line"/>The Quality Layer</div>
+            <h2 className="ai-compact-h"><span className="hl">AI sorts.</span> Your expert closes.</h2>
+            <p className="ai-compact-p">The product is <strong>exclusive qualified leads</strong>. The AI qualification layer is the reason they're qualified — it scores, verifies, and filters intent so your advisors spend time only on prospects worth closing. Not an AI funnel you operate. A quality layer that proves every lead.</p>
+            <div className="ai-compact-stats">
+              {[{n:"6",l:"scoring dimensions"},{n:"92%",l:"verification rate"},{n:"0",l:"unqualified leads"}].map((s,i)=>(
+                <div key={i} className="ai-compact-stat">
+                  <span className="ai-compact-num">{s.n}</span>
+                  <span className="ai-compact-lbl">{s.l}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={120} className="ai-compact-right">
+            <div className="ai-mini ai-mini-ai">
+              <div className="ai-mini-head"><span className="ai-mini-icon ai-mini-icon-lime">🤖</span><span className="ai-mini-title">AI sorts</span></div>
+              <div className="ai-mini-list">
+                {["Scores intent 0–100 across 6 dimensions","Verifies budget, timeline & authority","Filters tire-kickers before your dashboard","Tags HOT / WARM / COLD automatically"].map((t,j)=>(
+                  <div key={j} className="ai-mini-item"><span className="ai-mini-check ai-check-lime">✓</span>{t}</div>
+                ))}
+              </div>
+            </div>
+            <div className="ai-mini ai-mini-human">
+              <div className="ai-mini-head"><span className="ai-mini-icon">👔</span><span className="ai-mini-title">Your expert closes</span></div>
+              <div className="ai-mini-list">
+                {["Works only pre-qualified, warmed prospects","Leads with the prospect's stated motivation","Builds trust and judgment AI can't","Closes with full context from call one"].map((t,j)=>(
+                  <div key={j} className="ai-mini-item"><span className="ai-mini-check">→</span>{t}</div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -1233,79 +1260,6 @@ export default function Overview() {
     </section>
 
 
-    {/* ── AI QUALIFICATION LAYER ── */}
-    <section className="ai-section" id="ai">
-      <div className="ai-glow"/>
-      <div className="wrap ai-inner">
-        <Reveal>
-          <div className="ai-eyebrow"><span className="ai-eyebrow-line"/>The Quality Layer</div>
-          <h2 className="ai-formula"><span className="ai-sorts">AI sorts.</span><br/>Your <span className="ai-closes">expert closes.</span></h2>
-          <p className="ai-lead">The product is <strong>exclusive qualified leads</strong>. The AI qualification layer is the reason those leads are qualified — it scores, verifies, and filters intent at a scale no human team could match.</p>
-          <p className="ai-clarify">This isn't an "AI funnel" you have to operate. <strong>AI does the sorting so your advisors spend their time only on prospects worth closing.</strong></p>
-        </Reveal>
-
-        <Reveal delay={120}>
-          <div className="ai-split">
-            <div className="ai-col ai-col-ai">
-              <div className="ai-col-head">
-                <div className="ai-col-icon">🤖</div>
-                <div>
-                  <div className="ai-col-label">AI handles</div>
-                  <div className="ai-col-title">Sorting & verification</div>
-                </div>
-              </div>
-              <div className="ai-col-list">
-                {[
-                  "Scores every response 0–100 across 6 intent dimensions",
-                  "Verifies budget, timeline, and decision authority signals",
-                  "Filters out tire-kickers before they reach your dashboard",
-                  "Tags each lead HOT / WARM / COLD automatically",
-                  "Enriches profiles with geography, programme, and context",
-                ].map((t,j)=>(
-                  <div key={j} className="ai-col-item"><span className="ai-col-check">✓</span>{t}</div>
-                ))}
-              </div>
-            </div>
-
-            <div className="ai-col ai-col-human">
-              <div className="ai-col-head">
-                <div className="ai-col-icon">👔</div>
-                <div>
-                  <div className="ai-col-label">Your expert handles</div>
-                  <div className="ai-col-title">The conversation & the close</div>
-                </div>
-              </div>
-              <div className="ai-col-list">
-                {[
-                  "Reviews the Advisor Brief — score, timeline, own words",
-                  "Reaches out to pre-qualified, warmed prospects only",
-                  "Leads with the prospect's stated motivation",
-                  "Builds the relationship AI can't — trust and judgment",
-                  "Closes the deal with full context from the first call",
-                ].map((t,j)=>(
-                  <div key={j} className="ai-col-item"><span className="ai-col-check">→</span>{t}</div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={200}>
-          <div className="ai-proof-bar">
-            {[
-              {n:"6",l:"scoring dimensions per lead"},
-              {n:"92%",l:"intent verification completion"},
-              {n:"0",l:"unqualified leads in your feed"},
-            ].map((s,i)=>(
-              <div key={i} className="ai-proof-stat">
-                <div className="ai-proof-num">{s.n}</div>
-                <div className="ai-proof-lbl">{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-    </section>
 
 
     {/* ── INBOUND VS OUTBOUND ── */}
