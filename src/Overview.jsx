@@ -1481,10 +1481,10 @@ export default function Overview() {
             <span style={{width:6,height:6,borderRadius:"50%",background:"var(--black)",display:"inline-block"}}/>Selective Onboarding
           </div>
           <h2>Ready to receive leads<br/>from this funnel?</h2>
-          <p>One partner per jurisdiction. Apply and we'll review your profile within 24 hours.</p>
+          <p>Leads delivered exclusively for your jurisdiction and offer. Apply and we'll review your profile within 24 hours.</p>
           <a href="https://calendly.com/freedomsummit/30min" className="btn-lime">Schedule a Discovery Call →</a>
           <div style={{marginTop:16,display:"flex",gap:20,justifyContent:"center",flexWrap:"wrap"}}>
-            {["Discovery call within 48h","First leads in 7–14 days","Exclusive per jurisdiction"].map(t=>(
+            {["Discovery call within 48h","First leads in 4–8 weeks","Exclusive to your jurisdiction & offer"].map(t=>(
               <span key={t} style={{fontSize:12,color:"#555",display:"inline-flex",alignItems:"center",gap:6}}>
                 <span style={{color:"var(--lime)",fontWeight:900}}>✓</span>{t}
               </span>

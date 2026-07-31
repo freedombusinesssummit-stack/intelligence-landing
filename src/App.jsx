@@ -1706,8 +1706,8 @@ const INTEL_MILESTONES = [
 const FAQ = [
   { q: "How is FBS different from Facebook lead ads or Sales Navigator?", a: "Facebook ads give you contact info. We deliver the full intent profile, qualified through a multi-step verification process, scored on a 100-point framework, and matched to your jurisdictions. The leads cost more per unit, but the close rate isn't comparable." },
   { q: "What happens after I request access?", a: "We review your firm profile within 24 hours. If there's a fit, we book a discovery call. Onboarding takes 5–7 days: ICP build, dashboard setup, exclusivity scoping, and your first matched leads." },
-  { q: "Can I get exclusive leads in my jurisdiction?", a: "Yes. We onboard up to 5 partners per jurisdiction in most regions. In addition to the shared pool, partners can subscribe to an exclusive feed — leads that bypass the shared pool entirely and are routed only to your firm. Exclusive volume depends on your package." },
-  { q: "How many leads do I receive?", a: "Each partner package includes a defined monthly lead volume — agreed during onboarding based on your jurisdiction, capacity, and tier mix. Both shared-pool and exclusive feed allocations are outlined in the agreement, with quarterly reviews to adjust." },
+  { q: "Can I get exclusive leads in my jurisdiction?", a: "Yes. Each partner receives leads exclusively for their jurisdiction and their offer. No other firm receives the same leads — exclusivity is scoped to your market and your programme." },
+  { q: "How many leads do I receive?", a: "Lead volume depends on your media budget, jurisdiction demand, offer strength, and follow-up capacity. We agree an approach during onboarding and scale volume with budget after the first webinar. There's no fixed floor published — volume grows as the funnel matures." },
   { q: "What's the typical close rate?", a: "HOT-tier leads contacted within 24h: 18–28% close rate. WARM with proper nurture: 6–12%. COLD: <3% but useful for audience intelligence." },
   { q: "Do you offer a trial?", a: "No free trials — every lead has real acquisition cost. We offer a 30-day pilot with reduced commitment, discussed on the discovery call." },
   { q: "CRM integration?", a: "Direct integrations with HubSpot, Salesforce, Pipedrive, Zoho, Airtable. Custom webhooks on Partner plan and above." },
@@ -1866,8 +1866,10 @@ export default function App() {
             <strong>The lead generation network built exclusively for citizenship, residency and global mobility firms.</strong>
           </p>
           <div className="hero-actions fade-up fade-up-4">
-            <MagneticButton primary onClick={scrollToForm}>Apply for Access →</MagneticButton>
-            <MagneticButton onClick={() => document.getElementById("how").scrollIntoView({ behavior: "smooth" })}>See how it works →</MagneticButton>
+            <a href="https://platform.fsummit.net/demo" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
+              <MagneticButton primary>Book a Platform Demo →</MagneticButton>
+            </a>
+            <MagneticButton onClick={scrollToForm}>Apply for Access →</MagneticButton>
           </div>
 
           {/* SOCIAL PROOF UNDER BUTTON */}
@@ -1980,7 +1982,7 @@ export default function App() {
               Limited Capacity
             </div>
             <h3>Get matched to your first 10 pre-qualified leads in under 7 days.</h3>
-            <p>Limited capacity per jurisdiction. Up to 5 service providers per market.</p>
+            <p>Leads delivered exclusively for your jurisdiction and your offer.</p>
           </div>
           <button className="inline-cta-btn" onClick={scrollToForm}>Apply for Access →</button>
         </div>
@@ -2073,12 +2075,12 @@ export default function App() {
                 <div className="eyebrow"><span className="eyebrow-line" />Who This Is For</div>
                 <h2>Built for firms where client quality <span className="hl-sm">determines revenue</span>.</h2>
                 <p style={{ fontSize: 16, color: "var(--text2)", lineHeight: 1.7 }}>
-                  FBS Intelligence is a closed network. We onboard a limited number of service providers per jurisdiction in most regions.
+                  FBS Intelligence is a closed network. Each partner receives leads exclusively for their jurisdiction and their offer.
                 </p>
                 <div className="who-callout">
                   <div className="who-callout-tag">Selective Onboarding</div>
                   <div className="who-callout-text">
-                    <strong>Up to 5 service providers per jurisdiction.</strong> Plus exclusive lead feeds — leads that bypass the shared pool entirely and are delivered only to you.
+                    <strong>Exclusive to your jurisdiction and offer.</strong> No other firm receives the same leads — every lead we deliver is routed only to you.
                   </div>
                 </div>
               </div>
@@ -2135,7 +2137,7 @@ export default function App() {
                   </div>
                   <h2>Apply to join the FBS Intelligence network.</h2>
                   <p>
-                    We onboard a limited number of service providers per jurisdiction in most regions. Submit your firm profile — we respond within 24 hours.
+                    Each partner receives leads exclusively for their jurisdiction and offer. Submit your firm profile — we respond within 24 hours.
                   </p>
                   <div className="lime-cta-meta">
                     <span><span className="check">✓</span> 24-hour review of your application</span>
@@ -2332,34 +2334,34 @@ export default function App() {
             <Reveal>
               <div className="excl-text">
                 <div className="eyebrow eyebrow-lime"><span className="eyebrow-line" />Exclusive Lead Flow</div>
-                <h2>Beyond the shared pool: <span className="hl-sm">your own exclusive feed</span>.</h2>
+                <h2>Every lead is <span className="hl-sm">exclusively yours</span>.</h2>
                 <p>
-                  Every matched lead is visible to qualifying partners in your jurisdiction's <strong>shared pool</strong>. For example: 10 prospects researching Malta — every Malta-focused partner can reach out.
+                  Each partner receives leads exclusively for their <strong>jurisdiction</strong> and their <strong>offer</strong>. No other firm receives the same leads — there is no shared pool.
                 </p>
                 <p>
-                  Beyond that, your firm can receive an additional <strong>exclusive feed</strong> — leads from your jurisdiction that never enter the shared pool, and are delivered only to you.
+                  When a prospect matches your market and programme, that lead is routed only to you. Your competitors never see it.
                 </p>
 
                 <div className="excl-features">
                   <div className="excl-feature">
                     <div className="excl-feature-icon">1</div>
                     <div>
-                      <h4>Shared pool access</h4>
-                      <p>All qualifying leads from your jurisdiction visible to all partner firms covering it.</p>
+                      <h4>Scoped to your jurisdiction</h4>
+                      <p>You receive leads for the market you operate in — matched to your programme.</p>
                     </div>
                   </div>
                   <div className="excl-feature">
                     <div className="excl-feature-icon">2</div>
                     <div>
-                      <h4>Plus your private feed</h4>
-                      <p>Additional leads routed only to you. Other partners never see them.</p>
+                      <h4>Scoped to your offer</h4>
+                      <p>Leads are matched to the specific programme you provide — not generic interest.</p>
                     </div>
                   </div>
                   <div className="excl-feature">
                     <div className="excl-feature-icon">3</div>
                     <div>
-                      <h4>Volume guarantees</h4>
-                      <p>Minimum monthly lead floors negotiated as part of your exclusive package.</p>
+                      <h4>No duplicates, ever</h4>
+                      <p>Exclusivity means no other firm receives the same lead. What's yours is yours.</p>
                     </div>
                   </div>
                 </div>
@@ -2388,7 +2390,7 @@ export default function App() {
                     <div className="excl-flow-icon">✓</div>
                     <div>
                       <div className="excl-flow-name">Your firm</div>
-                      <div className="excl-flow-meta">Receives exclusive leads + shared pool access</div>
+                      <div className="excl-flow-meta">Receives every Malta lead matched to your offer</div>
                     </div>
                     <div className="excl-flow-status">Exclusive</div>
                   </div>
@@ -2396,17 +2398,17 @@ export default function App() {
                     <div className="excl-flow-icon">✕</div>
                     <div>
                       <div className="excl-flow-name">Other partner firm A</div>
-                      <div className="excl-flow-meta">Sees only shared-pool leads</div>
+                      <div className="excl-flow-meta">Different jurisdiction — never your leads</div>
                     </div>
-                    <div className="excl-flow-status">Shared only</div>
+                    <div className="excl-flow-status">No overlap</div>
                   </div>
                   <div className="excl-flow-item them">
                     <div className="excl-flow-icon">✕</div>
                     <div>
                       <div className="excl-flow-name">Other partner firm B</div>
-                      <div className="excl-flow-meta">Sees only shared-pool leads</div>
+                      <div className="excl-flow-meta">Different offer — never your leads</div>
                     </div>
-                    <div className="excl-flow-status">Shared only</div>
+                    <div className="excl-flow-status">No overlap</div>
                   </div>
                 </div>
               </div>
@@ -2441,7 +2443,7 @@ export default function App() {
                   </div>
                   <h2>Apply to join the FBS Intelligence network.</h2>
                   <p>
-                    We onboard a limited number of service providers per jurisdiction in most regions. Submit your firm profile — we respond within 24 hours.
+                    Each partner receives leads exclusively for their jurisdiction and offer. Submit your firm profile — we respond within 24 hours.
                   </p>
                   <div className="lime-cta-meta">
                     <span><span className="check">✓</span> 24-hour review of your application</span>

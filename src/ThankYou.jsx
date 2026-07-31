@@ -216,7 +216,7 @@ export default function ThankYou() {
             {icon:"✅",n:"01",label:"Application",sub:"Submitted just now",done:true},
             {icon:"📅",n:"02",label:"Book a call",sub:"Pick a time below",active:true},
             {icon:"📞",n:"03",label:"Discovery call",sub:"30 min · we scope the fit"},
-            {icon:"📥",n:"04",label:"First leads",sub:"Within 7–14 days of signing"},
+            {icon:"📥",n:"04",label:"First leads",sub:"Within 4–8 weeks of signing"},
           ].map((s,i)=>(
             <div key={i} className={`ty-step ${s.done?"done":""} ${s.active?"active":""}`}>
               <div className="ty-step-icon">{s.icon}</div>

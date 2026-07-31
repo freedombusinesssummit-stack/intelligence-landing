@@ -322,12 +322,12 @@ const EMAIL_SEQUENCE = [
 
 const FAQ = [
   {q:"What is the main purpose of the platform?",a:"We get you qualified leads. Real investors who want a second passport or residency — not tire-kickers. We run the ads, host the webinars, score every prospect, and drop them into your dashboard ready to talk."},
-  {q:"Is this lead generation, marketing, or a business partnership?",a:"It's all three. We generate the leads and run the marketing for you — and we only work with <strong>one firm per jurisdiction</strong>. So it's a partnership, not a list you buy. Your competitors can't get in once you're in."},
+  {q:"Is this lead generation, marketing, or a business partnership?",a:"It's all three. We generate the leads and run the marketing for you — and you receive leads <strong>exclusively for your jurisdiction and your offer</strong>. So it's a partnership, not a list you buy — no other firm gets the same leads."},
   {q:"Is there a cost — during pilot and after launch?",a:"Yes. There's a one-time setup fee to build your funnel, and you cover your own media budget for the ads. After that, we deliver qualified leads to you on a monthly subscription. Simple."},
   {q:"What is the commercial model?",a:"Three parts: a <strong>one-time setup fee</strong> to build and launch your funnel, your own <strong>media budget</strong> paid straight to the ad platforms, and a <strong>monthly subscription</strong> where we deliver qualified leads to your dashboard. That's it."},
   {q:"Do you have a brochure or written material?",a:"Yes. The <a href='/overview' style='color:var(--lime-dark);text-decoration:none;font-weight:600;'>Overview page</a> shows you exactly how the funnel works, step by step. This page breaks down what's in the setup and how the rollout goes. And on the call, we'll show you a plan built for your specific market."},
   {q:"What's the difference between Business and Premium?",a:"Business puts leads in your dashboard — your team does the follow-up. Premium does the follow-up for you: we send every lead a <strong>5-email warm-up sequence</strong> first. So by the time you call, they already know who you are and they're ready to talk."},
-  {q:"Are leads exclusive to my firm?",a:"100% yes. Nobody else in your jurisdiction gets your leads. This isn't a shared pool where five firms fight over the same people. They're yours."},
+  {q:"Are leads exclusive to my firm?",a:"100% yes. Nobody else in your jurisdiction gets your leads. This isn't a shared pool. Leads matched to your jurisdiction and offer come only to you."},
   {q:"What about ad spend?",a:"You pay for the ads directly — straight to the platforms. We build and manage the campaigns, but the media budget is yours to control. We'll help you figure out the right number during onboarding."},
   {q:"How fast do I receive first leads?",a:"Give it 4–8 weeks. We build the funnel, test the traffic, then go live. Your first webinar and first real leads usually land 6–8 weeks after you sign — and that first webinar is covered by the setup fee."},
 ];
@@ -398,7 +398,7 @@ export default function PricingPage() {
     {/* HERO */}
     <section className="hero">
       <div className="wrap">
-        <div className="eyebrow-pill"><span className="eyebrow-dot">Pricing</span> Two packages · No shared pool</div>
+        <div className="eyebrow-pill"><span className="eyebrow-dot">Pricing</span> Two packages · Fully exclusive</div>
         <h1>Leads delivered.<br/><span className="accent">Or leads warmed.</span></h1>
         <p className="hero-sub">Both packages deliver exclusive qualified leads matched to your jurisdiction. The difference is how much of the work FBS does before you make the first call.</p>
 
@@ -732,7 +732,7 @@ export default function PricingPage() {
         <p>Tell us about your firm — we review within 24 hours and book a discovery call.</p>
         <button className="btn-lime" onClick={()=>setModal(PLANS[1])}>Get Started →</button>
         <div style={{marginTop:16,display:"flex",gap:20,justifyContent:"center",flexWrap:"wrap"}}>
-          {["$1,950 setup · one-time (founding rate)","Discovery call within 48h","First leads in 7–14 days"].map(t=>(
+          {["$1,950 setup · one-time (founding rate)","Discovery call within 48h","First leads in 4–8 weeks"].map(t=>(
             <span key={t} style={{fontSize:12,color:"#555",display:"inline-flex",alignItems:"center",gap:6}}>
               <span style={{color:"#AAFF45",fontWeight:900}}>✓</span> {t}
             </span>
