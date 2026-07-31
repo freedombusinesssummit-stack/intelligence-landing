@@ -538,15 +538,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .tl-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text2);line-height:1.45;}
 .tl-item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
 .tl-outcome{border-left:2px solid;padding:8px 12px;font-size:12px;font-weight:700;color:var(--black);background:var(--off);border-radius:0 6px 6px 0;}
-.tl-summary{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px 32px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.tl-summary{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:24px;}
 .tl-track-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
 .tl-track-bar{display:flex;height:36px;border-radius:8px;overflow:hidden;margin-bottom:8px;}
 .tl-bar-seg{display:flex;align-items:center;justify-content:center;}
 .tl-bar-lbl{font-size:11px;font-weight:800;letter-spacing:0.06em;}
 .tl-track-marks{display:flex;justify-content:space-between;padding:0 2px;}
 .tl-mark{font-size:10px;color:var(--muted);font-weight:500;}
-.tl-summary-stats{display:flex;flex-direction:column;gap:16px;flex-shrink:0;}
-.tl-stat{text-align:right;}
+.tl-summary-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-top:24px;border-top:1px solid var(--border);}
+.tl-stat{text-align:center;}
 .tl-stat-val{font-size:26px;font-weight:900;color:var(--black);letter-spacing:-0.03em;line-height:1;}
 .tl-stat-unit{font-size:14px;font-weight:500;color:var(--muted);}
 .tl-stat-label{font-size:11px;color:var(--muted);margin-top:2px;}
@@ -590,9 +590,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 @media(max-width:1024px){
   .io-grid{grid-template-columns:1fr;}
   .tl-phases{grid-template-columns:1fr 1fr;}
-  .tl-summary{grid-template-columns:1fr;}
-  .tl-summary-stats{flex-direction:row;justify-content:flex-start;}
-  .tl-stat{text-align:left;}
+  .tl-summary-stats{grid-template-columns:1fr 1fr 1fr;}
+  .tl-stat{text-align:center;}
   .hsteps-grid{grid-template-columns:repeat(4,1fr);}
   .hstep:nth-child(4){border-right:1px solid var(--border);border-radius:0 14px 0 0;}
   .hstep:nth-child(5){border-radius:0 0 0 14px;}
@@ -1042,8 +1041,8 @@ export default function Overview() {
       </div>
     </section>
 
-    {/* 5-STEP FORMULA */}
-    <section className="formula-section">
+    {/* 5-STEP FORMULA — hidden */}
+    {false && <section className="formula-section">
       <div className="wrap">
         <Reveal>
           <div className="eyebrow lime"><span className="eyebrow-line"/>The 5-Step Formula</div>
@@ -1072,7 +1071,7 @@ export default function Overview() {
 
         </div>
       </div>
-    </section>
+    </section>}
 
     {/* GMS / LEAD QUALITY */}
     <section className="gms-section" id="scoring">
