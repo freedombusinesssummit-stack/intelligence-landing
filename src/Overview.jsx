@@ -81,7 +81,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px;}
 .nav-logo{font-size:14px;font-weight:800;color:var(--black);display:flex;align-items:center;gap:10px;letter-spacing:-0.02em;text-decoration:none;}
 .nav-logo-dot{width:8px;height:8px;background:var(--lime);border-radius:50%;animation:pulseLime 2.5s ease-in-out infinite;}
-.nav-right{display:flex;align-items:center;gap:24px;}
+.nav-right{display:flex;align-items:center;gap:20px;}
+section[id]{scroll-margin-top:78px;}
 .nav-link{font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color 0.15s;}
 .nav-link:hover{color:var(--black);}
 .nav-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--black);color:var(--white);border:none;cursor:pointer;padding:9px 20px;border-radius:7px;font-family:'Inter',sans-serif;transition:all 0.15s;text-decoration:none;}
@@ -616,6 +617,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
   .ovdash-kpi-row{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
+  .nav-right .nav-link{display:none;}
   /* Hero stats: 2x2 grid */
   .stats-strip{display:grid;grid-template-columns:1fr 1fr;gap:0;}
   .stat-item{padding:20px 16px 20px 0;border-right:none;margin-right:0;border-bottom:1px solid var(--border);}
@@ -703,8 +705,11 @@ export default function Overview() {
       <div className="wrap nav-inner">
         <a href="/" className="nav-logo"><div className="nav-logo-dot"/>FBS Intelligence</a>
         <div className="nav-right">
-          <a href="/" className="nav-link">Home</a>
-          <a href="/overview" className="nav-link" style={{color:"var(--black)",fontWeight:700}}>How it works</a>
+          <a href="#funnel" className="nav-link">Funnel</a>
+          <a href="#acquisition" className="nav-link">Acquisition</a>
+          <a href="#nurture" className="nav-link">Nurture</a>
+          <a href="#scoring" className="nav-link">Scoring</a>
+          <a href="#demo" className="nav-link">Demo</a>
           <a href="/#apply" className="nav-btn">Apply</a>
         </div>
       </div>
@@ -856,7 +861,7 @@ export default function Overview() {
     </section>
 
     {/* HOW WE GET LEADS */}
-    <section style={{padding:"96px 0",background:"var(--off)",borderBottom:"1px solid var(--border)"}}>
+    <section id="acquisition" style={{padding:"96px 0",background:"var(--off)",borderBottom:"1px solid var(--border)"}}>
       <div className="wrap">
         <Reveal>
           <div className="eyebrow lime"><span className="eyebrow-line"/>Acquisition</div>
@@ -906,7 +911,7 @@ export default function Overview() {
     </section>
 
     {/* VIDEO SAMPLES */}
-    <section style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
+    <section id="creative" style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
       <div className="wrap">
         <Reveal>
           <div className="eyebrow lime"><span className="eyebrow-line"/>Creative</div>
@@ -944,7 +949,7 @@ export default function Overview() {
     </section>
 
     {/* EMAIL NURTURE */}
-    <section style={{padding:"96px 0",background:"var(--off)",borderBottom:"1px solid var(--border)"}}>
+    <section id="nurture" style={{padding:"96px 0",background:"var(--off)",borderBottom:"1px solid var(--border)"}}>
       <div className="wrap">
         <Reveal>
           <div className="eyebrow lime"><span className="eyebrow-line"/>Nurture</div>
@@ -993,7 +998,7 @@ export default function Overview() {
     </section>
 
     {/* VERIFY INTENT / DEMO */}
-    <section style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
+    <section id="demo" style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
       <div className="wrap">
         <Reveal>
           <div className="demo-card">
