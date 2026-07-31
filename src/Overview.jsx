@@ -14,6 +14,40 @@ function useInView(threshold = 0.1, once = true) {
   return [ref, inView];
 }
 
+function VideoCard({ v, i }) {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <Reveal delay={i*80} className="video-card">
+      <div className="video-thumb" onClick={()=>!playing&&setPlaying(true)}>
+        {playing ? (
+          <iframe
+            src={`https://player.mux.com/${v.id}?autoplay=true&primary-color=%23AAFF45`}
+            title={v.title}
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+            style={{width:"100%",height:"100%",border:"none",display:"block"}}
+          />
+        ) : (
+          <>
+            <img
+              src={`https://image.mux.com/${v.id}/thumbnail.jpg?time=2&width=400&height=710&fit_mode=smartcrop`}
+              alt={v.title}
+              loading="lazy"
+            />
+            <div className="video-badge">{v.badge}</div>
+            <div className="video-play">▶</div>
+          </>
+        )}
+      </div>
+      <div className="video-info">
+        <div className="video-stage">{v.stage}</div>
+        <div className="video-title">{v.title}</div>
+        <div className="video-desc">{v.desc}</div>
+      </div>
+    </Reveal>
+  );
+}
+
 function Reveal({ children, delay = 0, className = "" }) {
   const [ref, inView] = useInView(0.08);
   return (
@@ -269,7 +303,7 @@ section[id]{scroll-margin-top:78px;}
 .video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
 .video-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.2s;}
 .video-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px -10px rgba(0,0,0,0.15);}
-.video-thumb{position:relative;aspect-ratio:9/16;background:#111;overflow:hidden;}
+.video-thumb{position:relative;aspect-ratio:9/16;background:#111;overflow:hidden;cursor:pointer;}
 .video-thumb img,.video-thumb video,.video-thumb iframe{width:100%;height:100%;object-fit:cover;border:none;}
 .video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(255,255,255,0.95);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--black);box-shadow:0 4px 16px rgba(0,0,0,0.3);transition:all 0.2s;}
 .video-card:hover .video-play{transform:translate(-50%,-50%) scale(1.1);background:var(--lime);}
@@ -924,23 +958,7 @@ export default function Overview() {
             {id:"IpjmtckTnJzwVNEIv3YT01WbTsPAqtPzlR02DMy4gD6JA",stage:"Stage 2",title:"Build awareness",desc:"Educate on the opportunity — why now, which programmes, what's changed. Positions the summit as the answer.",badge:"Awareness"},
             {id:"bjA29v9I8dDjJoYQHsLzRK9yiNCpUGmX3As6GOmjjF4",stage:"Stage 3",title:"Deliver the message",desc:"Clear call to action — register, take the survey, get your mobility score. Drives the qualified opt-in.",badge:"Conversion"},
           ].map((v,i)=>(
-            <Reveal key={i} delay={i*80} className="video-card">
-              <div className="video-thumb">
-                <iframe
-                  src={`https://player.mux.com/${v.id}?autoplay=muted&loop=true&muted=true&controls=false&primary-color=%23AAFF45`}
-                  title={v.title}
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  style={{width:"100%",height:"100%",border:"none",display:"block"}}
-                />
-                <div className="video-badge">{v.badge}</div>
-              </div>
-              <div className="video-info">
-                <div className="video-stage">{v.stage}</div>
-                <div className="video-title">{v.title}</div>
-                <div className="video-desc">{v.desc}</div>
-              </div>
-            </Reveal>
+            <VideoCard key={i} v={v} i={i} />
           ))}
         </div>
       </div>
