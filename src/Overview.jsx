@@ -553,6 +553,7 @@ section[id]{scroll-margin-top:78px;}
 
 /* ═══ INBOUND / OUTBOUND ═══ */
 .io-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;}
+.io-grid-single{grid-template-columns:1fr;max-width:640px;}
 .io-card{border-radius:20px;padding:40px 36px;display:flex;flex-direction:column;gap:0;}
 .io-inbound{background:var(--lime-soft);border:1px solid rgba(170,255,69,0.4);}
 .io-outbound{background:var(--black);border:1px solid #1a1a1a;}
@@ -1266,12 +1267,12 @@ export default function Overview() {
     <section style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
       <div className="wrap">
         <Reveal>
-          <div className="eyebrow lime"><span className="eyebrow-line"/>Jurisdiction Analysis</div>
-          <h2 className="sh2">We study your market first.<br/><span className="hl">Inbound or outbound?</span></h2>
-          <p className="sp">Before running a single ad, we analyse your jurisdiction and firm positioning to determine the right acquisition strategy. Not every market works the same way.</p>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>Acquisition Model</div>
+          <h2 className="sh2">We study your market first.<br/><span className="hl">Then leads come to you.</span></h2>
+          <p className="sp">Before running a single ad, we analyse your jurisdiction and firm positioning to build the right inbound funnel — one that attracts investors already searching for your programme.</p>
         </Reveal>
 
-        <div className="io-grid">
+        <div className="io-grid io-grid-single">
           <Reveal delay={80} className="io-card io-inbound">
             <div className="io-badge io-badge-in">Inbound</div>
             <h3 className="io-title">Leads come to you.</h3>
@@ -1288,34 +1289,7 @@ export default function Overview() {
               <span>Portugal</span><span>Malta</span><span>UAE</span><span>Singapore</span><span>Greece</span>
             </div>
           </Reveal>
-
-          <Reveal delay={160} className="io-card io-outbound">
-            <div className="io-badge io-badge-out">Outbound</div>
-            <h3 className="io-title">You reach out to leads.</h3>
-            <p className="io-desc">We identify and warm prospects in specific target markets — founders, HNW individuals, and internationally mobile professionals — before your team initiates contact. Higher touch, higher conversion.</p>
-            <div className="io-when">
-              <div className="io-when-label">Works best when</div>
-              <div className="io-when-items">
-                {["Your programme has lower search demand but strong appeal (Caribbean CBI, Paraguay)","You want to target a specific country, industry, or wealth demographic","Your firm has capacity for proactive outreach and follow-up sequences"].map((t,i)=>(
-                  <div key={i} className="io-when-item"><span className="io-check io-check-dark">✓</span>{t}</div>
-                ))}
-              </div>
-            </div>
-            <div className="io-examples io-examples-dark">
-              <span>St. Kitts</span><span>Dominica</span><span>Grenada</span><span>Paraguay</span><span>Antigua</span>
-            </div>
-          </Reveal>
         </div>
-
-        <Reveal delay={100}>
-          <div className="io-note">
-            <div className="io-note-icon">🔍</div>
-            <div>
-              <div className="io-note-h">We determine this on the discovery call.</div>
-              <div className="io-note-p">During onboarding, we review your jurisdiction, your firm's current lead sources, and your team's capacity. Some partners run both inbound and outbound simultaneously — we build the funnel accordingly.</div>
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
 
