@@ -159,6 +159,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .hstep-arrow{position:absolute;right:-10px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--border);z-index:2;background:var(--white);padding:2px;}
 
 /* ═══ ADVISOR BRIEF ANATOMY ═══ */
+.ov-dash-card{background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 16px 48px -8px rgba(0,0,0,0.1);margin-top:28px;padding:24px;}
+.ov-dash-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.ov-dash-label{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+.ov-dash-live{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--hot-color);}
+.ov-dash-live-dot{width:7px;height:7px;border-radius:50%;background:var(--hot-color);animation:pulse 1.5s ease-in-out infinite;}
+.ov-dash-jur{background:var(--lime-soft);border-radius:12px;padding:16px 18px;margin-bottom:16px;}
+.ov-dash-jur-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:6px;}
+.ov-dash-jur-val{font-size:20px;font-weight:800;color:var(--black);letter-spacing:-0.02em;}
+.ov-dash-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.ov-dash-kpi{background:var(--off);border-radius:10px;padding:16px;}
+.ov-dash-kpi-num{font-size:28px;font-weight:900;letter-spacing:-0.03em;line-height:1;margin-bottom:4px;}
+.ov-dash-kpi-lbl{font-size:12px;color:var(--muted);}
+.ov-dash-leads{display:flex;flex-direction:column;gap:8px;}
+.ov-dash-lead{display:flex;align-items:center;gap:12px;background:var(--off);border-radius:10px;padding:12px 14px;}
+.ov-dash-av{width:36px;height:36px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;}
+.ov-dash-name{font-size:15px;font-weight:700;color:var(--black);flex:1;}
+.ov-dash-score{font-size:16px;font-weight:800;color:var(--hot-color);}
+.ov-dash-new{background:var(--lime-soft);color:var(--lime-dark);font-size:10px;font-weight:800;padding:3px 10px;border-radius:100px;text-transform:uppercase;letter-spacing:0.06em;}
+
+/* ═══ ADVISOR BRIEF ANATOMY (old) ═══ */
 .advisor-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;margin-top:72px;padding-top:72px;border-top:1px solid var(--border);}
 
 .advisor-card{background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:0 16px 48px -8px rgba(0,0,0,0.1);margin-top:28px;}
@@ -198,6 +218,63 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
 .aff-icon{width:36px;height:36px;border-radius:10px;background:var(--off);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
 .aff-h{font-size:14px;font-weight:700;color:var(--black);margin-bottom:3px;}
 .aff-p{font-size:13px;color:var(--text2);line-height:1.55;}
+
+/* ═══ HOW WE GET LEADS / ACQUISITION ═══ */
+.acq-channels{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px;}
+.acq-channel{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px 20px;text-align:center;transition:all 0.2s;}
+.acq-channel:hover{border-color:var(--black);transform:translateY(-3px);box-shadow:0 12px 28px -8px rgba(0,0,0,0.1);}
+.acq-icon{font-size:28px;margin-bottom:12px;}
+.acq-name{font-size:15px;font-weight:800;color:var(--black);margin-bottom:6px;letter-spacing:-0.01em;}
+.acq-desc{font-size:12px;color:var(--text2);line-height:1.55;}
+.persona-card{background:var(--black);border-radius:20px;padding:40px 44px;margin-top:24px;display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center;position:relative;overflow:hidden;}
+.persona-card::before{content:'';position:absolute;top:-40%;right:-5%;width:45%;height:180%;background:radial-gradient(ellipse,rgba(170,255,69,0.1),transparent 60%);pointer-events:none;}
+.persona-left{position:relative;z-index:2;}
+.persona-eyebrow{font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(170,255,69,0.7);margin-bottom:12px;}
+.persona-title{font-size:26px;font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.15;margin-bottom:14px;}
+.persona-sub{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.65;}
+.persona-attrs{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.persona-attr{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px 18px;}
+.persona-attr-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(170,255,69,0.6);margin-bottom:6px;}
+.persona-attr-val{font-size:16px;font-weight:700;color:#fff;letter-spacing:-0.01em;}
+
+/* ═══ VIDEO SAMPLES ═══ */
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
+.video-card{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.2s;}
+.video-card:hover{transform:translateY(-4px);box-shadow:0 16px 36px -10px rgba(0,0,0,0.15);}
+.video-thumb{position:relative;aspect-ratio:9/16;background:#111;overflow:hidden;}
+.video-thumb img{width:100%;height:100%;object-fit:cover;}
+.video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(255,255,255,0.95);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--black);box-shadow:0 4px 16px rgba(0,0,0,0.3);transition:all 0.2s;}
+.video-card:hover .video-play{transform:translate(-50%,-50%) scale(1.1);background:var(--lime);}
+.video-badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.6);color:#fff;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:100px;backdrop-filter:blur(8px);}
+.video-info{padding:20px;}
+.video-stage{font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:6px;}
+.video-title{font-size:15px;font-weight:700;color:var(--black);margin-bottom:6px;letter-spacing:-0.01em;}
+.video-desc{font-size:12px;color:var(--text2);line-height:1.55;}
+
+/* ═══ EMAIL NURTURE ═══ */
+.nurture-flow{display:flex;flex-direction:column;gap:10px;margin-top:48px;max-width:720px;}
+.nurture-email{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px 22px;transition:all 0.2s;}
+.nurture-email:hover{border-color:rgba(170,255,69,0.5);transform:translateX(4px);}
+.nurture-day{width:52px;height:52px;background:var(--lime-soft);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
+.nurture-day-num{font-size:18px;font-weight:900;color:var(--lime-dark);line-height:1;}
+.nurture-day-lbl{font-size:8px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--lime-dark);margin-top:2px;}
+.nurture-subj{font-size:14px;font-weight:700;color:var(--black);margin-bottom:3px;}
+.nurture-prev{font-size:12px;color:var(--text2);line-height:1.5;}
+.nurture-icon{font-size:20px;flex-shrink:0;opacity:0.5;}
+
+/* ═══ VERIFY / DEMO CTA ═══ */
+.demo-section{background:linear-gradient(135deg,#0A0A0A,#0F1A08);position:relative;overflow:hidden;}
+.demo-glow{position:absolute;top:-20%;left:50%;transform:translateX(-50%);width:60%;height:120%;background:radial-gradient(ellipse,rgba(170,255,69,0.12),transparent 60%);filter:blur(50px);pointer-events:none;}
+.demo-inner{position:relative;z-index:2;text-align:center;max-width:680px;margin:0 auto;}
+.demo-live-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(217,79,58,0.15);border:1px solid rgba(217,79,58,0.3);border-radius:100px;padding:6px 16px;margin-bottom:24px;}
+.demo-live-dot{width:8px;height:8px;border-radius:50%;background:#FF4444;animation:pulse 1.2s ease-in-out infinite;}
+.demo-live-text{font-size:12px;font-weight:700;color:#FF6B5B;letter-spacing:0.06em;}
+.demo-h{font-size:clamp(28px,4vw,44px);font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:8px;}
+.demo-h-accent{color:var(--lime);}
+.demo-sub{font-size:17px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto;}
+.demo-btn{display:inline-flex;align-items:center;gap:10px;background:var(--lime);color:var(--black);text-decoration:none;font-size:16px;font-weight:800;padding:18px 40px;border-radius:12px;transition:all 0.2s;}
+.demo-btn:hover{background:var(--lime2);transform:translateY(-2px);box-shadow:0 12px 32px -8px rgba(170,255,69,0.4);}
+.demo-note{font-size:13px;color:rgba(255,255,255,0.4);margin-top:16px;}
 
 /* ═══ 5-STEP FORMULA ═══ */
 .formula-section{padding:96px 0;background:var(--white);border-bottom:1px solid var(--border);}
@@ -462,6 +539,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
   .tiers-row{grid-template-columns:1fr 1fr;}
   .db-stats{grid-template-columns:1fr 1fr;}
   .formula-badge{font-size:10px;padding:4px 8px;}
+  .acq-channels{grid-template-columns:1fr 1fr;}
+  .persona-card{grid-template-columns:1fr;gap:28px;}
+  .video-grid{grid-template-columns:1fr 1fr;}
+  .ov-dash-kpis{grid-template-columns:repeat(3,1fr);}
 }
 @media(max-width:768px){
   /* Hero stats: 2x2 grid */
@@ -491,6 +572,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,
   .deepdive-steps::before{left:27px;}
   /* Dashboard stats */
   .db-stats{grid-template-columns:1fr 1fr;}
+  .acq-channels{grid-template-columns:1fr 1fr;}
+  .video-grid{grid-template-columns:1fr;}
+  .persona-attrs{grid-template-columns:1fr;}
+  .ov-dash-kpis{grid-template-columns:1fr;}
+  .nurture-email{grid-template-columns:auto 1fr;gap:14px;}
+  .nurture-icon{display:none;}
   .wrap{padding:0 16px;}
 }
 `;
@@ -589,8 +676,8 @@ export default function Overview() {
             {n:"01",e:"🎯",t:"We learn your offer",d:"Discovery call: your jurisdiction, programme, client profile, what a qualified lead looks like.",tag:"Onboarding"},
             {n:"02",e:"👤",t:"We define your ICP",d:"We build an Ideal Client Profile — capital range, geography, motivation, timeline.",tag:"Strategy"},
             {n:"03",e:"🎬",t:"We run video ads",d:"Sponsored video on Meta, Instagram, LinkedIn and YouTube targeting your exact ICP.",tag:"Acquisition"},
-            {n:"04",e:"📅",t:"We host a webinar",d:"Prospects register for a mini-webinar on global mobility. Full UTM attribution captured.",tag:"Registration"},
-            {n:"05",e:"📋",t:"We run the survey",d:"Every registrant completes the 14-question Global Mobility Survey before joining.",tag:"Qualification"},
+            {n:"04",e:"📋",t:"We run the survey",d:"Prospects complete the 14-question Global Mobility Survey. Full UTM attribution captured.",tag:"Qualification"},
+            {n:"05",e:"📅",t:"We invite to webinar",d:"Qualified respondents register for a mini-webinar on global mobility for their jurisdiction.",tag:"Registration"},
             {n:"06",e:"📊",t:"We score & verify",d:"Each response is scored 0–100. Score 40+ leads go through intent verification.",tag:"Scoring"},
             {n:"07",e:"📥",t:"Leads in your dashboard",d:"Matched, scored, verified leads with full Advisor Brief — ready for contact.",tag:"Delivery"},
           ].map((s,i)=>(
@@ -605,66 +692,45 @@ export default function Overview() {
           ))}
         </div>
 
-        {/* ADVISOR BRIEF ANATOMY */}
+        {/* DASHBOARD TEMPLATE */}
         <div className="advisor-grid">
           <Reveal delay={80}>
             <div className="eyebrow" style={{marginBottom:12}}><span className="eyebrow-line"/>What you receive</div>
-            <h2 className="sh2" style={{fontSize:"clamp(28px,3.6vw,48px)"}}>Anatomy of a HOT-tier<br/><span className="hl">Advisor Brief</span></h2>
+            <h2 className="sh2" style={{fontSize:"clamp(28px,3.6vw,48px)"}}>Your live<br/><span className="hl">lead dashboard.</span></h2>
 
-            <div className="advisor-card">
-              {/* Header */}
-              <div className="ac-header">
-                <div className="ac-header-left">
-                  <div className="ac-hot-badge">
-                    <span className="ac-hot-dot"/>HOT
-                  </div>
-                  <div className="ac-score-tag">Score 87/100</div>
-                </div>
-                <div className="ac-time">12 min ago</div>
+            <div className="ov-dash-card">
+              <div className="ov-dash-top">
+                <div className="ov-dash-label">Your Partner Setup</div>
+                <div className="ov-dash-live"><span className="ov-dash-live-dot"/>Live feed active</div>
               </div>
-              <div className="ac-divider"/>
-
-              {/* Profile */}
-              <div className="ac-profile">
-                <div className="ac-avatar">JM</div>
-                <div>
-                  <div className="ac-name">J. Marchetti</div>
-                  <div className="ac-role">Founder · 🇮🇹 Milan, Italy</div>
-                </div>
+              <div className="ov-dash-jur">
+                <div className="ov-dash-jur-label">Primary Jurisdiction</div>
+                <div className="ov-dash-jur-val">Malta MEIN · St. Kitts CBI</div>
               </div>
-
-              {/* Fields grid */}
-              <div className="ac-fields">
-                {[
-                  {l:"INCOME",v:"$2M – $5M / yr"},
-                  {l:"TIMELINE",v:"Within 60 days"},
-                  {l:"FAMILY",v:"Spouse + 2 kids"},
-                  {l:"PROGRAMME",v:"St. Kitts CBI"},
-                ].map((f,i)=>(
-                  <div key={i} className="ac-field">
-                    <div className="ac-field-label">{f.l}</div>
-                    <div className="ac-field-val">{f.v}</div>
+              <div className="ov-dash-kpis">
+                {[{n:"24",l:"Leads this month",c:"var(--black)"},{n:"9",l:"HOT tier",c:"var(--hot-color)"},{n:"18",l:"Credits left",c:"var(--black)"}].map((k,i)=>(
+                  <div key={i} className="ov-dash-kpi">
+                    <div className="ov-dash-kpi-num" style={{color:k.c}}>{k.n}</div>
+                    <div className="ov-dash-kpi-lbl">{k.l}</div>
                   </div>
                 ))}
               </div>
-
-              {/* Quote */}
-              <div className="ac-quote">
-                <div className="ac-quote-label">PROSPECT'S OWN WORDS</div>
-                <div className="ac-quote-text">"We've been planning this for two years. The Italian tax situation is becoming impossible. We have $400k ready to deploy and we want our second passport before the kids start international school in September."</div>
-              </div>
-
-              {/* Actions */}
-              <div className="ac-actions">
-                <button className="ac-unlock">☎ Unlock contact (1 credit)</button>
-                <button className="ac-save">🔖 Save</button>
+              <div className="ov-dash-leads">
+                {[{av:"JM",bg:"#D94F3A",n:"J. Marchetti",s:87,tag:"New"},{av:"DH",bg:"#059669",n:"D. Harrison",s:73},{av:"ED",bg:"#C07D10",n:"E. Dubois",s:52}].map((l,i)=>(
+                  <div key={i} className="ov-dash-lead">
+                    <div className="ov-dash-av" style={{background:l.bg}}>{l.av}</div>
+                    <div className="ov-dash-name">{l.n}</div>
+                    <div className="ov-dash-score">{l.s}</div>
+                    {l.tag&&<div className="ov-dash-new">{l.tag}</div>}
+                  </div>
+                ))}
               </div>
             </div>
           </Reveal>
 
           <Reveal delay={180}>
             <div className="advisor-text">
-              <h3 className="advisor-text-h">Every field captured before the lead touches your dashboard.</h3>
+              <h3 className="advisor-text-h">Every lead lands scored, matched, and ready to contact.</h3>
               <p className="advisor-text-p"><strong>Score &amp; tier</strong> tells you priority. <strong>Prospect's own words</strong> tells you what to lead with. <strong>Profile context</strong> gives you the rest.</p>
               <div className="advisor-callout">
                 The shift: instead of qualifying 100 leads to find 5 worth pursuing, you receive 15 — and 12 are worth pursuing on day one.
@@ -687,6 +753,140 @@ export default function Overview() {
               </div>
             </div>
           </Reveal>
+        </div>
+      </div>
+    </section>
+
+    {/* HOW WE GET LEADS */}
+    <section style={{padding:"96px 0",background:"var(--off)",borderBottom:"1px solid var(--border)"}}>
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>Acquisition</div>
+          <h2 className="sh2">How we get your leads.</h2>
+          <p className="sp">We run paid campaigns across the platforms where high-net-worth prospects actually spend time — then filter for real intent. No cold lists, no scraped data. Every lead opts in.</p>
+        </Reveal>
+
+        <div className="acq-channels">
+          {[
+            {icon:"📱",name:"Meta Ads",desc:"Facebook & Instagram video campaigns targeting by geography, income, interests, and behavior."},
+            {icon:"🟠",name:"Reddit",desc:"Native placements in expat, investing, and relocation communities where research happens."},
+            {icon:"🏡",name:"Nextdoor",desc:"Hyper-local targeting of affluent neighborhoods — homeowners with real assets and mobility intent."},
+            {icon:"🎥",name:"YouTube",desc:"Pre-roll and in-feed video ads reaching prospects actively researching global mobility."},
+          ].map((c,i)=>(
+            <Reveal key={i} delay={i*60} className="acq-channel">
+              <div className="acq-icon">{c.icon}</div>
+              <div className="acq-name">{c.name}</div>
+              <div className="acq-desc">{c.desc}</div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* PERSONA */}
+        <Reveal delay={120}>
+          <div className="persona-card">
+            <div className="persona-left">
+              <div className="persona-eyebrow">Example · US Market</div>
+              <div className="persona-title">We target the exact person likely to invest.</div>
+              <div className="persona-sub">For the US outbound market, that's an established homeowner with the assets and motivation to build a Plan B. We tune targeting to each jurisdiction and programme.</div>
+            </div>
+            <div className="persona-attrs">
+              {[
+                {l:"Age",v:"40+ years old"},
+                {l:"Status",v:"Homeowner"},
+                {l:"Household income",v:"~$200K / year"},
+                {l:"Intent",v:"Second passport / residency"},
+              ].map((a,i)=>(
+                <div key={i} className="persona-attr">
+                  <div className="persona-attr-label">{a.l}</div>
+                  <div className="persona-attr-val">{a.v}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+
+    {/* VIDEO SAMPLES */}
+    <section style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>Creative</div>
+          <h2 className="sh2">The ads that bring them in.</h2>
+          <p className="sp">Every campaign moves the prospect through three stages — grab attention, build awareness, deliver the message. Here's what that looks like in the field.</p>
+        </Reveal>
+
+        <div className="video-grid">
+          {[
+            {thumb:"https://image.mux.com/HdV3fbnsBxGTqGhs02xBL023Njuo01CKTPfLOMCvj02kMTE/thumbnail.jpg?time=1&width=400&height=710&fit_mode=smartcrop",stage:"Stage 1",title:"Grab attention",desc:"Scroll-stopping hook in the first 3 seconds — a bold claim or question that speaks to mobility intent.",badge:"Attention"},
+            {thumb:"https://image.mux.com/xmy7Hfmwhjbcrio25900J1OhXVGldoZce02OKpoOINOqM/thumbnail.jpg?time=1&width=400&height=710&fit_mode=smartcrop",stage:"Stage 2",title:"Build awareness",desc:"Educate on the opportunity — why now, which programmes, what's changed. Positions the summit as the answer.",badge:"Awareness"},
+            {thumb:"https://image.mux.com/ZCDG5qNaC02GoEiuaq6oFVUu7mXOyGJgXYrVFwQZPY2k/thumbnail.jpg?time=1&width=400&height=710&fit_mode=smartcrop",stage:"Stage 3",title:"Deliver the message",desc:"Clear call to action — register, take the survey, get your mobility score. Drives the qualified opt-in.",badge:"Conversion"},
+          ].map((v,i)=>(
+            <Reveal key={i} delay={i*80} className="video-card">
+              <div className="video-thumb">
+                <img src={v.thumb} alt={v.title} loading="lazy"/>
+                <div className="video-badge">{v.badge}</div>
+                <div className="video-play">▶</div>
+              </div>
+              <div className="video-info">
+                <div className="video-stage">{v.stage}</div>
+                <div className="video-title">{v.title}</div>
+                <div className="video-desc">{v.desc}</div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* EMAIL NURTURE */}
+    <section style={{padding:"96px 0",background:"var(--off)",borderBottom:"1px solid var(--border)"}}>
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>Nurture</div>
+          <h2 className="sh2">We warm them up<br/><span className="hl">before you ever call.</span></h2>
+          <p className="sp">Every lead enters an automated email sequence that educates, builds trust, and filters intent. By the time a prospect reaches your dashboard as HOT, they've already engaged multiple times.</p>
+        </Reveal>
+
+        <div className="nurture-flow">
+          {[
+            {d:"0",subj:"Your Global Mobility Score is ready",prev:"Instant delivery after survey — their personalized readiness score + what it means."},
+            {d:"2",subj:"The 3 most common mistakes at this stage",prev:"Positions the advisor relationship as essential. Builds problem awareness."},
+            {d:"5",subj:"Portugal vs Malta vs Caribbean — honest comparison",prev:"Educational content that deepens intent and surfaces jurisdiction preference."},
+            {d:"8",subj:"Questions to ask before you choose an advisor",prev:"Primes them for the partner conversation — filters serious from casual."},
+            {d:"11",subj:"Ready to speak with a specialist?",prev:"Direct CTA. Clicks here flag the lead HOT and route to the partner dashboard."},
+          ].map((e,i)=>(
+            <Reveal key={i} delay={i*50} className="nurture-email">
+              <div className="nurture-day">
+                <div className="nurture-day-num">{e.d}</div>
+                <div className="nurture-day-lbl">Day</div>
+              </div>
+              <div>
+                <div className="nurture-subj">{e.subj}</div>
+                <div className="nurture-prev">{e.prev}</div>
+              </div>
+              <div className="nurture-icon">✉</div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* VERIFY INTENT / DEMO */}
+    <section className="demo-section" style={{padding:"110px 0"}}>
+      <div className="demo-glow"/>
+      <div className="wrap">
+        <div className="demo-inner">
+          <div className="demo-live-badge">
+            <span className="demo-live-dot"/>
+            <span className="demo-live-text">LIVE · RIGHT NOW</span>
+          </div>
+          <h2 className="demo-h">See the Intelligence Platform <span className="demo-h-accent">in action.</span></h2>
+          <p className="demo-sub">Leave your details. Our platform demo connects within 30 seconds and walks you through exactly how we qualify and deliver leads to partner firms.</p>
+          <a href="https://platform.fsummit.net/demo" className="demo-btn" target="_blank" rel="noopener noreferrer">
+            Verify Intent — Try the Live Demo →
+          </a>
+          <div className="demo-note">Real-time qualification call · connects in ~30 seconds</div>
         </div>
       </div>
     </section>
