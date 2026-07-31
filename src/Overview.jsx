@@ -923,9 +923,9 @@ export default function Overview() {
       <div className="wrap">
         <div className="ai-compact">
           <Reveal className="ai-compact-left">
-            <div className="eyebrow lime"><span className="eyebrow-line"/>The Quality Layer</div>
-            <h2 className="ai-compact-h"><span className="hl">AI sorts.</span> Your expert closes.</h2>
-            <p className="ai-compact-p">The product is <strong>exclusive qualified leads</strong>. The AI qualification layer is the reason they're qualified — it scores, verifies, and filters intent so your advisors spend time only on prospects worth closing. Not an AI funnel you operate. A quality layer that proves every lead.</p>
+            <div className="eyebrow lime"><span className="eyebrow-line"/>AI Qualification Layer</div>
+            <h2 className="ai-compact-h">We build an <span className="hl">AI-Enabled Funnel.</span><br/>AI sorts, your expert closes.</h2>
+            <p className="ai-compact-p">The product is <strong>exclusive qualified leads</strong>. The AI qualification layer is the reason they're qualified — it scores, verifies, and filters intent so your advisors spend time only on prospects worth closing. You don't operate the funnel. The AI proves every lead before it reaches you.</p>
             <div className="ai-compact-stats">
               {[{n:"6",l:"scoring dimensions"},{n:"92%",l:"verification rate"},{n:"0",l:"unqualified leads"}].map((s,i)=>(
                 <div key={i} className="ai-compact-stat">
