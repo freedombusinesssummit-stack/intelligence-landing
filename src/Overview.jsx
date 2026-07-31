@@ -529,6 +529,39 @@ section[id]{scroll-margin-top:78px;}
 .st-contacted{color:var(--muted);}.st-contacted::before{content:'✓';margin-right:2px;}
 .st-reached{background:#E8F5E0;color:#2A6A1A;border:1px solid #B8DFA8;}
 
+/* ═══ AI QUALIFICATION LAYER ═══ */
+.ai-section{padding:110px 0;background:linear-gradient(160deg,#0A0A0A,#0F1A08);position:relative;overflow:hidden;border-bottom:1px solid #1a1a1a;}
+.ai-glow{position:absolute;top:-20%;right:-5%;width:50%;height:140%;background:radial-gradient(ellipse,rgba(170,255,69,0.12),transparent 60%);filter:blur(60px);pointer-events:none;}
+.ai-inner{position:relative;z-index:2;}
+.ai-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(170,255,69,0.7);margin-bottom:18px;}
+.ai-eyebrow-line{width:24px;height:1px;background:rgba(170,255,69,0.5);}
+.ai-formula{font-size:clamp(32px,5vw,58px);font-weight:900;letter-spacing:-0.04em;line-height:1.05;color:#fff;margin-bottom:20px;}
+.ai-formula .ai-sorts{color:var(--lime);}
+.ai-formula .ai-closes{color:rgba(255,255,255,0.55);}
+.ai-lead{font-size:18px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:640px;margin-bottom:12px;}
+.ai-lead strong{color:#fff;font-weight:700;}
+.ai-clarify{font-size:15px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:640px;margin-bottom:48px;}
+.ai-clarify strong{color:var(--lime);font-weight:600;}
+.ai-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;}
+.ai-col{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:32px 30px;}
+.ai-col-ai{border-color:rgba(170,255,69,0.25);}
+.ai-col-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.ai-col-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.ai-col-ai .ai-col-icon{background:var(--lime);color:var(--black);}
+.ai-col-human .ai-col-icon{background:rgba(255,255,255,0.1);}
+.ai-col-label{font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:2px;}
+.ai-col-title{font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.02em;}
+.ai-col-list{display:flex;flex-direction:column;gap:12px;}
+.ai-col-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,0.7);line-height:1.5;}
+.ai-col-check{width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;margin-top:1px;}
+.ai-col-ai .ai-col-check{background:rgba(170,255,69,0.15);color:var(--lime);}
+.ai-col-human .ai-col-check{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);}
+.ai-proof-bar{display:flex;align-items:center;gap:0;margin-top:24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:24px 32px;}
+.ai-proof-stat{flex:1;padding-right:28px;margin-right:28px;border-right:1px solid rgba(255,255,255,0.08);}
+.ai-proof-stat:last-child{border-right:none;padding-right:0;margin-right:0;}
+.ai-proof-num{font-size:28px;font-weight:900;color:var(--lime);letter-spacing:-0.03em;line-height:1;margin-bottom:4px;}
+.ai-proof-lbl{font-size:12px;color:rgba(255,255,255,0.45);}
+
 /* ═══ INBOUND / OUTBOUND ═══ */
 .io-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;}
 .io-card{border-radius:20px;padding:40px 36px;display:flex;flex-direction:column;gap:0;}
@@ -650,6 +683,9 @@ section[id]{scroll-margin-top:78px;}
   .ovdash-kpi-row{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
+  .ai-split{grid-template-columns:1fr;}
+  .ai-proof-bar{flex-direction:column;align-items:flex-start;gap:16px;}
+  .ai-proof-stat{border-right:none;padding-right:0;margin-right:0;}
   .nav-right .nav-link{display:none;}
   /* Hero stats: 2x2 grid */
   .stats-strip{display:grid;grid-template-columns:1fr 1fr;gap:0;}
@@ -742,6 +778,7 @@ export default function Overview() {
           <a href="#acquisition" className="nav-link">Acquisition</a>
           <a href="#nurture" className="nav-link">Nurture</a>
           <a href="#scoring" className="nav-link">Scoring</a>
+          <a href="#ai" className="nav-link">AI Layer</a>
           <a href="#demo" className="nav-link">Demo</a>
           <a href="/#apply" className="nav-btn">Apply</a>
         </div>
@@ -758,7 +795,7 @@ export default function Overview() {
         <div className="hero-sub fade-up d2">Built for your firm. Your jurisdiction. Your ICP.</div>
         <p className="hero-desc fade-up d3">FBS Intelligence builds and runs a complete lead acquisition funnel for each partner — from video ads to survey to scoring to verified intent. You receive leads who are ready to talk.</p>
         <div className="stats-strip" ref={statsRef}>
-          {[{n:5,s:"",l:"Steps from ad\nto dashboard"},{n:14,s:" Q",l:"Survey questions\nper lead"},{n:92,s:"%",l:"Verification\ncompletion rate"},{n:72,s:"h",l:"Survey to\ndashboard"}].map((s,i)=>(
+          {[{n:7,s:"",l:"Steps from ad\nto dashboard"},{n:14,s:" Q",l:"Survey questions\nper lead"},{n:92,s:"%",l:"Verification\ncompletion rate"},{n:72,s:"h",l:"Survey to\ndashboard"}].map((s,i)=>(
             <div key={i} className="stat-item">
               <div className="stat-num"><AnimNum target={s.n} inView={statsInView} suffix={s.s}/></div>
               <div className="stat-label" style={{whiteSpace:"pre-line"}}>{s.l}</div>
@@ -1068,7 +1105,7 @@ export default function Overview() {
         <Reveal>
           <div className="eyebrow lime"><span className="eyebrow-line"/>The 5-Step Formula</div>
           <h2 className="sh2">From ad impression to<br/><span className="hl">qualified lead in dashboard.</span></h2>
-          <p className="sp">Five steps, all managed by FBS Intelligence. Each step filters, qualifies, and enriches — so only serious prospects matched to your jurisdiction reach your firm.</p>
+          <p className="sp">Seven steps, all managed by FBS Intelligence. Each step filters, qualifies, and enriches — so only serious prospects matched to your jurisdiction reach your firm.</p>
         </Reveal>
 
         <div className="formula-pipeline">
@@ -1192,6 +1229,81 @@ export default function Overview() {
             </Reveal>
           ))}
         </div>
+      </div>
+    </section>
+
+
+    {/* ── AI QUALIFICATION LAYER ── */}
+    <section className="ai-section" id="ai">
+      <div className="ai-glow"/>
+      <div className="wrap ai-inner">
+        <Reveal>
+          <div className="ai-eyebrow"><span className="ai-eyebrow-line"/>The Quality Layer</div>
+          <h2 className="ai-formula"><span className="ai-sorts">AI sorts.</span><br/>Your <span className="ai-closes">expert closes.</span></h2>
+          <p className="ai-lead">The product is <strong>exclusive qualified leads</strong>. The AI qualification layer is the reason those leads are qualified — it scores, verifies, and filters intent at a scale no human team could match.</p>
+          <p className="ai-clarify">This isn't an "AI funnel" you have to operate. <strong>AI does the sorting so your advisors spend their time only on prospects worth closing.</strong></p>
+        </Reveal>
+
+        <Reveal delay={120}>
+          <div className="ai-split">
+            <div className="ai-col ai-col-ai">
+              <div className="ai-col-head">
+                <div className="ai-col-icon">🤖</div>
+                <div>
+                  <div className="ai-col-label">AI handles</div>
+                  <div className="ai-col-title">Sorting & verification</div>
+                </div>
+              </div>
+              <div className="ai-col-list">
+                {[
+                  "Scores every response 0–100 across 6 intent dimensions",
+                  "Verifies budget, timeline, and decision authority signals",
+                  "Filters out tire-kickers before they reach your dashboard",
+                  "Tags each lead HOT / WARM / COLD automatically",
+                  "Enriches profiles with geography, programme, and context",
+                ].map((t,j)=>(
+                  <div key={j} className="ai-col-item"><span className="ai-col-check">✓</span>{t}</div>
+                ))}
+              </div>
+            </div>
+
+            <div className="ai-col ai-col-human">
+              <div className="ai-col-head">
+                <div className="ai-col-icon">👔</div>
+                <div>
+                  <div className="ai-col-label">Your expert handles</div>
+                  <div className="ai-col-title">The conversation & the close</div>
+                </div>
+              </div>
+              <div className="ai-col-list">
+                {[
+                  "Reviews the Advisor Brief — score, timeline, own words",
+                  "Reaches out to pre-qualified, warmed prospects only",
+                  "Leads with the prospect's stated motivation",
+                  "Builds the relationship AI can't — trust and judgment",
+                  "Closes the deal with full context from the first call",
+                ].map((t,j)=>(
+                  <div key={j} className="ai-col-item"><span className="ai-col-check">→</span>{t}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={200}>
+          <div className="ai-proof-bar">
+            {[
+              {n:"6",l:"scoring dimensions per lead"},
+              {n:"92%",l:"intent verification completion"},
+              {n:"0",l:"unqualified leads in your feed"},
+            ].map((s,i)=>(
+              <div key={i} className="ai-proof-stat">
+                <div className="ai-proof-num">{s.n}</div>
+                <div className="ai-proof-lbl">{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
 
