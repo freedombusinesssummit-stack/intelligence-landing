@@ -722,7 +722,36 @@ section[id]{scroll-margin-top:78px;}
   .demo-btn{width:100%;justify-content:center;}
   .wrap{padding:0 16px;}
 }
+
+/* ═══ FAQ ═══ */
+.ov-faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px;}
+.ov-faq-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:28px 24px;transition:all 0.2s;}
+.ov-faq-card:hover{border-color:var(--black);transform:translateY(-2px);}
+.ov-faq-card h4{font-size:15px;font-weight:700;color:var(--black);margin-bottom:10px;line-height:1.35;}
+.ov-faq-card p{font-size:13px;color:var(--text2);line-height:1.7;}
+@media(max-width:1024px){.ov-faq-grid{grid-template-columns:1fr;}}
 `;
+
+const FAQ = [
+  {q:"How is FBS Intelligence different from a lead-generation agency or an industry event?",a:"FBS Intelligence combines a dedicated acquisition funnel, educational content, intent-based qualification, and a partner dashboard built specifically for investment migration and global mobility. The objective is not simply to generate registrations, but to identify prospects whose jurisdiction, budget, timeline, and objectives match your offer."},
+  {q:"Where do the prospects come from?",a:"Each campaign uses a dedicated funnel built around a defined jurisdiction, program, or client profile. Prospects enter through targeted campaigns and educational content, then complete a structured qualification journey before appearing in the partner dashboard."},
+  {q:"What does “pre-qualified” mean?",a:"Qualification is based on declared intent and fit signals such as current location, nationality, investment range, preferred jurisdiction, relocation objective, family situation, and expected timeline. Depending on the campaign, contact details and intent can also be verified through a follow-up call."},
+  {q:"Are the prospects exclusive to our firm?",a:"Campaign structure and exclusivity are agreed before launch. A dedicated funnel can be built for one firm and one focused offer, so the partner knows exactly how prospects are sourced and whether they are shared."},
+  {q:"What information do we receive about each prospect?",a:"Partner profiles can include verified contact details, location, nationality, professional background, budget or capital range, jurisdiction interest, relocation timeline, family situation, and qualification score. The exact fields depend on the campaign and applicable consent requirements."},
+  {q:"Do we own the data?",a:"The partner receives the campaign leads and can export the relevant data for use in its own sales process, subject to the agreed campaign terms and consent framework. Ownership, access, and retention should be confirmed clearly before launch."},
+  {q:"Does FBS Intelligence replace our CRM?",a:"No. The dashboard is designed for lead visibility, filtering, and qualification. Qualified records can be exported into the partner’s existing CRM and follow-up workflow."},
+  {q:"Can FBS Intelligence integrate with our existing sales process?",a:"Yes. The funnel and qualification criteria are defined around the partner’s programs, target markets, and internal process. The delivery workflow can then be aligned with the CRM and the people responsible for follow-up."},
+  {q:"Is qualification automated or human-led?",a:"It can be adapted to the offer. Automation can help verify information and prioritize demand, while high-ticket or complex programs may require a more personal, human-led follow-up. The right model depends on the program and the partner’s client experience."},
+  {q:"What does FBS Intelligence manage?",a:"The engagement can cover funnel strategy, landing and registration pages, qualification survey, email sequences, webinar or educational content support, campaign setup, advertising coordination, and partner dashboard onboarding. The final scope is agreed before work begins."},
+  {q:"What do you need from our team?",a:"The strongest campaigns start with one focused offer. Partners typically provide program expertise, accurate service information, a spokesperson or subject-matter expert, brand assets, and a team member responsible for prompt lead follow-up."},
+  {q:"How quickly can we launch?",a:"A typical campaign requires a setup period for positioning, content, funnel production, qualification logic, and campaign preparation. The schedule depends on the partner’s readiness and approval speed, so the launch plan is confirmed during onboarding."},
+  {q:"What results should we expect?",a:"Results depend on the jurisdiction, audience, offer, media budget, content, and speed of follow-up. Before launch, FBS Intelligence should agree campaign targets and reporting metrics with the partner rather than promise a fixed number of signed clients."},
+  {q:"How much sales capacity do we need?",a:"At minimum, a partner needs a clearly assigned person or team that can respond quickly, qualify further when necessary, and maintain consistent follow-up. For a boutique firm, a smaller campaign or pilot may be more appropriate than generating more demand than the team can handle."},
+  {q:"Can we start with one jurisdiction or a pilot?",a:"Yes. Starting with one defined program, jurisdiction, or audience creates a cleaner message and makes lead quality and conversion easier to measure before expanding."},
+  {q:"How is pricing structured?",a:"Pricing should separate the initial funnel and campaign setup, ongoing management, and the media budget paid for distribution. The final proposal depends on the qualification method, campaign scope, webinar cadence, and level of support required."},
+  {q:"What happens if we stop working together?",a:"The agreement should state which lead data and campaign assets the partner keeps, which hosted services require an active subscription, and how records can be exported before access ends."},
+  {q:"Why should we choose FBS Intelligence?",a:"FBS Intelligence is built specifically for citizenship, residency, and global-mobility providers. It connects campaign acquisition with structured intent data, so firms can focus on prospects matched to their jurisdiction and ready for a relevant follow-up conversation."},
+];
 
 const GMS_DIMS = [
   {n:"01",h:"Budget confirmation",p:"Deployable capital, not aspiration.",w:20},
@@ -1396,6 +1425,24 @@ export default function Overview() {
       </div>
     </section>
 
+
+    {/* ── FAQ ── */}
+    <section style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>FAQ</div>
+          <h2 className="sh2">Questions firms ask<br/><span className="hl">before joining FBS Intelligence.</span></h2>
+        </Reveal>
+        <div className="ov-faq-grid">
+          {FAQ.map((f,i)=>(
+            <Reveal key={i} delay={(i%2)*60} className="ov-faq-card">
+              <h4>{f.q}</h4>
+              <p dangerouslySetInnerHTML={{__html:f.a}}/>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
 
     {/* BOTTOM CTA */}
     <section className="bottom-cta">
