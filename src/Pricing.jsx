@@ -769,19 +769,18 @@ export default function PricingPage() {
           The partner owns the data. We just build the infrastructure.
         </h2>
         <p style={{fontSize:16,color:"var(--text2)",maxWidth:620,lineHeight:1.7,marginBottom:0}}>
-          Every lead, every contact detail, every account is yours. FBS builds and runs the machine that generates them — but the data, the assets, and the client relationships belong to your firm. No shared pools, no lock-in.
+          Every lead, every contact detail, every client relationship is yours. FBS builds, hosts, and runs the machine that generates them — funnel, pages, ad accounts, and infrastructure — but the lead data and the clients belong to your firm. No shared pools, no lock-in.
         </p>
 
         <div className="own-grid">
           <div className="own-card you">
             <div className="own-badge">You own</div>
-            <div className="own-title">Your data. Your assets. Your clients.</div>
+            <div className="own-title">Your data. Your leads. Your clients.</div>
             <ul className="own-list">
               {[
                 "All leads — exclusive to your firm, never resold or shared",
                 "Full contact data, survey responses & Global Mobility Scores",
-                "Your CRM, ad accounts, domain, and tracking pixels",
-                "Landing pages, creatives, and funnel assets",
+                "Your CRM — every lead syncs straight into it",
                 "Direct client relationships — you close, you retain",
                 "Full export anytime (CSV / XLSX) — zero lock-in",
               ].map((t,i)=>(
@@ -795,7 +794,8 @@ export default function PricingPage() {
             <div className="own-title">The infrastructure behind the leads.</div>
             <ul className="own-list">
               {[
-                "Lead-generation funnel + landing pages",
+                "Lead-generation funnel + landing pages — hosted on FBS",
+                "Ad accounts, domain & tracking pixels",
                 "Ad campaign setup, management & optimisation",
                 "Global Mobility Score engine + lead verification",
                 "Dashboard, CRM integration & custom webhooks",
@@ -810,7 +810,7 @@ export default function PricingPage() {
 
         <div className="own-strip">
           <span className="own-strip-icon">🔒</span>
-          <div><strong>Portable by design.</strong> Cancel anytime and you walk away with your data, your accounts, and your assets intact — nothing stays locked inside FBS.</div>
+          <div><strong>Your data is portable.</strong> Cancel anytime and your leads go with you — export every contact, score, and survey response (CSV / XLSX) whenever you want. The funnel and hosted pages stay on FBS infrastructure.</div>
         </div>
       </div>
     </section>
