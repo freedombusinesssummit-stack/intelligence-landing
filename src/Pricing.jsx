@@ -7,6 +7,7 @@ const css = `
     --black:#0A0A0A; --off:#F4F4F2; --white:#FFFFFF;
     --lime:#AAFF45; --lime2:#8EE032; --lime-soft:#E8F5DF; --lime-dark:#5A8A20;
     --muted:#6B6B6B; --border:#E5E5E5; --dark:#0F0F0F; --text:#0A0A0A; --text2:#5A5A56;
+    --hot-color:#E05A3A;
   }
   html{scroll-behavior:smooth;}
   body{background:var(--white);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
@@ -225,8 +226,36 @@ const css = `
   .success-box h3{font-size:22px;font-weight:800;color:var(--black);margin-bottom:8px;letter-spacing:-0.02em;}
   .success-box p{font-size:14px;color:var(--text2);line-height:1.6;}
 
+  /* TIMELINE TO FIRST LEAD */
+  .tl-wrapper{margin-top:48px;}
+  .tl-phases{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+  .tl-phase{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.2s;}
+  .tl-phase:hover{transform:translateY(-3px);box-shadow:0 12px 32px -8px rgba(0,0,0,0.1);}
+  .tl-phase-head{padding:20px 20px 16px;border-left:3px solid;}
+  .tl-phase-tag{font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;}
+  .tl-phase-label{font-size:16px;font-weight:800;color:var(--black);margin-bottom:4px;letter-spacing:-0.01em;}
+  .tl-phase-weeks{font-size:12px;color:var(--muted);font-weight:600;}
+  .tl-phase-body{padding:0 20px 20px;}
+  .tl-items{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+  .tl-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text2);line-height:1.45;}
+  .tl-item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+  .tl-outcome{border-left:2px solid;padding:8px 12px;font-size:12px;font-weight:700;color:var(--black);background:var(--off);border-radius:0 6px 6px 0;}
+  .tl-summary{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:28px 32px;display:flex;flex-direction:column;gap:24px;}
+  .tl-track-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+  .tl-track-bar{display:flex;height:36px;border-radius:8px;overflow:hidden;margin-bottom:8px;}
+  .tl-bar-seg{display:flex;align-items:center;justify-content:center;}
+  .tl-bar-lbl{font-size:11px;font-weight:800;letter-spacing:0.06em;}
+  .tl-track-marks{display:flex;justify-content:space-between;padding:0 2px;}
+  .tl-mark{font-size:10px;color:var(--muted);font-weight:500;}
+  .tl-summary-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding-top:24px;border-top:1px solid var(--border);}
+  .tl-stat{text-align:center;}
+  .tl-stat-val{font-size:26px;font-weight:900;color:var(--black);letter-spacing:-0.03em;line-height:1;}
+  .tl-stat-unit{font-size:14px;font-weight:500;color:var(--muted);}
+  .tl-stat-label{font-size:11px;color:var(--muted);margin-top:2px;}
+
   @media(max-width:900px){
     .plans-grid,.nurture-compare,.faq-grid{grid-template-columns:1fr;}
+    .tl-phases{grid-template-columns:1fr 1fr;}
     .compare-table{font-size:13px;}
     .compare-table th.col,.compare-table td.col{width:110px;}
     .setup-banner{flex-direction:column;}
@@ -312,14 +341,6 @@ const COMPARE_ROWS = [
   {label:"CRM integration",b:true,p:true},
   {label:"Custom webhooks",b:false,p:true},
   {label:"Onboarding",b:"Docs + email",p:"Priority + call"},
-];
-
-const EMAIL_SEQUENCE = [
-  {n:1,subj:"What your Global Mobility Score means",day:"Day 0"},
-  {n:2,subj:"The 3 most common mistakes at this stage",day:"Day 2"},
-  {n:3,subj:"Portugal vs. Malta vs. UAE — a quick breakdown",day:"Day 5"},
-  {n:4,subj:"Questions to ask your advisor (checklist)",day:"Day 8"},
-  {n:5,subj:"Ready to speak with a specialist?",day:"Day 11"},
 ];
 
 const FAQ = [
@@ -590,90 +611,101 @@ export default function PricingPage() {
       </div>
     </section>
 
-    {/* NURTURE COMPARISON */}
+    {/* TIMELINE TO FIRST LEAD */}
     <section className="nurture-section">
       <div className="wrap">
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16}}>
-          <div style={{width:24,height:1,background:"#888",opacity:0.4}}/>
-          <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"#888"}}>The key difference</div>
+          <div style={{width:24,height:1,background:"var(--lime-dark)",opacity:0.5}}/>
+          <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"var(--lime-dark)"}}>Timeline to First Lead</div>
         </div>
-        <h2 style={{fontSize:"clamp(26px,3.4vw,40px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",marginBottom:12}}>
-          Who works the audience?
+        <h2 style={{fontSize:"clamp(26px,3.4vw,40px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",marginBottom:12,lineHeight:1.1}}>
+          From signed agreement to leads in your dashboard.
         </h2>
         <p style={{fontSize:16,color:"var(--text2)",maxWidth:580,lineHeight:1.7,marginBottom:0}}>
-          Both plans deliver exclusive qualified leads. In Professional, FBS runs a warming sequence on every lead before you ever make contact — so you call someone who already knows who you are.
+          Setup takes 4–8 weeks in total. The first weeks are foundation — funnel, copy, pixels, ICP. Then we test traffic, optimise, and scale. Most partners receive their first verified leads within 6–8 weeks of signing.
         </p>
 
-        <div className="nurture-compare">
-          {/* Business flow */}
-          <div className="flow-card">
-            <div className="flow-header">
-              <div className="flow-plan-tag">Business · <span style={{textDecoration:"line-through",opacity:0.5}}>$899</span> $499/mo</div>
-              <h3>Lead delivered. You take it from here.</h3>
-              <p>Lead completes GMS survey → scored → arrives in your dashboard. Your team does the outreach.</p>
-            </div>
-            <div className="flow-steps">
-              {[
-                {icon:"📋",h:"Lead completes GMS Survey",p:"14 questions, scored 0–100 across 6 dimensions"},
-                {icon:"📊",h:"Scored & matched",p:"Tier assigned (HOT/WARM/COLD), jurisdiction matched"},
-                {icon:"📥",h:"Appears in your dashboard",p:"Full Advisor Brief visible immediately"},
-                {icon:"📞",h:"You contact the lead",p:"Cold or warm depending on your outreach process",badge:"manual",badgeTxt:"Your team"},
-              ].map((s,i)=>(
-                <div key={i} className="flow-step">
-                  <div className="flow-step-icon">{s.icon}</div>
-                  <div className="flow-step-body">
-                    <div className="flow-step-h">{s.h}</div>
-                    <div className="flow-step-p">{s.p}</div>
-                    {s.badge&&<span className={"flow-step-badge badge-"+s.badge}>{s.badgeTxt}</span>}
+        {/* Timeline visual */}
+        <div className="tl-wrapper">
+          <div className="tl-phases">
+            {[
+              {
+                phase:"Phase 1",label:"Discovery & Setup",weeks:"Weeks 1–2",color:"var(--lime)",
+                items:["Discovery call — offer, ICP, jurisdiction","Global Mobility Score framework built","Landing page + survey configured","Pixel, UTM, analytics stack connected","Onboarding documentation delivered"],
+                outcome:"Funnel ready to receive traffic"
+              },
+              {
+                phase:"Phase 2",label:"Funnel Creation",weeks:"Weeks 2–4",color:"#0A0A0A",
+                items:["Video ad scripts and creatives produced","Webinar script + slides prepared","MailerLite sequences configured","CRM integration set up","ICP targeting brief finalised"],
+                outcome:"All assets live and tested"
+              },
+              {
+                phase:"Phase 3",label:"Traffic Testing",weeks:"Weeks 4–8",color:"#4A7FC1",
+                items:["First ad campaigns launched (test budget)","A/B testing: creatives, audiences, copy","Conversion rate optimisation on survey","First webinar run — registrations collected","Initial leads scored and verified"],
+                outcome:"First qualified leads delivered"
+              },
+              {
+                phase:"Phase 4",label:"Scale",weeks:"Week 8+",color:"var(--hot-color)",
+                items:["Winning campaigns scaled","ICP persona updated from real data","Lead volume increases with budget","Monthly reporting begins","Quarterly ICP review scheduled (Professional)"],
+                outcome:"Consistent lead flow at scale"
+              },
+            ].map((ph,i)=>(
+              <div key={i} className="tl-phase">
+                <div className="tl-phase-head" style={{borderLeftColor:ph.color}}>
+                  <div className="tl-phase-tag" style={{color:ph.color}}>{ph.phase}</div>
+                  <div className="tl-phase-label">{ph.label}</div>
+                  <div className="tl-phase-weeks">{ph.weeks}</div>
+                </div>
+                <div className="tl-phase-body">
+                  <ul className="tl-items">
+                    {ph.items.map((item,j)=>(
+                      <li key={j} className="tl-item">
+                        <span className="tl-item-dot" style={{background:ph.color}}/>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="tl-outcome" style={{borderLeftColor:ph.color}}>
+                    <span className="tl-outcome-label">→</span> {ph.outcome}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
 
-          {/* Premium flow */}
-          <div className="flow-card dark">
-            <div className="flow-header">
-              <div className="flow-plan-tag">Professional · <span style={{textDecoration:"line-through",opacity:0.5}}>$1,299</span> $899/mo</div>
-              <h3>FBS warms the lead. You close it.</h3>
-              <p>FBS runs a 5-email sequence on every lead before it reaches your dashboard. You call someone who's ready.</p>
-            </div>
-            <div className="flow-steps">
-              {[
-                {icon:"📋",h:"Lead completes GMS Survey",p:"14 questions, scored 0–100 across 6 dimensions"},
-                {icon:"📧",h:"FBS email nurture begins",p:"Automated 5-email sequence over 11 days",badge:"auto",badgeTxt:"FBS managed"},
-                {icon:"✅",h:"Lead signals readiness",p:"Clicks 'I'm ready to speak with a specialist'"},
-                {icon:"📥",h:"Flagged HOT in your dashboard",p:"Lead arrives pre-warmed, expecting your call"},
-                {icon:"📞",h:"You contact a warm prospect",p:"They know who you are and why you're calling",badge:"auto",badgeTxt:"Higher conversion"},
-              ].map((s,i)=>(
-                <div key={i} className="flow-step">
-                  <div className={"flow-step-icon"+(i===1||i===2?" dark-icon":"")}>{s.icon}</div>
-                  <div className="flow-step-body">
-                    <div className="flow-step-h">{s.h}</div>
-                    <div className="flow-step-p">{s.p}</div>
-                    {s.badge&&<span className={"flow-step-badge badge-"+s.badge}>{s.badgeTxt}</span>}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Email sequence preview */}
-            <div className="email-preview">
-              <div className="email-preview-header">
-                <div className="email-preview-dots">
-                  <span style={{background:"#FF5F57"}}/><span style={{background:"#FEBC2E"}}/><span style={{background:"#28C840"}}/>
-                </div>
-                <div className="email-preview-title">FBS Nurture Sequence — 5 emails over 11 days</div>
-              </div>
-              <div className="email-seq">
-                {EMAIL_SEQUENCE.map(e=>(
-                  <div key={e.n} className="email-seq-item">
-                    <div className="email-num">{e.n}</div>
-                    <div className="email-subj">{e.subj}</div>
-                    <div className="email-day">{e.day}</div>
+          {/* Summary bar */}
+          <div className="tl-summary">
+            <div className="tl-summary-track">
+              <div className="tl-track-label">Timeline to first leads</div>
+              <div className="tl-track-bar">
+                {[
+                  {label:"Setup",w:"25%",color:"var(--lime)"},
+                  {label:"Build",w:"25%",color:"#0A0A0A"},
+                  {label:"Test",w:"25%",color:"#4A7FC1"},
+                  {label:"Scale",w:"25%",color:"var(--hot-color)"},
+                ].map((s,i)=>(
+                  <div key={i} className="tl-bar-seg" style={{width:s.w,background:s.color}}>
+                    <span className="tl-bar-lbl" style={{color:s.color==="var(--lime)"||s.color==="var(--hot-color)"?"var(--black)":"var(--white)"}}>{s.label}</span>
                   </div>
                 ))}
               </div>
+              <div className="tl-track-marks">
+                {["Week 0","Week 2","Week 4","Week 6–8","Week 8+"].map((m,i)=>(
+                  <span key={i} className="tl-mark">{m}</span>
+                ))}
+              </div>
+            </div>
+            <div className="tl-summary-stats">
+              {[
+                {val:"2–3",unit:"weeks",label:"Funnel creation"},
+                {val:"4",unit:"weeks",label:"Traffic testing"},
+                {val:"4–8",unit:"weeks",label:"Total to first lead"},
+              ].map((s,i)=>(
+                <div key={i} className="tl-stat">
+                  <div className="tl-stat-val">{s.val}<span className="tl-stat-unit"> {s.unit}</span></div>
+                  <div className="tl-stat-label">{s.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
