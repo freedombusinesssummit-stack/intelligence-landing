@@ -554,6 +554,9 @@ section[id]{scroll-margin-top:78px;}
 /* ═══ INBOUND / OUTBOUND ═══ */
 .io-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;}
 .io-grid-single{grid-template-columns:1fr;max-width:640px;}
+.io-split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.io-split-text .sh2{margin-bottom:20px;}
+.io-split-text .sp{max-width:460px;}
 .io-card{border-radius:20px;padding:40px 36px;display:flex;flex-direction:column;gap:0;}
 .io-inbound{background:var(--lime-soft);border:1px solid rgba(170,255,69,0.4);}
 .io-outbound{background:var(--black);border:1px solid #1a1a1a;}
@@ -646,6 +649,8 @@ section[id]{scroll-margin-top:78px;}
 
 @media(max-width:1024px){
   .io-grid{grid-template-columns:1fr;}
+  .io-split{grid-template-columns:1fr;gap:36px;}
+  .io-split-text .sp{max-width:580px;}
   .tl-phases{grid-template-columns:1fr 1fr;}
   .tl-summary-stats{grid-template-columns:1fr 1fr 1fr;}
   .tl-stat{text-align:center;}
@@ -1266,13 +1271,13 @@ export default function Overview() {
     {/* ── INBOUND VS OUTBOUND ── */}
     <section style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
       <div className="wrap">
-        <Reveal>
-          <div className="eyebrow lime"><span className="eyebrow-line"/>Acquisition Model</div>
-          <h2 className="sh2">We study your market first.<br/><span className="hl">Then leads come to you.</span></h2>
-          <p className="sp">Before running a single ad, we analyse your jurisdiction and firm positioning to build the right inbound funnel — one that attracts investors already searching for your programme.</p>
-        </Reveal>
+        <div className="io-split">
+          <Reveal className="io-split-text">
+            <div className="eyebrow lime"><span className="eyebrow-line"/>Acquisition Model</div>
+            <h2 className="sh2">We study your market first.<br/><span className="hl">Then leads come to you.</span></h2>
+            <p className="sp">Before running a single ad, we analyse your jurisdiction and firm positioning to build the right inbound funnel — one that attracts investors already searching for your programme.</p>
+          </Reveal>
 
-        <div className="io-grid io-grid-single">
           <Reveal delay={80} className="io-card io-inbound">
             <div className="io-badge io-badge-in">Inbound</div>
             <h3 className="io-title">Leads come to you.</h3>
