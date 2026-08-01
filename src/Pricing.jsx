@@ -112,6 +112,8 @@ const css = `
   .plan-card.premium .plan-hr{border-color:rgba(255,255,255,0.1);}
   .features-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
   .plan-card.premium .features-label{color:rgba(255,255,255,0.35);}
+  .features-plus{font-size:13px;font-weight:800;color:var(--lime-dark);margin-bottom:14px;margin-top:-4px;letter-spacing:-0.01em;}
+  .plan-card.premium .features-plus{color:var(--lime);}
   .features-list{list-style:none;display:flex;flex-direction:column;gap:12px;flex:1;}
   .fi-row{display:flex;align-items:flex-start;gap:11px;font-size:13px;line-height:1.5;color:var(--text);}
   .plan-card.premium .fi-row{color:rgba(255,255,255,0.82);}
@@ -248,44 +250,44 @@ const PLANS = [
     id:"business", isPremium:false,
     badge:"Business", bc:"pb-b",
     name:"Business",
-    tagline:"Monthly lead delivery to your dashboard. FBS runs the funnel — your team handles all outreach, nurture, and conversion. Pay per month, cancel anytime after the minimum term.",
+    tagline:"Monthly lead campaign management and leads delivery to your dashboard. FBS runs the funnel — your team handles outreach, nurture, and conversion.",
     price:899, foundingPrice:499,
     priceNote:"/ month · monthly management fee",
     ctaCls:"cta-b", ctaText:"Get Started",
     features:[
       {t:"Exclusive leads matched to your jurisdiction",y:true},
       {t:"Global Mobility Score + full breakdown per lead",y:true},
+      {t:"Basic AI scoring + verification",y:true},
       {t:"Advisor Brief before first contact",y:true},
-      {t:"Basic reporting: tier split, timeline, capital",y:true},
-      {t:"CRM integration (HubSpot, Pipedrive, Salesforce)",y:true},
+      {t:"Ad campaign management",y:true},
+      {t:"1 traffic source (Meta, Reddit, etc.)",y:true},
+      {t:"CRM integration + lead export",y:true},
       {t:"Dashboard access + onboarding docs",y:true},
-      {t:"FBS-managed email nurture sequence",y:false},
-      {t:"Lead warming before partner contact",y:false},
-      {t:"Full audience intelligence + ICP persona",y:false},
-      {t:"Monthly performance report",y:false},
-      {t:"Quarterly ICP review call",y:false},
+      {t:"Basic reporting: tier split, timeline, capital",y:true},
     ]
   },
   {
     id:"premium", isPremium:true,
     badge:"Most Popular", bc:"pb-p",
-    name:"Premium",
-    tagline:"Everything in Business, plus FBS actively warms your leads with email sequences before you make first contact. By the time you call — they already know who you are.",
+    name:"Professional",
+    tagline:"Everything in Business, plus an AI engine that scores, warms, and calls your leads — they arrive conversation-ready.",
     price:1299, foundingPrice:899,
     priceNote:"/ month · monthly management fee",
     ctaCls:"cta-p", ctaText:"Get Started",
+    plusIntro:"Everything in Business, plus:",
     features:[
-      {t:"Exclusive leads matched to your jurisdiction",y:true},
-      {t:"Global Mobility Score + full breakdown per lead",y:true},
-      {t:"Advisor Brief before first contact",y:true},
-      {t:"FBS-managed 5-email nurture sequence per lead",y:true},
-      {t:"Lead warming — arrives ready to talk",y:true},
-      {t:"Full audience intelligence layer",y:true},
+      {t:"AI Voice Caller — records, transcribes + auto-summarizes to CRM",y:true},
+      {t:"AI Intelligence — live audience + intent layer",y:true},
       {t:"Auto-updated ICP persona (deepens with volume)",y:true},
-      {t:"CRM integration + custom webhooks",y:true},
+      {t:"Up to 3 traffic sources + retargeting",y:true},
+      {t:"FBS-managed nurture (email / SMS / WhatsApp)",y:true},
+      {t:"Lead warming — leads arrive ready to talk",y:true},
+      {t:"Real-time exclusive leads",y:true},
+      {t:"Lead replacement guarantee (quality SLA)",y:true},
+      {t:"Two-way CRM sync + custom webhooks",y:true},
       {t:"Monthly performance + attribution report",y:true},
-      {t:"Quarterly ICP review call",y:true},
-      {t:"Priority onboarding",y:true},
+      {t:"Quarterly ICP review call + dedicated strategist",y:true},
+      {t:"Priority onboarding + support",y:true},
     ]
   }
 ];
@@ -326,7 +328,7 @@ const FAQ = [
   {q:"Is there a cost — during pilot and after launch?",a:"Yes. There's a one-time setup fee to build your funnel, and you cover your own media budget for the ads. After that, we deliver qualified leads to you on a monthly subscription. Simple."},
   {q:"What is the commercial model?",a:"Three parts: a <strong>one-time setup fee</strong> to build and launch your funnel, your own <strong>media budget</strong> paid straight to the ad platforms, and a <strong>monthly subscription</strong> where we deliver qualified leads to your dashboard. That's it."},
   {q:"Do you have a brochure or written material?",a:"Yes. The <a href='/overview' style='color:var(--lime-dark);text-decoration:none;font-weight:600;'>Overview page</a> shows you exactly how the funnel works, step by step. This page breaks down what's in the setup and how the rollout goes. And on the call, we'll show you a plan built for your specific market."},
-  {q:"What's the difference between Business and Premium?",a:"Business puts leads in your dashboard — your team does the follow-up. Premium does the follow-up for you: we send every lead a <strong>5-email warm-up sequence</strong> first. So by the time you call, they already know who you are and they're ready to talk."},
+  {q:"What's the difference between Business and Professional?",a:"Business puts leads in your dashboard — your team does the follow-up. Professional does the follow-up for you: an AI engine scores, warms, and calls every lead first. So by the time you speak with them, they already know who you are and they're ready to talk."},
   {q:"Are leads exclusive to my firm?",a:"100% yes. Nobody else in your jurisdiction gets your leads. This isn't a shared pool. Leads matched to your jurisdiction and offer come only to you."},
   {q:"What about ad spend?",a:"You pay for the ads directly — straight to the platforms. We build and manage the campaigns, but the media budget is yours to control. We'll help you figure out the right number during onboarding."},
   {q:"How fast do I receive first leads?",a:"Give it 4–8 weeks. We build the funnel, test the traffic, then go live. Your first webinar and first real leads usually land 6–8 weeks after you sign — and that first webinar is covered by the setup fee."},
@@ -573,6 +575,7 @@ export default function PricingPage() {
               <button className={"plan-cta "+plan.ctaCls} onClick={()=>setModal(plan)}>{plan.ctaText}</button>
               <hr className="plan-hr"/>
               <div className="features-label">What's included</div>
+              {plan.plusIntro&&<div className="features-plus">{plan.plusIntro}</div>}
               <ul className="features-list">
                 {plan.features.map((f,i)=>(
                   <li key={i} className="fi-row">
@@ -598,7 +601,7 @@ export default function PricingPage() {
           Who works the audience?
         </h2>
         <p style={{fontSize:16,color:"var(--text2)",maxWidth:580,lineHeight:1.7,marginBottom:0}}>
-          Both plans deliver exclusive qualified leads. In Premium, FBS runs a warming sequence on every lead before you ever make contact — so you call someone who already knows who you are.
+          Both plans deliver exclusive qualified leads. In Professional, FBS runs a warming sequence on every lead before you ever make contact — so you call someone who already knows who you are.
         </p>
 
         <div className="nurture-compare">
@@ -631,7 +634,7 @@ export default function PricingPage() {
           {/* Premium flow */}
           <div className="flow-card dark">
             <div className="flow-header">
-              <div className="flow-plan-tag">Premium · <span style={{textDecoration:"line-through",opacity:0.5}}>$1,299</span> $899/mo</div>
+              <div className="flow-plan-tag">Professional · <span style={{textDecoration:"line-through",opacity:0.5}}>$1,299</span> $899/mo</div>
               <h3>FBS warms the lead. You close it.</h3>
               <p>FBS runs a 5-email sequence on every lead before it reaches your dashboard. You call someone who's ready.</p>
             </div>
@@ -690,7 +693,7 @@ export default function PricingPage() {
             <tr>
               <th style={{width:"55%"}}>Feature</th>
               <th className="col">Business<br/><span style={{fontSize:12,fontWeight:500,color:"var(--muted)"}}>$899/mo</span></th>
-              <th className="col hi">Premium<br/><span style={{fontSize:12,fontWeight:700,color:"var(--lime-dark)"}}>$1,299/mo</span></th>
+              <th className="col hi">Professional<br/><span style={{fontSize:12,fontWeight:700,color:"var(--lime-dark)"}}>$1,299/mo</span></th>
             </tr>
           </thead>
           <tbody>
