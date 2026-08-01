@@ -168,21 +168,47 @@ const css = `
   .email-subj{font-size:12px;color:rgba(255,255,255,0.6);}
   .email-day{font-size:10px;color:#555;margin-left:auto;white-space:nowrap;}
 
-  /* COMPARISON TABLE */
-  .compare-section{padding:96px 0;background:var(--white);border-bottom:1px solid var(--border);}
-  .compare-table{width:100%;border-collapse:collapse;margin-top:48px;}
-  .compare-table th{padding:14px 20px;text-align:left;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border);}
-  .compare-table th.col{text-align:center;width:160px;}
-  .compare-table th.col.hi{color:var(--black);}
-  .compare-table td{padding:14px 20px;border-bottom:1px solid var(--border);font-size:14px;color:var(--text);}
-  .compare-table td.col{text-align:center;}
-  .compare-table tr:hover td{background:#FAFAF6;}
-  .compare-table tr:last-child td{border-bottom:none;}
-  .section-row td{background:var(--off) !important;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:10px 20px !important;}
-  .c-yes{display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--lime);color:var(--black);align-items:center;justify-content:center;font-size:11px;font-weight:800;}
-  .c-no{color:var(--border);font-size:22px;line-height:1;}
-  .c-txt{font-size:13px;font-weight:600;color:var(--black);}
-  .c-txt.g{color:var(--lime-dark);}
+  /* WHAT WE NEED FROM YOU */
+  .need-section{padding:96px 0;background:var(--white);border-bottom:1px solid var(--border);}
+  .need-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;margin-top:48px;align-items:start;}
+  .need-callout{background:var(--black);border-radius:18px;padding:30px 32px;position:sticky;top:100px;}
+  .need-callout-tag{font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--lime);margin-bottom:14px;}
+  .need-callout h3{font-size:24px;font-weight:800;color:var(--white);letter-spacing:-0.02em;line-height:1.15;margin-bottom:12px;}
+  .need-callout p{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.65;}
+  .need-steps{display:flex;flex-direction:column;}
+  .need-item{display:grid;grid-template-columns:44px 1fr;gap:18px;padding-bottom:26px;position:relative;}
+  .need-item:last-child{padding-bottom:0;}
+  .need-item::before{content:'';position:absolute;left:21px;top:48px;bottom:0;width:2px;background:var(--border);}
+  .need-item:last-child::before{display:none;}
+  .need-num{width:44px;height:44px;border-radius:12px;background:var(--off);border:1px solid var(--border);color:var(--black);font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;}
+  .need-item.you .need-num{background:var(--lime);border-color:var(--lime);}
+  .need-owner{display:inline-block;font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:100px;background:var(--off);color:var(--muted);margin-bottom:8px;}
+  .need-item.you .need-owner{background:var(--lime-soft);color:var(--lime-dark);}
+  .need-h{font-size:16px;font-weight:800;color:var(--black);letter-spacing:-0.01em;margin-bottom:4px;}
+  .need-p{font-size:13.5px;color:var(--text2);line-height:1.6;}
+
+  /* DATA OWNERSHIP */
+  .own-section{padding:96px 0;background:var(--off);border-bottom:1px solid var(--border);}
+  .own-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;}
+  .own-card{border-radius:20px;padding:36px 34px;}
+  .own-card.you{background:var(--lime-soft);border:1px solid rgba(170,255,69,0.4);}
+  .own-card.fbs{background:var(--black);border:1px solid var(--black);}
+  .own-badge{display:inline-flex;align-items:center;font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:5px 12px;border-radius:100px;margin-bottom:18px;}
+  .own-card.you .own-badge{background:var(--lime);color:var(--black);}
+  .own-card.fbs .own-badge{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);}
+  .own-title{font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-bottom:22px;line-height:1.15;}
+  .own-card.you .own-title{color:var(--black);}
+  .own-card.fbs .own-title{color:var(--white);}
+  .own-list{list-style:none;display:flex;flex-direction:column;gap:13px;}
+  .own-item{display:flex;align-items:flex-start;gap:11px;font-size:14px;line-height:1.5;}
+  .own-card.you .own-item{color:var(--text);}
+  .own-card.fbs .own-item{color:rgba(255,255,255,0.82);}
+  .own-check{width:19px;height:19px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;margin-top:1px;}
+  .own-card.you .own-check{background:var(--lime);color:var(--black);}
+  .own-card.fbs .own-check{background:rgba(170,255,69,0.15);color:var(--lime);}
+  .own-strip{margin-top:20px;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:22px 26px;display:flex;align-items:center;gap:15px;font-size:14px;color:var(--text2);line-height:1.6;}
+  .own-strip strong{color:var(--black);font-weight:700;}
+  .own-strip-icon{font-size:22px;flex-shrink:0;}
 
   /* FAQ */
   .faq-section{padding:96px 0;background:var(--off);border-bottom:1px solid var(--border);}
@@ -254,7 +280,8 @@ const css = `
   .tl-stat-label{font-size:11px;color:var(--muted);margin-top:2px;}
 
   @media(max-width:900px){
-    .plans-grid,.nurture-compare,.faq-grid{grid-template-columns:1fr;}
+    .plans-grid,.nurture-compare,.faq-grid,.need-grid,.own-grid{grid-template-columns:1fr;}
+    .need-callout{position:static;}
     .tl-phases{grid-template-columns:1fr 1fr;}
     .compare-table{font-size:13px;}
     .compare-table th.col,.compare-table td.col{width:110px;}
@@ -319,28 +346,6 @@ const PLANS = [
       {t:"Priority onboarding + support",y:true},
     ]
   }
-];
-
-const COMPARE_ROWS = [
-  {section:"Lead Delivery"},
-  {label:"Exclusive leads — your firm only",b:true,p:true},
-  {label:"Global Mobility Score (0–100)",b:true,p:true},
-  {label:"Advisor Brief per lead",b:true,p:true},
-  {section:"Audience Nurture"},
-  {label:"FBS email nurture sequence (5 emails)",b:false,p:true},
-  {label:"Lead warming before partner contact",b:false,p:true},
-  {label:"Automated re-engagement follow-ups",b:false,p:true},
-  {label:"Outreach handled by your team",b:true,p:true},
-  {section:"Intelligence & Analytics"},
-  {label:"Basic reporting (tier, timeline, capital)",b:true,p:true},
-  {label:"Full audience intelligence layer",b:false,p:true},
-  {label:"Auto-updated ICP persona",b:false,p:true},
-  {label:"Monthly performance report",b:false,p:true},
-  {label:"Quarterly ICP review call",b:false,p:true},
-  {section:"Integration & Support"},
-  {label:"CRM integration",b:true,p:true},
-  {label:"Custom webhooks",b:false,p:true},
-  {label:"Onboarding",b:"Docs + email",p:"Priority + call"},
 ];
 
 const FAQ = [
@@ -712,35 +717,101 @@ export default function PricingPage() {
       </div>
     </section>
 
-    {/* COMPARISON TABLE */}
-    <section className="compare-section">
+    {/* WHAT WE NEED FROM YOU */}
+    <section className="need-section">
+      <div className="wrap">
+        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16}}>
+          <div style={{width:24,height:1,background:"var(--lime-dark)",opacity:0.5}}/>
+          <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"var(--lime-dark)"}}>Your Involvement</div>
+        </div>
+        <h2 style={{fontSize:"clamp(26px,3.4vw,40px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",marginBottom:12}}>What we need from you.</h2>
+        <p style={{fontSize:16,color:"var(--text2)",maxWidth:580,lineHeight:1.7,marginBottom:0}}>
+          We keep partner effort to a minimum. You provide one short video and a few approvals — our team handles the brief, scripting, production, setup, and go-live.
+        </p>
+
+        <div className="need-grid">
+          <div className="need-callout">
+            <div className="need-callout-tag">The only thing we need from you</div>
+            <h3>One video. That's it.</h3>
+            <p>From kick-off to launch, your only task is recording a short video from our script and signing off on the final assets. FBS builds and produces everything else.</p>
+          </div>
+
+          <div className="need-steps">
+            {[
+              {owner:"FBS",h:"We send you a brief",p:"A short onboarding brief covering your offer, ICP, and jurisdiction — so we build the funnel around your firm."},
+              {owner:"FBS",h:"We send the video script",p:"Our team writes a ready-to-read script for your intro / educational video. No copywriting or planning on your side."},
+              {owner:"You",you:true,h:"You record the video",p:"The one thing we need from you: record the video from our script. A phone or webcam is fine — we handle editing and polish."},
+              {owner:"FBS",h:"We send everything for approval",p:"Funnel, landing pages, creatives, and email sequences go to you for a final sign-off before anything goes live."},
+              {owner:"FBS",h:"Our team does the full setup & production",p:"We build and produce the entire funnel — setup, editing, tracking, and launch. You stay hands-off from here."},
+            ].map((s,i)=>(
+              <div key={i} className={"need-item"+(s.you?" you":"")}>
+                <div className="need-num">{i+1}</div>
+                <div className="need-body">
+                  <span className="need-owner">{s.owner}</span>
+                  <div className="need-h">{s.h}</div>
+                  <div className="need-p">{s.p}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* DATA OWNERSHIP */}
+    <section className="own-section">
       <div className="wrap">
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:16}}>
           <div style={{width:24,height:1,background:"#888",opacity:0.4}}/>
-          <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"#888"}}>Full Comparison</div>
+          <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"#888"}}>Data Ownership</div>
         </div>
-        <h2 style={{fontSize:"clamp(26px,3.4vw,40px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",marginBottom:0}}>Everything side by side.</h2>
-        <table className="compare-table">
-          <thead>
-            <tr>
-              <th style={{width:"55%"}}>Feature</th>
-              <th className="col">Business<br/><span style={{fontSize:12,fontWeight:500,color:"var(--muted)"}}>$899/mo</span></th>
-              <th className="col hi">Professional<br/><span style={{fontSize:12,fontWeight:700,color:"var(--lime-dark)"}}>$1,299/mo</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            {COMPARE_ROWS.map((row,i)=>{
-              if(row.section) return <tr key={i} className="section-row"><td colSpan={3}>{row.section}</td></tr>;
-              return(
-                <tr key={i}>
-                  <td>{row.label}</td>
-                  <td className="col">{row.b===true?<span className="c-yes">✓</span>:row.b===false?<span className="c-no">–</span>:<span className="c-txt">{row.b}</span>}</td>
-                  <td className="col">{row.p===true?<span className="c-yes">✓</span>:row.p===false?<span className="c-no">–</span>:<span className="c-txt g">{row.p}</span>}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <h2 style={{fontSize:"clamp(26px,3.4vw,40px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",marginBottom:12,lineHeight:1.1}}>
+          The partner owns the data. We just build the infrastructure.
+        </h2>
+        <p style={{fontSize:16,color:"var(--text2)",maxWidth:620,lineHeight:1.7,marginBottom:0}}>
+          Every lead, every contact detail, every account is yours. FBS builds and runs the machine that generates them — but the data, the assets, and the client relationships belong to your firm. No shared pools, no lock-in.
+        </p>
+
+        <div className="own-grid">
+          <div className="own-card you">
+            <div className="own-badge">You own</div>
+            <div className="own-title">Your data. Your assets. Your clients.</div>
+            <ul className="own-list">
+              {[
+                "All leads — exclusive to your firm, never resold or shared",
+                "Full contact data, survey responses & Global Mobility Scores",
+                "Your CRM, ad accounts, domain, and tracking pixels",
+                "Landing pages, creatives, and funnel assets",
+                "Direct client relationships — you close, you retain",
+                "Full export anytime (CSV / XLSX) — zero lock-in",
+              ].map((t,i)=>(
+                <li key={i} className="own-item"><span className="own-check">✓</span>{t}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="own-card fbs">
+            <div className="own-badge">We build &amp; run</div>
+            <div className="own-title">The infrastructure behind the leads.</div>
+            <ul className="own-list">
+              {[
+                "Lead-generation funnel + landing pages",
+                "Ad campaign setup, management & optimisation",
+                "Global Mobility Score engine + lead verification",
+                "Dashboard, CRM integration & custom webhooks",
+                "Nurture + AI scoring / warming layer (Professional)",
+                "Monthly reporting & performance attribution",
+              ].map((t,i)=>(
+                <li key={i} className="own-item"><span className="own-check">✓</span>{t}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="own-strip">
+          <span className="own-strip-icon">🔒</span>
+          <div><strong>Portable by design.</strong> Cancel anytime and you walk away with your data, your accounts, and your assets intact — nothing stays locked inside FBS.</div>
+        </div>
       </div>
     </section>
 
