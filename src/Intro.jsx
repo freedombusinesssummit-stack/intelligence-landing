@@ -12,6 +12,7 @@ const SECTIONS = [
     kicker: "Starting point",
     title: "Freedom Business Summit",
     body: "Where it all begins. We partnered with companies across the global mobility industry and ran 150+ conversations - and that is where the data, and FBS Intelligence, started.",
+    link: { label: "Visit fsummit.net", href: "https://fsummit.net" },
   },
   {
     n: 2,
@@ -19,7 +20,7 @@ const SECTIONS = [
     kicker: "The audience",
     title: "Audience Intelligence Layer",
     body: "The relocation and investor-intent data we gather - real signals, real numbers - telling you not just who a lead is, but how ready they are to make a move.",
-    link: { label: "See the platform overview", href: "/overview" },
+    link: { label: "Open the leads dashboard", href: "https://platform.fsummit.net/dashboard/leads" },
   },
   {
     n: 3,
@@ -27,6 +28,7 @@ const SECTIONS = [
     kicker: "The system",
     title: "High Converting Funnel System",
     body: "A proven, repeatable event funnel system - how we attract the right people, segment them, and turn a qualified audience into scored prospects.",
+    link: { label: "See the platform overview", href: "/overview" },
   },
   {
     n: 4,
@@ -54,6 +56,7 @@ const SECTIONS = [
     kicker: "Wrap-up",
     title: "Questions and next step",
     body: "Room for your questions, and a clear, simple next move together if it is a fit.",
+    link: { label: "View pricing in detail", href: "/pricing" },
   },
 ];
 
@@ -272,7 +275,15 @@ export default function Intro() {
                     </ul>
                   )}
                   {s.mock && <Mock />}
-                  {s.link && <a className="panel-link" href={s.link.href}>{s.link.label} ↗</a>}
+                  {s.link && (
+                    <a
+                      className="panel-link"
+                      href={s.link.href}
+                      {...(/^https?:/.test(s.link.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    >
+                      {s.link.label} ↗
+                    </a>
+                  )}
                 </div>
               </article>
             ))}
