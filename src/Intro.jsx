@@ -1,34 +1,59 @@
-import { useState } from "react";
-
 /* ──────────────────────────────────────────────
-   /intro — client-facing session walkthrough
+   /intro — client-facing walkthrough of the FBS
+   Intelligence story. Contents (table of contents)
+   up top, then a scrollable stack of sections.
    Same stack + design language as the main site.
    ────────────────────────────────────────────── */
 
-const PARTS = [
+const SECTIONS = [
   {
-    n: 1, title: "Welcome", time: "1 min",
-    body: "We start simple: a quick hello, introductions, and a check that the timing still works for you. No slides yet - just a moment to get comfortable before we get into the detail.",
+    n: 1,
+    id: "freedom-business-summit",
+    kicker: "Starting point",
+    title: "Freedom Business Summit",
+    body: "Where it all begins. We partnered with companies across the global mobility industry and ran 150+ conversations - and that is where the data, and FBS Intelligence, started.",
   },
   {
-    n: 2, title: "What we will cover", time: "2 min",
-    body: "A short look at the plan for today, so you always know where we are and how long we will need. If one part matters more to you than the rest, this is the moment to tell us - we will shape the call around it.",
-  },
-  {
-    n: 3, title: "About FBS Intelligence", time: "7 min",
-    body: "The context that makes everything else click. We will share who we are, how Freedom Business Summit grew into a platform across 16+ jurisdictions, and how we began gathering real investor-intent data through our summits. Then we will show how that data becomes the intelligence layer behind every lead you would receive.",
+    n: 2,
+    id: "audience-intelligence",
+    kicker: "The audience",
+    title: "Audience Intelligence Layer",
+    body: "The relocation and investor-intent data we gather - real signals, real numbers - telling you not just who a lead is, but how ready they are to make a move.",
     link: { label: "See the platform overview", href: "/overview" },
   },
   {
-    n: 4, title: "Live demo", time: "12 min",
-    body: "The heart of the call. We open the platform and walk it end to end - the partner dashboard, how each prospect is scored with the Global Mobility Score, and how the HOT / WARM / COLD tiers help your team focus on the right people first. You will see exactly what a lead looks like the moment it reaches you.",
+    n: 3,
+    id: "funnel-system",
+    kicker: "The system",
+    title: "High Converting Funnel System",
+    body: "A proven, repeatable event funnel system - how we attract the right people, segment them, and turn a qualified audience into scored prospects.",
+  },
+  {
+    n: 4,
+    id: "what-is-fbs",
+    kicker: "The product",
+    title: "What is FBS Intelligence?",
+    body: "At its heart it is a dashboard: an end-to-end lead generation network for investment migration companies to get pre-qualified prospects - scored, tiered, and ready to act on.",
+    points: [
+      "Our core product, backend product, and distribution product.",
+      "A dashboard product - the dashboard is the product.",
+    ],
     mock: true,
   },
   {
-    n: 5, title: "Pricing and next steps", time: "6 min",
-    body: "Finally, the practical side: the ways to work with us, what is included in each, and what a sensible first step looks like for your firm. We keep room for your questions and, if it is a fit, agree a clear next move before we close.",
-    plans: true,
-    link: { label: "View pricing in detail", href: "/pricing" },
+    n: 5,
+    id: "how-it-works",
+    kicker: "How it works",
+    title: "How it works",
+    body: "A section-by-section overview of the platform in action - from first touch to a scored lead landing on your dashboard.",
+    link: { label: "See how it works on Overview", href: "/overview" },
+  },
+  {
+    n: 6,
+    id: "questions-next-step",
+    kicker: "Wrap-up",
+    title: "Questions and next step",
+    body: "Room for your questions, and a clear, simple next move together if it is a fit.",
   },
 ];
 
@@ -63,7 +88,7 @@ const css = `
   .intro .nav-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--black);color:var(--white);padding:9px 18px;border-radius:7px;transition:all .15s}
   .intro .nav-btn:hover{background:var(--lime);color:var(--black)}
 
-  .intro .hero{padding:150px 0 84px;background:var(--white);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+  .intro .hero{padding:132px 0 56px;background:var(--white);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
   .intro .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(to right,rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(0,0,0,.04) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 70% 50% at 50% 30%,black 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 70% 50% at 50% 30%,black 40%,transparent 100%);pointer-events:none}
   .intro .hero>.intro-wrap{position:relative;z-index:2}
   .intro .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:20px;display:inline-flex;align-items:center;gap:10px}
@@ -81,42 +106,41 @@ const css = `
   .intro .btn:hover{color:var(--black);border-color:#cfcfcf}
   .intro .btn.primary{background:var(--black);color:var(--white);border-color:var(--black)}
   .intro .btn.primary:hover{background:var(--lime);color:var(--black);border-color:var(--lime);box-shadow:0 12px 32px -8px rgba(170,255,69,.4)}
-  .intro .btn:disabled{opacity:.4;cursor:default}
 
   .intro .section{padding:96px 0}
   .intro .section-off{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .intro .section-agenda{padding-top:56px;padding-bottom:72px}
   .intro .section h2{font-size:clamp(30px,3.8vw,50px);font-weight:800;letter-spacing:-.03em;line-height:1.05;color:var(--black);margin-bottom:16px;max-width:820px}
   .intro .hl-sm{background:linear-gradient(120deg,var(--lime),var(--lime));background-repeat:no-repeat;background-size:100% .32em;background-position:0 88%;padding:0 4px}
   .intro .section-body{font-size:17px;line-height:1.6;color:var(--text2);max-width:620px;margin-bottom:40px}
 
-  .intro .meter{display:flex;align-items:center;gap:16px;margin-bottom:28px}
-  .intro .meter-label{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);white-space:nowrap}
-  .intro .meter-bar{flex:1;height:6px;background:var(--border);border-radius:100px;overflow:hidden}
-  .intro .meter-fill{height:100%;background:var(--lime);border-radius:100px;transition:width .45s cubic-bezier(.16,1,.3,1)}
-  .intro .meter-total{font-size:12px;font-weight:700;color:var(--black);white-space:nowrap;font-variant-numeric:tabular-nums}
+  /* Contents — the table of contents that sets the structure */
+  .intro .toc{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .intro .toc-item{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:16px 18px;transition:all .18s}
+  .intro .toc-item:hover{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.22);transform:translateY(-1px)}
+  .intro .toc-num{width:32px;height:32px;border-radius:9px;background:var(--off);color:var(--muted);display:grid;place-items:center;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;transition:all .18s}
+  .intro .toc-item:hover .toc-num{background:var(--lime);color:var(--black)}
+  .intro .toc-txt{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .intro .toc-kicker{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lime-dark)}
+  .intro .toc-title{font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
+  .intro .toc-arrow{font-size:15px;color:var(--muted);transition:all .18s}
+  .intro .toc-item:hover .toc-arrow{transform:translateY(3px);color:var(--black)}
 
-  .intro .walk{display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start}
-  .intro .steps{display:flex;flex-direction:column;gap:8px}
-  .intro .step{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;width:100%;text-align:left;font-family:'Inter',sans-serif;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:15px 16px;cursor:pointer;transition:all .2s;color:inherit}
-  .intro .step:hover{border-color:#cfcfcf}
-  .intro .step.active{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.28)}
-  .intro .step-num{width:26px;height:26px;border-radius:50%;background:var(--off);color:var(--muted);display:grid;place-items:center;font-size:12px;font-weight:800;transition:all .2s}
-  .intro .step.active .step-num{background:var(--lime);color:var(--black)}
-  .intro .step.done .step-num{background:var(--lime-soft);color:var(--lime-dark)}
-  .intro .step-t{font-size:14.5px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
-  .intro .step-time{font-size:12px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
-
-  .intro .panel{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:40px 40px 34px;min-height:420px;position:relative}
-  .intro .panel-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-  .intro .panel-circle{width:34px;height:34px;border-radius:50%;background:var(--lime);color:var(--black);display:grid;place-items:center;font-size:14px;font-weight:800}
-  .intro .panel-chip{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--lime-dark);background:var(--lime-soft);border:1px solid rgba(170,255,69,.5);padding:5px 11px;border-radius:100px}
-  .intro .panel h3{font-size:clamp(24px,2.6vw,32px);font-weight:800;letter-spacing:-.025em;color:var(--black);margin-bottom:16px;line-height:1.1}
-  .intro .panel p{font-size:16.5px;line-height:1.62;color:var(--text2);max-width:600px}
-  .intro .panel-link{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-size:13px;font-weight:700;color:var(--black);background:var(--off);border:1px solid var(--border);padding:11px 16px;border-radius:9px;transition:all .18s}
+  /* Stacked, scrollable sections */
+  .intro .sections{display:flex;flex-direction:column;gap:20px}
+  .intro .sec{display:grid;grid-template-columns:96px 1fr;gap:28px;align-items:start;background:var(--white);border:1px solid var(--border);border-radius:18px;padding:36px 40px;scroll-margin-top:88px;transition:border-color .2s}
+  .intro .sec:hover{border-color:#d8d8d8}
+  .intro .sec-num{font-size:38px;font-weight:900;letter-spacing:-.04em;color:var(--lime2);font-variant-numeric:tabular-nums;line-height:1}
+  .intro .sec-kicker{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:12px}
+  .intro .sec-main h3{font-size:clamp(22px,2.5vw,30px);font-weight:800;letter-spacing:-.025em;color:var(--black);margin-bottom:14px;line-height:1.12}
+  .intro .sec-main p{font-size:16.5px;line-height:1.62;color:var(--text2);max-width:660px}
+  .intro .sec-points{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:8px;max-width:660px}
+  .intro .sec-points li{position:relative;padding-left:22px;font-size:15px;line-height:1.5;color:var(--text2)}
+  .intro .sec-points li::before{content:'';position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:2px;background:var(--lime2)}
+  .intro .panel-link{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:13px;font-weight:700;color:var(--black);background:var(--off);border:1px solid var(--border);padding:11px 16px;border-radius:9px;transition:all .18s}
   .intro .panel-link:hover{background:var(--lime);border-color:var(--lime)}
-  .intro .panel-nav{display:flex;justify-content:space-between;gap:12px;margin-top:30px;padding-top:24px;border-top:1px solid var(--border)}
 
-  .intro .mock{margin-top:24px;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 16px 40px -18px rgba(0,0,0,.2)}
+  .intro .mock{margin-top:24px;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 16px 40px -18px rgba(0,0,0,.2);max-width:660px}
   .intro .mock-chrome{background:#f5f4f0;padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
   .intro .mock-dots{display:flex;gap:6px}
   .intro .mock-dots i{width:10px;height:10px;border-radius:50%;display:block}
@@ -134,14 +158,6 @@ const css = `
   .intro .tier.warm{background:rgba(192,125,16,.12);color:var(--warm)}
   .intro .tier.cold{background:rgba(74,127,193,.12);color:var(--cold)}
 
-  .intro .plans{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px}
-  .intro .plan{border:1px solid var(--border);border-radius:12px;padding:16px}
-  .intro .plan:first-child{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.18)}
-  .intro .plan .pn{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text2)}
-  .intro .plan .pa{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-top:6px}
-  .intro .plan .pa span{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0}
-  .intro .plan .pd{font-size:12px;line-height:1.45;color:var(--text2);margin-top:6px}
-
   .intro footer{padding:48px 0;background:var(--white);border-top:1px solid var(--border)}
   .intro .foot-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .intro .foot-logo{font-size:14px;font-weight:800;display:flex;align-items:center;gap:9px}
@@ -151,12 +167,9 @@ const css = `
   .intro .foot-links a:hover{color:var(--black)}
 
   @media(max-width:880px){
-    .intro .walk{grid-template-columns:1fr;gap:18px}
-    .intro .steps{flex-direction:row;overflow-x:auto;padding-bottom:4px}
-    .intro .step{min-width:210px;grid-template-columns:auto 1fr;flex:0 0 auto}
-    .intro .step-time{grid-column:1/-1;margin-top:2px}
-    .intro .panel{padding:28px 22px}
-    .intro .plans{grid-template-columns:1fr}
+    .intro .toc{grid-template-columns:1fr}
+    .intro .sec{grid-template-columns:1fr;gap:10px;padding:28px 22px}
+    .intro .sec-num{font-size:28px}
     .intro .hero{padding:120px 0 64px}
   }
   @media(prefers-reduced-motion:reduce){.intro *{animation:none!important;transition:none!important}}
@@ -190,26 +203,7 @@ function Mock() {
   );
 }
 
-function Plans() {
-  return (
-    <div className="plans">
-      <div className="plan"><div className="pn">Dedicated funnel</div><div className="pa">$5,000 <span>build</span></div><div className="pd">Then $499/mo. 3-month minimum. You hold your own media budget.</div></div>
-      <div className="plan"><div className="pn">Shared pool</div><div className="pa">from $499 <span>/mo</span></div><div className="pd">Subscription access to the shared lead pool across jurisdictions.</div></div>
-      <div className="plan"><div className="pn">Summit</div><div className="pa">from $1,950 <span>/pkg</span></div><div className="pd">Participation in the live and virtual summits.</div></div>
-    </div>
-  );
-}
-
 export default function Intro() {
-  const [active, setActive] = useState(0);
-  const p = PARTS[active];
-  const last = PARTS.length - 1;
-
-  const go = (i) => {
-    if (active === last && i > last) return setActive(0);
-    setActive(Math.max(0, Math.min(last, i)));
-  };
-
   return (
     <div className="intro">
       <style>{css}</style>
@@ -230,54 +224,58 @@ export default function Intro() {
         <div className="intro-wrap">
           <div className="eyebrow fade-up"><span className="eyebrow-line" />Your session · FBS Intelligence</div>
           <h1 className="fade-up fu2">Here is how our <span className="accent">conversation</span> will go.</h1>
-          <div className="hero-sub fade-up fu2">About 30 minutes, five simple parts.</div>
-          <p className="hero-desc fade-up fu3">This page is your map for our call. You will always know what we are covering, what comes next, and how long we will need - so you can relax and focus on what matters to your firm.</p>
-          <div className="hero-pill fade-up fu3"><b>~30 min</b><span>5 parts · live demo included</span></div>
+          <div className="hero-sub fade-up fu2">About 30 minutes, section by section.</div>
+          <div className="hero-pill fade-up fu3"><b>~30 min</b><span>a focused, structured call</span></div>
           <div className="hero-actions fade-up fu4">
-            <button className="btn primary" onClick={() => document.getElementById("walk").scrollIntoView({ behavior: "smooth" })}>See the walkthrough</button>
+            <button className="btn primary" onClick={() => document.getElementById("walk").scrollIntoView({ behavior: "smooth" })}>See the structure</button>
             <a className="btn" href="/">Explore the platform</a>
           </div>
         </div>
       </header>
 
-      <section className="section section-off" id="walk">
+      <section className="section section-off section-agenda" id="walk">
         <div className="intro-wrap">
           <div className="eyebrow"><span className="eyebrow-line" />The agenda</div>
           <h2>What we will cover <span className="hl-sm">together</span></h2>
           <p className="section-body">Tap any part to see what happens in it. Nothing here is a surprise - this is exactly how we will spend our time.</p>
 
-          <div className="meter">
-            <span className="meter-label">Progress</span>
-            <div className="meter-bar"><div className="meter-fill" style={{ width: `${((active + 1) / PARTS.length) * 100}%` }} /></div>
-            <span className="meter-total">Part {active + 1} of {PARTS.length}</span>
+          <div className="toc">
+            {SECTIONS.map((s) => (
+              <a key={s.n} className="toc-item" href={`#${s.id}`}>
+                <span className="toc-num">{String(s.n).padStart(2, "0")}</span>
+                <span className="toc-txt">
+                  <span className="toc-kicker">{s.kicker}</span>
+                  <span className="toc-title">{s.title}</span>
+                </span>
+                <span className="toc-arrow">↓</span>
+              </a>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <div className="walk">
-            <div className="steps">
-              {PARTS.map((s, i) => (
-                <button key={s.n} className={`step ${i === active ? "active" : ""} ${i < active ? "done" : ""}`} onClick={() => go(i)}>
-                  <span className="step-num">{s.n}</span>
-                  <span className="step-t">{s.title}</span>
-                  <span className="step-time">{s.time}</span>
-                </button>
-              ))}
-            </div>
-
-            <div className="panel">
-              <div className="panel-eyebrow">
-                <span className="panel-circle">{p.n}</span>
-                <span className="panel-chip">{p.time}</span>
-              </div>
-              <h3>{p.title}</h3>
-              <p>{p.body}</p>
-              {p.mock && <Mock />}
-              {p.plans && <Plans />}
-              {p.link && <a className="panel-link" href={p.link.href}>{p.link.label} ↗</a>}
-              <div className="panel-nav">
-                <button className="btn" disabled={active === 0} onClick={() => go(active - 1)}>← Previous</button>
-                <button className="btn primary" onClick={() => go(active + 1)}>{active === last ? "Start again" : "Next part →"}</button>
-              </div>
-            </div>
+      <section className="section">
+        <div className="intro-wrap">
+          <div className="sections">
+            {SECTIONS.map((s) => (
+              <article key={s.n} id={s.id} className="sec">
+                <div className="sec-num">{String(s.n).padStart(2, "0")}</div>
+                <div className="sec-main">
+                  <div className="sec-kicker">{s.kicker}</div>
+                  <h3>{s.title}</h3>
+                  <p>{s.body}</p>
+                  {s.points && (
+                    <ul className="sec-points">
+                      {s.points.map((pt, i) => (
+                        <li key={i}>{pt}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {s.mock && <Mock />}
+                  {s.link && <a className="panel-link" href={s.link.href}>{s.link.label} ↗</a>}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
