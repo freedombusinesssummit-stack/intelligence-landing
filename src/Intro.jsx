@@ -41,7 +41,7 @@ const SECTIONS = [
     body: "At its heart it is a dashboard: an end-to-end lead generation network for investment migration companies to get pre-qualified prospects - scored, tiered, and ready to act on.",
     points: [
       "Our core product, backend product, and distribution product.",
-      "A dashboard product - the dashboard is the product.",
+      "Leads dashboard.",
     ],
     mock: true,
   },
