@@ -8,88 +8,52 @@
 const SECTIONS = [
   {
     n: 1,
-    id: "intro",
+    id: "freedom-business-summit",
     kicker: "Starting point",
-    title: "Intro",
-    body: "It starts with Freedom Business Summit (FBS) - where the whole story, and the data behind it, began.",
+    title: "Freedom Business Summit",
+    body: "Where it all begins. We partnered with companies across the global mobility industry and ran 150+ conversations - and that is where the data, and FBS Intelligence, started.",
   },
   {
     n: 2,
     id: "audience-intelligence",
     kicker: "The audience",
-    title: "Audience Intelligence",
-    body: "Who we actually reach and understand - the lawyer, the DP, and the partner - and the intent we capture on each.",
+    title: "Audience Intelligence Layer",
+    body: "The relocation and investor-intent data we gather - real signals, real numbers - telling you not just who a lead is, but how ready they are to make a move.",
     link: { label: "See the platform overview", href: "/overview" },
   },
   {
     n: 3,
-    id: "our-funnel",
-    kicker: "The funnel",
-    title: "Our funnel",
-    body: "How browsers first enter our funnel, and what happens the moment they do.",
+    id: "funnel-system",
+    kicker: "The system",
+    title: "High Converting Funnel System",
+    body: "A proven, repeatable event funnel system - how we attract the right people, segment them, and turn a qualified audience into scored prospects.",
   },
   {
     n: 4,
-    id: "funnel-system",
-    kicker: "The system",
-    title: "The high-converting funnel system",
-    body: "A proven, repeatable event funnel system - built to convert, not just collect.",
-  },
-  {
-    n: 5,
     id: "what-is-fbs",
     kicker: "The product",
     title: "What is FBS Intelligence?",
-    body: "At its heart it is a dashboard: FBS Intelligence, an end-to-end lead generation network for investment migration companies to get pre-qualified prospects.",
+    body: "At its heart it is a dashboard: an end-to-end lead generation network for investment migration companies to get pre-qualified prospects - scored, tiered, and ready to act on.",
     points: [
       "Our core product, backend product, and distribution product.",
       "A dashboard product - the dashboard is the product.",
     ],
     mock: true,
-    link: { label: "Explore the platform", href: "/overview" },
   },
   {
-    n: 6,
+    n: 5,
     id: "how-it-works",
     kicker: "How it works",
     title: "How it works",
-    body: "A section-by-section overview of the platform in action.",
+    body: "A section-by-section overview of the platform in action - from first touch to a scored lead landing on your dashboard.",
+    link: { label: "See how it works on Overview", href: "/overview" },
   },
   {
-    n: 7,
-    id: "what-is-next",
-    kicker: "What is next",
-    title: "What is next",
-    body: "Pricing and the ways to work with us - what is included, and where to start.",
-    link: { label: "View pricing in detail", href: "/pricing" },
-  },
-  {
-    n: 8,
-    id: "who-explores",
-    kicker: "The buyer",
-    title: "Who explores the platform",
-    body: "Our original buyer - their budget, and what they actually need.",
-  },
-  {
-    n: 9,
-    id: "story",
-    kicker: "The story",
-    title: "Story",
-    body: "The narrative we tell - stoic, emotional, and buyer-centric.",
-  },
-  {
-    n: 10,
-    id: "questions",
-    kicker: "Q&A",
-    title: "Questions and next steps",
-    body: "Room for your questions, and a clear next move together if it is a fit.",
-  },
-  {
-    n: 11,
-    id: "order-confirmation",
-    kicker: "Confirmation",
-    title: "Order confirmation",
-    body: "Locking in the details and confirming the order.",
+    n: 6,
+    id: "questions-next-step",
+    kicker: "Wrap-up",
+    title: "Questions and next step",
+    body: "Room for your questions, and a clear, simple next move together if it is a fit.",
   },
 ];
 
@@ -124,7 +88,7 @@ const css = `
   .intro .nav-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;background:var(--black);color:var(--white);padding:9px 18px;border-radius:7px;transition:all .15s}
   .intro .nav-btn:hover{background:var(--lime);color:var(--black)}
 
-  .intro .hero{padding:150px 0 84px;background:var(--white);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+  .intro .hero{padding:132px 0 56px;background:var(--white);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
   .intro .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(to right,rgba(0,0,0,.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(0,0,0,.04) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 70% 50% at 50% 30%,black 40%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 70% 50% at 50% 30%,black 40%,transparent 100%);pointer-events:none}
   .intro .hero>.intro-wrap{position:relative;z-index:2}
   .intro .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:20px;display:inline-flex;align-items:center;gap:10px}
@@ -145,6 +109,7 @@ const css = `
 
   .intro .section{padding:96px 0}
   .intro .section-off{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .intro .section-agenda{padding-top:56px;padding-bottom:72px}
   .intro .section h2{font-size:clamp(30px,3.8vw,50px);font-weight:800;letter-spacing:-.03em;line-height:1.05;color:var(--black);margin-bottom:16px;max-width:820px}
   .intro .hl-sm{background:linear-gradient(120deg,var(--lime),var(--lime));background-repeat:no-repeat;background-size:100% .32em;background-position:0 88%;padding:0 4px}
   .intro .section-body{font-size:17px;line-height:1.6;color:var(--text2);max-width:620px;margin-bottom:40px}
@@ -259,21 +224,20 @@ export default function Intro() {
         <div className="intro-wrap">
           <div className="eyebrow fade-up"><span className="eyebrow-line" />Your session · FBS Intelligence</div>
           <h1 className="fade-up fu2">Here is how our <span className="accent">conversation</span> will go.</h1>
-          <div className="hero-sub fade-up fu2">The story behind FBS Intelligence, section by section.</div>
-          <p className="hero-desc fade-up fu3">This page is your map. Start with the contents below to see the shape of the whole thing, then scroll for a short read on each part - with a link out wherever there is more to explore.</p>
-          <div className="hero-pill fade-up fu3"><b>11 sections</b><span>starting point · Freedom Business Summit (FBS)</span></div>
+          <div className="hero-sub fade-up fu2">About 30 minutes, section by section.</div>
+          <div className="hero-pill fade-up fu3"><b>~30 min</b><span>a focused, structured call</span></div>
           <div className="hero-actions fade-up fu4">
-            <button className="btn primary" onClick={() => document.getElementById("walk").scrollIntoView({ behavior: "smooth" })}>See the contents</button>
+            <button className="btn primary" onClick={() => document.getElementById("walk").scrollIntoView({ behavior: "smooth" })}>See the structure</button>
             <a className="btn" href="/">Explore the platform</a>
           </div>
         </div>
       </header>
 
-      <section className="section section-off" id="walk">
+      <section className="section section-off section-agenda" id="walk">
         <div className="intro-wrap">
-          <div className="eyebrow"><span className="eyebrow-line" />Contents · Starting point: Freedom Business Summit (FBS)</div>
+          <div className="eyebrow"><span className="eyebrow-line" />The agenda</div>
           <h2>The full picture, <span className="hl-sm">section by section</span></h2>
-          <p className="section-body">Everything we will walk through, in order. Jump to any part, or scroll down for the short version of each.</p>
+          <p className="section-body">Exactly how our call will run, in order. Jump to any part, or scroll down for the short version of each.</p>
 
           <div className="toc">
             {SECTIONS.map((s) => (
