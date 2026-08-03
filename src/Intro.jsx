@@ -236,8 +236,8 @@ export default function Intro() {
       <section className="section section-off section-agenda" id="walk">
         <div className="intro-wrap">
           <div className="eyebrow"><span className="eyebrow-line" />The agenda</div>
-          <h2>The full picture, <span className="hl-sm">section by section</span></h2>
-          <p className="section-body">Exactly how our call will run, in order. Jump to any part, or scroll down for the short version of each.</p>
+          <h2>What we will cover <span className="hl-sm">together</span></h2>
+          <p className="section-body">Tap any part to see what happens in it. Nothing here is a surprise - this is exactly how we will spend our time.</p>
 
           <div className="toc">
             {SECTIONS.map((s) => (
