@@ -8,48 +8,88 @@
 const SECTIONS = [
   {
     n: 1,
-    id: "how-we-started",
-    kicker: "Where it began",
-    title: "How we started",
-    body: "It began with Freedom Business Summit. We partnered with companies across the global mobility industry and ran 150+ conversations with them - and along the way we learned what these firms genuinely care about, and where the real gaps were.",
+    id: "intro",
+    kicker: "Starting point",
+    title: "Intro",
+    body: "It starts with Freedom Business Summit (FBS) - where the whole story, and the data behind it, began.",
   },
   {
     n: 2,
     id: "audience-intelligence",
-    kicker: "The data",
-    title: "Audience Intelligence Layer",
-    body: "Everything we gathered became data - real relocation and investor-intent signals, backed by real numbers. It is the layer that tells you not just who a lead is, but how ready they are to make a move.",
+    kicker: "The audience",
+    title: "Audience Intelligence",
+    body: "Who we actually reach and understand - the lawyer, the DP, and the partner - and the intent we capture on each.",
     link: { label: "See the platform overview", href: "/overview" },
   },
   {
     n: 3,
-    id: "events-funnel",
-    kicker: "The system",
-    title: "Events & our funnel",
-    body: "Running summits gave us a repeatable engine: how to attract the right people, segment them, build a genuinely qualified audience, and score each one. That system is exactly why we built FBS Intelligence.",
+    id: "our-funnel",
+    kicker: "The funnel",
+    title: "Our funnel",
+    body: "How browsers first enter our funnel, and what happens the moment they do.",
   },
   {
     n: 4,
+    id: "funnel-system",
+    kicker: "The system",
+    title: "The high-converting funnel system",
+    body: "A proven, repeatable event funnel system - built to convert, not just collect.",
+  },
+  {
+    n: 5,
     id: "what-is-fbs",
     kicker: "The product",
-    title: "What FBS Intelligence is",
-    body: "The product is the dashboard. Every qualified lead lands here - scored with the Global Mobility Score and sorted into HOT / WARM / COLD - ready for your team to act on.",
+    title: "What is FBS Intelligence?",
+    body: "At its heart it is a dashboard: FBS Intelligence, an end-to-end lead generation network for investment migration companies to get pre-qualified prospects.",
+    points: [
+      "Our core product, backend product, and distribution product.",
+      "A dashboard product - the dashboard is the product.",
+    ],
     mock: true,
     link: { label: "Explore the platform", href: "/overview" },
   },
   {
-    n: 5,
-    id: "live-demo",
-    kicker: "Live demo",
+    n: 6,
+    id: "how-it-works",
+    kicker: "How it works",
     title: "How it works",
-    body: "A live look at the funnel in action - from first touch to a scored lead landing on your dashboard, exactly as it will reach your team.",
+    body: "A section-by-section overview of the platform in action.",
   },
   {
-    n: 6,
-    id: "next-steps",
-    kicker: "Next steps",
-    title: "Next steps",
-    body: "If it is a fit, we agree a clear, simple next move together - no pressure, no obligation. Just the right first step for your firm.",
+    n: 7,
+    id: "what-is-next",
+    kicker: "What is next",
+    title: "What is next",
+    body: "Pricing and the ways to work with us - what is included, and where to start.",
+    link: { label: "View pricing in detail", href: "/pricing" },
+  },
+  {
+    n: 8,
+    id: "who-explores",
+    kicker: "The buyer",
+    title: "Who explores the platform",
+    body: "Our original buyer - their budget, and what they actually need.",
+  },
+  {
+    n: 9,
+    id: "story",
+    kicker: "The story",
+    title: "Story",
+    body: "The narrative we tell - stoic, emotional, and buyer-centric.",
+  },
+  {
+    n: 10,
+    id: "questions",
+    kicker: "Q&A",
+    title: "Questions and next steps",
+    body: "Room for your questions, and a clear next move together if it is a fit.",
+  },
+  {
+    n: 11,
+    id: "order-confirmation",
+    kicker: "Confirmation",
+    title: "Order confirmation",
+    body: "Locking in the details and confirming the order.",
   },
 ];
 
@@ -129,6 +169,9 @@ const css = `
   .intro .sec-kicker{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:12px}
   .intro .sec-main h3{font-size:clamp(22px,2.5vw,30px);font-weight:800;letter-spacing:-.025em;color:var(--black);margin-bottom:14px;line-height:1.12}
   .intro .sec-main p{font-size:16.5px;line-height:1.62;color:var(--text2);max-width:660px}
+  .intro .sec-points{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:8px;max-width:660px}
+  .intro .sec-points li{position:relative;padding-left:22px;font-size:15px;line-height:1.5;color:var(--text2)}
+  .intro .sec-points li::before{content:'';position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:2px;background:var(--lime2)}
   .intro .panel-link{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:13px;font-weight:700;color:var(--black);background:var(--off);border:1px solid var(--border);padding:11px 16px;border-radius:9px;transition:all .18s}
   .intro .panel-link:hover{background:var(--lime);border-color:var(--lime)}
 
@@ -218,7 +261,7 @@ export default function Intro() {
           <h1 className="fade-up fu2">Here is how our <span className="accent">conversation</span> will go.</h1>
           <div className="hero-sub fade-up fu2">The story behind FBS Intelligence, section by section.</div>
           <p className="hero-desc fade-up fu3">This page is your map. Start with the contents below to see the shape of the whole thing, then scroll for a short read on each part - with a link out wherever there is more to explore.</p>
-          <div className="hero-pill fade-up fu3"><b>6 sections</b><span>from how we started to a live demo</span></div>
+          <div className="hero-pill fade-up fu3"><b>11 sections</b><span>starting point · Freedom Business Summit (FBS)</span></div>
           <div className="hero-actions fade-up fu4">
             <button className="btn primary" onClick={() => document.getElementById("walk").scrollIntoView({ behavior: "smooth" })}>See the contents</button>
             <a className="btn" href="/">Explore the platform</a>
@@ -228,7 +271,7 @@ export default function Intro() {
 
       <section className="section section-off" id="walk">
         <div className="intro-wrap">
-          <div className="eyebrow"><span className="eyebrow-line" />Contents</div>
+          <div className="eyebrow"><span className="eyebrow-line" />Contents · Starting point: Freedom Business Summit (FBS)</div>
           <h2>The full picture, <span className="hl-sm">section by section</span></h2>
           <p className="section-body">Everything we will walk through, in order. Jump to any part, or scroll down for the short version of each.</p>
 
@@ -257,6 +300,13 @@ export default function Intro() {
                   <div className="sec-kicker">{s.kicker}</div>
                   <h3>{s.title}</h3>
                   <p>{s.body}</p>
+                  {s.points && (
+                    <ul className="sec-points">
+                      {s.points.map((pt, i) => (
+                        <li key={i}>{pt}</li>
+                      ))}
+                    </ul>
+                  )}
                   {s.mock && <Mock />}
                   {s.link && <a className="panel-link" href={s.link.href}>{s.link.label} ↗</a>}
                 </div>
