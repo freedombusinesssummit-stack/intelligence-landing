@@ -458,6 +458,21 @@ export default function PricingPage() {
             </div>
           </div>
         </div>
+
+        {/* FOUNDING MEMBERS BANNER */}
+        <div className="founding-banner" style={{marginTop:24,marginBottom:0,textAlign:"left"}}>
+          <div className="founding-banner-left">
+            <div className="founding-badge">Founding Members</div>
+            <div className="founding-text">
+              Special pricing locked for <strong>1 year</strong> — available for the first 10 partners only.
+              Setup fee and monthly rate reduced at founding rates.
+            </div>
+          </div>
+          <div className="founding-spots">
+            <span className="founding-spots-num">7</span>
+            <span>spots<br/>left</span>
+          </div>
+        </div>
       </div>
     </section>
 
