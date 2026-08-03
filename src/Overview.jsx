@@ -326,6 +326,19 @@ section[id]{scroll-margin-top:78px;}
 .nurture-connector{position:absolute;right:-14px;top:50%;transform:translateY(-50%);z-index:5;font-size:22px;color:var(--lime-dark);background:var(--off);width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;}
 .nurture-node-wrap:not(:last-child){padding-right:28px;}
 
+/* ═══ WHY WEBINAR ═══ */
+.why-lead{margin-top:44px;background:var(--black);border-radius:20px;padding:42px 46px;position:relative;overflow:hidden;}
+.why-lead::before{content:'';position:absolute;top:-45%;right:-8%;width:440px;height:440px;background:radial-gradient(circle,rgba(170,255,69,0.16),transparent 60%);pointer-events:none;}
+.why-lead-tag{font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--lime);margin-bottom:16px;position:relative;}
+.why-lead h3{font-size:clamp(21px,2.5vw,30px);font-weight:800;letter-spacing:-0.02em;color:var(--white);line-height:1.28;max-width:780px;position:relative;}
+.why-lead h3 em{font-style:normal;color:var(--lime);}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px;}
+.why-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:30px 28px;transition:all 0.2s;}
+.why-card:hover{border-color:rgba(170,255,69,0.5);transform:translateY(-3px);box-shadow:0 14px 30px -10px rgba(0,0,0,0.12);}
+.why-card-icon{width:52px;height:52px;border-radius:14px;background:var(--lime-soft);display:flex;align-items:center;justify-content:center;font-size:25px;margin-bottom:18px;}
+.why-card h4{font-size:18px;font-weight:800;color:var(--black);letter-spacing:-0.02em;margin-bottom:10px;line-height:1.2;}
+.why-card p{font-size:14px;color:var(--text2);line-height:1.65;}
+
 .list-asset{background:var(--black);border-radius:18px;padding:36px 40px;margin-top:32px;display:grid;grid-template-columns:1.6fr auto;gap:40px;align-items:center;}
 .list-asset-left{display:flex;align-items:flex-start;gap:20px;}
 .list-asset-icon{font-size:36px;flex-shrink:0;}
@@ -672,6 +685,7 @@ section[id]{scroll-margin-top:78px;}
   .nurture-diagram{grid-template-columns:1fr;gap:32px;}
   .nurture-node-wrap:not(:last-child){padding-right:0;}
   .nurture-connector{display:none;}
+  .why-grid{grid-template-columns:1fr;}
   .list-asset{grid-template-columns:1fr;gap:24px;}
   .demo-card{grid-template-columns:1fr;gap:36px;}
   .demo-call-window{max-width:280px;}
@@ -1058,6 +1072,38 @@ export default function Overview() {
             {id:"bjA29v9I8dDjJoYQHsLzRK9yiNCpUGmX3As6GOmjjF4",stage:"Stage 3",title:"Deliver the message",desc:"Clear call to action — register, take the survey, get your mobility score. Drives the qualified opt-in.",badge:"Conversion"},
           ].map((v,i)=>(
             <VideoCard key={i} v={v} i={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── WHY WEBINAR ── */}
+    <section style={{padding:"96px 0",background:"var(--white)",borderBottom:"1px solid var(--border)"}}>
+      <div className="wrap">
+        <Reveal>
+          <div className="eyebrow lime"><span className="eyebrow-line"/>Why a Webinar</div>
+          <h2 className="sh2">You don't pitch high-ticket.<br/><span className="hl">You teach it.</span></h2>
+          <p className="sp">Second passports and residency programmes are six-figure decisions — nobody signs off a cold ad or a hard sell. The proven way to sell high-ticket is through education, so we build the entire funnel around one thing: the webinar. It's the core of the model.</p>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <div className="why-lead">
+            <div className="why-lead-tag">Why nobody argues with a webinar</div>
+            <h3>A webinar sells without selling. You <em>educate the room</em>, answer every objection live, and let qualified buyers reach the decision on their own — so the follow-up call starts from “yes,” not from scratch.</h3>
+          </div>
+        </Reveal>
+
+        <div className="why-grid">
+          {[
+            {icon:"🛡️",h:"Handles objections live",p:"Every doubt — cost, risk, timing, legitimacy — is answered in the session, in context, before it can become a reason to say no."},
+            {icon:"🎓",h:"Sells indirectly",p:"No hard pitch. Teaching the opportunity lets prospects sell themselves on it — the pressure is off, and the intent is real."},
+            {icon:"🤝",h:"Builds real trust",p:"An hour of genuine expertise positions your firm as the authority. By the time you speak, they already know you and believe you."},
+          ].map((c,i)=>(
+            <Reveal key={i} delay={i*80} className="why-card">
+              <div className="why-card-icon">{c.icon}</div>
+              <h4>{c.h}</h4>
+              <p>{c.p}</p>
+            </Reveal>
           ))}
         </div>
       </div>
