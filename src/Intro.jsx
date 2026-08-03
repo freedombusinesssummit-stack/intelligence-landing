@@ -11,7 +11,7 @@ const PARTS = [
     body: "We start simple: a quick hello, introductions, and a check that the timing still works for you. No slides yet - just a moment to get comfortable before we get into the detail.",
   },
   {
-    n: 2, title: "What we will cover", time: "2 min",
+    n: 2, title: "Freedom Business Summit", time: "2 min",
     body: "A short look at the plan for today, so you always know where we are and how long we will need. If one part matters more to you than the rest, this is the moment to tell us - we will shape the call around it.",
   },
   {
@@ -27,7 +27,6 @@ const PARTS = [
   {
     n: 5, title: "Pricing and next steps", time: "6 min",
     body: "Finally, the practical side: the ways to work with us, what is included in each, and what a sensible first step looks like for your firm. We keep room for your questions and, if it is a fit, agree a clear next move before we close.",
-    plans: true,
     link: { label: "View pricing in detail", href: "/pricing" },
   },
 ];
@@ -134,14 +133,6 @@ const css = `
   .intro .tier.warm{background:rgba(192,125,16,.12);color:var(--warm)}
   .intro .tier.cold{background:rgba(74,127,193,.12);color:var(--cold)}
 
-  .intro .plans{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px}
-  .intro .plan{border:1px solid var(--border);border-radius:12px;padding:16px}
-  .intro .plan:first-child{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.18)}
-  .intro .plan .pn{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text2)}
-  .intro .plan .pa{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-top:6px}
-  .intro .plan .pa span{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0}
-  .intro .plan .pd{font-size:12px;line-height:1.45;color:var(--text2);margin-top:6px}
-
   .intro footer{padding:48px 0;background:var(--white);border-top:1px solid var(--border)}
   .intro .foot-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .intro .foot-logo{font-size:14px;font-weight:800;display:flex;align-items:center;gap:9px}
@@ -156,7 +147,6 @@ const css = `
     .intro .step{min-width:210px;grid-template-columns:auto 1fr;flex:0 0 auto}
     .intro .step-time{grid-column:1/-1;margin-top:2px}
     .intro .panel{padding:28px 22px}
-    .intro .plans{grid-template-columns:1fr}
     .intro .hero{padding:120px 0 64px}
   }
   @media(prefers-reduced-motion:reduce){.intro *{animation:none!important;transition:none!important}}
@@ -186,16 +176,6 @@ function Mock() {
         <div className="mock-lead"><div className="mock-av" style={{ background: "linear-gradient(135deg,#4A7FC1,#7C5BA8)" }}>JT</div><span className="mock-name">J. Tan · Greece GV</span></div>
         <div className="mock-gms">34<small>/100</small></div><span className="tier cold">Cold</span>
       </div>
-    </div>
-  );
-}
-
-function Plans() {
-  return (
-    <div className="plans">
-      <div className="plan"><div className="pn">Dedicated funnel</div><div className="pa">$5,000 <span>build</span></div><div className="pd">Then $499/mo. 3-month minimum. You hold your own media budget.</div></div>
-      <div className="plan"><div className="pn">Shared pool</div><div className="pa">from $499 <span>/mo</span></div><div className="pd">Subscription access to the shared lead pool across jurisdictions.</div></div>
-      <div className="plan"><div className="pn">Summit</div><div className="pa">from $1,950 <span>/pkg</span></div><div className="pd">Participation in the live and virtual summits.</div></div>
     </div>
   );
 }
@@ -271,7 +251,6 @@ export default function Intro() {
               <h3>{p.title}</h3>
               <p>{p.body}</p>
               {p.mock && <Mock />}
-              {p.plans && <Plans />}
               {p.link && <a className="panel-link" href={p.link.href}>{p.link.label} ↗</a>}
               <div className="panel-nav">
                 <button className="btn" disabled={active === 0} onClick={() => go(active - 1)}>← Previous</button>
