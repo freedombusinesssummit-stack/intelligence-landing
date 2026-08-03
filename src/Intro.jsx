@@ -12,7 +12,10 @@ const SECTIONS = [
     kicker: "Starting point",
     title: "Freedom Business Summit",
     body: "Where it all begins. We partnered with companies across the global mobility industry and ran 150+ conversations - and that is where the data, and FBS Intelligence, started.",
-    link: { label: "Visit fsummit.net", href: "https://fsummit.net" },
+    links: [
+      { label: "Visit fsummit.net", href: "https://fsummit.net" },
+      { label: "The post-event analytics report", href: "http://report.fsummit.net/" },
+    ],
   },
   {
     n: 2,
@@ -142,6 +145,8 @@ const css = `
   .intro .sec-points li::before{content:'';position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:2px;background:var(--lime2)}
   .intro .panel-link{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:13px;font-weight:700;color:var(--black);background:var(--off);border:1px solid var(--border);padding:11px 16px;border-radius:9px;transition:all .18s}
   .intro .panel-link:hover{background:var(--lime);border-color:var(--lime)}
+  .intro .sec-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .intro .sec-links .panel-link{margin-top:0}
 
   .intro .mock{margin-top:24px;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 16px 40px -18px rgba(0,0,0,.2);max-width:660px}
   .intro .mock-chrome{background:#f5f4f0;padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
@@ -275,14 +280,19 @@ export default function Intro() {
                     </ul>
                   )}
                   {s.mock && <Mock />}
-                  {s.link && (
-                    <a
-                      className="panel-link"
-                      href={s.link.href}
-                      {...(/^https?:/.test(s.link.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    >
-                      {s.link.label} ↗
-                    </a>
+                  {(s.links || (s.link ? [s.link] : [])).length > 0 && (
+                    <div className="sec-links">
+                      {(s.links || (s.link ? [s.link] : [])).map((l) => (
+                        <a
+                          key={l.href}
+                          className="panel-link"
+                          href={l.href}
+                          {...(/^https?:/.test(l.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        >
+                          {l.label} ↗
+                        </a>
+                      ))}
+                    </div>
                   )}
                 </div>
               </article>
