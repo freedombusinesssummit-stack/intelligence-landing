@@ -5,6 +5,7 @@ import Pricing from './Pricing.jsx'
 import Overview from './Overview.jsx'
 import ThankYou from './ThankYou.jsx'
 import Intro from './Intro.jsx'
+import Questions from './Questions.jsx'
 
 function Router() {
   const path = window.location.pathname
@@ -12,6 +13,7 @@ function Router() {
   if (path === '/overview') return <Overview />
   if (path === '/thank-you') return <ThankYou />
   if (path === '/intro') return <Intro />
+  if (path === '/questions') return <Questions />
   return <App />
 }
 
