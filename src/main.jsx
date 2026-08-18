@@ -6,6 +6,8 @@ import Overview from './Overview.jsx'
 import ThankYou from './ThankYou.jsx'
 import Intro from './Intro.jsx'
 import Questions from './Questions.jsx'
+import Privacy from './Privacy.jsx'
+import Terms from './Terms.jsx'
 
 function Router() {
   const path = window.location.pathname
@@ -14,6 +16,8 @@ function Router() {
   if (path === '/thank-you') return <ThankYou />
   if (path === '/intro') return <Intro />
   if (path === '/questions') return <Questions />
+  if (path === '/privacy') return <Privacy />
+  if (path === '/terms') return <Terms />
   return <App />
 }
 
