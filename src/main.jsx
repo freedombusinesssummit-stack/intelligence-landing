@@ -6,6 +6,7 @@ import Overview from './Overview.jsx'
 import ThankYou from './ThankYou.jsx'
 import Intro from './Intro.jsx'
 import Questions from './Questions.jsx'
+import Scoring from './Scoring.jsx'
 import Privacy from './Privacy.jsx'
 import Terms from './Terms.jsx'
 
@@ -16,6 +17,7 @@ function Router() {
   if (path === '/thank-you') return <ThankYou />
   if (path === '/intro') return <Intro />
   if (path === '/questions') return <Questions />
+  if (path === '/scoring') return <Scoring />
   if (path === '/privacy') return <Privacy />
   if (path === '/terms') return <Terms />
   return <App />
