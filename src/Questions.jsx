@@ -1,37 +1,135 @@
+import { useState } from "react";
+
 /* ──────────────────────────────────────────────
    /questions — the questions clients most often ask
-   about the product, before an engagement begins.
+   about the product, with answers. Accordion FAQ.
    Same stack + design language as the main site.
    ────────────────────────────────────────────── */
 
 const QUESTIONS = [
-  { title: "How do you define a qualified lead?" },
-  { title: "What is the average conversion rate from registration → qualified lead → consultation?" },
-  { title: "Can you share actual results from other immigration / Citizenship by Investment clients?" },
-  { title: "Are the leads exclusive to us?" },
-  { title: "What monthly ad budget do you recommend?" },
-  { title: "Apart from the $1,950 setup, $499/month, and ad spend, are there any additional costs?" },
-  { title: "Is there a minimum contract period, and can we cancel monthly?" },
-  { title: "Do we own the leads and data if we stop working together?" },
+  {
+    title: "How do you define a qualified lead?",
+    answer: [
+      "Every webinar registrant is invited to complete the Global Mobility Score (GMS) - a 14–25 question survey covering six readiness dimensions. Responses generate a 0–100 score that maps to four statuses: Nurture, Qualified, Warm, and Hot.",
+      "A Qualified lead has completed the full survey and cleared the scoring threshold - meaning they've stated a concrete budget range, a timeline, and their decision-making role.",
+      "Completion itself is a signal: it takes real effort, and people who aren't seriously considering a move don't finish it.",
+      { link: { label: "See a scoring sample inside the FBS platform", href: "https://platform.fsummit.net/dashboard/leads" } },
+    ],
+  },
+  {
+    title: "What is the average conversion rate from registration → qualified lead → consultation?",
+    answer: [
+      "Registration → survey completion averages around 37%, though it varies by offer, geography, and jurisdiction.",
+      "On the consultation step, the funnel isn't built to drive consultations directly - it's built to drive webinar attendance. In investment migration, a consultation request from someone who hasn't yet seen your process, your team, and your jurisdiction comparison is a low-intent request; it fills your calendar without filling your pipeline.",
+      "So the invitation to a consultation comes after the webinar, to people who have already spent 45 minutes with you.",
+    ],
+  },
+  {
+    title: "Can you share actual results from other immigration / Citizenship by Investment clients?",
+    answer: [
+      "One honest observation about this market: many firms can't produce reliable numbers even for their own campaigns, because there's no tracking infrastructure between the ad click and the signed engagement.",
+      "We regularly see leads worked with a single email, or not followed up at all. Part of what we build for you is the ability to answer this question about yourself.",
+      "Because the sales cycle in this space typically runs three to six months, we do quarterly reviews with each partner rather than judging results month to month.",
+    ],
+  },
+  {
+    title: "Are the leads exclusive to us?",
+    answer: [
+      "Yes - fully exclusive. We build the funnel individually for you: your offer, your jurisdiction, your audience, your creative.",
+      "The leads it generates come from that funnel and go to you alone. No other client receives them.",
+    ],
+  },
+  {
+    title: "What monthly ad budget do you recommend?",
+    answer: [
+      "Minimum $1,000/month to generate statistically meaningful data. For Tier 1 markets (US, UK, Canada, Western Europe) budget can be higher - the idea is to give the funnel enough volume to optimize.",
+      "Budget is paid directly to the ad platforms - it never passes through us.",
+    ],
+  },
+  {
+    title: "Apart from the $1,950 setup, $499/month, and ad spend, are there any additional costs?",
+    answer: [
+      "No. We take no commission or markup on ad spend. Landing pages and survey infrastructure are built on our side.",
+      "We'd suggest an email marketing service, or we can use yours.",
+    ],
+  },
+  {
+    title: "Is there a minimum contract period, and can we cancel monthly?",
+    answer: [
+      "No minimum term. Cancel any time with 30 days' written notice - though we'd recommend planning for three months. That's three webinar cycles: enough to test creative, tune targeting, and see what converts.",
+      "Over that time you're also building a lead and email list as an asset.",
+    ],
+  },
+  {
+    title: "Do we own the leads and data if we stop working together?",
+    answer: [
+      "Yes. Every lead generated for you is yours - full export in a standard format at any time, during or after the engagement, at no charge. We build and run the infrastructure; the assets it produces are yours.",
+    ],
+  },
   {
     title: "Target jurisdictions & ideal client profile (ICP)",
-    detail: "How do you handle routing and jurisdiction targeting for multi-program firms - for example, Canadian business immigration (PNPs / SUV), US programs (EB-5 / E-2), and key European Golden Visas such as Portugal and Greece? Can campaigns be tailored specifically to focus on these exact program streams?",
+    detail:
+      "How do you handle routing and jurisdiction targeting for multi-program firms - for example, Canadian business immigration (PNPs / SUV), US programs (EB-5 / E-2), and key European Golden Visas such as Portugal and Greece? Can campaigns be tailored specifically to focus on these exact program streams?",
+    answer: [
+      "Yes. We don't run a generic \"immigration\" funnel and hope it fits - each company we work with gets a dedicated funnel built around the specific program(s) you want leads for. For your firm, that means building separately around your priority directions - Canadian PNP/SUV, US EB-5/E-2, and Portugal/Greece Golden Visa - rather than one blended campaign.",
+      "We'd recommend launching with one or two jurisdictions first (based on where your capacity and demand for consultations is strongest), proving the funnel, then extending to the rest. Happy to map that sequencing with you on a call.",
+    ],
   },
   {
     title: "Territorial exclusivity & lead routing",
-    detail: "Are the leads, webinar registrants, and territorial slots generated during these campaigns strictly exclusive to us, or are they shared or re-routed with other network partners in your ecosystem?",
+    detail:
+      "Are the leads, webinar registrants, and territorial slots generated during these campaigns strictly exclusive to us, or are they shared or re-routed with other network partners in your ecosystem?",
+    answer: [
+      "Leads and registrations generated in your campaigns are 100% exclusive to you. They are never shared with, or re-routed to, any other partner in our network - during the engagement or after it ends.",
+      "Every lead your funnel generates is yours alone. Your registrant data isn't reused for our own marketing or handed to other advisory firms, including competitors.",
+      "One thing we want to be upfront about: FBS Intelligence doesn't provide jurisdiction-wide market exclusivity. If another firm wanted a Portugal Golden Visa funnel, for example, we could in principle build one for them too - but it would be a fully separate, independently-run funnel, and their leads would never touch yours or vice versa. What's exclusive is the individual lead and the individual funnel, not the jurisdiction itself.",
+    ],
   },
   {
     title: "Ad account ownership & audience data",
-    detail: "For the media budget spent on advertising platforms, do campaigns run through our own dedicated ad accounts (or via our custom domains / tracking pixels), so that we retain full long-term ownership of the pixel data, retargeting assets, and custom audiences?",
+    detail:
+      "For the media budget spent on advertising platforms, do campaigns run through our own dedicated ad accounts (or via our custom domains / tracking pixels), so that we retain full long-term ownership of the pixel data, retargeting assets, and custom audiences?",
+    answer: [
+      "Yes - campaigns run directly through your own ad accounts. Domains and tracking pixels stay with you, so the retargeting data and custom audiences you build up are yours to keep, regardless of what happens with the engagement down the line.",
+    ],
   },
   {
     title: "Full commercial & fee structure",
-    detail: "Beyond the $1,950 setup fee, $499/month management fee, and ad spend, are there any additional pay-per-lead charges, success / commission fees, or revenue-sharing models on converted retainers?",
+    detail:
+      "Beyond the $1,950 setup fee, $499/month management fee, and ad spend, are there any additional pay-per-lead charges, success / commission fees, or revenue-sharing models on converted retainers?",
+    answer: [
+      "No additional pay-per-lead charges or success / commission fees at this time - the $1,950 setup, $499/month management, and your ad spend are the full fee structure. Ad spend runs exclusively through your own ad account.",
+      "One item worth flagging early: third-party tools like the email marketing platform and webinar hosting platform are billed separately, outside our fees, at whatever tier your registration and lead volume requires. These are external services (not something FBS provides or marks up) - we'll help you pick and set them up, but the subscription cost itself sits with you.",
+      "We're open to discussing revenue-sharing models in the future if that's something you'd want to explore, but nothing like that is baked into the current offer. As it stands, the fees above cover everything involved in running the campaigns.",
+    ],
   },
   {
     title: "Conversion benchmarks & pilot cohort",
-    detail: "Based on past campaigns for investment migration advisors in top-tier markets, what are your typical benchmarks for Cost Per Qualified Lead (CPQL) and webinar-to-consultation conversion rates? And can the initial 8-week launch be structured as a trial cohort to evaluate the conversion of high-intent leads (70+ score) into active consultations before committing long-term?",
+    detail:
+      "Based on past campaigns for investment migration advisors in top-tier markets, what are your typical benchmarks for Cost Per Qualified Lead (CPQL) and webinar-to-consultation conversion rates? And can the initial 8-week launch be structured as a trial cohort to evaluate the conversion of high-intent leads (70+ score) into active consultations before committing long-term?",
+    answer: [
+      "Straight answer: there isn't one clean CPQL number we can hand you, and anyone quoting a single figure across geographies wouldn't be giving you the full picture. Cost varies a lot by market - within the US alone we typically see three meaningfully different cost tiers:",
+      {
+        ul: [
+          "A simple lead (registered on the landing page): typically $8–$25",
+          "A qualified lead (completed the qualifying survey): typically $25–$60",
+          "A webinar lead (registered and actually attended): typically $25–$80",
+        ],
+      },
+      "On top of that, offer and speaker matter a lot - two funnels for the identical program can produce very different lead costs depending on the creative and landing page alone. Rather than quote a benchmark, we'd rather show you the real numbers once your campaign is running.",
+      "On the pilot structure - yes, this is exactly what the 8-week launch is built for:",
+      {
+        ol: [
+          "Build the registration and survey funnel",
+          "Reach 100 registrations",
+          "Run the webinar",
+          "Track how many of those registrations convert into booked consultations",
+          "Evaluate lead quality - including how the 70+ GMS score segment specifically converts",
+        ],
+      },
+      "At the end of that window, the decision to scale further is based on your actual numbers, not a projection.",
+      "And those 100 registrations are your asset, not ours - it's your lead list and your data, a real dataset you keep regardless of what happens after the pilot.",
+    ],
   },
 ];
 
@@ -82,13 +180,25 @@ const css = `
   .questions .hl-sm{background:linear-gradient(120deg,var(--lime),var(--lime));background-repeat:no-repeat;background-size:100% .32em;background-position:0 88%;padding:0 4px}
 
   .questions .q-list{display:flex;flex-direction:column;gap:12px}
-  .questions .q-item{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px 26px;transition:border-color .2s,box-shadow .2s}
-  .questions .q-item:hover{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.18)}
-  .questions .q-num{width:32px;height:32px;border-radius:9px;background:var(--off);color:var(--lime-dark);display:grid;place-items:center;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
-  .questions .q-item:hover .q-num{background:var(--lime);color:var(--black)}
-  .questions .q-body{padding-top:3px}
-  .questions .q-text{display:block;font-size:17.5px;font-weight:600;letter-spacing:-.01em;color:var(--black);line-height:1.4}
-  .questions .q-detail{font-size:15px;line-height:1.6;color:var(--text2);margin-top:8px;max-width:820px}
+  .questions .q-item{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color .2s,box-shadow .2s}
+  .questions .q-item.open{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.18)}
+  .questions .q-item:hover{border-color:var(--lime2)}
+  .questions .q-head{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:22px 26px;font-family:'Inter',sans-serif;color:inherit}
+  .questions .q-num{width:32px;height:32px;border-radius:9px;background:var(--off);color:var(--lime-dark);display:grid;place-items:center;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;transition:all .2s}
+  .questions .q-item.open .q-num,.questions .q-head:hover .q-num{background:var(--lime);color:var(--black)}
+  .questions .q-text{font-size:17.5px;font-weight:600;letter-spacing:-.01em;color:var(--black);line-height:1.4}
+  .questions .q-toggle{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);display:grid;place-items:center;font-size:18px;font-weight:500;color:var(--text2);transition:all .2s}
+  .questions .q-item.open .q-toggle{background:var(--black);color:var(--white);border-color:var(--black);transform:rotate(45deg)}
+
+  .questions .q-panel{padding:0 26px 26px 76px}
+  .questions .q-detail{font-size:15px;line-height:1.55;color:var(--text2);font-style:italic;padding:2px 0 16px;border-bottom:1px solid var(--border);margin-bottom:6px}
+  .questions .q-answer p{font-size:15.5px;line-height:1.66;color:var(--text2);margin-top:14px}
+  .questions .q-answer p:first-child{margin-top:8px}
+  .questions .q-answer ul,.questions .q-answer ol{margin:14px 0 0;padding-left:22px}
+  .questions .q-answer li{font-size:15.5px;line-height:1.55;color:var(--text2);margin-top:8px;padding-left:4px}
+  .questions .q-answer ul li::marker{color:var(--lime2)}
+  .questions .ans-link{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:13px;font-weight:700;color:var(--black);background:var(--off);border:1px solid var(--border);padding:11px 16px;border-radius:9px;transition:all .18s}
+  .questions .ans-link:hover{background:var(--lime);border-color:var(--lime)}
 
   .questions .cta{margin-top:40px;background:var(--off);border:1px solid var(--border);border-radius:18px;padding:32px 34px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
   .questions .cta-t{font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--black)}
@@ -109,13 +219,55 @@ const css = `
 
   @media(max-width:880px){
     .questions .hero{padding:120px 0 48px}
-    .questions .q-item{padding:20px 20px;gap:14px}
+    .questions .q-head{padding:20px 18px;gap:12px}
+    .questions .q-panel{padding:0 18px 22px 18px}
     .questions .cta{flex-direction:column;align-items:flex-start;padding:26px 22px}
   }
   @media(prefers-reduced-motion:reduce){.questions *{animation:none!important;transition:none!important}}
 `;
 
+function AnswerBlocks({ blocks }) {
+  return (
+    <div className="q-answer">
+      {blocks.map((b, i) => {
+        if (typeof b === "string") return <p key={i}>{b}</p>;
+        if (b.ul)
+          return (
+            <ul key={i}>
+              {b.ul.map((x, j) => (
+                <li key={j}>{x}</li>
+              ))}
+            </ul>
+          );
+        if (b.ol)
+          return (
+            <ol key={i}>
+              {b.ol.map((x, j) => (
+                <li key={j}>{x}</li>
+              ))}
+            </ol>
+          );
+        if (b.link)
+          return (
+            <a
+              key={i}
+              className="ans-link"
+              href={b.link.href}
+              {...(/^https?:/.test(b.link.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {b.link.label} ↗
+            </a>
+          );
+        return null;
+      })}
+    </div>
+  );
+}
+
 export default function Questions() {
+  const [open, setOpen] = useState(null);
+  const toggle = (i) => setOpen((cur) => (cur === i ? null : i));
+
   return (
     <div className="questions">
       <style>{css}</style>
@@ -136,7 +288,7 @@ export default function Questions() {
         <div className="q-wrap">
           <div className="eyebrow fade-up"><span className="eyebrow-line" />Client questions</div>
           <h1 className="fade-up fu2">The questions we <span className="accent">hear most</span>.</h1>
-          <p className="hero-desc fade-up fu3">Before moving ahead, these are the points clients most often want cleared up about the product. Once we have clarity on them, we can discuss the next steps together.</p>
+          <p className="hero-desc fade-up fu3">Before moving ahead, these are the points clients most often want cleared up about the product. Tap any question to see the answer.</p>
         </div>
       </header>
 
@@ -148,15 +300,28 @@ export default function Questions() {
           </div>
 
           <div className="q-list">
-            {QUESTIONS.map((q, i) => (
-              <div className="q-item" key={i}>
-                <span className="q-num">{String(i + 1).padStart(2, "0")}</span>
-                <div className="q-body">
-                  <span className="q-text">{q.title}</span>
-                  {q.detail && <p className="q-detail">{q.detail}</p>}
+            {QUESTIONS.map((q, i) => {
+              const isOpen = open === i;
+              return (
+                <div className={`q-item ${isOpen ? "open" : ""}`} key={i}>
+                  <button
+                    className="q-head"
+                    onClick={() => toggle(i)}
+                    aria-expanded={isOpen}
+                  >
+                    <span className="q-num">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="q-text">{q.title}</span>
+                    <span className="q-toggle" aria-hidden>+</span>
+                  </button>
+                  {isOpen && (
+                    <div className="q-panel">
+                      {q.detail && <div className="q-detail">{q.detail}</div>}
+                      <AnswerBlocks blocks={q.answer} />
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="cta">
