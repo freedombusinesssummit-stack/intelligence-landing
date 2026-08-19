@@ -5,14 +5,34 @@
    ────────────────────────────────────────────── */
 
 const QUESTIONS = [
-  "How do you define a qualified lead?",
-  "What is the average conversion rate from registration → qualified lead → consultation?",
-  "Can you share actual results from other immigration / Citizenship by Investment clients?",
-  "Are the leads exclusive to us?",
-  "What monthly ad budget do you recommend?",
-  "Apart from the $1,950 setup, $499/month, and ad spend, are there any additional costs?",
-  "Is there a minimum contract period, and can we cancel monthly?",
-  "Do we own the leads and data if we stop working together?",
+  { title: "How do you define a qualified lead?" },
+  { title: "What is the average conversion rate from registration → qualified lead → consultation?" },
+  { title: "Can you share actual results from other immigration / Citizenship by Investment clients?" },
+  { title: "Are the leads exclusive to us?" },
+  { title: "What monthly ad budget do you recommend?" },
+  { title: "Apart from the $1,950 setup, $499/month, and ad spend, are there any additional costs?" },
+  { title: "Is there a minimum contract period, and can we cancel monthly?" },
+  { title: "Do we own the leads and data if we stop working together?" },
+  {
+    title: "Target jurisdictions & ideal client profile (ICP)",
+    detail: "How do you handle routing and jurisdiction targeting for multi-program firms - for example, Canadian business immigration (PNPs / SUV), US programs (EB-5 / E-2), and key European Golden Visas such as Portugal and Greece? Can campaigns be tailored specifically to focus on these exact program streams?",
+  },
+  {
+    title: "Territorial exclusivity & lead routing",
+    detail: "Are the leads, webinar registrants, and territorial slots generated during these campaigns strictly exclusive to us, or are they shared or re-routed with other network partners in your ecosystem?",
+  },
+  {
+    title: "Ad account ownership & audience data",
+    detail: "For the media budget spent on advertising platforms, do campaigns run through our own dedicated ad accounts (or via our custom domains / tracking pixels), so that we retain full long-term ownership of the pixel data, retargeting assets, and custom audiences?",
+  },
+  {
+    title: "Full commercial & fee structure",
+    detail: "Beyond the $1,950 setup fee, $499/month management fee, and ad spend, are there any additional pay-per-lead charges, success / commission fees, or revenue-sharing models on converted retainers?",
+  },
+  {
+    title: "Conversion benchmarks & pilot cohort",
+    detail: "Based on past campaigns for investment migration advisors in top-tier markets, what are your typical benchmarks for Cost Per Qualified Lead (CPQL) and webinar-to-consultation conversion rates? And can the initial 8-week launch be structured as a trial cohort to evaluate the conversion of high-intent leads (70+ score) into active consultations before committing long-term?",
+  },
 ];
 
 const css = `
@@ -66,7 +86,9 @@ const css = `
   .questions .q-item:hover{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.18)}
   .questions .q-num{width:32px;height:32px;border-radius:9px;background:var(--off);color:var(--lime-dark);display:grid;place-items:center;font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
   .questions .q-item:hover .q-num{background:var(--lime);color:var(--black)}
-  .questions .q-text{font-size:17.5px;font-weight:600;letter-spacing:-.01em;color:var(--black);line-height:1.4;padding-top:3px}
+  .questions .q-body{padding-top:3px}
+  .questions .q-text{display:block;font-size:17.5px;font-weight:600;letter-spacing:-.01em;color:var(--black);line-height:1.4}
+  .questions .q-detail{font-size:15px;line-height:1.6;color:var(--text2);margin-top:8px;max-width:820px}
 
   .questions .cta{margin-top:40px;background:var(--off);border:1px solid var(--border);border-radius:18px;padding:32px 34px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
   .questions .cta-t{font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--black)}
@@ -129,7 +151,10 @@ export default function Questions() {
             {QUESTIONS.map((q, i) => (
               <div className="q-item" key={i}>
                 <span className="q-num">{String(i + 1).padStart(2, "0")}</span>
-                <span className="q-text">{q}</span>
+                <div className="q-body">
+                  <span className="q-text">{q.title}</span>
+                  {q.detail && <p className="q-detail">{q.detail}</p>}
+                </div>
               </div>
             ))}
           </div>
