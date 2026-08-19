@@ -51,6 +51,7 @@ const QUESTIONS = [
     answer: [
       "No. We take no commission or markup on ad spend. Landing pages and survey infrastructure are built on our side.",
       "We'd suggest an email marketing service, or we can use yours.",
+      "Third-party services - such as the email marketing platform or the webinar hosting service - are treated as third-party tools and billed separately: their subscription is paid by you directly, at whatever tier your volume requires, not through us.",
     ],
   },
   {
