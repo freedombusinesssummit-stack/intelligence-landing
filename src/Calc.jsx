@@ -10,11 +10,11 @@ const DEFAULTS = {
   adBudget: "1500",
   cpc: "1.80",
   landingCR: "13",
-  leadToForm: "30",
-  formToCall: "35",
-  callToWebinar: "40",
-  webinarToApp: "25",
-  appToSigned: "30",
+  leadToWebinar: "30",
+  webinarToApp: "20",
+  appToSigned: "25",
+  leadToForm: "40",
+  formToCall: "30",
   revPerClient: "15000",
   margin: "70",
   mgmtFee: "499",
@@ -100,6 +100,10 @@ const css = `
   .calc .rows.three{grid-template-columns:repeat(3,1fr)}
   .calc .row{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--off);border:1px solid var(--border);border-radius:12px;padding:14px 18px}
   .calc .row label{font-size:15px;font-weight:600;color:var(--black);line-height:1.25}
+  .calc .rows.three .row{flex-direction:column;align-items:stretch;gap:10px}
+  .calc .rows.three .row label{font-size:13px;font-weight:700;color:var(--text2)}
+  .calc .rows.three .cin{width:100%;height:46px}
+  .calc .rows.three .cin input{width:auto;flex:1 1 auto}
   .calc .cin{display:inline-flex;align-items:center;gap:3px;background:var(--white);border:1px solid #d9d9d9;border-radius:10px;padding:0 12px;height:48px;flex:0 0 auto}
   .calc .cin:focus-within{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.22)}
   .calc .cin .aff{font-size:15px;font-weight:700;color:var(--muted)}
@@ -116,8 +120,9 @@ const css = `
   .calc .stage-num{font-size:clamp(26px,3.4vw,34px);font-weight:900;letter-spacing:-.03em;color:var(--black);font-variant-numeric:tabular-nums}
   .calc .stage-seg.signed .stage-num{color:var(--lime-dark)}
   .calc .stage-content{min-width:0}
-  .calc .stage-name{font-size:16.5px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
-  .calc .stage-note{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .calc .stage-name{font-size:16.5px;font-weight:700;letter-spacing:-.01em;color:var(--black);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .calc .stage-cost{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--lime-dark);background:var(--lime-soft);border:1px solid rgba(170,255,69,.5);border-radius:100px;padding:3px 12px;letter-spacing:0}
+  .calc .stage-cost b{font-weight:800;color:var(--black);font-variant-numeric:tabular-nums}
   .calc .stage-bar{height:8px;border-radius:6px;background:var(--lime2);margin-top:12px;transition:width .35s cubic-bezier(.16,1,.3,1);min-width:6px}
   .calc .stage-seg.signed .stage-bar{background:var(--black)}
 
@@ -157,11 +162,14 @@ export default function Calc() {
   const cpc = num(v.cpc);
   const clicks = cpc > 0 ? adBudget / cpc : 0;
   const leads = clicks * (num(v.landingCR) / 100);
-  const forms = leads * (num(v.leadToForm) / 100);
-  const calls = forms * (num(v.formToCall) / 100);
-  const webinar = calls * (num(v.callToWebinar) / 100);
+  // Revenue path: webinar attendance is measured from registered leads,
+  // not from calls. Applications come from webinar attendees.
+  const webinar = leads * (num(v.leadToWebinar) / 100);
   const apps = webinar * (num(v.webinarToApp) / 100);
   const signed = apps * (num(v.appToSigned) / 100);
+  // Consultation branch, also measured from the registered leads.
+  const forms = leads * (num(v.leadToForm) / 100);
+  const calls = forms * (num(v.formToCall) / 100);
 
   const revPerClient = num(v.revPerClient);
   const margin = num(v.margin) / 100;
@@ -171,19 +179,51 @@ export default function Calc() {
   const spend = adBudget + mgmtFee;
   const netProfit = grossProfit - spend;
   const roi = spend > 0 ? netProfit / spend : 0;
-  const cpl = leads > 0 ? adBudget / leads : 0;
+  const costPer = (x) => (x > 0 ? adBudget / x : 0);
+  const cpl = costPer(leads);
   const cac = signed > 0 ? spend / signed : 0;
 
-  const maxVol = clicks || 1;
-  const stages = [
+  const mainStages = [
     { name: "Clicks", value: clicks },
-    { name: "Leads", value: leads, conv: "landingCR", convLabel: "Landing page conversion", note: `Cost per lead: ${money2(cpl)}` },
-    { name: "Forms completed", value: forms, conv: "leadToForm", convLabel: "Registration → form completed" },
-    { name: "Calls booked", value: calls, conv: "formToCall", convLabel: "Form → call" },
-    { name: "Webinar attendees", value: webinar, conv: "callToWebinar", convLabel: "Call → webinar" },
+    { name: "Leads", value: leads, conv: "landingCR", convLabel: "Landing page conversion", costLabel: "Cost per lead", costVal: money2(cpl) },
+    { name: "Webinar attendees", value: webinar, conv: "leadToWebinar", convLabel: "Registration → webinar attendance", costLabel: "Cost per webinar attendee", costVal: money2(costPer(webinar)) },
     { name: "Applications", value: apps, conv: "webinarToApp", convLabel: "Webinar → application" },
-    { name: "Signed clients", value: signed, conv: "appToSigned", convLabel: "Application → signed client", note: `Cost per client: ${money0(cac)}`, signed: true },
+    { name: "Signed clients", value: signed, conv: "appToSigned", convLabel: "Application → signed client", costLabel: "Cost per client", costVal: money0(cac), signed: true },
   ];
+  const branchStages = [
+    { name: "Forms completed", value: forms, conv: "leadToForm", convLabel: "Registration → form completed", costLabel: "Cost per form completed", costVal: money2(costPer(forms)) },
+    { name: "Calls booked", value: calls, conv: "formToCall", convLabel: "Form → call" },
+  ];
+
+  const renderStages = (items, base) =>
+    items.map((s) => (
+      <Fragment key={s.name}>
+        {s.conv && (
+          <div className="seg conv-seg">
+            <div className="gut"><span className="conv-arrow">↓</span></div>
+            <div className="conv-ctrl">
+              <span className="conv-label">{s.convLabel}</span>
+              <span className="conv-in">
+                <input type="number" inputMode="decimal" step="1" value={v[s.conv]} onChange={set(s.conv)} />
+                <span className="aff">%</span>
+              </span>
+            </div>
+          </div>
+        )}
+        <div className={`seg stage-seg ${s.signed ? "signed" : ""}`}>
+          <div className="gut stage-num">{count(s.value)}</div>
+          <div className="stage-content">
+            <div className="stage-name">
+              {s.name}
+              {s.costLabel && (
+                <span className="stage-cost">{s.costLabel} <b>{s.costVal}</b></span>
+              )}
+            </div>
+            <div className="stage-bar" style={{ width: `${Math.max(6, (s.value / (base || 1)) * 100)}%` }} />
+          </div>
+        </div>
+      </Fragment>
+    ));
 
   return (
     <div className="calc">
@@ -247,36 +287,20 @@ export default function Calc() {
             </div>
           </div>
 
-          {/* funnel */}
+          {/* funnel — revenue path */}
           <div className="block">
             <div className="funnel-h">
               <div className="block-t">Your funnel</div>
               <div className="funnel-cap">per month · edit any conversion</div>
             </div>
-            {stages.map((s) => (
-              <Fragment key={s.name}>
-                {s.conv && (
-                  <div className="seg conv-seg">
-                    <div className="gut"><span className="conv-arrow">↓</span></div>
-                    <div className="conv-ctrl">
-                      <span className="conv-label">{s.convLabel}</span>
-                      <span className="conv-in">
-                        <input type="number" inputMode="decimal" step="1" value={v[s.conv]} onChange={set(s.conv)} />
-                        <span className="aff">%</span>
-                      </span>
-                    </div>
-                  </div>
-                )}
-                <div className={`seg stage-seg ${s.signed ? "signed" : ""}`}>
-                  <div className="gut stage-num">{count(s.value)}</div>
-                  <div className="stage-content">
-                    <div className="stage-name">{s.name}</div>
-                    {s.note && <div className="stage-note">{s.note}</div>}
-                    <div className="stage-bar" style={{ width: `${Math.max(6, (s.value / maxVol) * 100)}%` }} />
-                  </div>
-                </div>
-              </Fragment>
-            ))}
+            {renderStages(mainStages, clicks)}
+          </div>
+
+          {/* branch — consultations from the same leads */}
+          <div className="block">
+            <div className="block-h"><div className="block-t">Also from your leads</div></div>
+            <div className="card-sub">Form completions and consultation calls are measured from your registered leads, alongside the webinar track above.</div>
+            {renderStages(branchStages, leads)}
           </div>
 
           {/* deal economics */}
