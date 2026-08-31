@@ -76,14 +76,28 @@ const css = `
   .calc .tile-v{font-size:clamp(28px,4vw,40px);font-weight:900;letter-spacing:-.03em;margin-top:10px;font-variant-numeric:tabular-nums;color:var(--black)}
   .calc .tile.hi .tile-v{color:var(--lime)}
   .calc .tile-v.pos{color:var(--lime-dark)}.calc .tile-v.neg{color:var(--red)}
+  .calc .tile-sub{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.3}
+  .calc .tile.hi .tile-sub{color:rgba(255,255,255,.5)}
 
   /* input rows */
   .calc .block{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:26px 28px;margin-bottom:16px}
   .calc .block-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
   .calc .block-t{font-size:13px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--black)}
+  .calc .card-sub{font-size:13px;color:var(--muted);margin-top:-10px;margin-bottom:18px;line-height:1.4}
+
+  /* how it's calculated */
+  .calc .math-row{display:grid;grid-template-columns:1fr auto;column-gap:16px;row-gap:2px;padding:12px 2px;border-bottom:1px solid var(--border)}
+  .calc .math-row:last-child{border-bottom:none}
+  .calc .math-l{grid-column:1;grid-row:1;font-size:14.5px;font-weight:700;color:var(--black)}
+  .calc .math-f{grid-column:1;grid-row:2;font-size:12.5px;color:var(--muted)}
+  .calc .math-v{grid-column:2;grid-row:1 / span 2;align-self:center;font-size:16px;font-weight:800;color:var(--black);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+  .calc .math-v.neg{color:var(--red)}
+  .calc .math-row.total{background:var(--lime-soft);border:1px solid rgba(170,255,69,.45);border-radius:11px;padding:13px 14px;margin:6px 0;border-bottom:none}
+  .calc .math-row.total .math-l,.calc .math-row.total .math-v{font-size:16px}
   .calc .reset{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text2);background:var(--off);border:1px solid var(--border);padding:8px 13px;border-radius:8px;cursor:pointer;transition:all .15s}
   .calc .reset:hover{color:var(--black);border-color:#cfcfcf}
   .calc .rows{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .calc .rows.three{grid-template-columns:repeat(3,1fr)}
   .calc .row{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--off);border:1px solid var(--border);border-radius:12px;padding:14px 18px}
   .calc .row label{font-size:15px;font-weight:600;color:var(--black);line-height:1.25}
   .calc .cin{display:inline-flex;align-items:center;gap:3px;background:var(--white);border:1px solid #d9d9d9;border-radius:10px;padding:0 12px;height:48px;flex:0 0 auto}
@@ -94,26 +108,28 @@ const css = `
   .calc .cin.sm input{width:52px}
 
   /* funnel */
-  .calc .funnel-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:6px}
+  .calc .funnel-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
   .calc .funnel-cap{font-size:12.5px;color:var(--muted)}
-  .calc .stage{padding:16px 0}
-  .calc .stage-top{display:flex;align-items:center;gap:16px}
-  .calc .stage-v{font-size:clamp(26px,3.4vw,34px);font-weight:900;letter-spacing:-.03em;color:var(--black);font-variant-numeric:tabular-nums;min-width:96px}
-  .calc .stage.signed .stage-v{color:var(--lime-dark)}
-  .calc .stage-meta{display:flex;flex-direction:column;gap:2px}
-  .calc .stage-name{font-size:16px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
-  .calc .stage-note{font-size:12.5px;color:var(--muted)}
+  .calc .seg{display:grid;grid-template-columns:96px 1fr;column-gap:20px;align-items:center}
+  .calc .gut{text-align:right;line-height:1}
+  .calc .stage-seg{padding:14px 0}
+  .calc .stage-num{font-size:clamp(26px,3.4vw,34px);font-weight:900;letter-spacing:-.03em;color:var(--black);font-variant-numeric:tabular-nums}
+  .calc .stage-seg.signed .stage-num{color:var(--lime-dark)}
+  .calc .stage-content{min-width:0}
+  .calc .stage-name{font-size:16.5px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
+  .calc .stage-note{font-size:12.5px;color:var(--muted);margin-top:2px}
   .calc .stage-bar{height:8px;border-radius:6px;background:var(--lime2);margin-top:12px;transition:width .35s cubic-bezier(.16,1,.3,1);min-width:6px}
-  .calc .stage.signed .stage-bar{background:var(--black)}
+  .calc .stage-seg.signed .stage-bar{background:var(--black)}
 
-  .calc .conv{display:flex;align-items:center;gap:12px;padding:2px 0 2px 4px;color:var(--muted)}
-  .calc .conv-arrow{font-size:15px;color:#c9c9c9}
-  .calc .conv-label{font-size:13.5px;color:var(--text2);flex:1}
-  .calc .conv-in{display:inline-flex;align-items:center;gap:2px;background:var(--white);border:1px solid #d9d9d9;border-radius:9px;padding:0 10px;height:38px}
+  .calc .conv-seg{padding:4px 0}
+  .calc .conv-arrow{font-size:17px;color:#c4c4c4}
+  .calc .conv-ctrl{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--off);border:1px solid var(--border);border-radius:11px;padding:8px 10px 8px 16px}
+  .calc .conv-label{font-size:13.5px;font-weight:600;color:var(--text2)}
+  .calc .conv-in{display:inline-flex;align-items:center;gap:2px;background:var(--white);border:1px solid #d9d9d9;border-radius:9px;padding:0 12px;height:40px;flex:0 0 auto}
   .calc .conv-in:focus-within{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.22)}
-  .calc .conv-in input{border:none;background:none;font-family:'Inter',sans-serif;font-size:15px;font-weight:800;color:var(--black);text-align:right;width:44px;outline:none;font-variant-numeric:tabular-nums;-moz-appearance:textfield}
+  .calc .conv-in input{border:none;background:none;font-family:'Inter',sans-serif;font-size:16px;font-weight:800;color:var(--black);text-align:right;width:46px;outline:none;font-variant-numeric:tabular-nums;-moz-appearance:textfield}
   .calc .conv-in input::-webkit-outer-spin-button,.calc .conv-in input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-  .calc .conv-in .aff{font-size:14px;font-weight:700;color:var(--muted)}
+  .calc .conv-in .aff{font-size:15px;font-weight:700;color:var(--muted)}
 
   .calc .note{font-size:12.5px;line-height:1.55;color:var(--muted);text-align:center;margin-top:22px;max-width:620px;margin-left:auto;margin-right:auto}
 
@@ -127,8 +143,8 @@ const css = `
 
   @media(max-width:720px){
     .calc .tiles{grid-template-columns:1fr}
-    .calc .rows{grid-template-columns:1fr}
-    .calc .conv{flex-wrap:wrap}
+    .calc .rows,.calc .rows.three{grid-template-columns:1fr}
+    .calc .seg{grid-template-columns:72px 1fr;column-gap:14px}
   }
 `;
 
@@ -151,21 +167,22 @@ export default function Calc() {
   const margin = num(v.margin) / 100;
   const mgmtFee = num(v.mgmtFee);
   const revenue = signed * revPerClient;
-  const totalCost = adBudget + mgmtFee;
-  const netProfit = revenue * margin - totalCost;
-  const roi = totalCost > 0 ? netProfit / totalCost : 0;
+  const grossProfit = revenue * margin;
+  const spend = adBudget + mgmtFee;
+  const netProfit = grossProfit - spend;
+  const roi = spend > 0 ? netProfit / spend : 0;
   const cpl = leads > 0 ? adBudget / leads : 0;
-  const cac = signed > 0 ? totalCost / signed : 0;
+  const cac = signed > 0 ? spend / signed : 0;
 
   const maxVol = clicks || 1;
   const stages = [
     { name: "Clicks", value: clicks },
-    { name: "Leads", value: leads, conv: "landingCR", convLabel: "Landing page conversion", note: `${money2(cpl)} per lead` },
+    { name: "Leads", value: leads, conv: "landingCR", convLabel: "Landing page conversion", note: `Cost per lead: ${money2(cpl)}` },
     { name: "Forms completed", value: forms, conv: "leadToForm", convLabel: "Registration → form completed" },
     { name: "Calls booked", value: calls, conv: "formToCall", convLabel: "Form → call" },
     { name: "Webinar attendees", value: webinar, conv: "callToWebinar", convLabel: "Call → webinar" },
     { name: "Applications", value: apps, conv: "webinarToApp", convLabel: "Webinar → application" },
-    { name: "Signed clients", value: signed, conv: "appToSigned", convLabel: "Application → signed client", note: `${money0(cac)} per client`, signed: true },
+    { name: "Signed clients", value: signed, conv: "appToSigned", convLabel: "Application → signed client", note: `Cost per client: ${money0(cac)}`, signed: true },
   ];
 
   return (
@@ -198,14 +215,17 @@ export default function Calc() {
             <div className="tile hi">
               <div className="tile-l">Net profit / month</div>
               <div className="tile-v">{money0(netProfit)}</div>
+              <div className="tile-sub">gross profit − spend</div>
             </div>
             <div className="tile">
               <div className="tile-l">Return on cost</div>
               <div className={`tile-v ${roi >= 0 ? "pos" : "neg"}`}>{(roi * 100).toFixed(0)}%</div>
+              <div className="tile-sub">net profit ÷ spend</div>
             </div>
             <div className="tile">
               <div className="tile-l">Revenue / month</div>
               <div className="tile-v">{money0(revenue)}</div>
+              <div className="tile-sub">signed clients × revenue each</div>
             </div>
           </div>
 
@@ -236,24 +256,24 @@ export default function Calc() {
             {stages.map((s) => (
               <Fragment key={s.name}>
                 {s.conv && (
-                  <div className="conv">
-                    <span className="conv-arrow">↓</span>
-                    <span className="conv-label">{s.convLabel}</span>
-                    <span className="conv-in">
-                      <input type="number" inputMode="decimal" step="1" value={v[s.conv]} onChange={set(s.conv)} />
-                      <span className="aff">%</span>
-                    </span>
-                  </div>
-                )}
-                <div className={`stage ${s.signed ? "signed" : ""}`}>
-                  <div className="stage-top">
-                    <div className="stage-v">{count(s.value)}</div>
-                    <div className="stage-meta">
-                      <div className="stage-name">{s.name}</div>
-                      {s.note && <div className="stage-note">{s.note}</div>}
+                  <div className="seg conv-seg">
+                    <div className="gut"><span className="conv-arrow">↓</span></div>
+                    <div className="conv-ctrl">
+                      <span className="conv-label">{s.convLabel}</span>
+                      <span className="conv-in">
+                        <input type="number" inputMode="decimal" step="1" value={v[s.conv]} onChange={set(s.conv)} />
+                        <span className="aff">%</span>
+                      </span>
                     </div>
                   </div>
-                  <div className="stage-bar" style={{ width: `${Math.max(6, (s.value / maxVol) * 100)}%` }} />
+                )}
+                <div className={`seg stage-seg ${s.signed ? "signed" : ""}`}>
+                  <div className="gut stage-num">{count(s.value)}</div>
+                  <div className="stage-content">
+                    <div className="stage-name">{s.name}</div>
+                    {s.note && <div className="stage-note">{s.note}</div>}
+                    <div className="stage-bar" style={{ width: `${Math.max(6, (s.value / maxVol) * 100)}%` }} />
+                  </div>
                 </div>
               </Fragment>
             ))}
@@ -262,7 +282,8 @@ export default function Calc() {
           {/* deal economics */}
           <div className="block">
             <div className="block-h"><div className="block-t">Per signed client</div></div>
-            <div className="rows">
+            <div className="card-sub">What one signed client is worth to you, and the flat monthly fee.</div>
+            <div className="rows three">
               <div className="row">
                 <label htmlFor="revPerClient">Revenue per client</label>
                 <span className="cin"><span className="aff">$</span><input id="revPerClient" type="number" inputMode="decimal" step="500" value={v.revPerClient} onChange={set("revPerClient")} /></span>
@@ -272,13 +293,45 @@ export default function Calc() {
                 <span className="cin sm"><input id="margin" type="number" inputMode="decimal" step="1" value={v.margin} onChange={set("margin")} /><span className="aff">%</span></span>
               </div>
               <div className="row">
-                <label htmlFor="mgmtFee">Monthly management fee</label>
+                <label htmlFor="mgmtFee">Management fee / mo</label>
                 <span className="cin"><span className="aff">$</span><input id="mgmtFee" type="number" inputMode="decimal" step="50" value={v.mgmtFee} onChange={set("mgmtFee")} /></span>
               </div>
             </div>
           </div>
 
-          <p className="note">These default numbers are an example to show how the model works - not benchmarks. Replace them with your own and the funnel updates instantly.</p>
+          {/* how it's calculated */}
+          <div className="block">
+            <div className="block-h"><div className="block-t">How it's calculated</div></div>
+            <div className="math">
+              <div className="math-row">
+                <span className="math-l">Revenue / month</span>
+                <span className="math-f">{count(signed)} signed clients × {money0(revPerClient)}</span>
+                <span className="math-v">{money0(revenue)}</span>
+              </div>
+              <div className="math-row">
+                <span className="math-l">Gross profit</span>
+                <span className="math-f">revenue × {num(v.margin)}% profit margin</span>
+                <span className="math-v">{money0(grossProfit)}</span>
+              </div>
+              <div className="math-row">
+                <span className="math-l">Spend / month</span>
+                <span className="math-f">ad budget {money0(adBudget)} + management fee {money0(mgmtFee)}</span>
+                <span className="math-v neg">−{money0(spend)}</span>
+              </div>
+              <div className="math-row total">
+                <span className="math-l">Net profit / month</span>
+                <span className="math-f">gross profit − spend</span>
+                <span className="math-v">{money0(netProfit)}</span>
+              </div>
+              <div className="math-row">
+                <span className="math-l">Return on cost</span>
+                <span className="math-f">net profit ÷ spend</span>
+                <span className="math-v">{(roi * 100).toFixed(0)}%</span>
+              </div>
+            </div>
+          </div>
+
+          <p className="note">These default numbers are an example to show how the model works - not benchmarks. Replace them with your own and everything updates instantly.</p>
         </div>
       </div>
 
