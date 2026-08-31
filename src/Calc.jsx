@@ -99,10 +99,10 @@ const css = `
   .calc .rows.three{grid-template-columns:repeat(3,1fr)}
   .calc .row{display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--off);border:1px solid var(--border);border-radius:12px;padding:14px 18px}
   .calc .row label{font-size:15px;font-weight:600;color:var(--black);line-height:1.25}
-  .calc .rows.three .row{flex-direction:column;align-items:stretch;gap:10px}
+  .calc .rows.three .row{flex-direction:column;align-items:flex-start;gap:10px}
   .calc .rows.three .row label{font-size:13px;font-weight:700;color:var(--text2)}
-  .calc .rows.three .cin{width:100%;height:46px}
-  .calc .rows.three .cin input{width:auto;flex:1 1 auto}
+  .calc .rows.three .cin{height:46px}
+  .calc .rows.three .cin input,.calc .rows.three .cin.sm input{width:96px}
   .calc .cin{display:inline-flex;align-items:center;gap:3px;background:var(--white);border:1px solid #d9d9d9;border-radius:10px;padding:0 12px;height:48px;flex:0 0 auto}
   .calc .cin:focus-within{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.22)}
   .calc .cin .aff{font-size:15px;font-weight:700;color:var(--muted)}
