@@ -10,11 +10,10 @@ const DEFAULTS = {
   adBudget: "1500",
   cpc: "1.80",
   landingCR: "13",
+  leadToSurvey: "40",
   leadToWebinar: "30",
-  webinarToApp: "20",
-  appToSigned: "25",
-  leadToForm: "40",
-  formToCall: "30",
+  webinarToConsult: "18",
+  consultToSigned: "20",
   revPerClient: "15000",
   margin: "70",
   mgmtFee: "499",
@@ -121,8 +120,9 @@ const css = `
   .calc .stage-seg.signed .stage-num{color:var(--lime-dark)}
   .calc .stage-content{min-width:0}
   .calc .stage-name{font-size:16.5px;font-weight:700;letter-spacing:-.01em;color:var(--black);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-  .calc .stage-cost{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--lime-dark);background:var(--lime-soft);border:1px solid rgba(170,255,69,.5);border-radius:100px;padding:3px 12px;letter-spacing:0}
+  .calc .stage-cost{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--lime-dark);background:var(--lime-soft);border:1px solid rgba(170,255,69,.5);border-radius:100px;padding:3px 12px;letter-spacing:0;white-space:nowrap;max-width:100%}
   .calc .stage-cost b{font-weight:800;color:var(--black);font-variant-numeric:tabular-nums}
+  .calc .stage-note{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.4}
   .calc .stage-bar{height:8px;border-radius:6px;background:var(--lime2);margin-top:12px;transition:width .35s cubic-bezier(.16,1,.3,1);min-width:6px}
   .calc .stage-seg.signed .stage-bar{background:var(--black)}
 
@@ -162,14 +162,13 @@ export default function Calc() {
   const cpc = num(v.cpc);
   const clicks = cpc > 0 ? adBudget / cpc : 0;
   const leads = clicks * (num(v.landingCR) / 100);
-  // Revenue path: webinar attendance is measured from registered leads,
-  // not from calls. Applications come from webinar attendees.
+  // Survey and webinar attendance are both measured from registered leads:
+  // a lead can skip the survey and still attend the webinar.
+  const survey = leads * (num(v.leadToSurvey) / 100);
   const webinar = leads * (num(v.leadToWebinar) / 100);
-  const apps = webinar * (num(v.webinarToApp) / 100);
-  const signed = apps * (num(v.appToSigned) / 100);
-  // Consultation branch, also measured from the registered leads.
-  const forms = leads * (num(v.leadToForm) / 100);
-  const calls = forms * (num(v.formToCall) / 100);
+  // Consultations come from webinar attendees, signed clients from consultations.
+  const consultations = webinar * (num(v.webinarToConsult) / 100);
+  const signed = consultations * (num(v.consultToSigned) / 100);
 
   const revPerClient = num(v.revPerClient);
   const margin = num(v.margin) / 100;
@@ -186,13 +185,10 @@ export default function Calc() {
   const mainStages = [
     { name: "Clicks", value: clicks },
     { name: "Leads", value: leads, conv: "landingCR", convLabel: "Landing page conversion", costLabel: "Cost per lead", costVal: money2(cpl) },
-    { name: "Webinar attendees", value: webinar, conv: "leadToWebinar", convLabel: "Registration → webinar attendance", costLabel: "Cost per webinar attendee", costVal: money2(costPer(webinar)) },
-    { name: "Applications", value: apps, conv: "webinarToApp", convLabel: "Webinar → application" },
-    { name: "Signed clients", value: signed, conv: "appToSigned", convLabel: "Application → signed client", costLabel: "Cost per client", costVal: money0(cac), signed: true },
-  ];
-  const branchStages = [
-    { name: "Forms completed", value: forms, conv: "leadToForm", convLabel: "Registration → form completed", costLabel: "Cost per form completed", costVal: money2(costPer(forms)) },
-    { name: "Calls booked", value: calls, conv: "formToCall", convLabel: "Form → call" },
+    { name: "Survey completed", value: survey, conv: "leadToSurvey", convLabel: "Registration → survey completed", note: "From registered leads — not required to attend the webinar.", costLabel: "Cost per survey", costVal: money2(costPer(survey)) },
+    { name: "Webinar attendees", value: webinar, conv: "leadToWebinar", convLabel: "Registration → webinar attendance", note: "Also from registered leads.", costLabel: "Cost per attendee", costVal: money2(costPer(webinar)) },
+    { name: "Consultations", value: consultations, conv: "webinarToConsult", convLabel: "Webinar → consultation", costLabel: "Cost per consultation", costVal: money2(costPer(consultations)) },
+    { name: "Signed clients", value: signed, conv: "consultToSigned", convLabel: "Consultation → signed client", costLabel: "Cost per client", costVal: money0(cac), signed: true },
   ];
 
   const renderStages = (items, base) =>
@@ -219,6 +215,7 @@ export default function Calc() {
                 <span className="stage-cost">{s.costLabel} <b>{s.costVal}</b></span>
               )}
             </div>
+            {s.note && <div className="stage-note">{s.note}</div>}
             <div className="stage-bar" style={{ width: `${Math.max(6, (s.value / (base || 1)) * 100)}%` }} />
           </div>
         </div>
@@ -294,13 +291,6 @@ export default function Calc() {
               <div className="funnel-cap">per month · edit any conversion</div>
             </div>
             {renderStages(mainStages, clicks)}
-          </div>
-
-          {/* branch — consultations from the same leads */}
-          <div className="block">
-            <div className="block-h"><div className="block-t">Also from your leads</div></div>
-            <div className="card-sub">Form completions and consultation calls are measured from your registered leads, alongside the webinar track above.</div>
-            {renderStages(branchStages, leads)}
           </div>
 
           {/* deal economics */}
