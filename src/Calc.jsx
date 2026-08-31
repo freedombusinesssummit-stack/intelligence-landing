@@ -17,6 +17,9 @@ const DEFAULTS = {
   revPerClient: "15000",
   margin: "70",
   mgmtFee: "499",
+  emailCost: "40",
+  webinarCost: "50",
+  otherTools: "0",
 };
 
 const num = (v) => {
@@ -106,6 +109,9 @@ const css = `
   .calc .block .rows + .rows{margin-top:14px}
   .calc .readout{display:inline-flex;align-items:center;justify-content:flex-end;height:46px;min-width:132px;padding:0 14px;font-size:18px;font-weight:800;color:var(--black);font-variant-numeric:tabular-nums;background:var(--lime-soft);border:1px solid rgba(170,255,69,.5);border-radius:10px}
   .calc .readout.mirror{background:var(--white);border-color:#e2e2e2;color:var(--text2)}
+  .calc .breakeven{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:16px;background:var(--black);border-radius:12px;padding:16px 20px}
+  .calc .be-l{font-size:13.5px;font-weight:700;letter-spacing:.02em;color:rgba(255,255,255,.7)}
+  .calc .be-v{font-size:24px;font-weight:900;letter-spacing:-.02em;color:var(--lime);font-variant-numeric:tabular-nums}
   .calc .cin{display:inline-flex;align-items:center;gap:3px;background:var(--white);border:1px solid #d9d9d9;border-radius:10px;padding:0 12px;height:48px;flex:0 0 auto}
   .calc .cin:focus-within{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.22)}
   .calc .cin .aff{font-size:15px;font-weight:700;color:var(--muted)}
@@ -177,11 +183,16 @@ export default function Calc() {
   const margin = num(v.margin) / 100;
   const mgmtFee = num(v.mgmtFee);
   const profitPerClient = revPerClient * margin;
+  const emailCost = num(v.emailCost);
+  const webinarCost = num(v.webinarCost);
+  const otherTools = num(v.otherTools);
+  const toolsCost = emailCost + webinarCost + otherTools;
   const revenue = signed * revPerClient;
   const grossProfit = revenue * margin;
-  const spend = adBudget + mgmtFee;
+  const spend = adBudget + mgmtFee + toolsCost;
   const netProfit = grossProfit - spend;
   const roi = spend > 0 ? netProfit / spend : 0;
+  const breakEvenClients = profitPerClient > 0 ? spend / profitPerClient : 0;
   const costPer = (x) => (x > 0 ? adBudget / x : 0);
   const cpl = costPer(leads);
   const cac = signed > 0 ? spend / signed : 0;
@@ -297,10 +308,10 @@ export default function Calc() {
             {renderStages(mainStages, clicks)}
           </div>
 
-          {/* economics */}
+          {/* economics — per client */}
           <div className="block">
-            <div className="block-h"><div className="block-t">Economics</div></div>
-            <div className="card-sub">What one signed client is worth to you, and what you spend each month.</div>
+            <div className="block-h"><div className="block-t">Per signed client</div></div>
+            <div className="card-sub">What one signed client is worth to you.</div>
             <div className="rows three">
               <div className="row">
                 <label htmlFor="revPerClient">Revenue per client</label>
@@ -315,19 +326,41 @@ export default function Calc() {
                 <span className="readout">{money0(profitPerClient)}</span>
               </div>
             </div>
+          </div>
+
+          {/* economics — monthly spend */}
+          <div className="block">
+            <div className="block-h"><div className="block-t">Monthly spend</div></div>
+            <div className="card-sub">Everything you pay each month — media, management, and the third-party tools that run the funnel.</div>
             <div className="rows three">
               <div className="row">
-                <label>Ad spend / mo</label>
+                <label>Ad spend</label>
                 <span className="readout mirror">{money0(adBudget)}</span>
               </div>
               <div className="row">
-                <label htmlFor="mgmtFee">Management fee / mo</label>
+                <label htmlFor="mgmtFee">Management fee</label>
                 <span className="cin"><span className="aff">$</span><input id="mgmtFee" type="number" inputMode="decimal" step="50" value={v.mgmtFee} onChange={set("mgmtFee")} /></span>
               </div>
               <div className="row">
-                <label>Total spend / mo</label>
+                <label htmlFor="emailCost">Email marketing</label>
+                <span className="cin"><span className="aff">$</span><input id="emailCost" type="number" inputMode="decimal" step="10" value={v.emailCost} onChange={set("emailCost")} /></span>
+              </div>
+              <div className="row">
+                <label htmlFor="webinarCost">Webinar platform</label>
+                <span className="cin"><span className="aff">$</span><input id="webinarCost" type="number" inputMode="decimal" step="10" value={v.webinarCost} onChange={set("webinarCost")} /></span>
+              </div>
+              <div className="row">
+                <label htmlFor="otherTools">Other tools</label>
+                <span className="cin"><span className="aff">$</span><input id="otherTools" type="number" inputMode="decimal" step="10" value={v.otherTools} onChange={set("otherTools")} /></span>
+              </div>
+              <div className="row">
+                <label>Total spend</label>
                 <span className="readout">{money0(spend)}</span>
               </div>
+            </div>
+            <div className="breakeven">
+              <span className="be-l">Clients to break even each month</span>
+              <span className="be-v">{count(breakEvenClients)}</span>
             </div>
           </div>
 
@@ -347,7 +380,7 @@ export default function Calc() {
               </div>
               <div className="math-row">
                 <span className="math-l">Spend / month</span>
-                <span className="math-f">ad budget {money0(adBudget)} + management fee {money0(mgmtFee)}</span>
+                <span className="math-f">ad {money0(adBudget)} + management {money0(mgmtFee)} + tools {money0(toolsCost)}</span>
                 <span className="math-v neg">−{money0(spend)}</span>
               </div>
               <div className="math-row total">

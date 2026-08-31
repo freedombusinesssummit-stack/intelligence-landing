@@ -8,6 +8,8 @@
     }
   ],
   "rewrites": [
+    { "source": "/calc", "destination": "/calc.html" },
+    { "source": "/calculator", "destination": "/calc.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [
