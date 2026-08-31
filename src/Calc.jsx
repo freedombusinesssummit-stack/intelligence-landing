@@ -103,6 +103,9 @@ const css = `
   .calc .rows.three .row label{font-size:13px;font-weight:700;color:var(--text2)}
   .calc .rows.three .cin{height:46px}
   .calc .rows.three .cin input,.calc .rows.three .cin.sm input{width:96px}
+  .calc .block .rows + .rows{margin-top:14px}
+  .calc .readout{display:inline-flex;align-items:center;justify-content:flex-end;height:46px;min-width:132px;padding:0 14px;font-size:18px;font-weight:800;color:var(--black);font-variant-numeric:tabular-nums;background:var(--lime-soft);border:1px solid rgba(170,255,69,.5);border-radius:10px}
+  .calc .readout.mirror{background:var(--white);border-color:#e2e2e2;color:var(--text2)}
   .calc .cin{display:inline-flex;align-items:center;gap:3px;background:var(--white);border:1px solid #d9d9d9;border-radius:10px;padding:0 12px;height:48px;flex:0 0 auto}
   .calc .cin:focus-within{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.22)}
   .calc .cin .aff{font-size:15px;font-weight:700;color:var(--muted)}
@@ -173,6 +176,7 @@ export default function Calc() {
   const revPerClient = num(v.revPerClient);
   const margin = num(v.margin) / 100;
   const mgmtFee = num(v.mgmtFee);
+  const profitPerClient = revPerClient * margin;
   const revenue = signed * revPerClient;
   const grossProfit = revenue * margin;
   const spend = adBudget + mgmtFee;
@@ -293,10 +297,10 @@ export default function Calc() {
             {renderStages(mainStages, clicks)}
           </div>
 
-          {/* deal economics */}
+          {/* economics */}
           <div className="block">
-            <div className="block-h"><div className="block-t">Per signed client</div></div>
-            <div className="card-sub">What one signed client is worth to you, and the flat monthly fee.</div>
+            <div className="block-h"><div className="block-t">Economics</div></div>
+            <div className="card-sub">What one signed client is worth to you, and what you spend each month.</div>
             <div className="rows three">
               <div className="row">
                 <label htmlFor="revPerClient">Revenue per client</label>
@@ -307,8 +311,22 @@ export default function Calc() {
                 <span className="cin sm"><input id="margin" type="number" inputMode="decimal" step="1" value={v.margin} onChange={set("margin")} /><span className="aff">%</span></span>
               </div>
               <div className="row">
+                <label>Profit per client</label>
+                <span className="readout">{money0(profitPerClient)}</span>
+              </div>
+            </div>
+            <div className="rows three">
+              <div className="row">
+                <label>Ad spend / mo</label>
+                <span className="readout mirror">{money0(adBudget)}</span>
+              </div>
+              <div className="row">
                 <label htmlFor="mgmtFee">Management fee / mo</label>
                 <span className="cin"><span className="aff">$</span><input id="mgmtFee" type="number" inputMode="decimal" step="50" value={v.mgmtFee} onChange={set("mgmtFee")} /></span>
+              </div>
+              <div className="row">
+                <label>Total spend / mo</label>
+                <span className="readout">{money0(spend)}</span>
               </div>
             </div>
           </div>
