@@ -363,7 +363,7 @@ export default function Calc() {
           <div className="block">
             <div className="block-h"><div className="block-t">Economics · per month</div></div>
             <div className="card-sub">What a client is worth, and what you spend to run the funnel each month.</div>
-            <div className="rows three">
+            <div className="rows">
               {settings.map((it) => (
                 <div className="row" key={it.key}>
                   <label htmlFor={it.key}>{it.label}</label>
