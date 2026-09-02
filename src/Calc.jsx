@@ -85,6 +85,8 @@ const css = `
   .calc .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
   .calc .tile{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:20px 18px;text-align:center}
   .calc .tile.hi{background:var(--black)}
+  .calc .tile.accent{border-color:var(--lime2);box-shadow:0 0 0 3px rgba(170,255,69,.2)}
+  .calc .tile.accent .tile-v{color:var(--lime-dark)}
   .calc .tile-l{font-size:11.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);line-height:1.25}
   .calc .tile.hi .tile-l{color:rgba(255,255,255,.55)}
   .calc .tile-v{font-size:clamp(22px,2.7vw,30px);font-weight:900;letter-spacing:-.03em;margin-top:9px;font-variant-numeric:tabular-nums;color:var(--black)}
@@ -273,17 +275,19 @@ export default function Calc() {
           {/* headline outcome */}
           <div className="tiles">
             <div className="tile">
+              <div className="tile-l">Registrations / mo</div>
+              <div className="tile-v">{count(reg)}</div>
+              <div className="tile-sub">what the funnel is built to drive (~100+).</div>
+            </div>
+            <div className="tile accent">
               <div className="tile-l">Qualified leads / mo</div>
               <div className="tile-v">{count(qualified)}</div>
+              <div className="tile-sub">of those registrations — survey or webinar.</div>
             </div>
             <div className="tile">
               <div className="tile-l">Signed clients / mo</div>
               <div className="tile-v">{count(signed)}</div>
-              <div className="tile-sub">Rounded — expected monthly average.</div>
-            </div>
-            <div className="tile">
-              <div className="tile-l">Revenue / mo</div>
-              <div className="tile-v">{money0(monthlyRevenue)}</div>
+              <div className="tile-sub">rounded — expected monthly average.</div>
             </div>
             <div className="tile hi">
               <div className="tile-l">90-day ROI</div>
