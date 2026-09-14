@@ -2,32 +2,73 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.fbsintelligence.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.fbsintelligence.com"
+        }
+      ],
       "destination": "https://fbsintelligence.com/:path*",
       "permanent": true
     }
   ],
   "rewrites": [
-    { "source": "/calc", "destination": "/calc.html" },
-    { "source": "/calculator", "destination": "/calc.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/calc",
+      "destination": "/calc.html"
+    },
+    {
+      "source": "/calculator",
+      "destination": "/calc.html"
+    },
+    {
+      "source": "/workshop",
+      "destination": "https://workshop-eight-phi.vercel.app/workshop"
+    },
+    {
+      "source": "/workshop/:path*",
+      "destination": "https://workshop-eight-phi.vercel.app/workshop/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
       ]
     },
     {
       "source": "/robots.txt",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
     },
     {
       "source": "/sitemap.xml",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
+      ]
     }
   ]
 }
