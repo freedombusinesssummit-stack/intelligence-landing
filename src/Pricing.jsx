@@ -394,7 +394,7 @@ function Modal({plan, onClose}) {
         {!done?(<>
           <div className="modal-plan-tag" style={{background:isPrem?"#AAFF45":"#F4F4F2",color:isPrem?"#0A0A0A":"#6B6B6B"}}>{plan?.name}</div>
           <h2>Get started with {plan?.name}</h2>
-          <p className="modal-sub"><span style={{textDecoration:"line-through",opacity:0.5,fontWeight:500}}>${plan?.price}/mo</span> <strong style={{color:"var(--lime-dark)"}}>${plan?.foundingPrice}/mo</strong> + <span style={{textDecoration:"line-through",opacity:0.5,fontWeight:500}}>$5,000</span> <strong>$1,950</strong> setup (founding rate). We review your application within 24 hours and book a discovery call.</p>
+          <p className="modal-sub"><span style={{textDecoration:"line-through",opacity:0.5,fontWeight:500}}>€{plan?.price}/mo</span> <strong style={{color:"var(--lime-dark)"}}>€{plan?.foundingPrice}/mo</strong> + <span style={{textDecoration:"line-through",opacity:0.5,fontWeight:500}}>€5,000</span> <strong>€2,450</strong> setup (founding rate). We review your application within 24 hours and book a discovery call.</p>
           <div className="fields">
             <div className="field-row">
               <div className="cf"><label>Full name</label><input value={form.name} onChange={set("name")} placeholder="Your name"/></div>
@@ -444,8 +444,8 @@ export default function PricingPage() {
             <div className="setup-left">
               <div className="setup-tag">One-time setup fee — both plans</div>
               <div className="setup-price-row">
-                <div className="setup-price-old">$5,000</div>
-                <div className="setup-price-new">$1,950</div>
+                <div className="setup-price-old">€5,000</div>
+                <div className="setup-price-new">€2,450</div>
                 <div className="setup-price-lbl">once</div>
               </div>
               <div className="setup-desc">Charged after discovery call · before go-live</div>
@@ -484,7 +484,7 @@ export default function PricingPage() {
           <div style={{fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:"var(--lime-dark)"}}>Setup Fee</div>
         </div>
         <div className="split-head" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:16,alignItems:"start",marginBottom:32}}>
-          <h2 style={{fontSize:"clamp(24px,3vw,38px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",margin:0,lineHeight:1.15}}>What your <span style={{background:"var(--lime)",padding:"0 6px",borderRadius:4}}>$1,950</span> setup fee covers.</h2>
+          <h2 style={{fontSize:"clamp(24px,3vw,38px)",fontWeight:800,letterSpacing:"-0.03em",color:"var(--black)",margin:0,lineHeight:1.15}}>What your <span style={{background:"var(--lime)",padding:"0 6px",borderRadius:4}}>€2,450</span> setup fee covers.</h2>
           <p style={{fontSize:14,color:"var(--text2)",lineHeight:1.75,margin:0,paddingTop:6}}>Everything needed to launch your funnel — built once, runs continuously. Funnel pages, survey, email sequences, ad creatives, tracking, CRM integration, and onboarding. Charged once after your discovery call, before go-live. Monthly management starts after launch.</p>
         </div>
 
@@ -616,9 +616,9 @@ export default function PricingPage() {
               </div>
               <div className="plan-name">{plan.name}</div>
               <div className="plan-tagline">{plan.tagline}</div>
-              <div className="price-old">${plan.price}/mo</div>
+              <div className="price-old">€{plan.price}/mo</div>
               <div className="price-new-row">
-                <div className="plan-price">${plan.foundingPrice}</div>
+                <div className="plan-price">€{plan.foundingPrice}</div>
                 <div className="plan-price-mo">/mo</div>
               </div>
               <div className="plan-price-note">{plan.priceNote}</div>
@@ -862,7 +862,7 @@ export default function PricingPage() {
         <p>Tell us about your firm — we review within 24 hours and book a discovery call.</p>
         <button className="btn-lime" onClick={()=>setModal(PLANS[1])}>Get Started →</button>
         <div style={{marginTop:16,display:"flex",gap:20,justifyContent:"center",flexWrap:"wrap"}}>
-          {["$1,950 setup · one-time (founding rate)","Discovery call within 48h","First leads in 4–8 weeks"].map(t=>(
+          {["€2,450 setup · one-time (founding rate)","Discovery call within 48h","First leads in 4–8 weeks"].map(t=>(
             <span key={t} style={{fontSize:12,color:"#555",display:"inline-flex",alignItems:"center",gap:6}}>
               <span style={{color:"#AAFF45",fontWeight:900}}>✓</span> {t}
             </span>
