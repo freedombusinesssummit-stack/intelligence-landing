@@ -9,6 +9,7 @@ import Questions from './Questions.jsx'
 import Scoring from './Scoring.jsx'
 import Calc from './Calc.jsx'
 import Industries from './Industries.jsx'
+import HowItWorks from './HowItWorks.jsx'
 import Privacy from './Privacy.jsx'
 import Terms from './Terms.jsx'
 
@@ -22,6 +23,7 @@ function Router() {
   if (path === '/scoring') return <Scoring />
   if (path === '/calc' || path === '/calculator') return <Calc />
   if (path === '/industries') return <Industries />
+  if (path === '/how-it-works') return <HowItWorks />
   if (path === '/privacy') return <Privacy />
   if (path === '/terms') return <Terms />
   return <App />

@@ -169,3 +169,19 @@ The hero must carry the primary CTA, not just the nav "Apply" button.
 
 **Approved track-record stat (Why section):**
 > FBS has run events across 16+ jurisdictions and worked with 50+ firms in investment migration and cross-border structuring.
+
+---
+
+## 13. How it works page (`/how-it-works` — funnel walkthrough for client calls)
+
+**Purpose:** a step-by-step walkthrough of one real funnel, used on client calls — scroll top to bottom and the client sees a lead's journey from click to their CRM. Running example: **Golden Visa Portugal for US investors**. Each step has a screenshot placeholder (partner drops real images in) and a "What you get" line.
+
+**Naming (hard rule):** the live event is called **"workshop"** everywhere on this page — one single event, consistent with the real `/workshop` route. Do NOT introduce a separate "webinar" on this page (the lead registers for the workshop at step 1 and attends it at step 6). The 7-step flow in §4 uses "webinar"; if the two pages must match, align them deliberately in one edit — do not let both terms appear for the same event.
+
+**7 steps:** 01 Landing page · 02 AI verification call · 03 Trigger email sequence · 04 Profiling survey · 05 Jurisdiction playbook (workshop prep/reminders) · 06 Workshop & follow-up · 07 FBS Intelligence Platform (scored lead card).
+
+**Conversion benchmarks (between steps):** the figures shown (≈60% answer the call, ≈40% complete the survey, ≈30% attend the workshop, etc.) are **illustrative/typical for this program type** and are labelled as such on the page ("typical benchmarks … adjust to your market"). Replace the `BENCHMARKS` constant with real Malta/Portugal numbers before relying on them as audited results; do not present them as guaranteed.
+
+**Lead card:** anonymized and illustrative (initials only, no real person). Shows program, route, budget, timeline, family, residency, call result, engagement, lead score/tier. Closes with "AI sorts. Your expert closes." (§1).
+
+**CTAs:** "Book a walkthrough" → `https://platform.fsummit.net/demo` (§10 primary); "Get your CPL estimate" → `/industries#estimate`.
