@@ -166,3 +166,6 @@ The hero must carry the primary CTA, not just the nav "Apply" button.
 **Qualified lead (page-level short form):** completed the profiling survey and passed scoring on budget, timeline, fit (service + geo), and verified contact details. Leads below the threshold never reach the partner. (Consistent with §5.)
 
 **Lead form fields:** Name, Email, Company, Industry (dropdown), Target geo, Current cost per lead (optional). Captured to MailerLite custom fields `industry`, `target_geo`, `current_cpl` and the **"Industries / SBC"** group. Submits → `/thank-you`.
+
+**Approved track-record stat (Why section):**
+> FBS has run events across 16+ jurisdictions and worked with 50+ firms in investment migration and cross-border structuring.

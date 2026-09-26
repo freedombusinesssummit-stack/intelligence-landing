@@ -55,7 +55,7 @@ const QUALIFIED = [
 const WHY = [
   { t: "Exclusive leads", d: "Every lead is yours only. Never shared, never resold." },
   { t: "Any geo", d: "Middle East, US, Europe, Asia — wherever your clients are." },
-  { t: "Built by industry insiders", d: "FBS has run events across 16+ jurisdictions and worked with 150+ firms in investment migration." },
+  { t: "Built by industry insiders", d: "FBS has run events across 16+ jurisdictions and worked with 50+ firms in investment migration and cross-border structuring." },
 ];
 
 const VERTICALS = [
@@ -100,7 +100,7 @@ const css = `
 
   .ind nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
   .ind .nav-inner{max-width:1080px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:62px}
-  .ind .nav-logo{font-size:14px;font-weight:800;color:var(--black);display:flex;align-items:center;gap:10px;letter-spacing:-.02em}
+  .ind .nav-logo{font-size:14px;font-weight:800;color:var(--black);display:flex;align-items:center;gap:10px;letter-spacing:-.02em;white-space:nowrap}
   .ind .nav-logo-dot{width:8px;height:8px;background:var(--lime);border-radius:50%;animation:indPulse 2.5s ease-in-out infinite}
   .ind .nav-right{display:flex;align-items:center;gap:22px}
   .ind .nav-link{font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--text2);transition:color .15s}
@@ -124,7 +124,7 @@ const css = `
   .ind .btn.primary:hover{background:var(--lime);color:var(--black);border-color:var(--lime);box-shadow:0 12px 32px -8px rgba(170,255,69,.4)}
   .ind .hero-verticals{margin-top:28px;max-width:720px}
   .ind .hv-label{display:block;font-size:11.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:14px}
-  .ind .hv-text{font-size:clamp(15px,1.7vw,17px);line-height:2;color:var(--muted)}
+  .ind .hero .hv-text{font-size:16px;line-height:2;color:var(--muted);max-width:none;margin-top:0}
   .ind .hv-item{white-space:nowrap}
   .ind .hv-word{color:var(--black);font-weight:700;letter-spacing:-.01em}
   .ind .hv-word.lead{background:var(--lime);padding:2px 7px;border-radius:5px}
@@ -215,6 +215,17 @@ const css = `
     .ind .qual{grid-template-columns:1fr;gap:24px}
     .ind form{grid-template-columns:1fr}
     .ind .cta{padding:32px 22px}
+  }
+  @media(max-width:640px){
+    .ind .nav-inner{height:56px;padding:0 18px}
+    .ind .nav-right{gap:12px}
+    .ind .nav-link{display:none}
+    .ind .nav-btn{white-space:nowrap;font-size:11px;padding:9px 14px}
+    .ind-wrap{padding:0 18px}
+    .ind .hero-verticals{margin-top:22px}
+    .ind .hero .hv-text{font-size:11.5px;line-height:1.8}
+    .ind .hv-item,.ind .hv-word{white-space:normal}
+    .ind .hv-word.lead{padding:1px 5px}
   }
 `;
 
