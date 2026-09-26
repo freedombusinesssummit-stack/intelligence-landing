@@ -28,19 +28,19 @@ const INDUSTRIES = [
   {
     title: "Company incorporation & licensing",
     tag: "Same model",
-    tone: "model",
+    tone: "same",
     body: "Founders and business owners who need a company, a license or a new jurisdiction. Qualified on business type, urgency and budget.",
   },
   {
     title: "Fintech, payments & banking",
     tag: "Same model",
-    tone: "model",
+    tone: "same",
     body: "Business owners looking for accounts, payment solutions and cross-border banking. Qualified on company size, volume and need.",
   },
   {
     title: "Adjacent services",
     tag: "Same model",
-    tone: "model",
+    tone: "same",
     body: "International health insurance, tax and wealth structuring for globally mobile clients.",
   },
 ];
@@ -144,11 +144,12 @@ const css = `
 
   .ind .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .ind .card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:26px 26px}
-  .ind .card-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+  .ind .card-head{margin-bottom:12px;line-height:1.25}
   .ind .card-t{font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--black)}
-  .ind .badge{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:100px}
+  .ind .card-head .badge{vertical-align:middle;margin-left:9px;position:relative;top:-1px}
+  .ind .badge{display:inline-flex;align-items:center;flex:0 0 auto;white-space:nowrap;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;line-height:1;padding:5px 9px;border-radius:100px}
   .ind .badge.proven{background:var(--lime);color:var(--black)}
-  .ind .badge.model{background:var(--off);color:var(--muted);border:1px solid var(--border)}
+  .ind .badge.same{background:var(--off);color:var(--muted);border:1px solid var(--border)}
   .ind .card-b{font-size:15px;line-height:1.55;color:var(--text2)}
   .ind .card-note{font-size:13px;line-height:1.5;color:var(--lime-dark);font-weight:600;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
   .ind .ask{background:var(--black);border-radius:16px;padding:26px 28px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
