@@ -142,3 +142,27 @@ The hero must carry the primary CTA, not just the nav "Apply" button.
 - ❌ "One partner per jurisdiction" (replace with jurisdiction + offer wording)
 - ✅ KEEP the 7-step flow at top of Overview
 - ❌ The standalone five-stage deep-dive lower on the page (duplicates the 7-step flow)
+
+---
+
+## 12. Industries page (`/industries` — general "what we do", SBC / non-migration QR target)
+
+**Purpose:** a vertical-agnostic entry point for high-ticket service firms who reach us off an event (SBC QR) or from any non-migration channel.
+
+**Approved positioning wording:**
+- "Pre-qualified leads for high-ticket services. Any geo."
+- "Any geo" is approved — Middle East, US, Europe, Asia, wherever the client's buyers are.
+- "AI sorts. Your expert closes." (same as §1.)
+
+**Cost-per-lead framing (use everywhere on this page):**
+- Always **"expected cost per qualified lead"** — it is an **economics forecast for the client's market, not our fee/tariff.**
+- Any figure is illustrative until the client's market is scoped; we send a per-market estimate within 48h.
+
+**Honesty by vertical (hard rule):**
+- **"Proven"** may be applied to **investment migration only.** Approved proof point: tested with US investors for Malta and Portugal.
+- All other verticals (company incorporation & licensing; fintech, payments & banking; adjacent services — health insurance, tax & wealth structuring) are presented as **"same model"**, with **no invented case studies, client names, or results.**
+- If asked "who have you done this for?", the honest answer is investment migration; do not imply live track record in the other verticals.
+
+**Qualified lead (page-level short form):** completed the profiling survey and passed scoring on budget, timeline, fit (service + geo), and verified contact details. Leads below the threshold never reach the partner. (Consistent with §5.)
+
+**Lead form fields:** Name, Email, Company, Industry (dropdown), Target geo, Current cost per lead (optional). Captured to MailerLite custom fields `industry`, `target_geo`, `current_cpl` and the **"Industries / SBC"** group. Submits → `/thank-you`.
