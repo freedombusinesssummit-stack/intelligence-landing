@@ -58,6 +58,22 @@ const WHY = [
   { t: "Built by industry insiders", d: "FBS has run events across 16+ jurisdictions and worked with 150+ firms in investment migration." },
 ];
 
+const VERTICALS = [
+  "Investment migration",
+  "Company incorporation & licensing",
+  "Offshore & international structuring",
+  "Banking & payments",
+  "Tax & wealth planning",
+  "International real estate",
+  "Global insurance",
+];
+
+const MODELS = [
+  { t: "Done-for-you", tag: "Most exclusive", d: "Your leads only, and a campaign built around your offer." },
+  { t: "Subscription · Exclusive", tag: "Exclusive", d: "A lead you open disappears for everyone else. Higher price." },
+  { t: "Subscription · Shared", tag: "Best value", d: "Each lead is seen by up to 3 firms. Lower price, more volume." },
+];
+
 const INDUSTRY_OPTIONS = [
   "Investment migration",
   "Company incorporation & licensing",
@@ -106,6 +122,8 @@ const css = `
   .ind .btn:hover{color:var(--black);border-color:#cfcfcf}
   .ind .btn.primary{background:var(--black);color:var(--white);border-color:var(--black)}
   .ind .btn.primary:hover{background:var(--lime);color:var(--black);border-color:var(--lime);box-shadow:0 12px 32px -8px rgba(170,255,69,.4)}
+  .ind .hero-verticals{font-size:14px;line-height:1.7;color:var(--text2);max-width:700px;margin-top:24px}
+  .ind .hero-verticals strong{color:var(--black);font-weight:800}
 
   .ind .section{padding:88px 0}
   .ind .section-off{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -165,6 +183,17 @@ const css = `
   .ind .cta-submit button:hover{box-shadow:0 12px 32px -8px rgba(170,255,69,.5)}
   .ind .cta-submit button:disabled{opacity:.6;cursor:default}
   .ind .cta-fine{grid-column:1 / -1;font-size:12px;color:rgba(255,255,255,.45);margin-top:4px;line-height:1.5}
+
+  .ind .verify{background:var(--black);border-radius:22px;padding:44px 44px;text-align:center}
+  .ind .verify-eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+  .ind .verify-t{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;color:var(--white);line-height:1.1;max-width:720px;margin:0 auto}
+  .ind .verify-d{font-size:17px;line-height:1.55;color:rgba(255,255,255,.7);max-width:600px;margin:14px auto 0}
+
+  .ind .model{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:26px 24px;border-top:3px solid var(--lime2)}
+  .ind .model-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .ind .model-t{font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--black)}
+  .ind .model-tag{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--lime-dark);background:var(--lime-soft);border:1px solid rgba(170,255,69,.5);border-radius:100px;padding:3px 10px;white-space:nowrap}
+  .ind .model-d{font-size:14.5px;line-height:1.55;color:var(--text2)}
 
   .ind footer{padding:44px 0;background:var(--white);border-top:1px solid var(--border)}
   .ind .foot-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -296,6 +325,7 @@ export default function Industries() {
           <div className="eyebrow"><span className="eyebrow-line" />Lead intelligence for high-ticket services</div>
           <h1>Pre-qualified leads for <span className="accent">high-ticket services</span>. Any geo.</h1>
           <p>We find, qualify and score your future clients before they reach your team. You get leads ready for a sales conversation, not raw traffic.</p>
+          <div className="hero-verticals"><strong>Built for firms in:</strong> {VERTICALS.join(" · ")}</div>
           <div className="hero-actions">
             <button className="btn primary" onClick={scrollToForm}>Get your CPL estimate</button>
             <a className="btn" href="/calc">Check the calculator</a>
@@ -365,6 +395,17 @@ export default function Industries() {
         </div>
       </section>
 
+      {/* INTENT-VERIFIED */}
+      <section className="section">
+        <div className="ind-wrap">
+          <div className="verify">
+            <div className="verify-eyebrow">Intent-verified leads</div>
+            <div className="verify-t">We call every lead before handing it over.</div>
+            <div className="verify-d">You only receive people who said yes to speaking with an advisor.</div>
+          </div>
+        </div>
+      </section>
+
       {/* WHY */}
       <section className="section section-off">
         <div className="ind-wrap">
@@ -375,6 +416,26 @@ export default function Industries() {
               <div className="why-item" key={w.t}>
                 <div className="why-t">{w.t}</div>
                 <div className="why-d">{w.d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WAYS TO WORK */}
+      <section className="section">
+        <div className="ind-wrap">
+          <div className="sec-eyebrow">Ways to work with us</div>
+          <h2>Choose your <span className="hl">access model</span>.</h2>
+          <p className="sec-lead">From fully exclusive and done-for-you to a shared feed with more volume — pick what fits your budget and pipeline.</p>
+          <div className="steps">
+            {MODELS.map((m) => (
+              <div className="model" key={m.t}>
+                <div className="model-head">
+                  <span className="model-t">{m.t}</span>
+                  <span className="model-tag">{m.tag}</span>
+                </div>
+                <div className="model-d">{m.d}</div>
               </div>
             ))}
           </div>
