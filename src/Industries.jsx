@@ -122,8 +122,11 @@ const css = `
   .ind .btn:hover{color:var(--black);border-color:#cfcfcf}
   .ind .btn.primary{background:var(--black);color:var(--white);border-color:var(--black)}
   .ind .btn.primary:hover{background:var(--lime);color:var(--black);border-color:var(--lime);box-shadow:0 12px 32px -8px rgba(170,255,69,.4)}
-  .ind .hero-verticals{font-size:14px;line-height:1.7;color:var(--text2);max-width:700px;margin-top:24px}
-  .ind .hero-verticals strong{color:var(--black);font-weight:800}
+  .ind .hero-verticals{margin-top:28px;max-width:760px}
+  .ind .hv-label{display:block;font-size:11.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:12px}
+  .ind .hv-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .ind .hv-chip{font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:var(--black);background:var(--off);border:1px solid var(--border);border-radius:100px;padding:8px 15px;transition:all .15s}
+  .ind .hv-chip:first-child{background:var(--lime);border-color:var(--lime)}
 
   .ind .section{padding:88px 0}
   .ind .section-off{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -325,7 +328,14 @@ export default function Industries() {
           <div className="eyebrow"><span className="eyebrow-line" />Lead intelligence for high-ticket services</div>
           <h1>Pre-qualified leads for <span className="accent">high-ticket services</span>. Any geo.</h1>
           <p>We find, qualify and score your future clients before they reach your team. You get leads ready for a sales conversation, not raw traffic.</p>
-          <div className="hero-verticals"><strong>Built for firms in:</strong> {VERTICALS.join(" · ")}</div>
+          <div className="hero-verticals">
+            <span className="hv-label">Built for firms in</span>
+            <div className="hv-chips">
+              {VERTICALS.map((vt) => (
+                <span className="hv-chip" key={vt}>{vt}</span>
+              ))}
+            </div>
+          </div>
           <div className="hero-actions">
             <button className="btn primary" onClick={scrollToForm}>Get your CPL estimate</button>
             <a className="btn" href="/calc">Check the calculator</a>
