@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 
 /* ──────────────────────────────────────────────
    /industries — general "what we do" page for
@@ -122,12 +122,13 @@ const css = `
   .ind .btn:hover{color:var(--black);border-color:#cfcfcf}
   .ind .btn.primary{background:var(--black);color:var(--white);border-color:var(--black)}
   .ind .btn.primary:hover{background:var(--lime);color:var(--black);border-color:var(--lime);box-shadow:0 12px 32px -8px rgba(170,255,69,.4)}
-  .ind .hero-verticals{margin-top:28px;max-width:780px}
+  .ind .hero-verticals{margin-top:28px;max-width:720px}
   .ind .hv-label{display:block;font-size:11.5px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--lime-dark);margin-bottom:14px}
-  .ind .hv-text{font-size:clamp(15px,1.7vw,18px);line-height:2;color:var(--muted)}
+  .ind .hv-text{font-size:clamp(15px,1.7vw,17px);line-height:2;color:var(--muted)}
+  .ind .hv-item{white-space:nowrap}
   .ind .hv-word{color:var(--black);font-weight:700;letter-spacing:-.01em}
-  .ind .hv-word.lead{background:var(--lime);padding:2px 7px;border-radius:5px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-  .ind .hv-sep{color:#C7C7C7;font-weight:400;margin:0 7px}
+  .ind .hv-word.lead{background:var(--lime);padding:2px 7px;border-radius:5px}
+  .ind .hv-sep{color:#C7C7C7;font-weight:400}
 
   .ind .section{padding:88px 0}
   .ind .section-off{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -334,10 +335,13 @@ export default function Industries() {
             <span className="hv-label">Built for firms in</span>
             <p className="hv-text">
               {VERTICALS.map((vt, i) => (
-                <span key={vt}>
-                  <span className={i === 0 ? "hv-word lead" : "hv-word"}>{vt}</span>
-                  {i < VERTICALS.length - 1 && <span className="hv-sep">·</span>}
-                </span>
+                <Fragment key={vt}>
+                  <span className="hv-item">
+                    <span className={i === 0 ? "hv-word lead" : "hv-word"}>{vt}</span>
+                    {i < VERTICALS.length - 1 && <span className="hv-sep">&nbsp;·</span>}
+                  </span>
+                  {i < VERTICALS.length - 1 && " "}
+                </Fragment>
               ))}
             </p>
           </div>
