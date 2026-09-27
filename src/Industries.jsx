@@ -195,10 +195,12 @@ const css = `
   .ind .verify-t{font-size:clamp(24px,3.2vw,38px);font-weight:800;letter-spacing:-.03em;color:var(--white);line-height:1.1;max-width:720px;margin:0 auto}
   .ind .verify-d{font-size:17px;line-height:1.55;color:rgba(255,255,255,.7);max-width:600px;margin:14px auto 0}
 
-  .ind .model{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:26px 24px;border-top:3px solid var(--lime2)}
-  .ind .model-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .ind .ways{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:center}
+  .ind .ways-list{display:flex;flex-direction:column;gap:12px}
+  .ind .model{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:22px 24px;border-left:3px solid var(--lime2)}
+  .ind .model-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;flex-wrap:nowrap}
   .ind .model-t{font-size:17px;font-weight:800;letter-spacing:-.02em;color:var(--black)}
-  .ind .model-tag{font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--lime-dark);background:var(--lime-soft);border:1px solid rgba(170,255,69,.5);border-radius:100px;padding:3px 10px;white-space:nowrap}
+  .ind .model-tag{flex:0 0 auto;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--lime-dark);background:var(--lime-soft);border:1px solid rgba(170,255,69,.5);border-radius:100px;padding:3px 10px;white-space:nowrap}
   .ind .model-d{font-size:14.5px;line-height:1.55;color:var(--text2)}
 
   .ind footer{padding:44px 0;background:var(--white);border-top:1px solid var(--border)}
@@ -212,7 +214,7 @@ const css = `
   @media(max-width:820px){
     .ind .steps,.ind .why{grid-template-columns:1fr}
     .ind .cards{grid-template-columns:1fr}
-    .ind .qual{grid-template-columns:1fr;gap:24px}
+    .ind .qual,.ind .ways{grid-template-columns:1fr;gap:24px}
     .ind form{grid-template-columns:1fr}
     .ind .cta{padding:32px 22px}
   }
@@ -455,19 +457,23 @@ export default function Industries() {
       {/* WAYS TO WORK */}
       <section className="section">
         <div className="ind-wrap">
-          <div className="sec-eyebrow">Ways to work with us</div>
-          <h2>Choose your <span className="hl">access model</span>.</h2>
-          <p className="sec-lead">From fully exclusive and done-for-you to a shared feed with more volume — pick what fits your budget and pipeline.</p>
-          <div className="steps">
-            {MODELS.map((m) => (
-              <div className="model" key={m.t}>
-                <div className="model-head">
-                  <span className="model-t">{m.t}</span>
-                  <span className="model-tag">{m.tag}</span>
+          <div className="ways">
+            <div>
+              <div className="sec-eyebrow">Ways to work with us</div>
+              <h2>Choose your <span className="hl">access model</span>.</h2>
+              <p className="qual-note">From fully exclusive and done-for-you to a shared feed with more volume — <strong>pick what fits your budget and pipeline.</strong></p>
+            </div>
+            <div className="ways-list">
+              {MODELS.map((m) => (
+                <div className="model" key={m.t}>
+                  <div className="model-head">
+                    <span className="model-t">{m.t}</span>
+                    <span className="model-tag">{m.tag}</span>
+                  </div>
+                  <div className="model-d">{m.d}</div>
                 </div>
-                <div className="model-d">{m.d}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
