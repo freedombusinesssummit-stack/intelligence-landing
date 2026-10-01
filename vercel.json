@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/playbook",
+      "destination": "https://drive.google.com/file/d/1v4BOBfuprEwQXbw0bV1LJCp_byoqBFj2/view",
+      "permanent": false
+    },
+    {
       "source": "/:path*",
       "has": [
         {
